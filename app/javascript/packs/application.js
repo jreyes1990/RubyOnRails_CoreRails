@@ -15,3 +15,12 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+import "controllers"
+
+const originalWebSocketClose = WebSocket.prototype.close
+WebSocket.prototype.close = function () {
+  if (this.readyState != WebSocket.CONNECTING) {
+    originalWebSocketClose.apply(this, arguments)
+  }
+}
