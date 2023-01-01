@@ -16,11 +16,39 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+import "startbootstrap-sb-admin-2/vendor/jquery/jquery";
+import "@popperjs/core/dist/umd/popper";
+import "startbootstrap-sb-admin-2/js/sb-admin-2";
+import "startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle";
+import "startbootstrap-sb-admin-2/vendor/jquery-easing/jquery.easing";
+import "startbootstrap-sb-admin-2/vendor/fontawesome-free/js/all";
+
+import "datatables.net/js/jquery.dataTables";
+
+import "datatables.net-bs4/js/dataTables.bootstrap4";
+
+import "datatables.net-buttons-bs4/js/buttons.bootstrap4";
+
+import "datatables.net-buttons/js/dataTables.buttons";
+import "datatables.net-buttons/js/buttons.flash";
+import "datatables.net-buttons/js/buttons.colVis";
+import "datatables.net-buttons/js/buttons.html5";
+import "datatables.net-buttons/js/buttons.print";
+
+let pdfMake = require("pdfmake/build/pdfmake");
+let pdfFonts = require("pdfmake/build/vfs_fonts");
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 import "controllers"
 
-const originalWebSocketClose = WebSocket.prototype.close
-WebSocket.prototype.close = function () {
-  if (this.readyState != WebSocket.CONNECTING) {
-    originalWebSocketClose.apply(this, arguments)
+document.addEventListener("turbolinks:load", () => {
+  const originalWebSocketClose = WebSocket.prototype.close
+  WebSocket.prototype.close = function () {
+    if (this.readyState != WebSocket.CONNECTING) {
+      originalWebSocketClose.apply(this, arguments)
+    }
   }
-}
+
+});
+
+

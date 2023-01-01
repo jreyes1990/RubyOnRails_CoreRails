@@ -2,10 +2,17 @@
   "name": "core_rails",
   "private": true,
   "dependencies": {
+    "@popperjs/core": "^2.11.6",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
+    "@ttskch/select2-bootstrap4-theme": "^1.5.2",
+    "datatables.net": "^1.13.1",
+    "datatables.net-buttons-bs4": "^2.3.3",
+    "pdfmake": "^0.2.7",
+    "select2": "^4.1.0-rc.0",
+    "startbootstrap-sb-admin-2": "^4.1.4",
     "stimulus": "^3.2.1",
     "stimulus_reflex": "3.4.1",
     "turbolinks": "^5.2.0"

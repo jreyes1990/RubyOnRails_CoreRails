@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+
+@import "startbootstrap-sb-admin-2/css/sb-admin-2.css";
+@import "startbootstrap-sb-admin-2/node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.css";
+
+@import "@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.css";
+
+@import "datatables.net-bs4/css/dataTables.bootstrap4.css";
+
+@import "datatables.net-buttons-bs4/css/buttons.bootstrap4.css";
+
+@import "select2/dist/css/select2.css";
+
+@import "font_awesome5.css";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+

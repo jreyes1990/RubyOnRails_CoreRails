@@ -1,0 +1,18 @@
+-- USO DE YARN
+   -- SB-ADMINS-2, enlace: https://yarnpkg.com/package/startbootstrap-sb-admin-2
+      yarn add startbootstrap-sb-admin-2
+      
+   -- POPPER, enlace: https://yarnpkg.com/package/@popperjs/core
+      yarn add @popperjs/core
+      
+   -- DATATABLES.NET, enlace: https://yarnpkg.com/package/datatables.net
+      yarn add datatables.net
+      
+   -- DATATABLES.NET-BUTTONS-BS4, enlace: https://yarnpkg.com/package/datatables.net-buttons-bs4
+      yarn add datatables.net-buttons-bs4
+      
+   -- PDFMAKE, enlace: https://yarnpkg.com/package/pdfmake
+      yarn add pdfmake
+
+   -- SELECT2-BOOTSTRAP4, enlace: https://yarnpkg.com/package/@ttskch/select2-bootstrap4-theme
+      yarn add @ttskch/select2-bootstrap4-theme
