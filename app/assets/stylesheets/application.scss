@@ -14,18 +14,27 @@
  *= require_self
  */
 
-@import "startbootstrap-sb-admin-2/css/sb-admin-2.css";
-@import "startbootstrap-sb-admin-2/node_modules/bootstrap/dist/css/bootstrap.min.css";
-@import "startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.css";
+@import "startbootstrap-sb-admin-2/css/sb-admin-2";
+@import "startbootstrap-sb-admin-2/node_modules/bootstrap/dist/css/bootstrap";
+@import "startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all";
+@import "startbootstrap-sb-admin-2/vendor/fontawesome-free/scss/solid";
 
-@import "@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.css";
+@import "@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4";
 
-@import "datatables.net-bs4/css/dataTables.bootstrap4.css";
+@import "datatables.net-bs4/css/dataTables.bootstrap4";
 
-@import "datatables.net-buttons-bs4/css/buttons.bootstrap4.css";
+@import "datatables.net-buttons-bs4/css/buttons.bootstrap4";
 
-@import "select2/dist/css/select2.css";
+@import "select2/dist/css/select2";
 
-@import "font_awesome5.css";
+@import "font_awesome5_webfont";
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
 
+/*estilos para la tabla*/
+table th {
+  background-color: #029B4E !important;
+  color: white;
+}
+table>tbody>tr>td {
+  vertical-align: middle !important;
+}
