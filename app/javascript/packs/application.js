@@ -48,11 +48,17 @@ document.addEventListener("turbolinks:load", () => {
   /* *******************************************************
    * Para controlar el sidebar en posición cerrado o abierto
    * ******************************************************** */
+  let sidebarState = sessionStorage.getItem("sidebar");
+  $(".sidebar").toggleClass(sidebarState);
+
   $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
     $("body").toggleClass("sidebar-toggled");
     $(".sidebar").toggleClass("toggled");
     if ($(".sidebar").hasClass("toggled")) {
+      sessionStorage.setItem("sidebar", "toggled");
       $('.sidebar .collapse').collapse('hide');
+    }else{
+      sessionStorage.setItem("sidebar", "");
     };
   });
 
