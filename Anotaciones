@@ -16,3 +16,16 @@
 
    -- SELECT2-BOOTSTRAP4, enlace: https://yarnpkg.com/package/@ttskch/select2-bootstrap4-theme
       yarn add @ttskch/select2-bootstrap4-theme
+
+   -- INSTALACION REDIS, Enlace: https://stackoverflow.com/questions/58918869/ruby-on-rails-operation-now-in-progress-connect2-would-block
+
+   -- STIMULUS-REFLEX, Enlace: https://docs.stimulusreflex.com/hello-world/setup
+      yarn add stimulus_reflex
+
+   -- SWEETALERT2, Enlace: https://www.youtube.com/watch?v=Nwy4c57hibM
+   --              Enlace: https://sweetalert2.github.io/
+   --              Enlace: https://codigonautas.com/creacion-de-bonitos-mensajes-emergentes-con-sweetalert2/
+       yarn add sweetalert2
+
+   -- GENERAR CONTROLLER PARA SWEETALERT2
+      rails generate stimulus_reflex sweetalert

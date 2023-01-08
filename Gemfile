@@ -25,6 +25,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 
 # Use Redis adapter to run Action Cable in production
+# Enlace: https://stackoverflow.com/questions/58918869/ruby-on-rails-operation-now-in-progress-connect2-would-block
 gem 'redis', '~> 4.0'
 
 # Use Active Model has_secure_password
@@ -40,18 +41,22 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
-  #marco de prueba RSpec a Ruby on Rails como una alternativa directa a su marco de prueba predeterminado
+  # marco de prueba RSpec a Ruby on Rails como una alternativa directa a su marco de prueba predeterminado
   # https://github.com/rspec/rspec-rails
   gem 'rspec-rails'
+
   gem 'rubocop'
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
+
   gem 'listen', '~> 3.2'
+
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   # Agregue un comentario que resuma el esquema actual en la parte superior o inferior
@@ -62,6 +67,7 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+
   gem 'selenium-webdriver'
 
   # Easy installation and use of web drivers to run system tests with browsers
@@ -93,4 +99,9 @@ gem 'simple_form'
 # Le permite crear archivos de datos iniciales a partir de los datos existentes en su base de datos.
 # https://www.rubydoc.info/gems/seed_dump/3.3.1
 gem 'seed_dump'
+
+# https://github.com/stimulusreflex/stimulus_reflex
+# https://docs.stimulusreflex.com/hello-world/quickstart
+# https://www.headway.io/blog/a-future-for-rails-stimulusreflex
+# https://docs.stimulusreflex.com/hello-world/setup
 gem "stimulus_reflex", "~> 3.4"
