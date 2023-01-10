@@ -77,6 +77,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem 'net-ssh', '>= 6.0.2'
+
 # https://guias.makeitreal.camp/ruby-on-rails-i/devise
 # https://github.com/heartcombo/devise
 # gem 'devise'
@@ -105,3 +107,16 @@ gem 'seed_dump'
 # https://www.headway.io/blog/a-future-for-rails-stimulusreflex
 # https://docs.stimulusreflex.com/hello-world/setup
 gem "stimulus_reflex", "~> 3.4"
+
+gem 'ajax-datatables-rails'
+
+# Para generación de vistas de base de datos
+gem 'scenic'
+
+# GEMAS PARA GENERACION DE EXCELES
+gem 'caxlsx'
+gem 'caxlsx_rails'
+
+# GEMA PARA PROCESAMIENTO DE ARCHIVOS EXCEL
+gem "roo"
+

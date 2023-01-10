@@ -27,5 +27,17 @@
    --              Enlace: https://codigonautas.com/creacion-de-bonitos-mensajes-emergentes-con-sweetalert2/
        yarn add sweetalert2
 
-   -- GENERAR CONTROLLER PARA SWEETALERT2
+   -- GENERAR STIMULUS_REFLEX PARA SWEETALERT2
       rails generate stimulus_reflex sweetalert
+
+   -- DROPZONE.JS, Enlace: https://www.youtube.com/watch?v=fg_8qJ-su6A
+      yarn add dropzone
+
+   -- ACTIVE_STORAGE, Instalacion
+      rails active_storage:install
+
+   -- MIGRATIONS
+      rails db:migrate
+
+   -- GENERAR STIMULUS_REFLEX PARA DROPZONE
+      rails generate stimulus_reflex dropzone
