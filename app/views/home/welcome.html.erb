@@ -19,10 +19,55 @@
 <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="5" data-dropzone-max-files="1" style="text-align: center" data-dropzone-accepted-files="application/pdf">
 
   <div class="dropzone-msg dz-message needsclick text-gray-600">
-    <%= image_tag("pdf.png", height: '100', width: '', style: 'opacity: 60%;')%>
+    <%= image_tag("pdf.png", height: '100', width: '', style: 'opacity: 60%;') %>
     <h3 class="dropzone-msg-title">Drag here to upload or click here to browse</h3>
     <span class="dropzone-msg-desc text-sm">2 MB file size maximun. Allowed file types png, jpg.</span>
     <strong><span class="dropzone-msg-desc text-sm">Arrastrar y Soltar .pdf</span></strong>
   </div>
 </div>
 -->
+
+<!-- Inicio Componentes -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <div class="row">
+      <div class="col-md-6 text-left">
+        <h5 class="m-0 font-weight-bold text-warning">Gestión de Componente</h5>
+      </div>
+      <div class="col-md-6 text-right">
+        <!--< if tiene_permiso("BOTON NUEVO REGISTRO", "VER") %>-->
+        <!--<= link_to new_componente_path, class: "btn btn-outline-success btn-sm" do %>
+            <span class="icon text-green-50">
+                <i class="fas fa-plus-circle"></i>
+            </span>
+          <span class="text">AGREGAR</span>
+        < end %>-->
+        <!--< end %>-->
+        <!--<= link_to root_path, class: "btn btn-outline-danger btn-sm" do %>
+          <span class="icon text-red-50">
+              <i class="fas fa-home"></i>
+          </span>
+          <span class="text">INICIO</span>
+        < end %>-->
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-12 table-responsive">
+
+          <table id="datatable" class="table table-striped table-hover table-sm table-responsive-sm table-bordered" cellspacing="0" style="width:100%">
+            <thead class="text-white">
+            <tr>
+              <th class="text-center">Id</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
