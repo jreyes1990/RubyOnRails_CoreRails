@@ -52,56 +52,6 @@ import "controllers"
 
 document.addEventListener("turbolinks:load", () => {
     /* *******************************************************
-     * Para controlar el sidebar en posición cerrado o abierto
-     * ******************************************************** */
-    let sidebarState = sessionStorage.getItem("sidebar");
-    $(".sidebar").toggleClass(sidebarState);
-
-    $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
-        $("body").toggleClass("sidebar-toggled");
-        $(".sidebar").toggleClass("toggled");
-        if ($(".sidebar").hasClass("toggled")) {
-            sessionStorage.setItem("sidebar", "toggled");
-            $('.sidebar .collapse').collapse('hide');
-        } else {
-            sessionStorage.setItem("sidebar", "");
-        }
-    });
-
-    $("#topBtn").click(function () {
-        $("html ,body").animate(
-            {
-                scrollTop: 0,
-            },
-            800
-        );
-    });
-    /* *******************************************************
-     * Fin para controlar el sidebar en posición cerrado o abierto
-     * ******************************************************** */
-
-    //control de los tiempos de los flash
-    $(".alert")
-        .fadeTo(4000, 500)
-        .slideUp(500, function () {
-            $(".alert").slideUp(4000);
-        });
-
-    const originalWebSocketClose = WebSocket.prototype.close
-    WebSocket.prototype.close = function () {
-        if (this.readyState != WebSocket.CONNECTING) {
-            originalWebSocketClose.apply(this, arguments)
-        }
-    }
-
-    // Configuracion para activar select2
-    $(".select2").select2({
-        theme: "bootstrap4",
-        language: "es-GT",
-        width: "100%",
-    });
-
-    /* *******************************************************
    * Configuracion para dataTables
    * *********************************************************/
     var espaniol = {
@@ -115,7 +65,7 @@ document.addEventListener("turbolinks:load", () => {
         sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
         sInfoPostFix: "(Actualizados)",
         sProcessing: "Procesando...",
-        sSearch: "",
+        sSearch: "Buscar",
         oPaginate: {
             sFirst: "Primero",
             sLast: "Último",
@@ -198,6 +148,56 @@ document.addEventListener("turbolinks:load", () => {
             },
         ],
         pagingType: "full_numbers",
+    });
+
+    /* *******************************************************
+     * Para controlar el sidebar en posición cerrado o abierto
+     * ******************************************************** */
+    let sidebarState = sessionStorage.getItem("sidebar");
+    $(".sidebar").toggleClass(sidebarState);
+
+    $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
+        $("body").toggleClass("sidebar-toggled");
+        $(".sidebar").toggleClass("toggled");
+        if ($(".sidebar").hasClass("toggled")) {
+            sessionStorage.setItem("sidebar", "toggled");
+            $('.sidebar .collapse').collapse('hide');
+        } else {
+            sessionStorage.setItem("sidebar", "");
+        }
+    });
+
+    $("#topBtn").click(function () {
+        $("html ,body").animate(
+            {
+                scrollTop: 0,
+            },
+            800
+        );
+    });
+    /* *******************************************************
+     * Fin para controlar el sidebar en posición cerrado o abierto
+     * ******************************************************** */
+
+    //control de los tiempos de los flash
+    $(".alert")
+        .fadeTo(4000, 500)
+        .slideUp(500, function () {
+            $(".alert").slideUp(4000);
+        });
+
+    const originalWebSocketClose = WebSocket.prototype.close
+    WebSocket.prototype.close = function () {
+        if (this.readyState != WebSocket.CONNECTING) {
+            originalWebSocketClose.apply(this, arguments)
+        }
+    }
+
+    // Configuracion para activar select2
+    $(".select2").select2({
+        theme: "bootstrap4",
+        language: "es-GT",
+        width: "100%",
     });
 
     $("#opcion-ca-datatable").DataTable({
