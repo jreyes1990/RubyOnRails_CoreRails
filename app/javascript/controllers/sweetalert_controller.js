@@ -5,12 +5,14 @@ import ApplicationController from './application_controller'
  * Learn more at: https://docs.stimulusreflex.com
  */
 export default class extends ApplicationController {
-  static values = { confirmAlert: String,
-                    cancelAlert: String,
-                    confirmTitle: String,
-                    cancelTitle: String,
-                    confirmBtn: String,
-                    cancelBtn: String  }
+  static values = {
+    confirmAlert: String,
+    cancelAlert: String,
+    confirmTitle: String,
+    cancelTitle: String,
+    confirmBtn: String,
+    cancelBtn: String
+  }
 
   /*
    * Regular Stimulus lifecycle methods
@@ -24,13 +26,13 @@ export default class extends ApplicationController {
    * call super if you intend to do anything else when this controller connects.
   */
 
-  connect () {
+  connect() {
     super.connect()
     // add your code here, if applicable
     this.redirect = false;
   }
 
-  procesoSatisfechoCenter(event){
+  procesoSatisfechoCenter(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -48,7 +50,7 @@ export default class extends ApplicationController {
     })
   }
 
-  procesoAlertaCenter(event){
+  procesoAlertaCenter(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -66,7 +68,7 @@ export default class extends ApplicationController {
     })
   }
 
-  procesoCanceladoCenter(event){
+  procesoCanceladoCenter(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -84,7 +86,7 @@ export default class extends ApplicationController {
     })
   }
 
-  procesoSatisfechoTopEnd(event){
+  procesoSatisfechoTopEnd(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -102,7 +104,7 @@ export default class extends ApplicationController {
     })
   }
 
-  procesoAlertaTopEnd(event){
+  procesoAlertaTopEnd(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -120,7 +122,7 @@ export default class extends ApplicationController {
     })
   }
 
-  procesoCanceladoTopEnd(event){
+  procesoCanceladoTopEnd(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -138,7 +140,7 @@ export default class extends ApplicationController {
     })
   }
 
-  procesoSatisfechoTopEndToast(event){
+  procesoSatisfechoTopEndToast(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -160,7 +162,7 @@ export default class extends ApplicationController {
     })
   }
 
-  procesoAlertaTopEndToast(event){
+  procesoAlertaTopEndToast(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -182,7 +184,7 @@ export default class extends ApplicationController {
     })
   }
 
-  procesoCanceladoTopEndToast(event){
+  procesoCanceladoTopEndToast(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -204,7 +206,7 @@ export default class extends ApplicationController {
     })
   }
 
-  btnInactivar(event){
+  btnInactivar(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -238,10 +240,9 @@ export default class extends ApplicationController {
         this.redirect = true;
         this.element.click();
       } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
       ) {
-        /*
         swalWithBootstrapButtons.fire({
           title: this.cancelAlertValue,
           html: this.cancelTitleValue,
@@ -252,12 +253,11 @@ export default class extends ApplicationController {
           timer: 5000,
           timerProgressBar: true
         })
-         */
       }
     })
   }
 
-  btnConfirmar(event){
+  btnConfirmar(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -291,10 +291,9 @@ export default class extends ApplicationController {
         this.redirect = true;
         this.element.click();
       } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
       ) {
-        /*
         swalWithBootstrapButtons.fire({
           title: this.cancelAlertValue,
           html: this.cancelTitleValue,
@@ -305,12 +304,11 @@ export default class extends ApplicationController {
           timer: 5000,
           timerProgressBar: true
         })
-         */
       }
     })
   }
 
-  btnInactivarToast(event){
+  btnInactivarToast(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -344,8 +342,8 @@ export default class extends ApplicationController {
         this.redirect = true;
         this.element.click();
       } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire({
           title: this.cancelAlertValue,
@@ -361,7 +359,7 @@ export default class extends ApplicationController {
     })
   }
 
-  btnConfirmarToast(event){
+  btnConfirmarToast(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -395,8 +393,8 @@ export default class extends ApplicationController {
         this.redirect = true;
         this.element.click();
       } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire({
           title: this.cancelAlertValue,
