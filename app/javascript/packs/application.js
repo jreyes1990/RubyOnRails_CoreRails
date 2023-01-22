@@ -19,9 +19,9 @@ require("channels")
 
 import "startbootstrap-sb-admin-2/vendor/jquery/jquery";
 import "@popperjs/core/dist/umd/popper";
-import "startbootstrap-sb-admin-2/js/sb-admin-2";
 import "startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle";
 import "startbootstrap-sb-admin-2/vendor/jquery-easing/jquery.easing";
+import "startbootstrap-sb-admin-2/js/sb-admin-2";
 import "startbootstrap-sb-admin-2/vendor/fontawesome-free/js/all";
 
 import "datatables.net/js/jquery.dataTables";
@@ -46,11 +46,17 @@ import "select2/dist/js/i18n/es";
 import "moment/dist/moment";
 import "moment/dist/locale/es";
 
+import "controllers"
+
+var jQuery = require("startbootstrap-sb-admin-2/vendor/jquery/jquery");
+
+// import jQuery from "jquery";
+global.$ = global.jQuery = jQuery;
+window.$ = window.jQuery = jQuery;
+
 let pdfMake = require("pdfmake/build/pdfmake");
 let pdfFonts = require("pdfmake/build/vfs_fonts");
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
-import "controllers"
 
 document.addEventListener("turbolinks:load", () => {
   /* *******************************************************
@@ -62,7 +68,7 @@ document.addEventListener("turbolinks:load", () => {
     //"LengthMenu": [[5,10,15,20,25,50,-1],[5,10,15,20,25,50,"Todos"]],
     //"iDisplayLength": 5,
     sZeroRecords: "No se encontraron resultados",
-    info: "Mostrando _END_ registros, de _TOTAL_ registros",
+    info: "Mostrando _END_ registros, de _TOTAL_ registros ",
     sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
     sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
     sInfoPostFix: "(Actualizados)",
@@ -98,10 +104,11 @@ document.addEventListener("turbolinks:load", () => {
     stateDuration: 1200,
     responsive: "true",
     dom: var_dom,
+    sPaginationType: "bootstrap",
     language: espaniol,
     lengthChange: true,
     select: true,
-    order: [0, "desc"],
+    order: [[ 3, 'desc' ], [ 0, 'asc' ]],
     buttons: [
       {
         text: 'CSV <i class="fas fa-file-csv"></i><br> ',
@@ -188,6 +195,25 @@ document.addEventListener("turbolinks:load", () => {
     .slideUp(500, function () {
       $(".alert").slideUp(4000);
     });
+
+  //MOSTRAR U OCULTAR CONTRASEÑA INICIO DE SESIÓN
+  $('#show_password').on('click', function (e) {
+    var cambio = document.getElementById("txtPassword");
+    if(cambio.type == "password"){
+        cambio.type = "text";
+        $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+    }else{
+        cambio.type = "password";
+        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+    }
+    $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
+  });
+
+  /*
+  document.oncontextmenu = ev =>{
+      ev.preventDefault();
+  }
+*/
 
   const originalWebSocketClose = WebSocket.prototype.close
   WebSocket.prototype.close = function () {

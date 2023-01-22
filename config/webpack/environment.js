@@ -3,7 +3,9 @@ const webpack = require('webpack')
 environment.plugins.prepend('Provide', new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'startbootstrap-sb-admin-2/vendor/jquery/jquery',
+        'window.jQuery': 'jquery',
         Popper: ['popper.js', 'default'],
+        Trix: "trix",
         Rails: '@rails/ujs'
     })
 )
