@@ -209,6 +209,32 @@ document.addEventListener("turbolinks:load", () => {
     $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
   });
 
+  //MOSTRAR U OCULTAR CONTRASEÑA NUEVO REGISTRO USUARIO
+  $('#nuevo_password').on('click', function (e) {
+    var cambio = document.getElementById("txtNuevoPassword");
+    if(cambio.type == "password"){
+        cambio.type = "text";
+        $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+    }else{
+        cambio.type = "password";
+        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+    }
+    $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
+  });
+
+  //MOSTRAR U OCULTAR CONFIRMACION CONTRASEÑA NUEVO REGISTRO USUARIO
+  $('#confirma_nuevo_password').on('click', function (e) {
+    var cambio = document.getElementById("txtConfirmaPassword");
+    if(cambio.type == "password"){
+        cambio.type = "text";
+        $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+    }else{
+        cambio.type = "password";
+        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+    }
+    $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
+  });
+
   /*
   document.oncontextmenu = ev =>{
       ev.preventDefault();
