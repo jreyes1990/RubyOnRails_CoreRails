@@ -1,4 +1,4 @@
-<h1 class="h4 text-primary mb-4">BIENVENIDO</h1>
+<h2>BIENVENIDO</h1>
 <br>
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -7,7 +7,6 @@
       <%= f.email_field :email, label: "Email", required: false, autofocus: true, autocomplete: "email", class: "form-control form-control-user", placeholder: "Ingrese su correo..." %>
     </div>
     <br>
-    
     <div class="input-group">
       <%= f.password_field :password, label: "Password", required: false, autocomplete: "current-password", class: "form-control form-control-user", placeholder: "Contraseña", id:'txtPassword' %>
       <div class="input-group-append">
@@ -15,12 +14,10 @@
       </div>
     </div>
     <br>
-    
     <% if devise_mapping.rememberable? %>
-      <%= f.input :remember_me, as: :boolean, input_html: {class: "form-check-input custom-checkbox small"} %>
+      <%= f.input :remember_me, as: :boolean, label: "Recuérdame", input_html: {class: "form-check-input custom-checkbox small"} %>
     <% end %>
   </div>
-
   <div class="form-actions">
     <%= f.button :submit, "Inicio Sesión", class: "btn btn-success btn-user btn-block" %>
   </div>

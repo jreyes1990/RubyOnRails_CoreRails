@@ -48,6 +48,9 @@ import "moment/dist/locale/es";
 
 import "controllers"
 
+import "trix";
+import "@rails/actiontext";
+
 var jQuery = require("startbootstrap-sb-admin-2/vendor/jquery/jquery");
 
 // import jQuery from "jquery";
@@ -332,3 +335,6 @@ document.addEventListener("turbolinks:load", () => {
 });
 
 
+
+require("trix")
+require("@rails/actiontext")

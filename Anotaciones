@@ -27,6 +27,17 @@
    --              Enlace: https://codigonautas.com/creacion-de-bonitos-mensajes-emergentes-con-sweetalert2/
        yarn add sweetalert2
 
+   -- GENERAR ACTION_TEXT, Enlace: https://bswan0002.medium.com/how-to-set-up-action-text-rich-text-editor-in-rails-6-ab91be81e647
+      rails action_text:install
+
+      rails active_storage:install
+
+   -- INSTALACIÓN PAQUETES PARA ACTION_TEXT
+      sudo apt-get -y install imagemagick
+      sudo apt-get -y install libmagic-dev
+      sudo apt-get -y install libmagickwand-dev
+
+
    -- GENERAR STIMULUS_REFLEX PARA SWEETALERT2
       rails generate stimulus_reflex sweetalert
 
