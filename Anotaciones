@@ -41,3 +41,15 @@
 
    -- GENERAR STIMULUS_REFLEX PARA DROPZONE
       rails generate stimulus_reflex dropzone
+
+   -- DEVISE, Intalación devise
+      rails generate devise:install
+
+   -- DEVISE, Generación modelo devise
+      rails generate devise User user_created_id:integer user_updated_id:integer estado:string{10}
+
+   -- DEVISE, Generación controller devise
+      rails generate devise:controllers users
+
+   -- DEVISE, Generación views devise
+      rails generate devise:views

@@ -81,7 +81,7 @@ gem 'net-ssh', '>= 6.0.2'
 
 # https://guias.makeitreal.camp/ruby-on-rails-i/devise
 # https://github.com/heartcombo/devise
-# gem 'devise'
+gem 'devise'
 
 # Uso para manejo de fotografias,  Enlace:  https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave'
