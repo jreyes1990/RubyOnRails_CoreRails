@@ -120,3 +120,7 @@ gem 'caxlsx_rails'
 # GEMA PARA PROCESAMIENTO DE ARCHIVOS EXCEL
 gem "roo"
 
+gem "net-http"
+gem "net-smtp"
+gem "net-imap"
+gem "uri", "0.10.0"
