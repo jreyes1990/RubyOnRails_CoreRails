@@ -38,6 +38,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -67,6 +69,4 @@ Rails.application.configure do
 
   # ADD the following line; it probably doesn't exist
   config.session_store :cache_store, key: "_sessions_development", compress: true, pool_size: 5, expire_after: 1.year
-
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
