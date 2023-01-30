@@ -16,6 +16,9 @@ module CoreRails
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    config.i18n.default_locale = :es
+
+    
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
     config.action_mailer.default :charset => "utf-8"

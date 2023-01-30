@@ -105,7 +105,7 @@ document.addEventListener("turbolinks:load", () => {
     fixedHeader: true,
     stateSave: true,
     stateDuration: 1200,
-    responsive: "true",
+    responsive: true,
     dom: var_dom,
     sPaginationType: "bootstrap",
     language: espaniol,
@@ -333,8 +333,3 @@ document.addEventListener("turbolinks:load", () => {
   });
 
 });
-
-
-
-require("trix")
-require("@rails/actiontext")

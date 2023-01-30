@@ -124,3 +124,6 @@ gem "net-http"
 gem "net-smtp"
 gem "net-imap"
 gem "uri", "0.10.0"
+
+# Traducir las vistas de devise, Enlace: https://medium.com/@MiguelCasas/rails-i18n-devise-i18n-internacionalizacion-5157ab9b8f97
+gem "devise-i18n-views"
