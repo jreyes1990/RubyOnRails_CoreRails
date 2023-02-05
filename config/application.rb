@@ -16,8 +16,13 @@ module CoreRails
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     
-    config.i18n.default_locale = :en
+    config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
+    config.i18n.default_locale = :es
     config.i18n.available_locales = [:en, :es]
+    config.time_zone = "Central America"
+
+    config.session_store :active_record_store,
+                         :key => '_redmine_session'
 
 
     config.action_mailer.delivery_method = :smtp
