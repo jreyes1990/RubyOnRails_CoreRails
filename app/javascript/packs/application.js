@@ -51,12 +51,6 @@ import "controllers"
 import "trix";
 import "@rails/actiontext";
 
-var jQuery = require("startbootstrap-sb-admin-2/vendor/jquery/jquery");
-
-// import jQuery from "jquery";
-global.$ = global.jQuery = jQuery;
-window.$ = window.jQuery = jQuery;
-
 let pdfMake = require("pdfmake/build/pdfmake");
 let pdfFonts = require("pdfmake/build/vfs_fonts");
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
