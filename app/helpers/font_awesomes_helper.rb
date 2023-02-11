@@ -1,0 +1,2 @@
+module FontAwesomesHelper
+end

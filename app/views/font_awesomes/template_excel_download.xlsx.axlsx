@@ -1,0 +1,23 @@
+wb = xlsx_package.workbook
+wb.styles do |s|
+  estilo = s.add_style bg_color: "EFEFEF", fg_color: "00", sz: 14, alignment: { horizontal: :center }
+  header = s.add_style bg_color: 'DD', sz: 16, b: true, alignment: { horizontal: :center }
+  highlight_cell = s.add_style(bg_color: "EFEFEF", sz: 12, border: Axlsx::STYLE_THIN_BORDER, alignment: { horizontal: :center })
+  nombre_cell = s.add_style(bg_color: "EFEFEF", fg_color: '00', sz: 12, border: Axlsx::STYLE_THIN_BORDER, alignment: { horizontal: :center })
+  borde_tabla = s.add_style(border: Axlsx::STYLE_THIN_BORDER, alignment: { horizontal: :center })
+  borde_tabla_color = s.add_style(bg_color: "F9E79F", fg_color: '00', border: Axlsx::STYLE_THIN_BORDER, alignment: { horizontal: :center })
+
+  columnasHoja = @nombre_columnas
+  ids = @ids_columnas
+  
+  # Exporta Personal Del Area
+  wb.add_worksheet(name: "Prueba") do |sheet|
+    @arrayEstilo = []            
+                
+    sheet.add_row ["PERIODO"], style: header           
+    sheet.add_row [nil, nil, nil, nil, nil]
+                                        
+    sheet.add_row ids, :style => [highlight_cell, highlight_cell, highlight_cell, highlight_cell, highlight_cell, highlight_cell, highlight_cell, highlight_cell, highlight_cell, highlight_cell, highlight_cell, highlight_cell] #:style => @arrayEstilo 
+    sheet.add_row columnasHoja, :style => [nombre_cell, nombre_cell, nombre_cell, nombre_cell, nombre_cell, nombre_cell, nombre_cell, nombre_cell, nombre_cell, nombre_cell, nombre_cell, nombre_cell] # :style => @arrayEstilo  
+  end
+end
