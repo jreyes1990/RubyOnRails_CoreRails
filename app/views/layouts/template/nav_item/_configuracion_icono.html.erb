@@ -1,0 +1,30 @@
+<!-- Divider -->
+<hr class="sidebar-divider">
+
+<!-- Heading -->
+<div class="sidebar-heading">
+  Interface
+</div>
+
+<!-- Nav Item - Utilities Collapse Menu -->
+<li class="<%= is_active_controller_icono_titulo %>">
+  <a class="menu_sb <%= is_active_controller_icono %>" href="#" data-toggle="collapse" data-target="#collapseIconos" aria-expanded="true" aria-controls="collapseIconos">
+    <i class="fas fa-images"></i>
+    <span>Utilities</span>
+  </a>
+  <div id="collapseIconos" class="opcion_sb <%= is_active_option_controller_icono %>" aria-labelledby="headingIconos" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+      <h6 class="collapse-header">Custom Utilities:</h6>
+      <!--< if tiene_permiso_sidebar("MENU FONT AWESOME", "VER OPCION") %>-->
+        <%=link_to font_awesomes_path, class: is_active_action("font_awesomes") do %>
+          <i class="fab fa-font-awesome-flag"></i>
+          <span>Font Awesome</span>
+        <% end %>
+      <!--< end %>-->
+      <a class="collapse-item" href="utilities-color.html">Colors</a>
+      <a class="collapse-item" href="utilities-border.html">Borders</a>
+      <a class="collapse-item" href="utilities-animation.html">Animations</a>
+      <a class="collapse-item" href="utilities-other.html">Other</a>
+    </div>
+  </div>
+</li>
