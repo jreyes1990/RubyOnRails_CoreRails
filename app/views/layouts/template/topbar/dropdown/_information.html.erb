@@ -21,10 +21,22 @@
       Activity Log
     </a>
     <div class="dropdown-divider"></div>
+    <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item", data: {controller: 'sweetalert', action: 'click->sweetalert#btnConfirmar',
+                                                                                           sweetalert_confirm_alert_value: "¿Desea Cerrar Sesión?",
+                                                                                           sweetalert_cancel_alert_value: "Cancelado",
+                                                                                           sweetalert_confirm_title_value: 'Seleccione <strong>Cerrar sesión</strong>, a continuación si está listo para finalizar su sesión actual.',
+                                                                                           sweetalert_confirm_btn_value: '<i class="fas fa-sign-out-alt"></i> <strong>Cerrar Sesión</strong>',
+                                                                                           sweetalert_cancel_btn_value: '<i class="fas fa-times-circle"></i> <strong>Cancelar</strong>',
+                                                                                           sweetalert_cancel_title_value: 'Se ha cancelado el evento <strong>Cerrar sesión</strong>' } do %>
+      <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-800"></i>
+      <span class="text">Cerrar Sesión</span>
+    <% end %>
+    <!--
     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
       <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
       Logout
     </a>
+    -->
   </div>
 </li>
 <!-- End of Nav Item - User Information -->
