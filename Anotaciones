@@ -53,6 +53,8 @@
    -- GENERAR STIMULUS_REFLEX PARA DROPZONE
       rails generate stimulus_reflex dropzone
 
+-- USO DE DEVISE
+
    -- DEVISE, Intalación devise
       rails generate devise:install
 
@@ -64,3 +66,11 @@
 
    -- DEVISE, Generación views devise
       rails generate devise:views
+
+-- GENERANDO DATOS
+   rails generate scaffold font_awesom icono:string{50} prefijo_nombre:string{150} termino:string codigo_css:string{25} tipo_icono:string{50} user_created_id:integer user_updated_id:integer estado:string{10}
+
+-- APLICANDO DATATABLE-AJAX
+   ajax-datatables-rails: contenedor de los métodos ajax de DataTables que permiten la sincronización con la paginación del lado del servidor en una aplicación de Rails
+   Enlace: https://github.com/jbox-web/ajax-datatables-rails
+

@@ -3,7 +3,10 @@ class FontAwesomesController < ApplicationController
 
   # GET /font_awesomes or /font_awesomes.json
   def index
-    @font_awesomes = FontAwesom.all.order(id: :DESC)
+    respond_to do |format|    
+      format.html
+      format.json { render json: FontAwesomDatatable.new(params, view_context: view_context) }
+    end
   end
 
   # GET /font_awesomes/1 or /font_awesomes/1.json

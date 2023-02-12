@@ -259,17 +259,21 @@ document.addEventListener("turbolinks:load", () => {
     pagingType: "full_numbers",
   });
 
-  $("#opcion-ca-datatable").DataTable({
+  $("#font-awesome-datatable").DataTable({
     fixedHeader: true,
     stateSave: true,
     stateDuration: 1200,
-    responsive: "true",
+    responsive: true,
     dom: var_dom,
     language: espaniol,
     processing: true,
     serverSide: true,
+    lengthMenu: [
+      [5, 10, 15, 20, 25, 50, -1],
+      [5, 10, 15, 20, 25, 50, 'Todos'],
+    ],
     ajax: {
-      url: $("#opcion-ca-datatable").data("source"),
+      url: $("#font-awesome-datatable").data("source"),
     },
     buttons: [
       {
@@ -321,14 +325,15 @@ document.addEventListener("turbolinks:load", () => {
     ],
     pagingType: "full_numbers",
     columns: [
-      { data: "id" },
-      { data: "opcion" },
-      { data: "componente" },
-      { data: "atributo" },
-      { data: "descripcion" },
-      { data: "estado" },
-      { data: "editar" },
-      { data: "inactivar" },
+      { data: "id", class: "text-center" },
+      { data: "icono", class: "text-center" },
+      { data: "prefijo_nombre" },
+      { data: "codigo_css", class: "text-center" },
+      { data: "tipo_icono", class: "text-center" },
+      { data: "termino" },
+      { data: "estado", class: "text-center" },
+      { data: "opciones", class: "text-center" },
+      { data: "inactivar", class: "text-center" },
     ],
   });
 
