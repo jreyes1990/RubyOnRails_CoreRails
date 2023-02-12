@@ -202,6 +202,7 @@ class FontAwesomesController < ApplicationController
           @font_awesom.icono = @codigo_icono
           @font_awesom.prefijo_nombre = @codigo_prefijo
           @font_awesom.termino = @codigo_termino
+          @font_awesom.observacion = @codigo_termino
           @font_awesom.codigo_css = @codigo_css
           @font_awesom.tipo_icono = @codigo_tipo_icono
           @font_awesom.user_created_id = current_user.id
