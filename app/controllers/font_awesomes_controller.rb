@@ -30,7 +30,7 @@ class FontAwesomesController < ApplicationController
 
     respond_to do |format|
       if @font_awesom.save
-        format.html { redirect_to font_awesomes_url, notice: "El icono #{@font_awesom.icono} se ha creado correctamente." }
+        format.html { redirect_to font_awesomes_url, notice: "El icono <i class='#{@font_awesom.icono}' aria-hidden='true'></i> <strong>#{@font_awesom.icono}</strong> se ha creado correctamente.".html_safe }
         format.json { render :show, status: :created, location: @font_awesom }
       else
         format.html { render :new, status: :unprocessable_entity, alert: "Ocurrio un error al crear el Icono, Verifique!!.." }
@@ -45,7 +45,7 @@ class FontAwesomesController < ApplicationController
 
     respond_to do |format|
       if @font_awesom.update(font_awesom_params)
-        format.html { redirect_to font_awesomes_url, notice: "El icono #{@font_awesom.icono} se ha actualizado correctamente." }
+        format.html { redirect_to font_awesomes_url, notice: "El icono <i class='#{@font_awesom.icono}' aria-hidden='true'></i> <strong>#{@font_awesom.icono}</strong> se ha actualizado correctamente.".html_safe }
         format.json { render :show, status: :ok, location: @font_awesom }
       else
         format.html { render :edit, status: :unprocessable_entity, alert: "Ocurrio un error al actualizar el Icono, Verifique!!.." }
@@ -59,7 +59,7 @@ class FontAwesomesController < ApplicationController
     @font_awesom.destroy
 
     respond_to do |format|
-      format.html { redirect_to font_awesomes_url, notice: "El icono #{@font_awesom.icono} se ha aliminado correctamente." }
+      format.html { redirect_to font_awesomes_url, notice: "El icono <i class='#{@font_awesom.icono}' aria-hidden='true'></i> <strong>#{@font_awesom.icono}</strong> se ha aliminado correctamente.".html_safe }
       format.json { head :no_content }
     end
   end
@@ -71,7 +71,7 @@ class FontAwesomesController < ApplicationController
 
     respond_to do |format|
       if @font_awesom.save
-        format.html { redirect_to font_awesomes_url, notice: "El icono #{@font_awesom.icono} ha sido Inactivado" }
+        format.html { redirect_to font_awesomes_url, notice: "El icono <i class='#{@font_awesom.icono}' aria-hidden='true'></i> <strong>#{@font_awesom.icono}</strong> ha sido Inactivado".html_safe }
         format.json { render :show, status: :created, location: @font_awesom }
       else
         format.html { render :new, status: :unprocessable_entity, alert: "Ocurrio un error al inactivar el icono, Verifique!!.." }
@@ -87,7 +87,7 @@ class FontAwesomesController < ApplicationController
 
     respond_to do |format|
       if @font_awesom.save
-        format.html { redirect_to font_awesomes_url, notice: "El icono #{@font_awesom.icono} ha sido Activado" }
+        format.html { redirect_to font_awesomes_url, notice: "El icono <i class='#{@font_awesom.icono}' aria-hidden='true'></i> <strong>#{@font_awesom.icono}</strong> ha sido Activado".html_safe }
         format.json { render :show, status: :created, location: @font_awesom }
       else
         format.html { render :new, status: :unprocessable_entity, alert: "Ocurrio un error al activar el icono, Verifique!!.." }
@@ -127,12 +127,6 @@ class FontAwesomesController < ApplicationController
     array_ids = archivo_cargado.row(3)
     usuario_id = current_user.id
 
-    @elimina_datos_tabla = FontAwesom.all
-          
-    @elimina_datos_tabla.each do |elimina|
-      elimina.destroy
-    end
-    
     contador = 0
     archivo_cargado.each do |fila|
       #puts "-------------------------------- \nFILAS #{fila}" 
@@ -198,16 +192,24 @@ class FontAwesomesController < ApplicationController
         end
         #puts "***************************** ANTES DE GUARDAR, FILA #{contador} \nICONO: #{@codigo_icono} | PREFIJO: #{@codigo_prefijo} | TERMINO: #{@codigo_termino} | CODIGO CSS: #{@codigo_css} | TIPO ICONO: #{@codigo_tipo_icono}"
         if !@codigo_icono.blank? && !@codigo_tipo_icono.blank?
-          @font_awesom = FontAwesom.new
-          @font_awesom.icono = @codigo_icono
-          @font_awesom.prefijo_nombre = @codigo_prefijo
-          @font_awesom.termino = @codigo_termino
-          @font_awesom.observacion = @codigo_termino
-          @font_awesom.codigo_css = @codigo_css
-          @font_awesom.tipo_icono = @codigo_tipo_icono
-          @font_awesom.user_created_id = current_user.id
-          @font_awesom.estado = "A"
-          @font_awesom.save 
+          @consulta_awesome = FontAwesom.where(icono: @codigo_icono)
+
+          if @consulta_awesome.blank?
+            @consulta_awesome.each do |elimina|
+              elimina.destroy
+            end
+          
+            @font_awesom = FontAwesom.new
+            @font_awesom.icono = @codigo_icono
+            @font_awesom.prefijo_nombre = @codigo_prefijo
+            @font_awesom.termino = @codigo_termino
+            @font_awesom.observacion = @codigo_termino
+            @font_awesom.codigo_css = @codigo_css
+            @font_awesom.tipo_icono = @codigo_tipo_icono
+            @font_awesom.user_created_id = current_user.id
+            @font_awesom.estado = "A"
+            @font_awesom.save 
+          end
         end
       end
       contador = contador + 1
@@ -216,7 +218,7 @@ class FontAwesomesController < ApplicationController
     File.delete(Rails.root.join('app', 'exceles', uploaded_io.original_filename))
 
     respond_to do |format|
-      format.html { redirect_to carga_masiva_awesome_path, notice: "Procesado exitosamente."  }
+      format.html { redirect_to carga_masiva_awesome_path, notice: "La carga se ha procesado exitosamente."  }
       format.json { render :show, status: :created, location: @font_awesom }
     end
   end 
