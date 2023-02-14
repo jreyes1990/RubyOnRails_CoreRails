@@ -21,7 +21,12 @@
           <span>Font Awesome</span>
         <% end %>
       <!--< end %>-->
-      <a class="collapse-item" href="utilities-color.html">Colors</a>
+      <!--< if tiene_permiso_sidebar("MENU FONT AWESOME", "VER OPCION") %>-->
+      <%=link_to codigo_colores_path, class: is_active_action("codigo_colores") do %>
+        <i class="fab fa-font-awesome-flag"></i>
+        <span>Codigo Colores</span>
+      <% end %>
+      <!--< end %>-->
       <a class="collapse-item" href="utilities-border.html">Borders</a>
       <a class="collapse-item" href="utilities-animation.html">Animations</a>
       <a class="collapse-item" href="utilities-other.html">Other</a>

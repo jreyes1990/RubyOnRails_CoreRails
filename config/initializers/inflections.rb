@@ -14,4 +14,5 @@
  ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
     inflect.irregular "font_awesom", "font_awesomes"
+    inflect.irregular "codigo_color", "codigo_colores"
  end

@@ -89,6 +89,54 @@ document.addEventListener("turbolinks:load", () => {
     "<'row'<'col-sm-10'i><'col-sm-1 text-center'><'col-sm-1'>><br>" +
     "<'row'<'col-sm-4'><'col-sm-3 text-center'p><'col-sm-5'>>";
 
+  var var_buttons = 
+  [{
+      text: 'CSV <i class="fas fa-file-csv"></i> ',
+      extend: "csvHtml5",
+      fieldSeparator: "\t",
+      extension: ".csv",
+      titleAttr: "Si desea exportar el archivo, Dar click en CSV",
+      className: "btn btn-outline-warning",
+    },
+    {
+      text: 'EXCEL <i class="fas fa-file-excel"></i> ',
+      extend: "csvHtml5",
+      fieldSeparator: "\t",
+      extension: ".xlsx",
+      titleAttr: "Si desea exportar el archivo, Dar click en EXCEL",
+      className: "btn btn-outline-success",
+      messageTop: "La exportación excel, se ha realizado correctamente",
+    },
+    {
+      text: 'PDF <i class="fas fa-file-pdf"></i> ',
+      extend: "pdfHtml5",
+      titleAttr: "Si desea exportar el archivo, Dar click en PDF",
+      className: "btn btn-outline-danger",
+      messageTop: "PDF created by PDFMake with Buttons for DataTables.",
+    },
+    {
+      text: 'PRINT <i class="fas fa-print"></i> ',
+      extend: "print",
+      titleAttr: "Si desea imprimr, Dar click en PRINT",
+      className: "btn btn-outline-info",
+      exportOptions: {
+        columns: ":visible",
+      },
+    },
+    {
+      text: "JSON",
+      titleAttr: "Si desea exportar el archivo, Dar click en JSON",
+      className: "btn btn-outline-primary",
+      action: function (e, dt, button, config) {
+        var data = dt.buttons.exportData();
+
+        $.fn.dataTable.fileSave(
+          new Blob([JSON.stringify(data)]),
+          "Export.json"
+        );
+      },
+  }];
+
   $(document).ajaxSend(function (e, xhr, options) {
     var token = $("meta[name='csrf-token']").attr("content");
     xhr.setRequestHeader("X-CSRF-Token", token);
@@ -208,54 +256,7 @@ document.addEventListener("turbolinks:load", () => {
       [5, 10, 15, 20, 25, 50, -1],
       [5, 10, 15, 20, 25, 50, 'Todos'],
     ],
-    buttons: [
-      {
-        text: 'CSV <i class="fas fa-file-csv"></i><br> ',
-        extend: "csvHtml5",
-        fieldSeparator: "\t",
-        extension: ".csv",
-        titleAttr: "Si desea exportar el archivo, Dar click en CSV",
-        className: "btn btn-warning",
-      },
-      {
-        text: 'EXCEL <i class="fas fa-file-excel"></i> ',
-        extend: "csvHtml5",
-        fieldSeparator: "\t",
-        extension: ".xlsx",
-        titleAttr: "Si desea exportar el archivo, Dar click en EXCEL",
-        className: "btn btn-success",
-        messageTop: "La exportación excel, se ha realizado correctamente",
-      },
-      {
-        text: 'PDF <i class="fas fa-file-pdf"></i> ',
-        extend: "pdfHtml5",
-        titleAttr: "Si desea exportar el archivo, Dar click en PDF",
-        className: "btn btn-danger",
-        messageTop: "PDF created by PDFMake with Buttons for DataTables.",
-      },
-      {
-        text: 'PRINT <i class="fas fa-print"></i> ',
-        extend: "print",
-        titleAttr: "Si desea imprimr, Dar click en PRINT",
-        className: "btn btn-info",
-        exportOptions: {
-          columns: ":visible",
-        },
-      },
-      {
-        text: "JSON",
-        titleAttr: "Si desea exportar el archivo, Dar click en JSON",
-        className: "btn btn-primary",
-        action: function (e, dt, button, config) {
-          var data = dt.buttons.exportData();
-
-          $.fn.dataTable.fileSave(
-            new Blob([JSON.stringify(data)]),
-            "Export.json"
-          );
-        },
-      },
-    ],
+    buttons: var_buttons,
     pagingType: "full_numbers",
   });
 
@@ -275,54 +276,7 @@ document.addEventListener("turbolinks:load", () => {
     ajax: {
       url: $("#font-awesome-datatable").data("source"),
     },
-    buttons: [
-      {
-        text: 'CSV <i class="fas fa-file-csv"></i> ',
-        extend: "csvHtml5",
-        fieldSeparator: "\t",
-        extension: ".csv",
-        titleAttr: "Si desea exportar el archivo, Dar click en CSV",
-        className: "btn btn-outline-warning",
-      },
-      {
-        text: 'EXCEL <i class="fas fa-file-excel"></i> ',
-        extend: "csvHtml5",
-        fieldSeparator: "\t",
-        extension: ".xlsx",
-        titleAttr: "Si desea exportar el archivo, Dar click en EXCEL",
-        className: "btn btn-outline-success",
-        messageTop: "La exportación excel, se ha realizado correctamente",
-      },
-      {
-        text: 'PDF <i class="fas fa-file-pdf"></i> ',
-        extend: "pdfHtml5",
-        titleAttr: "Si desea exportar el archivo, Dar click en PDF",
-        className: "btn btn-outline-danger",
-        messageTop: "PDF created by PDFMake with Buttons for DataTables.",
-      },
-      {
-        text: 'PRINT <i class="fas fa-print"></i> ',
-        extend: "print",
-        titleAttr: "Si desea imprimr, Dar click en PRINT",
-        className: "btn btn-outline-info",
-        exportOptions: {
-          columns: ":visible",
-        },
-      },
-      {
-        text: "JSON",
-        titleAttr: "Si desea exportar el archivo, Dar click en JSON",
-        className: "btn btn-outline-primary",
-        action: function (e, dt, button, config) {
-          var data = dt.buttons.exportData();
-
-          $.fn.dataTable.fileSave(
-            new Blob([JSON.stringify(data)]),
-            "Export.json"
-          );
-        },
-      },
-    ],
+    buttons: var_buttons,
     pagingType: "full_numbers",
     columns: [
       { data: "id", class: "text-center" },
@@ -331,6 +285,38 @@ document.addEventListener("turbolinks:load", () => {
       { data: "codigo_css", class: "text-center" },
       { data: "tipo_icono", class: "text-center" },
       { data: "termino" },
+      { data: "estado", class: "text-center" },
+      { data: "opciones", class: "text-center" },
+      { data: "inactivar", class: "text-center" },
+    ],
+  });
+
+  $("#codigo-color-datatable").DataTable({
+    fixedHeader: true,
+    stateSave: true,
+    stateDuration: 1200,
+    responsive: true,
+    dom: var_dom,
+    language: espaniol,
+    processing: true,
+    serverSide: true,
+    lengthMenu: [
+      [5, 10, 15, 20, 25, 50, -1],
+      [5, 10, 15, 20, 25, 50, 'Todos'],
+    ],
+    ajax: {
+      url: $("#codigo-color-datatable").data("source"),
+    },
+    buttons: var_buttons,
+    pagingType: "full_numbers",
+    columns: [
+      { data: "id", class: "text-center" },
+      { data: "disenio" },
+      { data: "nombre_color" },
+      { data: "colores", class: "text-center" },
+      { data: "codigo_hex", class: "text-center" },
+      { data: "codigo_rgb", class: "text-center" },
+      { data: "codigo_hls", class: "text-center" },
       { data: "estado", class: "text-center" },
       { data: "opciones", class: "text-center" },
       { data: "inactivar", class: "text-center" },

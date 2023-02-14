@@ -20,7 +20,7 @@ module ApplicationHelper
 
   # METODOS DE ACTIVACION EN SIDEBAR - ICONOS
   def is_active_controller_icono_titulo
-    @controladores = ["font_awesomes"]
+    @controladores = ["font_awesomes", "codigo_colores"]
     if @controladores.include? params[:controller]
       "nav-item active"
     else
@@ -29,7 +29,7 @@ module ApplicationHelper
   end
 
   def is_active_controller_icono
-    @controladores = ["font_awesomes"]
+    @controladores = ["font_awesomes", "codigo_colores"]
     if @controladores.include? params[:controller]
       "nav-link"
     else
@@ -38,7 +38,7 @@ module ApplicationHelper
   end
 
   def is_active_option_controller_icono
-    @controladores = ["font_awesomes"]
+    @controladores = ["font_awesomes", "codigo_colores"]
     if @controladores.include? params[:controller]
       "collapse show"
     else
