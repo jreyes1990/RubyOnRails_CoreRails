@@ -117,6 +117,125 @@ class CodigoColoresController < ApplicationController
             template: 'codigo_colores/template_excel_download.xlsx.axlsx'
   end 
 
+  def carga_excel
+    uploaded_io = params[:carga_codigo_colores][:archivo_excel]
+
+    File.open(Rails.root.join('app','exceles', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)      
+    end
+
+    archivo_cargado = Roo::Spreadsheet.open(Rails.root.join('app', 'exceles', uploaded_io.original_filename), extension: :xlsx)
+
+    array_ids = archivo_cargado.row(3)
+    usuario_id = current_user.id
+
+    contador = 0
+    archivo_cargado.each do |fila|
+      #puts "-------------------------------- \nFILAS #{fila}" 
+      #puts "********** IMPRIMIENDO CONTADOR #{contador}"
+      
+      if contador > 3
+        
+        arrayValores = fila
+      
+        hash = Hash[array_ids.zip arrayValores]          
+        hash.each do |id, valores|
+          #puts "**********linea#{contador}/// IMPRIMIENDO IDS #{id}, CORRESPONDE A #{valores}"   
+
+          if id == "D"     
+            id_disenio = valores 
+
+            if !id_disenio.blank?
+              @codigo_disenio = id_disenio
+            else
+              @codigo_disenio = ''
+            end
+          end
+
+          if id == "NC"     
+            id_nombre_color = valores 
+
+            if !id_nombre_color.blank?
+              @nombre_color = id_nombre_color
+            else
+              @nombre_color = ''
+            end
+          end
+
+          if id == "C"     
+            id_color = valores 
+
+            if !id_color.blank?
+              @codigo_color = id_color
+            else
+              @codigo_color = ''
+            end
+          end
+
+          if id == "HEX"     
+            id_codigo_hex = valores 
+
+            if !id_codigo_hex.blank?
+              @codigo_hex = id_codigo_hex
+            else
+              @codigo_hex = ''
+            end
+          end
+
+          if id == "RGB"     
+            id_codigo_rgb = valores 
+
+            if !id_codigo_rgb.blank?
+              @codigo_rgb = id_codigo_rgb
+            else
+              @codigo_rgb = ''
+            end
+          end
+
+          if id == "HLS"     
+            id_codigo_hls = valores 
+
+            if !id_codigo_hls.blank?
+              @codigo_hls = id_codigo_hls
+            else
+              @codigo_hls = ''
+            end
+          end
+        end
+
+        #puts "***************************** ANTES DE GUARDAR, FILA #{contador} \nDISEÑO: #{@codigo_disenio} | NOMBRE COLOR: #{@nombre_color} | COLOR: #{@codigo_color} | HEX: #{@codigo_hex} | RGB: #{@codigo_rgb} | HLS: #{@codigo_hls}"
+        if !@nombre_color.blank? && !@codigo_color.blank? && !@codigo_hex.blank? && !@codigo_rgb.blank? && !@codigo_hls.blank?
+          @consulta_codigo_color = CodigoColor.where(colores: @codigo_color, codigo_hex: @codigo_hex, codigo_rgb: @codigo_rgb, codigo_hls: @codigo_hls)
+
+          if @consulta_codigo_color.blank?
+            @consulta_codigo_color.each do |elimina|
+              elimina.destroy
+            end
+          
+            @codigo_color = CodigoColor.new
+            @codigo_color.disenio = @codigo_disenio
+            @codigo_color.nombre_color = @nombre_color
+            @codigo_color.colores = @codigo_hex
+            @codigo_color.codigo_hex = @codigo_hex
+            @codigo_color.codigo_rgb = @codigo_rgb
+            @codigo_color.codigo_hls = @codigo_hls
+            @codigo_color.user_created_id = current_user.id
+            @codigo_color.estado = "A"
+            @codigo_color.save 
+          end
+        end
+      end
+      contador = contador + 1
+    end
+
+    File.delete(Rails.root.join('app', 'exceles', uploaded_io.original_filename))
+
+    respond_to do |format|
+      format.html { redirect_to carga_masiva_color_path, notice: "La carga se ha procesado exitosamente."  }
+      format.json { render :show, status: :created, location: @codigo_color }
+    end
+  end 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_codigo_color

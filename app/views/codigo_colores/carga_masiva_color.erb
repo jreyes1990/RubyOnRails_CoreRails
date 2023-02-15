@@ -67,7 +67,7 @@
                   <div class="form-group">
                     <strong><label for="nombreTransaccion">PROCESAMIENTO</label></strong>
                     <br>
-                    <%= simple_form_for :carga_font_awesome, :url => {:controller => "font_awesomes", :action => "carga_excel"}, defaults: { wrapper: :inline_field4 } do |f| %>
+                    <%= simple_form_for :carga_codigo_colores, :url => {:controller => "codigo_colores", :action => "carga_excel"}, defaults: { wrapper: :inline_field4 } do |f| %>
                     <div class="row text-center">
                       <%= f.label "Archivo Excel terminado" %>
                       <%= f.file_field :archivo_excel, required: true, class: 'form-control', label: "Selecciona un Archivo Excel" ,wrapper: :inline_field12  %>

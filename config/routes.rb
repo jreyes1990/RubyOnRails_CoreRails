@@ -20,6 +20,6 @@ Rails.application.routes.draw do
     get 'codigo_colores/activar/:id' => "codigo_colores#activar_color", as: 'activar_color'
     get "/carga_masiva_color/" => "codigo_colores#carga_masiva_color", as: 'carga_masiva_color'
     post 'codigo_colores/descarga_formato_excel'
-    post 'codigo_colores/carga_excel', as: 'carga_excel_colores'
+    post 'codigo_colores/carga_excel'
   end
 end
