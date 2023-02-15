@@ -87,7 +87,7 @@ document.addEventListener("turbolinks:load", () => {
     "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
     "<'row'<'col-sm-12'tr>>" +
     "<'row'<'col-sm-10'i><'col-sm-1 text-center'><'col-sm-1'>><br>" +
-    "<'row'<'col-sm-3'><'col-sm-4 text-center'p><'col-sm-5'>>";
+    "<'row'<'col-sm-4'><'col-sm-3 text-center'p><'col-sm-5'>>";
 
   var var_buttons = 
   [{
