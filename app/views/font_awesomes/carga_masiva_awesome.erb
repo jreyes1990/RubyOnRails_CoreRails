@@ -48,10 +48,10 @@
                     <div class="col-md-12 text-center">
                     <br>
                       <%= button_tag f.submit, class: "btn btn-success btn-sm", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
-                                                                                                                          sweetalert_confirm_alert_value: "Descarga Formato",                                                                                                                        
-                                                                                                                          sweetalert_confirm_title_value: "Está seguro de realizar la descargar del formato del "+'<strong>Font Awesome</strong>',
-                                                                                                                          sweetalert_confirm_btn_value: "Si, Descargar",
-                                                                                                                          sweetalert_cancel_btn_value: "No, Cancelar"  }  do %>
+                                                                                        sweetalert_confirm_alert_value: "Descarga Formato",                                                                                                                        
+                                                                                        sweetalert_confirm_title_value: "Está seguro de realizar la descargar del formato del "+'<strong>Font Awesome</strong>',
+                                                                                        sweetalert_confirm_btn_value: "Si, Descargar",
+                                                                                        sweetalert_cancel_btn_value: "No, Cancelar"  }  do %>
                       <span class="icon text-50">
                         <i class="fa fa-download"></i>
                       </span>
@@ -75,11 +75,11 @@
                     <div class="col-md-12 text-center">
                       <br>
                       <%= button_tag f.submit, class: "btn btn-danger btn-sm", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
-                                                                                                                          sweetalert_confirm_alert_value: "Carga Excel",
-                                                                                                                          sweetalert_cancel_alert_value: "Cancelado",
-                                                                                                                          sweetalert_confirm_title_value: '<strong>NOTA: </strong>'+"Al momento de realizar la carga, se eliminará e importará los datos mayor a la semana actual."+'<br><br>'+"Está seguro de realizar la carga del "+'<strong>personal de turno?</strong>',
-                                                                                                                          sweetalert_confirm_btn_value: "Si, Procesar",
-                                                                                                                          sweetalert_cancel_btn_value: "No, Cancelar" }   do %>
+                                                                                        sweetalert_confirm_alert_value: "Carga Excel",
+                                                                                        sweetalert_cancel_alert_value: "Cancelado",
+                                                                                        sweetalert_confirm_title_value: '<strong>NOTA: </strong>'+"Al momento de realizar la carga, se eliminará e importará los datos mayor a la semana actual."+'<br><br>'+"Está seguro de realizar la carga del "+'<strong>personal de turno?</strong>',
+                                                                                        sweetalert_confirm_btn_value: "Si, Procesar",
+                                                                                        sweetalert_cancel_btn_value: "No, Cancelar" }   do %>
                       <span class="icon text-50">
                         <i class="fa fa-upload"></i>
                       </span>
