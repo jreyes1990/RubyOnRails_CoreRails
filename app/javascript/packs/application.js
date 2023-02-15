@@ -26,7 +26,7 @@ import "startbootstrap-sb-admin-2/vendor/fontawesome-free/js/all";
 
 import "datatables.net/js/jquery.dataTables";
 
-import "datatables.net-bs4/js/dataTables.bootstrap4";
+import "datatables.net-bs/js/dataTables.bootstrap";
 
 import "datatables.net-buttons-bs4/js/buttons.bootstrap4";
 
@@ -87,7 +87,7 @@ document.addEventListener("turbolinks:load", () => {
     "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
     "<'row'<'col-sm-12'tr>>" +
     "<'row'<'col-sm-10'i><'col-sm-1 text-center'><'col-sm-1'>><br>" +
-    "<'row'<'col-sm-4'><'col-sm-3 text-center'p><'col-sm-5'>>";
+    "<'row'<'col-sm-3'><'col-sm-4 text-center'p><'col-sm-5'>>";
 
   var var_buttons = 
   [{
@@ -96,7 +96,7 @@ document.addEventListener("turbolinks:load", () => {
       fieldSeparator: "\t",
       extension: ".csv",
       titleAttr: "Si desea exportar el archivo, Dar click en CSV",
-      className: "btn btn-outline-warning",
+      className: "btn btn-warning",
     },
     {
       text: 'EXCEL <i class="fas fa-file-excel"></i> ',
@@ -104,21 +104,21 @@ document.addEventListener("turbolinks:load", () => {
       fieldSeparator: "\t",
       extension: ".xlsx",
       titleAttr: "Si desea exportar el archivo, Dar click en EXCEL",
-      className: "btn btn-outline-success",
+      className: "btn btn-success",
       messageTop: "La exportación excel, se ha realizado correctamente",
     },
     {
       text: 'PDF <i class="fas fa-file-pdf"></i> ',
       extend: "pdfHtml5",
       titleAttr: "Si desea exportar el archivo, Dar click en PDF",
-      className: "btn btn-outline-danger",
+      className: "btn btn-danger",
       messageTop: "PDF created by PDFMake with Buttons for DataTables.",
     },
     {
       text: 'PRINT <i class="fas fa-print"></i> ',
       extend: "print",
       titleAttr: "Si desea imprimr, Dar click en PRINT",
-      className: "btn btn-outline-info",
+      className: "btn btn-info",
       exportOptions: {
         columns: ":visible",
       },
@@ -126,7 +126,7 @@ document.addEventListener("turbolinks:load", () => {
     {
       text: "JSON",
       titleAttr: "Si desea exportar el archivo, Dar click en JSON",
-      className: "btn btn-outline-primary",
+      className: "btn btn-primary",
       action: function (e, dt, button, config) {
         var data = dt.buttons.exportData();
 
