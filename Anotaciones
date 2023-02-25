@@ -67,12 +67,12 @@
    -- DEVISE, Generación views devise
       rails generate devise:views
 
--- GENERANDO SCAFFOLD FONT_AWESOME
-   rails generate scaffold font_awesom icono:string{50} prefijo_nombre:string{150} termino:string codigo_css:string{25} tipo_icono:string{50} user_created_id:integer user_updated_id:integer estado:string{10}
-
 -- APLICANDO DATATABLE-AJAX
    ajax-datatables-rails: contenedor de los métodos ajax de DataTables que permiten la sincronización con la paginación del lado del servidor en una aplicación de Rails
    Enlace: https://github.com/jbox-web/ajax-datatables-rails
+
+-- GENERANDO SCAFFOLD FONT_AWESOME
+   rails generate scaffold font_awesom icono:string{50} prefijo_nombre:string{150} termino:string codigo_css:string{25} tipo_icono:string{50} user_created_id:integer user_updated_id:integer estado:string{10}
 
 -- GENERANDO DATATABLE AJAX FONT_AWESOME
    rails generate datatable font_awesom
@@ -82,3 +82,6 @@
 
 -- GENERANDO DATATABLE AJAX CODIGO_COLOR
    rails generate datatable codigo_color
+
+-- GENERANDO SCAFFOLD EMPRESA
+   rails generate scaffold empresa codigo_empresa:integer nombre:string{200} descripcion:string user_created_id:integer user_updated_id:integer estado:string{10}

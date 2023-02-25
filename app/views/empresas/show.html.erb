@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Codigo empresa:</strong>
+  <%= @empresa.codigo_empresa %>
+</p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @empresa.nombre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @empresa.descripcion %>
+</p>
+
+<p>
+  <strong>User created:</strong>
+  <%= @empresa.user_created_id %>
+</p>
+
+<p>
+  <strong>User updated:</strong>
+  <%= @empresa.user_updated_id %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @empresa.estado %>
+</p>
+
+<%= link_to 'Edit', edit_empresa_path(@empresa) %> |
+<%= link_to 'Back', empresas_path %>

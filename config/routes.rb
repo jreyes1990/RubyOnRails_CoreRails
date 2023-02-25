@@ -7,6 +7,13 @@ Rails.application.routes.draw do
   root to: 'home#welcome'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  scope "/sistemas" do
+    resources :empresas
+    get 'empresa/inactivar/:id' => "empresas#inactivar_empresa", as: 'inactivar_empresa'
+    get 'empresa/activar/:id' => "empresas#activar_empresa", as: 'activar_empresa'
+
+  end
+
   scope "/otros" do
     resources :font_awesomes
     get 'font_awesomes/inactivar/:id' => "font_awesomes#inactivar_awesome", as: 'inactivar_awesome'

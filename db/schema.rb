@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_13_021000) do
+ActiveRecord::Schema.define(version: 2023_02_24_033732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,10 +49,21 @@ ActiveRecord::Schema.define(version: 2023_02_13_021000) do
   create_table "codigo_colores", force: :cascade do |t|
     t.string "disenio", limit: 50
     t.string "nombre_color", limit: 100
-    t.string "colores", limit: 25
-    t.string "codigo_hex", limit: 25
+    t.string "colores", limit: 15
+    t.string "codigo_hex", limit: 15
     t.string "codigo_rgb", limit: 50
     t.string "codigo_hls", limit: 50
+    t.integer "user_created_id"
+    t.integer "user_updated_id"
+    t.string "estado", limit: 10
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "empresas", force: :cascade do |t|
+    t.integer "codigo_empresa"
+    t.string "nombre", limit: 200
+    t.string "descripcion"
     t.integer "user_created_id"
     t.integer "user_updated_id"
     t.string "estado", limit: 10
