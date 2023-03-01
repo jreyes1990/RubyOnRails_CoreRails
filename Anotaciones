@@ -94,3 +94,6 @@
 
 -- GENERANDO DATATABLE AJAX ÁREA
    rails generate datatable area
+
+-- GENERANDO SCAFFOLD ATRIBUTO
+   rails generate scaffold atributo nombre:string{200} descripcion:string user_created_id:integer user_updated_id:integer estado:string{10}

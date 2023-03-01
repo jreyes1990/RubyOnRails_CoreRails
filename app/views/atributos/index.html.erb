@@ -1,0 +1,112 @@
+<!-- Inicio Atributos -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <div class="row">
+      <div class="col-md-6 text-left">
+        <h6 class="m-0 font-weight-bold text-primary">Gestión de Atributos</h6>
+      </div>
+      <div class="col-md-6 text-right">
+        <!--< if tiene_permiso("BOTON NUEVO REGISTRO", "VER") %>-->
+          <%= link_to new_atributo_path, class: "btn btn-success btn-sm" do %>
+            <span class="icon text-green-50">
+                <i class="fas fa-plus-circle"></i>
+            </span>
+            <span class="text">AGREGAR</span>
+          <%end%>
+        <!--< end %>-->
+        <%= link_to root_path, class: "btn btn-danger btn-sm" do %>
+          <span class="icon text-red-50">
+              <i class="fas fa-home"></i>
+          </span>
+          <span class="text">INICIO</span>
+        <%end%>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-12 table-responsive">
+          <table id="datatable" class="table table-striped table-hover table-sm table-responsive-sm table-bordered" cellspacing="0" style="width:100%">
+            <thead class="text-white">
+              <tr>
+                <th class="text-center">ID</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th class="text-center">Estado</th>
+                <!--< if tiene_permiso("BOTON EDITAR REGISTRO", "VER") ||
+                tiene_permiso("BOTON ELIMINAR REGISTRO", "VER") %>-->
+                <th class="text-center"></th>
+                <!--< end %>-->
+                <!--< if tiene_permiso("BOTON ACTIVAR/INACTIVAR REGISTRO", "VER") %>-->
+                <th class="text-center"></th>
+                <!--< end %>-->
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @atributos.each do |atributo| %>
+                <tr>
+                  <td class="text-center"><%= atributo.id %></td>
+                  <td><%= atributo.nombre %></td>
+                  <td><%= atributo.descripcion %></td>
+                  <td><%= format_estado(atributo.estado) %></td>
+                  <!--< if tiene_permiso("BOTON EDITAR REGISTRO", "VER") ||
+                    tiene_permiso("BOTON ELIMINAR REGISTRO", "VER") %>-->
+                    <td class="text-center">
+                      <% if atributo.estado == 'A' %>
+                        <!--< if tiene_permiso("BOTON EDITAR REGISTRO", "VER") %>-->
+                        <%= link_to edit_atributo_path(atributo), class: "btn btn-outline-info btn-sm rounded-circle" do %>
+                          <i class="fas fa-edit"></i>
+                        <%end%>
+                        <!--< end %>-->
+                      <% else %>
+                        <!--< if tiene_permiso("BOTON ELIMINAR REGISTRO", "VER") %>-->
+                          <%= link_to  atributo_path(:id => atributo.id), method: :delete, class: "btn btn-outline-danger btn-sm rounded-circle", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
+                                                                                                                                                        sweetalert_confirm_alert_value: "Eliminar",
+                                                                                                                                                        sweetalert_cancel_alert_value: "Cancelado",
+                                                                                                                                                        sweetalert_confirm_title_value: 'Esta seguro de eliminar <strong style="color: #1d71b9; font-weight: bold;"><p>'+"#{atributo.nombre}?"+'</p></strong>',
+                                                                                                                                                        sweetalert_confirm_btn_value: '<i class="fas fa-check-circle"></i> <strong>Si, Eliminar</strong>',
+                                                                                                                                                        sweetalert_cancel_btn_value: '<i class="fas fa-times-circle"></i> <strong>No, Cancelar</strong>',
+                                                                                                                                                        sweetalert_cancel_title_value: 'Se ha cancelado la aliminación de <strong>'+"#{atributo.nombre}"+'</strong>' } do %>
+                            <i class="fas fa-trash-alt"></i>
+                          <%end%>
+                        <!--< end %>-->
+                      <% end %>
+                    </td>
+                    <!--< end %>
+                    < if tiene_permiso("BOTON ACTIVAR/INACTIVAR REGISTRO", "VER") %>-->
+                    <td class="text-center">
+                      <% if atributo.estado == 'A' %>
+                        <%= link_to  inactivar_atributo_path(:id => atributo.id), class: "btn btn-outline-danger btn-sm rounded-circle", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
+                                                                                                                                              sweetalert_confirm_alert_value: "Inactivar",
+                                                                                                                                              sweetalert_cancel_alert_value: "Cancelado",
+                                                                                                                                              sweetalert_confirm_title_value: 'Esta seguro de inactivar <strong style="color: #1d71b9; font-weight: bold;"><p>'+"#{atributo.nombre}?"+'</p></strong>',
+                                                                                                                                              sweetalert_confirm_btn_value: '<i class="fas fa-check-circle"></i> <strong>Si, Inactivar</strong>',
+                                                                                                                                              sweetalert_cancel_btn_value: '<i class="fas fa-times-circle"></i> <strong>No, Cancelar</strong>',
+                                                                                                                                              sweetalert_cancel_title_value: 'Se ha cancelado la inactivación de <strong>'+"#{atributo.nombre}"+'</strong>' } do %>
+                          <i class="fas fa-toggle-on" style="transform: rotate(180deg)"></i>
+                        <%end%>
+                      <% else %>
+                        <%= link_to  activar_atributo_path(:id => atributo.id), class: "btn btn-outline-success btn-sm rounded-circle", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
+                                                                                                                                              sweetalert_confirm_alert_value: "Activar",
+                                                                                                                                              sweetalert_cancel_alert_value: "Cancelado",
+                                                                                                                                              sweetalert_confirm_title_value: 'Esta seguro de activar <strong style="color: #1d71b9; font-weight: bold;"><p>'+"#{atributo.nombre}?"+'</p></strong>',
+                                                                                                                                              sweetalert_confirm_btn_value: '<i class="fas fa-check-circle"></i> <strong>Si, Activar</strong>',
+                                                                                                                                              sweetalert_cancel_btn_value: '<i class="fas fa-times-circle"></i> <strong>No, Cancelar</strong>',
+                                                                                                                                              sweetalert_cancel_title_value: 'Se ha cancelado la activación de <strong>'+"#{atributo.nombre}"+'</strong>' } do %>
+                          <i class="fas fa-toggle-on" style="transform: rotate(360deg)"></i>
+                        <%end%>
+                      <% end %>
+                    </td>
+                    <!--< end %>-->
+                  <!--< end %>-->
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -30,6 +30,13 @@
       <%end%>
       <!--< end %>-->
 
+      <!--< if tiene_permiso_sidebar("MENU ATRIBUTO", "VER OPCION") %>-->
+      <%=link_to atributos_path, class: is_active_action("atributos")  do %>
+        <i class="fas fa-atom"></i>
+        <span>Atributo</span>
+      <%end%>
+      <!--< end %>-->
+
       <!--FINALIZA VALIDACION DEL OPCIONES PARA MOSTRAR EN EL SIDEBAR -->
     </div>
   </div>

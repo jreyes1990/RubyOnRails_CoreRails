@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     resources :areas
     get 'areas/inactivar/:id' => "areas#inactivar_area", as: 'inactivar_area'
     get 'areas/activar/:id' => "areas#activar_area", as: 'activar_area'
+
+    resources :atributos
+    get 'atributos/inactivar/:id' => "atributos#inactivar_atributo", as: 'inactivar_atributo'
+    get 'atributos/activar/:id' => "atributos#activar_atributo", as: 'activar_atributo'
   end
 
   scope "/otros" do

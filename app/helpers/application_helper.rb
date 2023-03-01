@@ -49,7 +49,7 @@ module ApplicationHelper
 
   # METODOS DE ACTIVACION EN SIDEBAR - CONFIGURACIÓN SISTEMA
   def is_active_controller_sistema_titulo
-    @controladores = ["empresas","areas"]
+    @controladores = ["empresas","areas","atributos"]
     if @controladores.include? params[:controller]
       "nav-item active"
     else
@@ -58,7 +58,7 @@ module ApplicationHelper
   end
 
   def is_active_controller_sistema
-    @controladores = ["empresas","areas"]
+    @controladores = ["empresas","areas","atributos"]
     if @controladores.include? params[:controller]
       "nav-link"
     else
@@ -67,7 +67,7 @@ module ApplicationHelper
   end
 
   def is_active_option_controller_sistema
-    @controladores = ["empresas","areas"]
+    @controladores = ["empresas","areas","atributos"]
     if @controladores.include? params[:controller]
       "collapse show"
     else
