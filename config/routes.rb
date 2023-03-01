@@ -9,9 +9,12 @@ Rails.application.routes.draw do
 
   scope "/sistemas" do
     resources :empresas
-    get 'empresa/inactivar/:id' => "empresas#inactivar_empresa", as: 'inactivar_empresa'
-    get 'empresa/activar/:id' => "empresas#activar_empresa", as: 'activar_empresa'
+    get 'empresas/inactivar/:id' => "empresas#inactivar_empresa", as: 'inactivar_empresa'
+    get 'empresas/activar/:id' => "empresas#activar_empresa", as: 'activar_empresa'
 
+    resources :areas
+    get 'areas/inactivar/:id' => "areas#inactivar_area", as: 'inactivar_area'
+    get 'areas/activar/:id' => "areas#activar_area", as: 'activar_area'
   end
 
   scope "/otros" do

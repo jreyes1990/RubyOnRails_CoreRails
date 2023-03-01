@@ -110,7 +110,7 @@ gem "stimulus_reflex", "~> 3.4"
 
 gem 'ajax-datatables-rails'
 
-# Para generación de vistas de base de datos
+# Para generación de vistas de base de datos, Enlace: https://github.com/scenic-views/scenic
 gem 'scenic'
 
 # GEMAS PARA GENERACION DE EXCELES

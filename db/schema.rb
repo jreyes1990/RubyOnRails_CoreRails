@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_24_033732) do
+ActiveRecord::Schema.define(version: 2023_02_27_031743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,20 @@ ActiveRecord::Schema.define(version: 2023_02_24_033732) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "areas", force: :cascade do |t|
+    t.integer "codigo_area"
+    t.string "nombre", limit: 200
+    t.string "codigo_hex"
+    t.string "descripcion"
+    t.integer "user_created_id"
+    t.integer "user_updated_id"
+    t.string "estado", limit: 10
+    t.bigint "empresa_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["empresa_id"], name: "index_areas_on_empresa_id"
   end
 
   create_table "codigo_colores", force: :cascade do |t|
@@ -109,4 +123,24 @@ ActiveRecord::Schema.define(version: 2023_02_24_033732) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "areas", "empresas"
+
+  create_view "areas_views", sql_definition: <<-SQL
+      SELECT areas.id,
+      areas.codigo_area,
+      areas.nombre,
+      areas.codigo_hex,
+      areas.descripcion,
+      areas.user_created_id,
+      areas.user_updated_id,
+      areas.estado,
+      areas.empresa_id,
+      areas.created_at,
+      areas.updated_at,
+      empresas.codigo_empresa,
+      empresas.nombre AS nombre_empresa,
+      ((empresas.codigo_empresa || ': '::text) || (empresas.nombre)::text) AS codigo_nombre_empresa
+     FROM (areas
+       JOIN empresas ON ((areas.empresa_id = empresas.id)));
+  SQL
 end

@@ -13,6 +13,12 @@
 #  user_updated_id :integer
 #
 class Empresa < ApplicationRecord
-    validates_presence_of :codigo_empresa, :nombre, :estado, message: ": este campo es obligatorio"
-    validates :nombre, uniqueness: {case_sensitive: false, scope: [:codigo_empresa, :estado], message: "La Empresa que intenta registrar ya existe" }
+  has_many :areas
+  
+  validates_presence_of :codigo_empresa, :nombre, :estado, message: ": este campo es obligatorio"
+  validates :nombre, uniqueness: {case_sensitive: false, scope: [:codigo_empresa, :estado], message: "La Empresa que intenta registrar ya existe" }
+
+  def codigo_nombre_empresa
+    "#{self.codigo_empresa}: #{self.nombre}"
+  end
 end

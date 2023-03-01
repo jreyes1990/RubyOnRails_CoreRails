@@ -16,10 +16,20 @@
     <div class="bg-white py-2 collapse-inner rounded">
       <h6 class="collapse-header">Opciones:</h6>
       <!--INICIA VALIDACION DE OPCIONES MOSTRAR EN EL SIDEBAR -->
+      <!--< if tiene_permiso_sidebar("MENU EMPRESAS", "VER OPCION") %>-->
       <%=link_to empresas_path, class: is_active_action("empresas") do %>
         <i class="fas fa-building"></i>
         <span>Empresa</span>
       <%end%>
+      <!--< end %>-->
+
+      <!--< if tiene_permiso_sidebar("MENU AREAS EMPRESA", "VER OPCION") %>-->
+      <%=link_to areas_path, class: is_active_action("areas") do %>
+        <i class="fas fa-sitemap"></i>
+        <span>Areas - Empresa</span>
+      <%end%>
+      <!--< end %>-->
+
       <!--FINALIZA VALIDACION DEL OPCIONES PARA MOSTRAR EN EL SIDEBAR -->
     </div>
   </div>

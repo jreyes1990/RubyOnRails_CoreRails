@@ -85,3 +85,12 @@
 
 -- GENERANDO SCAFFOLD EMPRESA
    rails generate scaffold empresa codigo_empresa:integer nombre:string{200} descripcion:string user_created_id:integer user_updated_id:integer estado:string{10}
+
+-- GENERANDO SCAFFOLD AREA
+   rails generate scaffold area codigo_area:integer nombre:string{200} codigo_hex:string descripcion:string user_created_id:integer user_updated_id:integer estado:string{10} empresa:references
+
+-- GENERANDO VISTA AREA CON SCENIC 
+   rails generate scenic:view areas_views
+
+-- GENERANDO DATATABLE AJAX ÁREA
+   rails generate datatable area

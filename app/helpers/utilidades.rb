@@ -11,4 +11,8 @@ module Utilidades
 
     return "<div class='text-center'><span class='#{badge_estado}'>#{nombre_estado}</span></div>".html_safe
   end
+
+  def format_estilo_codigo(parametro)
+    return "<strong><span class='badge badge-pill badge-white' style='background: #{parametro}; color: #{parametro};'>#{parametro}</span></strong>".html_safe
+  end
 end
