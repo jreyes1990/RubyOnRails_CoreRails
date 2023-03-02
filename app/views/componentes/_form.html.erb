@@ -1,13 +1,13 @@
-<!-- Inicio Atributo -->
+<!-- Inicio Componente -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Gestión de Atributo</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Gestión de Componente</h6>
   </div>
   <div class="card-body">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <%= simple_form_for(@atributo) do |f| %>
+          <%= simple_form_for(@componente) do |f| %>
             <%= f.error_notification %>
             <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -21,19 +21,19 @@
               <div class="col-md-12 text-center">
                 <!--< if tiene_permiso("BOTON REGISTRAR", "VER") %>-->
                   <%= button_tag f.submit, class: "btn btn-success btn-sm", data: {controller: 'sweetalert', action: 'click->sweetalert#btnConfirmar',
-                                                                                    sweetalert_confirm_alert_value: "#{titulo_atributo}",
+                                                                                    sweetalert_confirm_alert_value: "#{titulo_componente}",
                                                                                     sweetalert_cancel_alert_value: "Cancelado",
-                                                                                    sweetalert_confirm_title_value: 'Esta seguro de <strong>'+"#{titulo_atributo.upcase} #{@atributo.nombre}?"+'</strong>',
-                                                                                    sweetalert_confirm_btn_value: '<i class="fas fa-check-circle"></i> <strong>Si, '+"#{titulo_atributo}"+'</strong>',
+                                                                                    sweetalert_confirm_title_value: 'Esta seguro de <strong>'+"#{titulo_componente.upcase} #{@componente.nombre}?"+'</strong>',
+                                                                                    sweetalert_confirm_btn_value: '<i class="fas fa-check-circle"></i> <strong>Si, '+"#{titulo_componente}"+'</strong>',
                                                                                     sweetalert_cancel_btn_value: '<i class="fas fa-times-circle"></i> <strong>No, Cancelar</strong>',
-                                                                                    sweetalert_cancel_title_value: 'Se ha cancelado el evento <strong>'+"#{titulo_atributo.upcase} #{@atributo.nombre}"+'</strong>' } do %>
+                                                                                    sweetalert_cancel_title_value: 'Se ha cancelado el evento <strong>'+"#{titulo_componente.upcase} #{@componente.nombre}"+'</strong>' } do %>
                     <span class="icon text-green-50">
                       <i class="fas fa-edit"></i>
                     </span>
-                    <span class="text"><%= titulo_atributo.upcase %></span>
+                    <span class="text"><%= titulo_componente.upcase %></span>
                   <%end%>
                 <!--< end %>-->
-                <%= link_to atributos_path, class: "btn btn-danger btn-sm" do %>
+                <%= link_to componentes_path, class: "btn btn-danger btn-sm" do %>
                   <span class="icon text-red-50">
                     <i class="fas fa-arrow-circle-left"></i>
                   </span>

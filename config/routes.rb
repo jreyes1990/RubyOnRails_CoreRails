@@ -19,6 +19,10 @@ Rails.application.routes.draw do
     resources :atributos
     get 'atributos/inactivar/:id' => "atributos#inactivar_atributo", as: 'inactivar_atributo'
     get 'atributos/activar/:id' => "atributos#activar_atributo", as: 'activar_atributo'
+
+    resources :componentes
+    get 'componentes/inactivar/:id' => "componentes#inactivar_componente", as: 'inactivar_componente'
+    get 'componentes/activar/:id' => "componentes#activar_componente", as: 'activar_componente'
   end
 
   scope "/otros" do

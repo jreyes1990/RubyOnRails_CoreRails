@@ -97,3 +97,9 @@
 
 -- GENERANDO SCAFFOLD ATRIBUTO
    rails generate scaffold atributo nombre:string{200} descripcion:string user_created_id:integer user_updated_id:integer estado:string{10}
+
+-- GENERANDO SCAFFOLD COMPONENTE
+   rails generate scaffold componente nombre:string{200} descripcion:string user_created_id:integer user_updated_id:integer estado:string{10}
+
+-- GENERANDO DATATABLE AJAX COMPONENTE
+   rails generate datatable componente
