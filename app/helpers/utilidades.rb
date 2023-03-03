@@ -15,4 +15,8 @@ module Utilidades
   def format_estilo_codigo(parametro)
     return "<strong><span class='badge badge-pill badge-white' style='background: #{parametro}; color: #{parametro};'>#{parametro}</span></strong>".html_safe
   end
+
+  def icono_awesome(parametro)
+    return "<i class='#{parametro}' aria-hidden='true'></i>".html_safe
+  end
 end

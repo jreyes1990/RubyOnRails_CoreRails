@@ -19,7 +19,7 @@
       <!--< if tiene_permiso_sidebar("MENU EMPRESAS", "VER OPCION") %>-->
       <%= link_to empresas_path, class: is_active_action("empresas") do %>
         <i class="fas fa-building"></i>
-        <span>Empresa</span>
+        <span>Empresas</span>
       <% end %>
       <!--< end %>-->
 
@@ -30,17 +30,24 @@
       <% end %>
       <!--< end %>-->
 
+      <!--< if tiene_permiso_sidebar("MENU MENU", "VER OPCION") %>-->
+      <%=link_to menus_path, class: is_active_action("menus")  do %>
+        <i class="fab fa-elementor"></i>
+        <span>Menús</span>
+      <%end%>
+      <!--< end %>-->
+      
       <!--< if tiene_permiso_sidebar("MENU ATRIBUTO", "VER OPCION") %>-->
       <%= link_to atributos_path, class: is_active_action("atributos")  do %>
         <i class="fas fa-atom"></i>
-        <span>Atributo</span>
+        <span>Atributos</span>
       <% end %>
       <!--< end %>-->
 
       <!--< if tiene_permiso_sidebar("MENU COMPONENTE", "VER OPCION") %>-->
       <%= link_to componentes_path, class: is_active_action("componentes")  do %>
         <i class="fab fa-codepen"></i>
-        <span>Componente</span>
+        <span>Componentes</span>
       <% end %>
       <!--< end %>-->
 

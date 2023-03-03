@@ -45,7 +45,7 @@ class EmpresasController < ApplicationController
         format.html { redirect_to empresas_url, notice: "La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha actualizado correctamente.".html_safe }
         format.json { render :show, status: :ok, location: @empresa }
       else
-        format.html { render :edit, status: :unprocessable_entity, alert: "Ocurrio un error al crear el Color, Verifique!!.." }
+        format.html { render :edit, status: :unprocessable_entity, alert: "Ocurrio un error al actualizar el Color, Verifique!!.." }
         format.json { render json: @empresa.errors, status: :unprocessable_entity }
       end
     end

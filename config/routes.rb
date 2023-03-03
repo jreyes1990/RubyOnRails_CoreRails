@@ -23,6 +23,10 @@ Rails.application.routes.draw do
     resources :componentes
     get 'componentes/inactivar/:id' => "componentes#inactivar_componente", as: 'inactivar_componente'
     get 'componentes/activar/:id' => "componentes#activar_componente", as: 'activar_componente'
+
+    resources :menus
+    get 'menus/inactivar/:id' => "menus#inactivar_menu", as: 'inactivar_menu'
+    get 'menus/activar/:id' => "menus#activar_menu", as: 'activar_menu'
   end
 
   scope "/otros" do

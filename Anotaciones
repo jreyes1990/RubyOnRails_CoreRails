@@ -103,3 +103,9 @@
 
 -- GENERANDO DATATABLE AJAX COMPONENTE
    rails generate datatable componente
+
+-- GENERANDO SCAFFOLD MENU
+   rails generate scaffold menu nombre:string{200} descripcion:string icono:string{50} codigo_hex:string user_created_id:integer user_updated_id:integer estado:string{10}
+
+-- GENERANDO SCAFFOLD ROL
+   rails generate scaffold rol nombre:string{200} descripcion:string codigo_hex:string user_created_id:integer user_updated_id:integer estado:string{10}
