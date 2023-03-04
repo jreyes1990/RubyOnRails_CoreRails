@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_03_030009) do
+ActiveRecord::Schema.define(version: 2023_03_03_054336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,17 @@ ActiveRecord::Schema.define(version: 2023_03_03_030009) do
     t.string "nombre", limit: 200
     t.string "descripcion"
     t.string "icono", limit: 50
+    t.string "codigo_hex"
+    t.integer "user_created_id"
+    t.integer "user_updated_id"
+    t.string "estado", limit: 10
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "nombre", limit: 200
+    t.string "descripcion"
     t.string "codigo_hex"
     t.integer "user_created_id"
     t.integer "user_updated_id"

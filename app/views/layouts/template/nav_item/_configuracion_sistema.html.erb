@@ -30,6 +30,13 @@
       <% end %>
       <!--< end %>-->
 
+      <!--< if tiene_permiso_sidebar("MENU ROL", "VER OPCION") %>-->
+      <%=link_to roles_path, class: is_active_action("roles")  do %>
+        <i class="fas fa-user-tag"></i>
+        <span>Roles</span>
+      <%end%>
+      <!--< end %>-->
+
       <!--< if tiene_permiso_sidebar("MENU MENU", "VER OPCION") %>-->
       <%=link_to menus_path, class: is_active_action("menus")  do %>
         <i class="fab fa-elementor"></i>

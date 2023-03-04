@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @rol.nombre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @rol.descripcion %>
+</p>
+
+<p>
+  <strong>Codigo hex:</strong>
+  <%= @rol.codigo_hex %>
+</p>
+
+<p>
+  <strong>User created:</strong>
+  <%= @rol.user_created_id %>
+</p>
+
+<p>
+  <strong>User updated:</strong>
+  <%= @rol.user_updated_id %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @rol.estado %>
+</p>
+
+<%= link_to 'Edit', edit_rol_path(@rol) %> |
+<%= link_to 'Back', roles_path %>

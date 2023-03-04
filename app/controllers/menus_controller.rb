@@ -85,7 +85,7 @@ class MenusController < ApplicationController
     respond_to do |format|
       if @menu.save
         format.html { redirect_to menus_url, notice: "El Menú <i class='#{@menu.icono}' aria-hidden='true'></i> <strong style='color: #{@menu.codigo_hex}'>#{@menu.nombre}</strong> ha sido Activado.".html_safe }
-        format.json { render :show, status: :created, location: @empresa }
+        format.json { render :show, status: :created, location: @menu }
       else
         format.html { redirect_to menus_url, alert: "Ocurrio un error al activar el menú, Verifique!!.." }
         format.json { render json: @menu.errors, status: :unprocessable_entity }

@@ -13,10 +13,10 @@ module Utilidades
   end
 
   def format_estilo_codigo(parametro)
-    return "<strong><span class='badge badge-pill badge-white' style='background: #{parametro}; color: #{parametro};'>#{parametro}</span></strong>".html_safe
+    return "<div class='text-center'><strong><span class='badge badge-pill badge-white' style='background: #{parametro}; color: #{parametro};'>#{parametro}</span></strong></div>".html_safe
   end
 
   def icono_awesome(parametro)
-    return "<i class='#{parametro}' aria-hidden='true'></i>".html_safe
+    return "<div class='text-center'><i class='#{parametro}' aria-hidden='true'></i></div>".html_safe
   end
 end
