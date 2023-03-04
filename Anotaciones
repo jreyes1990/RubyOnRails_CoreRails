@@ -109,3 +109,12 @@
 
 -- GENERANDO SCAFFOLD ROL
    rails generate scaffold rol nombre:string{200} descripcion:string codigo_hex:string user_created_id:integer user_updated_id:integer estado:string{10}
+
+-- GENERANDO SCAFFOLD OPCION
+   rails generate scaffold opcion nombre:string{200} descripcion:string icono:string{50} path:string controlador:string{300} codigo_hex:string user_created_id:integer user_updated_id:integer estado:string{10} menu:references
+
+-- GENERANDO VISTA OPCION CON SCENIC 
+   rails generate scenic:view opciones_views
+
+-- GENERANDO DATATABLE AJAX OPCION
+   rails generate datatable opcion

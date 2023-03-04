@@ -31,6 +31,10 @@ Rails.application.routes.draw do
     resources :roles
     get 'roles/inactivar/:id' => "roles#inactivar_rol", as: 'inactivar_rol'
     get 'roles/activar/:id' => "roles#activar_rol", as: 'activar_rol'
+
+    resources :opciones
+    get 'opciones/inactivar/:id' => "opciones#inactivar_opcion", as: 'inactivar_opcion'
+    get 'opciones/activar/:id' => "opciones#activar_opcion", as: 'activar_opcion'
   end
 
   scope "/otros" do

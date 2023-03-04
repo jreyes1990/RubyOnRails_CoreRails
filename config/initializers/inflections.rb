@@ -16,4 +16,5 @@
     inflect.irregular "font_awesom", "font_awesomes"
     inflect.irregular "codigo_color", "codigo_colores"
     inflect.irregular "rol", "roles"
+    inflect.irregular "opcion", "opciones"
  end

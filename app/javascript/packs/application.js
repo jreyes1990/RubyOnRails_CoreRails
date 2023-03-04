@@ -388,4 +388,37 @@ document.addEventListener("turbolinks:load", () => {
     ],
   });
 
+  $("#opcion-datatable").DataTable({
+    fixedHeader: true,
+    stateSave: true,
+    stateDuration: 1200,
+    responsive: true,
+    dom: var_datatable,
+    language: espaniol,
+    processing: true,
+    serverSide: true,
+    lengthMenu: [
+      [5, 10, 15, 20, 25, 50, -1],
+      [5, 10, 15, 20, 25, 50, 'Todos'],
+    ],
+    ajax: {
+      url: $("#opcion-datatable").data("source"),
+    },
+    buttons: var_buttons,
+    pagingType: "full_numbers",
+    columns: [
+      { data: "id", class: "text-center" },
+      { data: "nombre_menu" },
+      { data: "icono" },
+      { data: "nombre_opcion" },
+      { data: "path_opcion" },
+      { data: "controlador_opcion" },
+      { data: "codigo_hex" },
+      { data: "descripcion" },
+      { data: "estado" },
+      { data: "opciones", class: "text-center" },
+      { data: "inactivar", class: "text-center" },
+    ],
+  });
+
 });

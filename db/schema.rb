@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_03_054336) do
+ActiveRecord::Schema.define(version: 2023_03_04_043913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,22 @@ ActiveRecord::Schema.define(version: 2023_03_03_054336) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "opciones", force: :cascade do |t|
+    t.string "nombre", limit: 200
+    t.string "descripcion"
+    t.string "icono", limit: 50
+    t.string "path"
+    t.string "controlador", limit: 300
+    t.string "codigo_hex"
+    t.integer "user_created_id"
+    t.integer "user_updated_id"
+    t.string "estado", limit: 10
+    t.bigint "menu_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["menu_id"], name: "index_opciones_on_menu_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "nombre", limit: 200
     t.string "descripcion"
@@ -167,6 +183,7 @@ ActiveRecord::Schema.define(version: 2023_03_03_054336) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "areas", "empresas"
+  add_foreign_key "opciones", "menus"
 
   create_view "areas_views", sql_definition: <<-SQL
       SELECT areas.id,
@@ -185,5 +202,25 @@ ActiveRecord::Schema.define(version: 2023_03_03_054336) do
       ((empresas.codigo_empresa || ': '::text) || (empresas.nombre)::text) AS codigo_nombre_empresa
      FROM (areas
        JOIN empresas ON ((areas.empresa_id = empresas.id)));
+  SQL
+  create_view "opciones_views", sql_definition: <<-SQL
+      SELECT opciones.id,
+      opciones.nombre,
+      opciones.descripcion,
+      opciones.icono,
+      opciones.path,
+      opciones.controlador,
+      opciones.codigo_hex,
+      opciones.user_created_id,
+      opciones.user_updated_id,
+      opciones.estado,
+      opciones.menu_id,
+      opciones.created_at,
+      opciones.updated_at,
+      menus.nombre AS nombre_menu,
+      menus.icono AS icono_menu,
+      menus.codigo_hex AS codigo_hex_menu
+     FROM (opciones
+       JOIN menus ON ((opciones.menu_id = menus.id)));
   SQL
 end

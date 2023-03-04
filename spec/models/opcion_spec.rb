@@ -1,21 +1,31 @@
 # == Schema Information
 #
-# Table name: menus
+# Table name: opciones
 #
 #  id              :bigint           not null, primary key
 #  codigo_hex      :string
+#  controlador     :string(300)
 #  descripcion     :string
 #  estado          :string(10)
 #  icono           :string(50)
 #  nombre          :string(200)
+#  path            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  menu_id         :bigint           not null
 #  user_created_id :integer
 #  user_updated_id :integer
 #
-class Menu < ApplicationRecord
-  has_many :opciones
-  
-  validates_presence_of :nombre, :icono, :codigo_hex, :estado, message: ": este campo es obligatorio"
-  validates :nombre, uniqueness: {case_sensitive: false, scope: [:icono, :codigo_hex, :estado], message: "El Menú que intenta registrar ya existe" }
+# Indexes
+#
+#  index_opciones_on_menu_id  (menu_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (menu_id => menus.id)
+#
+require 'rails_helper'
+
+RSpec.describe Opcion, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

@@ -44,6 +44,13 @@
       <%end%>
       <!--< end %>-->
       
+      <!--< if tiene_permiso_sidebar("MENU OPCION MENU", "VER OPCION") %>-->
+      <%=link_to opciones_path, class: is_active_action("opciones")  do %>
+        <i class="fas fa-minus-square"></i>
+        <span>Menú - Opciones</span>
+      <%end%>
+      <!--< end %>-->
+
       <!--< if tiene_permiso_sidebar("MENU ATRIBUTO", "VER OPCION") %>-->
       <%= link_to atributos_path, class: is_active_action("atributos")  do %>
         <i class="fas fa-atom"></i>
