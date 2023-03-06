@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_04_043913) do
+ActiveRecord::Schema.define(version: 2023_03_06_000442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,20 @@ ActiveRecord::Schema.define(version: 2023_03_04_043913) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "menu_roles", force: :cascade do |t|
+    t.integer "menu_id"
+    t.string "descripcion"
+    t.integer "user_created_id"
+    t.integer "user_updated_id"
+    t.string "estado", limit: 10
+    t.bigint "opcion_id", null: false
+    t.bigint "rol_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["opcion_id"], name: "index_menu_roles_on_opcion_id"
+    t.index ["rol_id"], name: "index_menu_roles_on_rol_id"
+  end
+
   create_table "menus", force: :cascade do |t|
     t.string "nombre", limit: 200
     t.string "descripcion"
@@ -183,6 +197,8 @@ ActiveRecord::Schema.define(version: 2023_03_04_043913) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "areas", "empresas"
+  add_foreign_key "menu_roles", "opciones"
+  add_foreign_key "menu_roles", "roles"
   add_foreign_key "opciones", "menus"
 
   create_view "areas_views", sql_definition: <<-SQL
@@ -221,6 +237,33 @@ ActiveRecord::Schema.define(version: 2023_03_04_043913) do
       menus.icono AS icono_menu,
       menus.codigo_hex AS codigo_hex_menu
      FROM (opciones
+       JOIN menus ON ((opciones.menu_id = menus.id)));
+  SQL
+  create_view "menu_roles_views", sql_definition: <<-SQL
+      SELECT menu_roles.id,
+      menu_roles.menu_id,
+      menu_roles.descripcion,
+      menu_roles.user_created_id,
+      menu_roles.user_updated_id,
+      menu_roles.estado,
+      menu_roles.opcion_id,
+      menu_roles.rol_id,
+      menu_roles.created_at,
+      menu_roles.updated_at,
+      opciones.nombre AS nombre_opcion,
+      opciones.icono AS icono_opcion,
+      opciones.path AS path_opcion,
+      opciones.controlador AS controlador_opcion,
+      opciones.codigo_hex AS codigo_hex_opcion,
+      roles.nombre AS nombre_rol,
+      roles.codigo_hex AS codigo_hex_rol,
+      menus.id AS menu_codigo,
+      menus.nombre AS nombre_menu,
+      menus.icono AS icono_menu,
+      menus.codigo_hex AS codigo_hex_menu
+     FROM (((menu_roles
+       JOIN opciones ON ((menu_roles.opcion_id = opciones.id)))
+       JOIN roles ON ((menu_roles.rol_id = roles.id)))
        JOIN menus ON ((opciones.menu_id = menus.id)));
   SQL
 end

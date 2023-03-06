@@ -51,6 +51,13 @@
       <%end%>
       <!--< end %>-->
 
+      <!--< if tiene_permiso_sidebar("MENU MENU ROL", "VER OPCION") %>-->
+      <%=link_to menu_roles_path, class: is_active_action("menu_roles")  do %>
+        <i class="fas fa-user-cog"></i>
+        <span>Menú - Roles</span>
+      <%end%>
+      <!--< end %>-->
+
       <!--< if tiene_permiso_sidebar("MENU ATRIBUTO", "VER OPCION") %>-->
       <%= link_to atributos_path, class: is_active_action("atributos")  do %>
         <i class="fas fa-atom"></i>

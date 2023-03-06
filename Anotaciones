@@ -118,3 +118,12 @@
 
 -- GENERANDO DATATABLE AJAX OPCION
    rails generate datatable opcion
+
+-- GENERANDO SCAFFOLD MENU_ROL
+   rails generate scaffold menu_rol menu_id:integer descripcion:string user_created_id:integer user_updated_id:integer estado:string{10} opcion:references rol:references
+
+-- GENERANDO VISTA MENU_ROL CON SCENIC 
+   rails generate scenic:view menu_roles_views
+
+-- GENERANDO DATATABLE AJAX MENU_ROL
+   rails generate datatable menu_rol

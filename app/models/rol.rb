@@ -13,6 +13,8 @@
 #  user_updated_id :integer
 #
 class Rol < ApplicationRecord
+  has_many :menu_roles
+  
   validates_presence_of :nombre, :codigo_hex, :estado, message: ": este campo es obligatorio"
   validates :nombre, uniqueness: {case_sensitive: false, scope: [:codigo_hex, :estado], message: "El Rol que intenta registrar ya existe" }
 end

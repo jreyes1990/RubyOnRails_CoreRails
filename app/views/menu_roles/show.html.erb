@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Menu:</strong>
+  <%= @menu_rol.menu_id %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @menu_rol.descripcion %>
+</p>
+
+<p>
+  <strong>User created:</strong>
+  <%= @menu_rol.user_created_id %>
+</p>
+
+<p>
+  <strong>User updated:</strong>
+  <%= @menu_rol.user_updated_id %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @menu_rol.estado %>
+</p>
+
+<p>
+  <strong>Opcion:</strong>
+  <%= @menu_rol.opcion_id %>
+</p>
+
+<p>
+  <strong>Rol:</strong>
+  <%= @menu_rol.rol_id %>
+</p>
+
+<%= link_to 'Edit', edit_menu_rol_path(@menu_rol) %> |
+<%= link_to 'Back', menu_roles_path %>

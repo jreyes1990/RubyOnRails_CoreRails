@@ -51,6 +51,13 @@ import "controllers"
 import "trix";
 import "@rails/actiontext";
 
+var jQuery = require("jquery");
+
+// import jQuery from "jquery";
+global.$ = global.jQuery = jQuery;
+window.$ = window.jQuery = jQuery;
+
+
 let pdfMake = require("pdfmake/build/pdfmake");
 let pdfFonts = require("pdfmake/build/vfs_fonts");
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -249,6 +256,12 @@ document.addEventListener("turbolinks:load", () => {
     width: "100%",
   });
 
+  // Configuracion para activar select2 multiple
+  $(".select2-multiple").select2({
+    language: "es-GT",
+    width: "100%",
+  });
+
   $("#datatable").DataTable({
     fixedHeader: true,
     stateSave: true,
@@ -415,6 +428,35 @@ document.addEventListener("turbolinks:load", () => {
       { data: "controlador_opcion" },
       { data: "codigo_hex" },
       { data: "descripcion" },
+      { data: "estado" },
+      { data: "opciones", class: "text-center" },
+      { data: "inactivar", class: "text-center" },
+    ],
+  });
+
+  $("#menu-rol-datatable").DataTable({
+    fixedHeader: true,
+    stateSave: true,
+    stateDuration: 1200,
+    responsive: true,
+    dom: var_datatable,
+    language: espaniol,
+    processing: true,
+    serverSide: true,
+    lengthMenu: [
+      [5, 10, 15, 20, 25, 50, -1],
+      [5, 10, 15, 20, 25, 50, 'Todos'],
+    ],
+    ajax: {
+      url: $("#menu-rol-datatable").data("source"),
+    },
+    buttons: var_buttons,
+    pagingType: "full_numbers",
+    columns: [
+      { data: "id", class: "text-center" },
+      { data: "nombre_rol" },
+      { data: "nombre_menu" },
+      { data: "nombre_opcion" },
       { data: "estado" },
       { data: "opciones", class: "text-center" },
       { data: "inactivar", class: "text-center" },

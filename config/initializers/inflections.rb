@@ -17,4 +17,5 @@
     inflect.irregular "codigo_color", "codigo_colores"
     inflect.irregular "rol", "roles"
     inflect.irregular "opcion", "opciones"
+    inflect.irregular "menu_rol", "menu_roles"
  end
