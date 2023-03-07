@@ -127,3 +127,12 @@
 
 -- GENERANDO DATATABLE AJAX MENU_ROL
    rails generate datatable menu_rol
+
+-- GENERANDO SCAFFOLD OPCION_CA
+   rails generate scaffold opcion_ca descripcion:string user_created_id:integer user_updated_id:integer estado:string{10} opcion:references componente:references atributo:references
+
+-- GENERANDO VISTA OPCION_CA CON SCENIC 
+   rails generate scenic:view opcion_cas_views
+
+-- GENERANDO DATATABLE AJAX OPCION_CA
+   rails generate datatable opcion_ca

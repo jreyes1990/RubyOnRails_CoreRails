@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_06_000442) do
+ActiveRecord::Schema.define(version: 2023_03_06_053014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,6 +144,21 @@ ActiveRecord::Schema.define(version: 2023_03_06_000442) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "opcion_cas", force: :cascade do |t|
+    t.string "descripcion"
+    t.integer "user_created_id"
+    t.integer "user_updated_id"
+    t.string "estado", limit: 10
+    t.bigint "opcion_id", null: false
+    t.bigint "componente_id", null: false
+    t.bigint "atributo_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["atributo_id"], name: "index_opcion_cas_on_atributo_id"
+    t.index ["componente_id"], name: "index_opcion_cas_on_componente_id"
+    t.index ["opcion_id"], name: "index_opcion_cas_on_opcion_id"
+  end
+
   create_table "opciones", force: :cascade do |t|
     t.string "nombre", limit: 200
     t.string "descripcion"
@@ -199,6 +214,9 @@ ActiveRecord::Schema.define(version: 2023_03_06_000442) do
   add_foreign_key "areas", "empresas"
   add_foreign_key "menu_roles", "opciones"
   add_foreign_key "menu_roles", "roles"
+  add_foreign_key "opcion_cas", "atributos"
+  add_foreign_key "opcion_cas", "componentes"
+  add_foreign_key "opcion_cas", "opciones"
   add_foreign_key "opciones", "menus"
 
   create_view "areas_views", sql_definition: <<-SQL
@@ -264,6 +282,32 @@ ActiveRecord::Schema.define(version: 2023_03_06_000442) do
      FROM (((menu_roles
        JOIN opciones ON ((menu_roles.opcion_id = opciones.id)))
        JOIN roles ON ((menu_roles.rol_id = roles.id)))
+       JOIN menus ON ((opciones.menu_id = menus.id)));
+  SQL
+  create_view "opcion_cas_views", sql_definition: <<-SQL
+      SELECT opcion_cas.id,
+      opcion_cas.descripcion,
+      opcion_cas.user_created_id,
+      opcion_cas.user_updated_id,
+      opcion_cas.estado,
+      opcion_cas.opcion_id,
+      opcion_cas.componente_id,
+      opcion_cas.atributo_id,
+      opcion_cas.created_at,
+      opcion_cas.updated_at,
+      opciones.menu_id,
+      menus.nombre AS nombre_menu,
+      menus.icono AS icono_menu,
+      menus.codigo_hex AS codigo_hex_menu,
+      opciones.nombre AS nombre_opcion,
+      opciones.icono AS icono_opcion,
+      opciones.codigo_hex AS codigo_hex_opcion,
+      componentes.nombre AS nombre_componente,
+      atributos.nombre AS nombre_atributo
+     FROM ((((opcion_cas
+       JOIN opciones ON ((opcion_cas.opcion_id = opciones.id)))
+       JOIN componentes ON ((opcion_cas.componente_id = componentes.id)))
+       JOIN atributos ON ((opcion_cas.atributo_id = atributos.id)))
        JOIN menus ON ((opciones.menu_id = menus.id)));
   SQL
 end

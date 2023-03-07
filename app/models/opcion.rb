@@ -28,6 +28,7 @@ class Opcion < ApplicationRecord
   belongs_to :menu
 
   has_many :menu_roles
+  has_many :opcion_cas
   
   validates_presence_of :nombre, :icono, :codigo_hex, :path, :controlador, :menu_id, :estado, message: ": este campo es obligatorio"
   validates :nombre, uniqueness: {case_sensitive: false, scope: [:icono, :codigo_hex, :path, :controlador, :menu_id, :estado], message: "El Menú-Opción que intenta registrar ya existe" }

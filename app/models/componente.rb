@@ -12,6 +12,8 @@
 #  user_updated_id :integer
 #
 class Componente < ApplicationRecord
+  has_many :opcion_cas
+  
   validates_presence_of :nombre, :estado, message: ": este campo es obligatorio"
   validates :nombre, uniqueness: {case_sensitive: false, scope: [:estado], message: "El Menú que intenta registrar ya existe" }
 end

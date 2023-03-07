@@ -20,10 +20,10 @@
 #  user_updated_id :integer
 #
 class OpcionView < ApplicationRecord
-    self.table_name = "opciones_views"
-    self.primary_key = :id
-  
-    def readonly?
-      true
-    end
+  self.table_name = "opciones_views"
+  self.primary_key = :id
+
+  def readonly?
+    true
   end
+end

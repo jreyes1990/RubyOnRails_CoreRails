@@ -72,6 +72,13 @@
       <% end %>
       <!--< end %>-->
 
+      <!--< if tiene_permiso_sidebar("MENU PERMISOS FORMULARIO", "VER OPCION") %>-->
+      <%=link_to opcion_cas_path, class: is_active_action("opcion_cas")  do %>
+        <i class="fas fa-clipboard-list"></i>
+        <span>Permiso Formulario</span>
+      <%end%>
+      <!--< end %>-->
+
       <!--FINALIZA VALIDACION DEL OPCIONES PARA MOSTRAR EN EL SIDEBAR -->
     </div>
   </div>
