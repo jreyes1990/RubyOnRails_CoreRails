@@ -35,7 +35,7 @@ class FontAwesomDatatable < AjaxDatatablesRails::ActiveRecord
         icono: icono_awesome(record),
         prefijo_nombre: record.prefijo_nombre,
         codigo_css: codigo_css_awesome(record),
-        tipo_icono: record.tipo_icono,
+        tipo_icono: record.tipo_icono.upcase,
         termino: record.termino,
         estado: format_estado(record),
         opciones: show_btn_opcion(record),
@@ -45,7 +45,7 @@ class FontAwesomDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    FontAwesom.order(id: :DESC)
+    FontAwesom.order(tipo_icono: :ASC, id: :DESC)
   end
 
   def show_btn_opcion(record)

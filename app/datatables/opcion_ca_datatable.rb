@@ -32,7 +32,7 @@ class OpcionCaDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         id: record.id,
-        nombre_menu: record.nombre_menu,
+        nombre_menu: estilo_codigo_hex_menu_opcion(record),
         nombre_opcion: record.nombre_opcion,
         nombre_componente: record.nombre_componente,
         nombre_atributo: record.nombre_atributo,
@@ -112,5 +112,9 @@ class OpcionCaDatatable < AjaxDatatablesRails::ActiveRecord
     end
 
     return "<div class='text-center'><span class='#{badge_estado}'>#{nombre_estado}</span></div>".html_safe
+  end
+
+  def estilo_codigo_hex_menu_opcion(record)
+    return "<div class='text-center'><strong style='color: #{record.codigo_hex_menu};'>#{record.nombre_menu.upcase}</strong> - <strong style='color: #{record.codigo_hex_opcion};'>#{record.nombre_opcion.upcase}</strong></div>".html_safe
   end
 end

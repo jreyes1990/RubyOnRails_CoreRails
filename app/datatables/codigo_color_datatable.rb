@@ -33,7 +33,7 @@ class CodigoColorDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         id: record.id,
-        disenio: record.disenio,
+        disenio: record.disenio.upcase,
         nombre_color: record.nombre_color,
         colores: estilo_codigo_hex(record),
         codigo_hex: record.codigo_hex,
@@ -47,7 +47,7 @@ class CodigoColorDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    CodigoColor.order(id: :DESC)
+    CodigoColor.order(disenio: :ASC, id: :DESC)
   end
 
   def show_btn_opcion(record)

@@ -279,7 +279,27 @@ document.addEventListener("turbolinks:load", () => {
     pagingType: "full_numbers",
   });
 
+  var groupColumnAwesome = 4;
   $("#font-awesome-datatable").DataTable({
+    columnDefs: [{ visible: false, targets: groupColumnAwesome }],
+    drawCallback: function (settings) {
+      var api = this.api();
+      var rows = api.rows({ page: 'current' }).nodes();
+      var last = null;
+
+      api
+          .column(groupColumnAwesome, { page: 'current' })
+          .data()
+          .each(function (group, i) {
+            if (last !== group) {
+              $(rows)
+                  .eq(i)
+                  .before('<tr class="group text-left" style="background: #ffe5a4 !important;"><td colspan="8"><strong>' + group + '</strong></td></tr>');
+
+              last = group;
+            }
+          });
+    },
     fixedHeader: true,
     stateSave: true,
     stateDuration: 1200,
@@ -308,9 +328,29 @@ document.addEventListener("turbolinks:load", () => {
       { data: "opciones", class: "text-center" },
       { data: "inactivar", class: "text-center" },
     ],
-  });
-
+  }).column(4).visible(false);
+   
+  var groupColumn = 1;
   $("#codigo-color-datatable").DataTable({
+    columnDefs: [{ visible: false, targets: groupColumn }],
+    drawCallback: function (settings) {
+      var api = this.api();
+      var rows = api.rows({ page: 'current' }).nodes();
+      var last = null;
+
+      api
+          .column(groupColumn, { page: 'current' })
+          .data()
+          .each(function (group, i) {
+            if (last !== group) {
+              $(rows)
+                  .eq(i)
+                  .before('<tr class="group text-left" style="background: #ffe5a4 !important;"><td colspan="9"><strong>' + group + '</strong></td></tr>');
+
+              last = group;
+            }
+          });
+    },
     fixedHeader: true,
     stateSave: true,
     stateDuration: 1200,
@@ -340,9 +380,28 @@ document.addEventListener("turbolinks:load", () => {
       { data: "opciones", class: "text-center" },
       { data: "inactivar", class: "text-center" },
     ],
-  });
+  }).column(1).visible(false);
 
   $("#area-empresa-datatable").DataTable({
+    columnDefs: [{ visible: false, targets: groupColumn }],
+    drawCallback: function (settings) {
+      var api = this.api();
+      var rows = api.rows({ page: 'current' }).nodes();
+      var last = null;
+
+      api
+          .column(groupColumn, { page: 'current' })
+          .data()
+          .each(function (group, i) {
+            if (last !== group) {
+              $(rows)
+                  .eq(i)
+                  .before('<tr class="group text-left" style="background: #ffe5a4 !important;"><td colspan="8"><strong>' + group + '</strong></td></tr>');
+
+              last = group;
+            }
+          });
+    },
     fixedHeader: true,
     stateSave: true,
     stateDuration: 1200,
@@ -371,7 +430,7 @@ document.addEventListener("turbolinks:load", () => {
       { data: "opciones", class: "text-center" },
       { data: "inactivar", class: "text-center" },
     ],
-  });
+  }).column(1).visible(false);
 
   $("#componente-datatable").DataTable({
     fixedHeader: true,
@@ -402,6 +461,25 @@ document.addEventListener("turbolinks:load", () => {
   });
 
   $("#opcion-datatable").DataTable({
+    columnDefs: [{ visible: false, targets: groupColumn }],
+    drawCallback: function (settings) {
+      var api = this.api();
+      var rows = api.rows({ page: 'current' }).nodes();
+      var last = null;
+
+      api
+          .column(groupColumn, { page: 'current' })
+          .data()
+          .each(function (group, i) {
+            if (last !== group) {
+              $(rows)
+                  .eq(i)
+                  .before('<tr class="group text-left" style="background: #ffe5a4 !important;"><td colspan="10"><strong>' + group + '</strong></td></tr>');
+
+              last = group;
+            }
+          });
+    },
     fixedHeader: true,
     stateSave: true,
     stateDuration: 1200,
@@ -432,9 +510,28 @@ document.addEventListener("turbolinks:load", () => {
       { data: "opciones", class: "text-center" },
       { data: "inactivar", class: "text-center" },
     ],
-  });
+  }).column(1).visible(false);
 
   $("#menu-rol-datatable").DataTable({
+    columnDefs: [{ visible: false, targets: groupColumn }],
+    drawCallback: function (settings) {
+      var api = this.api();
+      var rows = api.rows({ page: 'current' }).nodes();
+      var last = null;
+
+      api
+          .column(groupColumn, { page: 'current' })
+          .data()
+          .each(function (group, i) {
+            if (last !== group) {
+              $(rows)
+                  .eq(i)
+                  .before('<tr class="group text-left" style="background: #ffe5a4 !important;"><td colspan="10"><strong>' + group + '</strong></td></tr>');
+
+              last = group;
+            }
+          });
+    },
     fixedHeader: true,
     stateSave: true,
     stateDuration: 1200,
@@ -461,9 +558,28 @@ document.addEventListener("turbolinks:load", () => {
       { data: "opciones", class: "text-center" },
       { data: "inactivar", class: "text-center" },
     ],
-  });
+  }).column(1).visible(false);
 
   $("#opcion-ca-datatable").DataTable({
+    columnDefs: [{ visible: false, targets: groupColumn }],
+    drawCallback: function (settings) {
+      var api = this.api();
+      var rows = api.rows({ page: 'current' }).nodes();
+      var last = null;
+
+      api
+          .column(groupColumn, { page: 'current' })
+          .data()
+          .each(function (group, i) {
+            if (last !== group) {
+              $(rows)
+                  .eq(i)
+                  .before('<tr class="group text-left" style="background: #ffe5a4 !important;"><td colspan="8"><strong>' + group + '</strong></td></tr>');
+
+              last = group;
+            }
+          });
+    },
     fixedHeader: true,
     stateSave: true,
     stateDuration: 1200,
@@ -492,6 +608,6 @@ document.addEventListener("turbolinks:load", () => {
       { data: "opciones", class: "text-center" },
       { data: "inactivar", class: "text-center" },
     ],
-  });
+  }).column(1).visible(false).column(2).visible(false);
 
 });

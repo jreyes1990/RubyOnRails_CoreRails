@@ -32,7 +32,7 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         id: record.id,
-        nombre_empresa: record.nombre_empresa,
+        nombre_empresa: estilo_codigo_hex_empresa(record),
         codigo_area: record.codigo_area,
         nombre_area: record.nombre,
         codigo_hex: estilo_codigo_hex(record),
@@ -116,5 +116,9 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
 
   def estilo_codigo_hex(record)
     return "<strong><span class='badge badge-pill badge-white' style='background: #{record.codigo_hex}; color: #{record.codigo_hex};'>#{record.codigo_hex}</span></strong>".html_safe
+  end
+
+  def estilo_codigo_hex_empresa(record)
+    return "<div class='text-center'><strong style='color: #fffff !important;'>#{record.nombre_empresa.upcase}</strong></div>".html_safe
   end
 end

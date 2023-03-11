@@ -30,7 +30,7 @@ class MenuRolDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         id: record.id,
-        nombre_rol: record.nombre_rol.capitalize,
+        nombre_rol: estilo_codigo_hex_menu_rol(record),
         nombre_menu: record.nombre_menu,
         nombre_opcion: record.nombre_opcion,
         estado: format_estado(record),
@@ -108,5 +108,9 @@ class MenuRolDatatable < AjaxDatatablesRails::ActiveRecord
     end
 
     return "<div class='text-center'><span class='#{badge_estado}'>#{nombre_estado}</span></div>".html_safe
+  end
+
+  def estilo_codigo_hex_menu_rol(record)
+    return "<div class='text-center'><strong style='color: #{record.codigo_hex_rol};'>#{record.nombre_rol.upcase}</strong></div>".html_safe
   end
 end

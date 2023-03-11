@@ -34,7 +34,7 @@ class OpcionDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         id: record.id,
-        nombre_menu: record.nombre_menu,
+        nombre_menu: estilo_codigo_hex_menu(record),
         icono: icono_awesome(record),
         nombre_opcion: record.nombre,
         path_opcion: record.path,
@@ -49,7 +49,7 @@ class OpcionDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    OpcionView.order(id: :DESC)
+    OpcionView.order(nombre_menu: :ASC, id: :DESC)
   end
 
   def show_btn_opcion(record)
@@ -120,6 +120,10 @@ class OpcionDatatable < AjaxDatatablesRails::ActiveRecord
     end
 
     return "<div class='text-center'><span class='#{badge_estado}'>#{nombre_estado}</span></div>".html_safe
+  end
+
+  def estilo_codigo_hex_menu(record)
+    return "<div class='text-center'><strong style='color: #{record.codigo_hex_menu};'>#{record.nombre_menu.upcase}</strong></div>".html_safe
   end
 
   def estilo_codigo_hex(record)
