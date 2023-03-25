@@ -53,3 +53,14 @@ table>tbody>tr>td {
 td.highlight {
   background-color: whitesmoke !important;
 }
+
+/*MEJORAS DE ESTILOS DEL TEMPLATE*/
+.sidebar-dark .nav-item.active .nav-link {
+  color: #fddb85 !important;
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item.active, .sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
+  color: #5c78f8 !important;
+  font-weight: 700;
+  background-color: #fddb85 !important;
+}
