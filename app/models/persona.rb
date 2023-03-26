@@ -29,7 +29,8 @@ class Persona < ApplicationRecord
 
   has_many :personas_areas
 
-  validates_presence_of :nombre, :apellido, :user_id, :estado, message: ": este campo es obligatorio"
+  #validates_presence_of :nombre, :apellido, :user_id, :estado, message: ": este campo es obligatorio"
+  validates :nombre, :apellido, :direccion, :telefono, presence: false
 
   def nombre_completo
     "#{self.nombre} #{self.apellido}"

@@ -9,6 +9,7 @@
 #  updated_at      :datetime         not null
 #  area_id         :bigint           not null
 #  persona_id      :bigint           not null
+#  rol_id          :integer
 #  user_created_id :integer
 #  user_updated_id :integer
 #

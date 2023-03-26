@@ -5,6 +5,7 @@ class CreatePersonasAreas < ActiveRecord::Migration[6.0]
       t.integer :user_created_id
       t.integer :user_updated_id
       t.string :estado, limit: 10
+      t.integer :rol_id
       t.references :persona, null: false, foreign_key: true
       t.references :area, null: false, foreign_key: true
 

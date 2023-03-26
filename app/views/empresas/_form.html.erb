@@ -13,8 +13,9 @@
 
             <div class="form-inputs">
               <div class="row">
-                <div class="col-md-4"><%= f.input :codigo_empresa %></div>
+                <div class="col-md-2"><%= f.input :codigo_empresa %></div>
                 <div class="col-md-8"><%= f.input :nombre %></div>
+                <div class="col-md-2"><%= f.input :codigo_hex, input_html: { type: "color" } %></div>
               </div>
 
               <%= f.input :descripcion, as: :text, input_html: {rows: 3} %>

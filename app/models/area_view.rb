@@ -6,6 +6,7 @@
 #  codigo_area           :integer
 #  codigo_empresa        :integer
 #  codigo_hex            :string
+#  codigo_hex_empresa    :string
 #  codigo_nombre_empresa :text
 #  descripcion           :string
 #  estado                :string(10)

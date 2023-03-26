@@ -19,4 +19,56 @@ module Utilidades
   def icono_awesome(parametro)
     return "<div class='text-center'><i class='#{parametro}' aria-hidden='true'></i></div>".html_safe
   end
+
+  def concatena_datos(valor1, valor2)
+    return "#{valor1} - #{valor2}"
+  end
+
+  def format_digitos(correlativo, valor_digito)
+    if !correlativo.nil?
+      respuesta = correlativo.to_s.rjust(valor_digito,"0")
+    end
+
+    return respuesta
+  end
+
+  def custom_query(sql)
+    results = ActiveRecord::Base.connection.exec_query(sql)
+  
+    if results.present?
+      return results
+    else
+      return nil
+    end
+  end
+
+  def fecha_actual
+    t = Time.now
+    fecha = t.strftime("%d/%m/%Y")
+    return fecha
+  end 
+
+  def fecha_actual_ot
+    t = Time.now
+    fecha = t.strftime("%Y-%m-%d")
+    return fecha
+  end
+
+  def fecha_hora_actual
+    t = Time.now
+    fecha = t.strftime("%d/%m/%Y %H:%M:%S")
+    return fecha
+  end 
+
+  def hora_actual
+    t = Time.now
+    hora = t.strftime("%H:%M")
+    return hora
+  end 
+  
+  def ano_actual
+    t = Time.now
+    fecha = t.strftime("%Y")
+    return fecha
+  end 
 end

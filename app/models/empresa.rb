@@ -4,6 +4,7 @@
 #
 #  id              :bigint           not null, primary key
 #  codigo_empresa  :integer
+#  codigo_hex      :string
 #  descripcion     :string
 #  estado          :string(10)
 #  nombre          :string(200)
@@ -15,7 +16,7 @@
 class Empresa < ApplicationRecord
   has_many :areas
   
-  validates_presence_of :codigo_empresa, :nombre, :estado, message: ": este campo es obligatorio"
+  validates_presence_of :nombre, :estado, message: ": este campo es obligatorio"
   validates :nombre, uniqueness: {case_sensitive: false, scope: [:codigo_empresa, :estado], message: "La Empresa que intenta registrar ya existe" }
 
   def codigo_nombre_empresa

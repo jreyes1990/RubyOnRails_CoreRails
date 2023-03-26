@@ -16,6 +16,6 @@
 class Menu < ApplicationRecord
   has_many :opciones
   
-  validates_presence_of :nombre, :icono, :codigo_hex, :estado, message: ": este campo es obligatorio"
+  validates_presence_of :nombre, :estado, message: ": este campo es obligatorio"
   validates :nombre, uniqueness: {case_sensitive: false, scope: [:icono, :codigo_hex, :estado], message: "El Menú que intenta registrar ya existe" }
 end

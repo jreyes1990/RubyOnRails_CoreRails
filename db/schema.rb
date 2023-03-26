@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 2023_03_26_060408) do
   create_table "codigo_colores", force: :cascade do |t|
     t.string "disenio", limit: 50
     t.string "nombre_color", limit: 100
-    t.string "colores", limit: 15
-    t.string "codigo_hex", limit: 15
+    t.string "colores", limit: 25
+    t.string "codigo_hex", limit: 25
     t.string "codigo_rgb", limit: 50
     t.string "codigo_hls", limit: 50
     t.integer "user_created_id"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2023_03_26_060408) do
   create_table "empresas", force: :cascade do |t|
     t.integer "codigo_empresa"
     t.string "nombre", limit: 200
+    t.string "codigo_hex"
     t.string "descripcion"
     t.integer "user_created_id"
     t.integer "user_updated_id"
@@ -196,6 +197,7 @@ ActiveRecord::Schema.define(version: 2023_03_26_060408) do
     t.integer "user_created_id"
     t.integer "user_updated_id"
     t.string "estado", limit: 10
+    t.integer "rol_id"
     t.bigint "persona_id", null: false
     t.bigint "area_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -265,7 +267,8 @@ ActiveRecord::Schema.define(version: 2023_03_26_060408) do
       areas.updated_at,
       empresas.codigo_empresa,
       empresas.nombre AS nombre_empresa,
-      ((empresas.codigo_empresa || ': '::text) || (empresas.nombre)::text) AS codigo_nombre_empresa
+      ((empresas.codigo_empresa || ': '::text) || (empresas.nombre)::text) AS codigo_nombre_empresa,
+      empresas.codigo_hex AS codigo_hex_empresa
      FROM (areas
        JOIN empresas ON ((areas.empresa_id = empresas.id)));
   SQL
@@ -348,6 +351,7 @@ ActiveRecord::Schema.define(version: 2023_03_26_060408) do
       personas_areas.user_created_id,
       personas_areas.user_updated_id,
       personas_areas.estado,
+      personas_areas.rol_id,
       personas_areas.persona_id,
       personas_areas.area_id,
       personas_areas.created_at,
@@ -361,11 +365,14 @@ ActiveRecord::Schema.define(version: 2023_03_26_060408) do
       areas.codigo_hex AS codigo_hex_area,
       areas.empresa_id,
       empresas.codigo_empresa,
-      empresas.nombre AS nombre_empresa
-     FROM ((((personas_areas
+      empresas.nombre AS nombre_empresa,
+      roles.nombre AS nombre_rol,
+      roles.codigo_hex AS codigo_hex_rol
+     FROM (((((personas_areas
        JOIN personas ON ((personas_areas.persona_id = personas.id)))
        JOIN users ON ((personas.user_id = users.id)))
        JOIN areas ON ((personas_areas.area_id = areas.id)))
-       JOIN empresas ON ((areas.empresa_id = empresas.id)));
+       JOIN empresas ON ((areas.empresa_id = empresas.id)))
+       LEFT JOIN roles ON ((personas_areas.rol_id = roles.id)));
   SQL
 end

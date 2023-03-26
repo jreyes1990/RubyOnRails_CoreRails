@@ -2,6 +2,20 @@ module ApplicationHelper
   include Utilidades
   include Permisos
 
+  def current_user_name
+    persona = Persona.where(user_id: current_user.id).first
+
+    if !persona.nil?
+      if (!persona.nombre.nil? || !persona.apellido.nil?)
+        return "#{persona.nombre.upcase} #{persona.apellido.upcase}"
+      else
+        return current_user.email
+      end
+    else
+      return current_user.email
+    end
+  end
+
   def is_active_action(controller)
     if params[:controller] == controller
       "collapse-item active"
