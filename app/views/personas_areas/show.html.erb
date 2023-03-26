@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @personas_area.descripcion %>
+</p>
+
+<p>
+  <strong>User created:</strong>
+  <%= @personas_area.user_created_id %>
+</p>
+
+<p>
+  <strong>User updated:</strong>
+  <%= @personas_area.user_updated_id %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @personas_area.estado %>
+</p>
+
+<p>
+  <strong>Persona:</strong>
+  <%= @personas_area.persona_id %>
+</p>
+
+<p>
+  <strong>Area:</strong>
+  <%= @personas_area.area_id %>
+</p>
+
+<%= link_to 'Edit', edit_personas_area_path(@personas_area) %> |
+<%= link_to 'Back', personas_areas_path %>

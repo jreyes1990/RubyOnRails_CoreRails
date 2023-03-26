@@ -16,6 +16,14 @@
     <div class="bg-white py-2 collapse-inner rounded">
       <h6 class="collapse-header">Opciones:</h6>
       <!--INICIA VALIDACION DE OPCIONES MOSTRAR EN EL SIDEBAR -->
+
+      <!--< if tiene_permiso_sidebar("MENU USUARIOS", "VER OPCION") %>-->
+      <%=link_to usuarios_path, class: is_active_action("usuarios") do %>
+        <i class="fas fa-users"></i>
+        <span>Usuarios</span>
+      <%end%>
+      <!--< end %>-->
+
       <!--< if tiene_permiso_sidebar("MENU EMPRESAS", "VER OPCION") %>-->
       <%= link_to empresas_path, class: is_active_action("empresas") do %>
         <i class="fas fa-building"></i>
@@ -28,6 +36,13 @@
         <i class="fas fa-sitemap"></i>
         <span>Areas - Empresa</span>
       <% end %>
+      <!--< end %>-->
+
+      <!--< if tiene_permiso_sidebar("MENU USUARIO AREA", "VER OPCION") %>-->
+      <%=link_to personas_areas_path, class: is_active_action("personas_areas")  do %>
+        <i class="fas fa-users"></i>
+        <span>Usuario - Area</span>
+      <%end%>
       <!--< end %>-->
 
       <!--< if tiene_permiso_sidebar("MENU ROL", "VER OPCION") %>-->

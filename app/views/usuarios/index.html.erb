@@ -1,0 +1,59 @@
+<!-- Inicio Usuarios -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <div class="row">
+      <div class="col-md-6 text-left">
+        <h6 class="m-0 font-weight-bold text-primary">Gestión de Usuarios</h6>
+      </div>
+      <div class="col-md-6 text-right">
+        <!--< if tiene_permiso("BOTON NUEVO REGISTRO", "VER") %>-->
+          <%= link_to agregar_usuario_path, class: "btn btn-success btn-sm" do %>
+            <span class="icon text-green-50">
+                <i class="fas fa-plus-circle"></i>
+            </span>
+            <span class="text">AGREGAR</span>
+          <%end%>
+        <!--< end %>-->
+        <%= link_to root_path, class: "btn btn-danger btn-sm" do %>
+          <span class="icon text-red-50">
+              <i class="fas fa-home"></i>
+          </span>
+          <span class="text">INICIO</span>
+        <%end%>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-12 table-responsive">
+          <table id="datatable" class="table table-striped table-hover table-sm table-responsive-sm table-bordered" cellspacing="0" style="width:100%">
+              <thead class="text-white">
+                <tr>
+                  <th class="text-center">ID</th>
+                  <th>Nombre</th>
+                  <th class="text-center">Teléfono</th>
+                  <th>Dirección</th>
+                  <th>Email</th>
+                  <th class="text-center">Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @personas.each do |persona| %>
+                  <tr>  
+                    <td class="text-center"><%= persona.id %></td>
+                    <td><%= persona.nombre_completo %></td>
+                    <td class="text-center"><%= persona.telefono %></td>
+                    <td><%= persona.direccion %></td>
+                    <td><%= persona.correo_electronico %></td>
+                    <td class="text-center"><%= persona.estado %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+                    

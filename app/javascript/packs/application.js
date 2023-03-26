@@ -610,4 +610,34 @@ document.addEventListener("turbolinks:load", () => {
     ],
   }).column(1).visible(false).column(2).visible(false);
 
+  //BUSCADOR EMPRESAS
+  $('#codigo_empresa_usuario').select2({
+    ajax: {
+      url: $('#codigo_empresa_usuario').data('endpoint'),
+      dataType: "json",
+      delay: 500,
+      data: function (params) {
+        return {
+          empresa_usuario_params: params.term, // search term
+          page: params.page
+        };
+      },
+      processResults: function (data, page) {
+        return {
+          //results: data
+          results: $.map(data, function (value, index) {
+            return {
+              id: value.valor_id,
+              text: value.valor_text
+            };
+          })
+        };
+      }
+    },
+    minimumInputLength: 2,
+    theme: "bootstrap4",
+    language: "es-GT",
+    width: '100%'
+  });
+
 });

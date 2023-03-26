@@ -24,4 +24,19 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_one :persona, dependent: :destroy
+  after_create :set_persona
+
+  def set_persona
+    self.persona = Persona.create()
+  end
+
+  def active_for_authentication?
+    if self.estado == 'I'
+      super && false
+    else
+      super && true
+    end
+  end
 end

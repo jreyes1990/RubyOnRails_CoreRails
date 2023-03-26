@@ -14,13 +14,13 @@
             <div class="form-inputs">
               <div class="row">
                 <div class="col-md-4"><%= f.association :menu, collection: Menu.where(estado: 'A'), value_method: :id, label_method: :nombre,  label: "Menú", include_blank: "Seleccione un menú", input_html: { class: "select2", id: 'menu_id', required: true } %></div>
+                <div class="col-md-4"><%= f.input :icono, collection: FontAwesom.where(estado: 'A'), value_method: :icono, label_method: :icono,  label: "Icono", include_blank: "Seleccione un icono", input_html: { class: "select2", id: 'font_awesom_id', required: true } %></div>
                 <div class="col-md-4"><%= f.input :nombre %></div>
-                <div class="col-md-4"><%= f.input :codigo_hex, input_html: { type: "color" } %></div>
               </div>
               <div class="row">
-                <div class="col-md-4"><%= f.input :icono, collection: FontAwesom.where(estado: 'A'), value_method: :icono, label_method: :icono,  label: "Icono", include_blank: "Seleccione un icono", input_html: { class: "select2", id: 'font_awesom_id', required: true } %></div>
                 <div class="col-md-4"><%= f.input :path %></div>
                 <div class="col-md-4"><%= f.input :controlador %></div>
+                <div class="col-md-4"><%= f.input :codigo_hex, input_html: { type: "color" } %></div>
               </div>
               <%= f.input :descripcion, as: :text, input_html: {rows: 3} %>
             </div>

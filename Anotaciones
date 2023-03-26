@@ -136,3 +136,18 @@
 
 -- GENERANDO DATATABLE AJAX OPCION_CA
    rails generate datatable opcion_ca
+
+-- GENERANDO MODEL PERSONA
+   rails generate model persona nombre:string{200} apellido:string{200} foto:string telefono:integer direccion:string token:string{1000} user_created_id:integer user_updated_id:integer estado:string{10} user:references
+
+-- GENERANDO CONTROLLER PERSONAS
+   rails generate controller personas show edit
+
+-- GENERANDO CONTROLLER USUARIOS
+   rails generate controller usuarios index
+
+-- GENERANDO SCAFFOLD PERSONAS_AREA
+   rails generate scaffold personas_area descripcion:string user_created_id:integer user_updated_id:integer estado:string{10} persona:references area:references
+
+-- GENERANDO VISTA PERSONAS_AREA CON SCENIC 
+   rails generate scenic:view personas_areas_views

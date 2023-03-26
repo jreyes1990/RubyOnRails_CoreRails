@@ -142,3 +142,10 @@ es:
       mark: "*"
       text: necesario
     'yes': Sí
+    error_notification:
+      default_message: "Por favor revise los problemas a continuación:"
+    errors:
+      messages:
+        blank: "%{attribute} no puede estar vacío"
+        invalid: "%{attribute} no es válido" 
+    

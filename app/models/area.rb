@@ -25,6 +25,16 @@
 class Area < ApplicationRecord
   belongs_to :empresa
 
+  has_many :personas_areas
+  
   validates_presence_of :nombre, :codigo_area, :empresa_id, :estado, message: ": este campo es obligatorio"
   validates :nombre, uniqueness: {case_sensitive: false, scope: [:codigo_area, :empresa_id, :estado], message: "El Área que intenta registrar ya existe" }
+
+  def nombre_area_empresa
+    "#{self.empresa.nombre.upcase} - #{self.nombre.upcase}"
+  end
+
+  def area_con_codigo
+    "#{self.codigo_area} | #{self.nombre.upcase}" 
+  end
 end

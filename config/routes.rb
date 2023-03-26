@@ -8,6 +8,21 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   scope "/sistemas" do
+    #resources :usuarios
+    #post 'usuarios/crear_usuario'
+    get 'usuarios/index' => "usuarios#index", as: 'usuarios'
+    post 'usuarios/crear_usuario' => "usuarios#crear_usuario", as: 'crear_usuario'
+    get 'usuarios/agregar_usuario' => "usuarios#agregar_usuario", as: 'agregar_usuario'
+    get "search_empresa_usuario" => "usuarios#search_empresa", as: "search_empresa"
+    get "search_area_usuario" => "usuarios#search_area", as: "search_area"
+
+    get 'personas/show'
+    get 'personas/edit'
+
+    resources :personas_areas
+    get 'personas_areas/inactivar/:id' => "personas_areas#inactivar_personas_area", as: 'inactivar_personas_area'
+    get 'personas_areas/activar/:id' => "personas_areas#activar_personas_area", as: 'activar_personas_area'
+
     resources :empresas
     get 'empresas/inactivar/:id' => "empresas#inactivar_empresa", as: 'inactivar_empresa'
     get 'empresas/activar/:id' => "empresas#activar_empresa", as: 'activar_empresa'

@@ -13,11 +13,11 @@
 
             <div class="form-inputs">
               <div class="row">
-                <div class="col-md-6">
-                  <%= f.input :nombre %>
-                </div>
                 <div class="col-md-3">
                   <%= f.input :icono, collection: FontAwesom.where(estado: 'A'), value_method: :icono, label_method: :icono,  label: "Icono", include_blank: "Seleccione un icono", input_html: { class: "select2", id: 'font_awesom_id', required: true, type: "icon"} %>
+                </div>
+                <div class="col-md-6">
+                  <%= f.input :nombre %>
                 </div>
                 <div class="col-md-3">
                   <%= f.input :codigo_hex, input_html: { type: "color" } %>

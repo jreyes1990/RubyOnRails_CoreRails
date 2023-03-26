@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_06_053014) do
+ActiveRecord::Schema.define(version: 2023_03_26_060408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,6 +175,35 @@ ActiveRecord::Schema.define(version: 2023_03_06_053014) do
     t.index ["menu_id"], name: "index_opciones_on_menu_id"
   end
 
+  create_table "personas", force: :cascade do |t|
+    t.string "nombre", limit: 200
+    t.string "apellido", limit: 200
+    t.string "foto"
+    t.integer "telefono"
+    t.string "direccion"
+    t.string "token", limit: 1000
+    t.integer "user_created_id"
+    t.integer "user_updated_id"
+    t.string "estado", limit: 10
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_personas_on_user_id"
+  end
+
+  create_table "personas_areas", force: :cascade do |t|
+    t.string "descripcion"
+    t.integer "user_created_id"
+    t.integer "user_updated_id"
+    t.string "estado", limit: 10
+    t.bigint "persona_id", null: false
+    t.bigint "area_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_id"], name: "index_personas_areas_on_area_id"
+    t.index ["persona_id"], name: "index_personas_areas_on_persona_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "nombre", limit: 200
     t.string "descripcion"
@@ -218,6 +247,9 @@ ActiveRecord::Schema.define(version: 2023_03_06_053014) do
   add_foreign_key "opcion_cas", "componentes"
   add_foreign_key "opcion_cas", "opciones"
   add_foreign_key "opciones", "menus"
+  add_foreign_key "personas", "users"
+  add_foreign_key "personas_areas", "areas"
+  add_foreign_key "personas_areas", "personas"
 
   create_view "areas_views", sql_definition: <<-SQL
       SELECT areas.id,
@@ -309,5 +341,31 @@ ActiveRecord::Schema.define(version: 2023_03_06_053014) do
        JOIN componentes ON ((opcion_cas.componente_id = componentes.id)))
        JOIN atributos ON ((opcion_cas.atributo_id = atributos.id)))
        JOIN menus ON ((opciones.menu_id = menus.id)));
+  SQL
+  create_view "personas_areas_views", sql_definition: <<-SQL
+      SELECT personas_areas.id,
+      personas_areas.descripcion,
+      personas_areas.user_created_id,
+      personas_areas.user_updated_id,
+      personas_areas.estado,
+      personas_areas.persona_id,
+      personas_areas.area_id,
+      personas_areas.created_at,
+      personas_areas.updated_at,
+      (((personas.nombre)::text || ' '::text) || (personas.apellido)::text) AS nombre_usuario,
+      personas.telefono AS telefono_usuario,
+      personas.user_id,
+      users.email AS email_usuario,
+      areas.codigo_area,
+      areas.nombre AS nombre_area,
+      areas.codigo_hex AS codigo_hex_area,
+      areas.empresa_id,
+      empresas.codigo_empresa,
+      empresas.nombre AS nombre_empresa
+     FROM ((((personas_areas
+       JOIN personas ON ((personas_areas.persona_id = personas.id)))
+       JOIN users ON ((personas.user_id = users.id)))
+       JOIN areas ON ((personas_areas.area_id = areas.id)))
+       JOIN empresas ON ((areas.empresa_id = empresas.id)));
   SQL
 end

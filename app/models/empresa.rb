@@ -21,4 +21,12 @@ class Empresa < ApplicationRecord
   def codigo_nombre_empresa
     "#{self.codigo_empresa}: #{self.nombre}"
   end
+
+  def informacion_empresa
+    "CÓDIGO: " + "#{self.codigo_empresa}" + " #{self.nombre.upcase}" 
+  end
+
+  def empresa_con_codigo
+    "#{self.codigo_empresa} | #{self.nombre.upcase}" 
+  end
 end

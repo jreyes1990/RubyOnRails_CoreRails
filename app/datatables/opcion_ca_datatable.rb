@@ -45,7 +45,7 @@ class OpcionCaDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    OpcionCaView.order(id: :DESC)
+    OpcionCaView.order(nombre_menu: :DESC, nombre_opcion: :DESC, id: :DESC)
   end
 
   def show_btn_opcion(record)
