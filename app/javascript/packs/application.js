@@ -236,6 +236,20 @@ document.addEventListener("turbolinks:load", () => {
     $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
   });
 
+  $(document).ready(function () {
+    $('#show_password_new').click(function () {
+      var tipo = document.getElementById("txtPasswordNew");
+
+      if(tipo.type == "password"){
+        $('#txtPasswordNew').attr('type', 'text');
+        $('#mostrar').addClass('fa fa-eye').removeClass('fa fa-eye-slash');
+      }else{
+        $('#txtPasswordNew').attr('type', 'password');
+        $('#mostrar').addClass('fa fa-eye-slash').removeClass('fa fa-eye');
+      }
+    });
+  });
+
   /*
   document.oncontextmenu = ev =>{
       ev.preventDefault();

@@ -119,6 +119,6 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def estilo_codigo_hex_empresa(record)
-    return "<div class='text-center'><strong style='color: #fffff !important;'>#{record.nombre_empresa.upcase}</strong></div>".html_safe
+    return "<div class='text-center'><strong style='color: #{record.codigo_hex}'>#{record.nombre_empresa.upcase}</strong></div>".html_safe
   end
 end
