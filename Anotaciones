@@ -151,3 +151,15 @@
 
 -- GENERANDO VISTA PERSONAS_AREA CON SCENIC 
    rails generate scenic:view personas_areas_views
+
+-- GENERANDO DATATABLE AJAX PERSONAS_AREA
+   rails generate datatable personas_area
+
+-- GENERANDO MODEL PARAMETROS
+   rails generate model parametro area_id:integer nombre_area:string empresa_id:integer nombre_empresa:string ruta_predeterminada:string view_default:string user:references
+
+-- PARA CREAR UN MODAL SE NECESITA LO SIGUIENTE
+   1. Crear un metodo con el formato .js
+   2. Crear un partial
+   3. Crear la llamada del partial con formato .js
+   4. Crear la ruta del partial

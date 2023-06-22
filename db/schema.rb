@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_26_060408) do
+ActiveRecord::Schema.define(version: 2023_06_12_044639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,6 +176,19 @@ ActiveRecord::Schema.define(version: 2023_03_26_060408) do
     t.index ["menu_id"], name: "index_opciones_on_menu_id"
   end
 
+  create_table "parametros", force: :cascade do |t|
+    t.integer "area_id"
+    t.string "nombre_area"
+    t.integer "empresa_id"
+    t.string "nombre_empresa"
+    t.string "ruta_predeterminada"
+    t.string "view_default"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_parametros_on_user_id"
+  end
+
   create_table "personas", force: :cascade do |t|
     t.string "nombre", limit: 200
     t.string "apellido", limit: 200
@@ -249,6 +262,7 @@ ActiveRecord::Schema.define(version: 2023_03_26_060408) do
   add_foreign_key "opcion_cas", "componentes"
   add_foreign_key "opcion_cas", "opciones"
   add_foreign_key "opciones", "menus"
+  add_foreign_key "parametros", "users"
   add_foreign_key "personas", "users"
   add_foreign_key "personas_areas", "areas"
   add_foreign_key "personas_areas", "personas"

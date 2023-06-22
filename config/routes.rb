@@ -3,11 +3,15 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
-
-  root to: 'home#welcome'
+  
+  root to: 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   scope "/sistemas" do
+    get 'home/mostrar/:id' => "home#mostrar_parametro", as: 'mostrar_parametro'
+    post 'home/registrar_parametro'
+    post "home/registrar_area_temporal"
+
     #resources :usuarios
     #post 'usuarios/crear_usuario'
     get 'usuarios/index' => "usuarios#index", as: 'usuarios'
@@ -16,12 +20,19 @@ Rails.application.routes.draw do
     get "search_empresa_usuario" => "usuarios#search_empresa", as: "search_empresa"
     get "search_area_usuario" => "usuarios#search_area", as: "search_area"
 
-    get 'personas/show'
-    get 'personas/edit'
+    #Manejo controller Personas
+    resources :personas
+    get 'personas/show/:id' => "personas#show", as: 'ver_perfil'
+    get "/persona/modal_cambio_contra/:persona_id" => "personas#modal_cambiar_contrasena", as: "modal_cambiar_contrasena"
+    post "personas/registrar_cambio_contrasena"  
+    #get 'personas/show'
+    #get 'personas/edit'
 
     resources :personas_areas
     get 'personas_areas/inactivar/:id' => "personas_areas#inactivar_personas_area", as: 'inactivar_personas_area'
     get 'personas_areas/activar/:id' => "personas_areas#activar_personas_area", as: 'activar_personas_area'
+    get "search_empresa_persona" => "personas_areas#search_empresa_persona", as: "search_empresa_persona"
+    get "search_area_persona" => "personas_areas#search_area_persona", as: "search_area_persona"
 
     resources :empresas
     get 'empresas/inactivar/:id' => "empresas#inactivar_empresa", as: 'inactivar_empresa'
