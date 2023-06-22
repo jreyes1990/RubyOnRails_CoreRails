@@ -13,9 +13,9 @@
 
             <div class="form-inputs">
               <div class="row">
-                <div class="col-md-4"><%= f.label "Menú" %><%= collection_select(:menu, :menu_id, Menu.joins("inner join opciones on(menus.id=opciones.menu_id)").where(estado: 'A').distinct.order(id: :DESC), :id, :nombre,  {:prompt => "Seleccione un Menú"}, {:class => "select2", :required => false, id: 'codigo_menu'}) %></div>
-                <div class="col-md-4"><%= f.label :opcion %><%= f.grouped_collection_select(:opcion_id, Menu.where(estado: 'A').order(:nombre).limit(5), :opciones, :nombre, :id, :nombre, {prompt: "Seleccione una Opción" }, {class: "select2", required: true, id: "codigo_opcion"}) %></div>
-                <div class="col-md-4"><%= f.association :rol, collection: Rol.where(estado: 'A'),value_method: :id, label_method: :nombre,  label: "Rol", include_blank: "Seleccione un rol", input_html: { class: "select2", id: 'rol_id', required: true } %></div>
+                <div class="col-md-4"><br><%= f.label "Menú" %><%= collection_select(:menu, :menu_id, Menu.joins("inner join opciones on(menus.id=opciones.menu_id)").where(estado: 'A').distinct.order(id: :DESC), :id, :nombre,  {:prompt => "Seleccione un Menú"}, {:class => "select2", :required => false, id: 'codigo_menu'}) %></div>
+                <div class="col-md-4"><br><%= f.label :opcion %><%= f.grouped_collection_select(:opcion_id, Menu.where(estado: 'A').order(:nombre).limit(5), :opciones, :nombre, :id, :nombre, {prompt: "Seleccione una Opción" }, {class: "select2", required: true, id: "codigo_opcion"}) %></div>
+                <div class="col-md-4"><br><%= f.association :rol, collection: Rol.where(estado: 'A'),value_method: :id, label_method: :nombre,  label: "Rol", include_blank: "Seleccione un rol", input_html: { class: "select2", id: 'rol_id', required: true } %></div>
               </div>              
             </div>
             <br>

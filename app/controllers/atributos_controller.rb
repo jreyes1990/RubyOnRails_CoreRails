@@ -3,7 +3,7 @@ class AtributosController < ApplicationController
 
   # GET /atributos or /atributos.json
   def index
-    @atributos = Atributo.all
+    @atributos = Atributo.all.order(id: :DESC)
   end
 
   # GET /atributos/1 or /atributos/1.json

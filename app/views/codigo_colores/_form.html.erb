@@ -15,12 +15,12 @@
               <div class="row">
                 <div class="col-md-4"><%= f.input :disenio %></div>
                 <div class="col-md-4"><%= f.input :nombre_color, required: true %></div>
-                <div class="col-md-4"><%= f.input :colores, required: true %></div>
+                <div class="col-md-4"><%= f.input :colores, required: true, placeholder: '#000000' %></div>
               </div>
               <div class="row">
-                <div class="col-md-4"><%= f.input :codigo_hex, label: 'HEX', required: true %></div>
-                <div class="col-md-4"><%= f.input :codigo_rgb, label: 'RGB', required: true %></div>
-                <div class="col-md-4"><%= f.input :codigo_hls, label: 'HLS', required: true %></div>
+                <div class="col-md-4"><%= f.input :codigo_hex, label: 'HEX', required: true, placeholder: '#000000' %></div>
+                <div class="col-md-4"><%= f.input :codigo_rgb, label: 'RGB', required: true, placeholder: 'rgb( 0, 0, 0 )' %></div>
+                <div class="col-md-4"><%= f.input :codigo_hls, label: 'HLS', required: true, placeholder: 'hls( 0, 0%, 0% )' %></div>
               </div>
             </div>
             <br>
