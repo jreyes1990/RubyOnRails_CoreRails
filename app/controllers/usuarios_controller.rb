@@ -4,7 +4,6 @@ class UsuariosController < ApplicationController
   def index
     @personas = Persona.select("personas.*, (personas.nombre||' '||personas.apellido) as nombre_completo, users.email as correo_electronico")
                        .joins("inner join users on(personas.user_id=users.id)")
-                       .where("personas.estado='A'")
                        .order!("personas.id DESC")
   end
 
