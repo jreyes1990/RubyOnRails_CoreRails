@@ -1,2 +1,101 @@
-<h1>Personas#show</h1>
-<p>Find me in app/views/personas/show.html.erb</p>
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Perfil de Usuario</h6>
+  </div>
+
+  <div class="card-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="card">
+            <div class="card-body">
+              <div class="container-fluid">
+                <div class="d-flex flex-column align-items-center text-center">
+                  <!--<img src="<= @persona.foto.url%>" alt="Admin" class="rounded-circle" width="150" height="150">-->
+                  <img src="https://avatars.githubusercontent.com/u/97012106?v=4" alt="Admin" class="rounded-circle" width="150" height="150">
+                  <div class="mt-3">
+                    <h4><%= @persona.nombre_completo %></h4>
+                    <p class="text-secondary mb-1">Tel. <%= @persona.telefono %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+
+        <div class="col-md-7">
+          <div class="card">
+            <div class="card-body">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-3">Empresa</div>
+                      <div class="col-md-9 text-secondary">Empresa</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-3">Areas</div>
+                      <div class="col-md-9 text-secondary">Areas</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-3">Username</div>
+                      <div class="col-md-9 text-secondary"><%= @persona.user.email %></div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-3">Direccion</div>
+                      <div class="col-md-9 text-secondary"><%= @persona.direccion %></div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-3">Fecha de Registro</div>
+                      <div class="col-md-9 text-secondary"><%= @persona.created_at.strftime('%d/%m/%Y %H:%M:%S') %></div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-3">Fecha de Ultima Actualizacion</div>
+                      <div class="col-md-9 text-secondary"><%= @persona.updated_at.strftime('%d/%m/%Y %H:%M:%S') %></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="text-center">
+            <%= link_to modal_cambiar_contrasena_path(:persona_id => @persona.id), {:remote => true, 'data-toggle' =>  "modal",'data-target' => '#modal-content-cambio-contrasena', class: "btn btn-success btn-sm"} do %>
+              <span class="icon text-50">
+                <i class="fas fa-key"></i>
+              </span>
+              <span class="text">CAMBIAR CONTRASEÑA</span>
+            <% end %>
+            
+            <%= link_to edit_persona_path(@persona), class: "btn btn-success btn-sm" do %>
+              <span class="icon text-50">
+                <i class="fas fa-edit"></i>
+              </span>
+              <span class="text">EDITAR</span>
+            <% end %>
+            
+            <%= link_to root_path, class: "btn btn-danger btn-sm" do %>
+              <span class="icon text-red-50">
+                <i class="fas fa-home"></i>
+              </span>
+              <span class="text">INICIO</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
+
+<div id="modal-content-cambio-contrasena" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
