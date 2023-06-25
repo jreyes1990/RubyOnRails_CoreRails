@@ -1,0 +1,41 @@
+<!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog modal-login">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">PARAMETROS INICIALES</h4>
+      </div>
+
+      <div class="modal-body">
+        <%= simple_form_for :set_area_form, url: {controller: "home", action: "registrar_area_temporal"} do |f| %>
+          <div class="form-inputs">
+            <%= f.input :area_id, collection: @consulta_area, label_method: :nombre_area, value_method: :area_id, label: "Áreas disponibles", required: true,  include_blank: "Seleccione una área", input_html: {class: "select2"} %>
+          </div>
+          <br>
+
+          <%= button_tag f.submit, class: "btn btn-success btn-sm", :id=>"open-tabla" do %>
+            <span class="text">REGISTRAR</span>
+            <span class="icon text-50">
+              <i class="fas fa-arrow-right"></i>
+            </span>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {     
+     $('#myModal')
+      .modal({
+        backdrop: 'static',
+        keyboard: true, 
+        show: true
+      }
+    );   
+  });
+</script>
