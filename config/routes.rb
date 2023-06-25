@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     get 'personas/show/:id' => "personas#show", as: 'ver_perfil'
     get "/persona/modal_cambio_contra/:persona_id" => "personas#modal_cambiar_contrasena", as: "modal_cambiar_contrasena"
     post "personas/registrar_cambio_contrasena"  
+    get 'personas/inactivar/:id' => "personas#inactivar_persona", as: 'inactivar_persona'
+    get 'personas/activar/:id' => "personas#activar_persona", as: 'activar_persona'
     #get 'personas/show'
     #get 'personas/edit'
 

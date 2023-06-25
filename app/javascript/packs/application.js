@@ -624,6 +624,56 @@ document.addEventListener("turbolinks:load", () => {
     ],
   }).column(1).visible(false).column(2).visible(false);
 
+  $("#personas-area-datatable").DataTable({
+    columnDefs: [{ visible: false, targets: groupColumn }],
+    drawCallback: function (settings) {
+      var api = this.api();
+      var rows = api.rows({ page: 'current' }).nodes();
+      var last = null;
+
+      api
+          .column(groupColumn, { page: 'current' })
+          .data()
+          .each(function (group, i) {
+            if (last !== group) {
+              $(rows)
+                  .eq(i)
+                  .before('<tr class="group text-left" style="background: #ffe5a4 !important;"><td colspan="8"><strong>' + group + '</strong></td></tr>');
+
+              last = group;
+            }
+          });
+    },
+    fixedHeader: true,
+    stateSave: true,
+    stateDuration: 1200,
+    responsive: true,
+    dom: var_datatable,
+    language: espaniol,
+    processing: true,
+    serverSide: true,
+    lengthMenu: [
+      [5, 10, 15, 20, 25, 50, -1],
+      [5, 10, 15, 20, 25, 50, 'Todos'],
+    ],
+    ajax: {
+      url: $("#personas-area-datatable").data("source"),
+    },
+    buttons: var_buttons,
+    pagingType: "full_numbers",
+    columns: [
+      { data: "id", class: "text-center" },
+      { data: "nombre_empresa" },
+      { data: "nombre_area" },
+      { data: "nombre_usuario" },
+      { data: "email_usuario" },
+      { data: "nombre_rol" },
+      { data: "estado" },
+      { data: "opciones", class: "text-center" },
+      { data: "inactivar", class: "text-center" },
+    ],
+  }).column(1).visible(false).column(2).visible(false);
+
   //BUSCADOR EMPRESAS
   $('#codigo_empresa_usuario').select2({
     ajax: {
@@ -633,6 +683,36 @@ document.addEventListener("turbolinks:load", () => {
       data: function (params) {
         return {
           empresa_usuario_params: params.term, // search term
+          page: params.page
+        };
+      },
+      processResults: function (data, page) {
+        return {
+          //results: data
+          results: $.map(data, function (value, index) {
+            return {
+              id: value.valor_id,
+              text: value.valor_text
+            };
+          })
+        };
+      }
+    },
+    minimumInputLength: 2,
+    theme: "bootstrap4",
+    language: "es-GT",
+    width: '100%'
+  });
+
+  //BUSCADOR EMPRESAS
+  $('#codigo_empresa_persona').select2({
+    ajax: {
+      url: $('#codigo_empresa_persona').data('endpoint'),
+      dataType: "json",
+      delay: 500,
+      data: function (params) {
+        return {
+          empresa_usuario_area_params: params.term, // search term
           page: params.page
         };
       },
