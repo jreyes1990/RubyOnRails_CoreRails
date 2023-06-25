@@ -101,6 +101,6 @@ class AtributosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def atributo_params
-      params.require(:atributo).permit(:nombre, :descripcion, :user_created_id, :user_updated_id, :estado)
+      params.require(:atributo).permit(Atributo.attribute_names.map(&:to_sym))
     end
 end

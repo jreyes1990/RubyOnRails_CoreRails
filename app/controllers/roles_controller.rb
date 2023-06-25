@@ -101,6 +101,6 @@ class RolesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def rol_params
-      params.require(:rol).permit(:nombre, :descripcion, :codigo_hex, :user_created_id, :user_updated_id, :estado)
+      params.require(:rol).permit(Rol.attribute_names.map(&:to_sym))
     end
 end

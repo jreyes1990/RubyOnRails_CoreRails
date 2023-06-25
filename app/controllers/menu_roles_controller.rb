@@ -125,6 +125,6 @@ class MenuRolesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def menu_rol_params
-      params.require(:menu_rol).permit(:menu_id, :descripcion, :user_created_id, :user_updated_id, :estado, :opcion_id, :rol_id)
+      params.require(:menu_rol).permit(MenuRol.attribute_names.map(&:to_sym))
     end
 end

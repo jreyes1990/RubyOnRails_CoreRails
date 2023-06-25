@@ -231,7 +231,7 @@ class FontAwesomesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def font_awesom_params
-      params.require(:font_awesom).permit(:icono, :prefijo_nombre, :termino, :codigo_css, :tipo_icono, :user_created_id, :user_updated_id, :estado, :observacion, :main_image, other_images: [])
+      params.require(:font_awesom).permit(FontAwesom.attribute_names.map(&:to_sym), :main_image, other_images: [])
     end
 
     def attach_other_images

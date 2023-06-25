@@ -104,6 +104,6 @@ class OpcionCasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def opcion_ca_params
-      params.require(:opcion_ca).permit(:descripcion, :user_created_id, :user_updated_id, :estado, :opcion_id, :componente_id, :atributo_id)
+      params.require(:opcion_ca).permit(OpcionCa.attribute_names.map(&:to_sym))
     end
 end

@@ -244,6 +244,6 @@ class CodigoColoresController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def codigo_color_params
-      params.require(:codigo_color).permit(:disenio, :nombre_color, :colores, :codigo_hex, :codigo_rgb, :codigo_hls, :user_created_id, :user_updated_id, :estado)
+      params.require(:codigo_color).permit(CodigoColor.attribute_names.map(&:to_sym))
     end
 end

@@ -104,6 +104,6 @@ class ComponentesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def componente_params
-      params.require(:componente).permit(:nombre, :descripcion, :user_created_id, :user_updated_id, :estado)
+      params.require(:componente).permit(Componente.attribute_names.map(&:to_sym))
     end
 end

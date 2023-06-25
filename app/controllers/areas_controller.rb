@@ -104,6 +104,6 @@ class AreasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def area_params
-      params.require(:area).permit(:codigo_area, :nombre, :codigo_hex, :descripcion, :user_created_id, :user_updated_id, :estado, :empresa_id)
+      params.require(:area).permit(Area.attribute_names.map(&:to_sym))
     end
 end

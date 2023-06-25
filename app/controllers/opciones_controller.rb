@@ -104,6 +104,6 @@ class OpcionesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def opcion_params
-      params.require(:opcion).permit(:nombre, :descripcion, :icono, :path, :controlador, :codigo_hex, :user_created_id, :user_updated_id, :estado, :menu_id)
+      params.require(:opcion).permit(Opcion.attribute_names.map(&:to_sym))
     end
 end
