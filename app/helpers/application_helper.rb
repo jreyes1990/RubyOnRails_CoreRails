@@ -16,6 +16,48 @@ module ApplicationHelper
     end
   end
 
+  def current_user_role
+    role_persona =  PersonasAreaView.where(user_id: current_user.id).first
+
+    if !role_persona.nil?
+      if (!role_persona.nombre_rol.nil?)
+        return "#{role_persona.nombre_rol.upcase}"
+      end
+    end
+  end
+
+  def current_user_role_color
+    role_persona_color =  PersonasAreaView.where(user_id: current_user.id).first
+
+    if !role_persona_color.nil?
+      if (!role_persona_color.nombre_rol.nil?)
+        return "#{role_persona_color.codigo_hex_rol}"
+      end
+    end
+  end
+
+  def current_nombre_area_controller
+    parametro_area = Parametro.where(user_id: current_user.id).first
+
+    if (parametro_area != nil) then
+      nombre_area = parametro_area.nombre_area.upcase
+      return nombre_area
+    else
+      return nombre_area = ''
+    end
+  end
+
+  def current_nombre_area_empresa_controller
+    parametro_area = Parametro.where(user_id: current_user.id).first
+
+    if (parametro_area != nil) then
+      nombre_empresa = parametro_area.nombre_empresa.upcase
+      return nombre_empresa
+    else
+      return nombre_empresa = ''
+    end
+  end
+
   def is_active_action(controller)
     if params[:controller] == controller
       "collapse-item active"
