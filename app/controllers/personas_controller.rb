@@ -1,6 +1,7 @@
 class PersonasController < ApplicationController
   before_action :set_persona, only: [:show, :edit, :update, :destroy]
   def show
+    @empresa_area = PersonasAreaView.where(persona_id: @persona.id, empresa_id: current_user_empresa_id).first
   end
 
   def edit
