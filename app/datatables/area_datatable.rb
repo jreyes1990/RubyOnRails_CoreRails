@@ -45,7 +45,7 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    AreaView.order(id: :DESC)
+    AreaView.order(nombre_empresa: :ASC, codigo_area: :ASC)
   end
 
   def show_btn_opcion(record)
