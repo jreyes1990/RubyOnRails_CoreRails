@@ -163,3 +163,7 @@
    2. Crear un partial
    3. Crear la llamada del partial con formato .js
    4. Crear la ruta del partial
+
+-- DATATABLE-RESPONSIVE
+   Se instalo datatables.net-responsive-bs4 para tener una tabla responsiva
+   yarn add datatables.net-responsive-bs4

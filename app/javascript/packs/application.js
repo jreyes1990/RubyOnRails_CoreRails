@@ -43,6 +43,8 @@ import "jszip/dist/jszip";
 import "select2/dist/js/select2";
 import "select2/dist/js/i18n/es";
 
+import "datatables.net-responsive-bs4/js/responsive.bootstrap4";
+
 import "moment/dist/moment";
 import "moment/dist/locale/es";
 
