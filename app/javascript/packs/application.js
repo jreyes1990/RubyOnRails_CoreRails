@@ -96,14 +96,14 @@ document.addEventListener("turbolinks:load", () => {
     "" +
     "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
     "<'row'<'col-sm-12'tr>>" +
-    "<'row'<'col-sm-10'i><'col-sm-1 text-center'><'col-sm-1'>><br>" +
+    "<'row'<'col-md-10'i><'col-md-1 text-center'><'col-md-1'>><br>" +
     "<'row text-center' <'col-md-3'><'col-md-6'p><'col-md-3'>>";
 
   var var_datatable =
     "" +
     "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
     "<'row'<'col-sm-12'tr>>" +
-    "<'row'<'col-sm-10'i><'col-sm-1 text-center'><'col-sm-1'>><br>" +
+    "<'row'<'col-md-10'i><'col-md-1 text-center'><'col-md-1'>><br>" +
     "<'row text-center' <'col-md-4'><'col-md-5'p><'col-md-3'>>";
 
   var var_buttons = 
@@ -112,7 +112,9 @@ document.addEventListener("turbolinks:load", () => {
       extend: "csvHtml5",
       fieldSeparator: "\t",
       extension: ".csv",
-      titleAttr: "Si desea exportar el archivo, Dar click en CSV",
+      dataContentAttr: "Si desea exportar el archivo, Dar click en CSV",
+      titleAttr: 'Si desea exportar el archivo, Dar click en CSV',
+      customClassName: "popover-success",
       className: "btn btn-warning",
     },
     {
@@ -279,6 +281,38 @@ document.addEventListener("turbolinks:load", () => {
     width: "100%",
   });
 
+  //
+  //funcion para los mensajes de los toggle en las tablas
+  $(function() {
+    $('[title]').attr("data-rel", "tooltip");
+    $("[data-rel='tooltip']")
+        .attr("data-placement", "top")
+        /*.attr("data-content", function() {
+            return $(this).attr("title")
+        })
+        .removeAttr('title')*/;
+
+    var showPopover = function() {
+        $(this).popover('show');
+    };
+    var hidePopover = function() {
+        $(this).popover('hide');
+    };
+    $("[data-rel='tooltip']").popover({
+        trigger: 'manual'
+    }).click(showPopover).hover(showPopover, hidePopover);
+  });
+
+  /*
+  $(document).ready(function(){
+        $('[data-toggle="popover"]').popover({
+            'trigger': 'hover',
+            'placement': 'top',
+        });
+    });
+  */
+ 
+  //
   $("#datatable").DataTable({
     fixedHeader: true,
     stateSave: true,
