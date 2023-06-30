@@ -130,4 +130,14 @@ module ApplicationHelper
       "collapse"
     end
   end
+
+  def conteo(modelo, estado)
+    if estado == "0"
+      @cantidad = modelo.all.distinct.count
+    elsif estado == "A"  
+      @cantidad = modelo.where(estado: 'A').distinct.count
+    else
+      @cantidad = modelo.where(estado: 'I').distinct.count
+    end
+  end
 end
