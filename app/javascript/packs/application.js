@@ -338,6 +338,20 @@ document.addEventListener("turbolinks:load", () => {
       var rows = api.rows({ page: 'current' }).nodes();
       var last = null;
 
+      $(function() {
+        $('[title]').attr("data-rel", "tooltip");
+        $("[data-rel='tooltip']").attr("data-placement", "top");
+        var showPopover = function() {
+            $(this).popover('show');
+        };
+        var hidePopover = function() {
+            $(this).popover('hide');
+        };
+        $("[data-rel='tooltip']").popover({
+            trigger: 'manual'
+        }).click(showPopover).hover(showPopover, hidePopover);
+      });
+
       api
           .column(groupColumnAwesome, { page: 'current' })
           .data()
@@ -388,6 +402,20 @@ document.addEventListener("turbolinks:load", () => {
       var api = this.api();
       var rows = api.rows({ page: 'current' }).nodes();
       var last = null;
+
+      $(function() {
+        $('[title]').attr("data-rel", "tooltip");
+        $("[data-rel='tooltip']").attr("data-placement", "top");
+        var showPopover = function() {
+            $(this).popover('show');
+        };
+        var hidePopover = function() {
+            $(this).popover('hide');
+        };
+        $("[data-rel='tooltip']").popover({
+            trigger: 'manual'
+        }).click(showPopover).hover(showPopover, hidePopover);
+      });
 
       api
           .column(groupColumn, { page: 'current' })
@@ -440,6 +468,20 @@ document.addEventListener("turbolinks:load", () => {
       var rows = api.rows({ page: 'current' }).nodes();
       var last = null;
 
+      $(function() {
+        $('[title]').attr("data-rel", "tooltip");
+        $("[data-rel='tooltip']").attr("data-placement", "top");
+        var showPopover = function() {
+            $(this).popover('show');
+        };
+        var hidePopover = function() {
+            $(this).popover('hide');
+        };
+        $("[data-rel='tooltip']").popover({
+            trigger: 'manual'
+        }).click(showPopover).hover(showPopover, hidePopover);
+      });
+
       api
           .column(groupColumn, { page: 'current' })
           .data()
@@ -484,6 +526,21 @@ document.addEventListener("turbolinks:load", () => {
   }).column(1).visible(false);
 
   $("#componente-datatable").DataTable({
+    drawCallback: function (settings) {
+      $(function() {
+        $('[title]').attr("data-rel", "tooltip");
+        $("[data-rel='tooltip']").attr("data-placement", "top");
+        var showPopover = function() {
+            $(this).popover('show');
+        };
+        var hidePopover = function() {
+            $(this).popover('hide');
+        };
+        $("[data-rel='tooltip']").popover({
+            trigger: 'manual'
+        }).click(showPopover).hover(showPopover, hidePopover);
+      });
+    },
     fixedHeader: true,
     stateSave: true,
     stateDuration: 1200,
@@ -517,6 +574,20 @@ document.addEventListener("turbolinks:load", () => {
       var api = this.api();
       var rows = api.rows({ page: 'current' }).nodes();
       var last = null;
+
+      $(function() {
+        $('[title]').attr("data-rel", "tooltip");
+        $("[data-rel='tooltip']").attr("data-placement", "top");
+        var showPopover = function() {
+            $(this).popover('show');
+        };
+        var hidePopover = function() {
+            $(this).popover('hide');
+        };
+        $("[data-rel='tooltip']").popover({
+            trigger: 'manual'
+        }).click(showPopover).hover(showPopover, hidePopover);
+      });
 
       api
           .column(groupColumn, { page: 'current' })
@@ -570,6 +641,20 @@ document.addEventListener("turbolinks:load", () => {
       var rows = api.rows({ page: 'current' }).nodes();
       var last = null;
 
+      $(function() {
+        $('[title]').attr("data-rel", "tooltip");
+        $("[data-rel='tooltip']").attr("data-placement", "top");
+        var showPopover = function() {
+            $(this).popover('show');
+        };
+        var hidePopover = function() {
+            $(this).popover('hide');
+        };
+        $("[data-rel='tooltip']").popover({
+            trigger: 'manual'
+        }).click(showPopover).hover(showPopover, hidePopover);
+      });
+
       api
           .column(groupColumn, { page: 'current' })
           .data()
@@ -617,6 +702,20 @@ document.addEventListener("turbolinks:load", () => {
       var api = this.api();
       var rows = api.rows({ page: 'current' }).nodes();
       var last = null;
+
+      $(function() {
+        $('[title]').attr("data-rel", "tooltip");
+        $("[data-rel='tooltip']").attr("data-placement", "top");
+        var showPopover = function() {
+            $(this).popover('show');
+        };
+        var hidePopover = function() {
+            $(this).popover('hide');
+        };
+        $("[data-rel='tooltip']").popover({
+            trigger: 'manual'
+        }).click(showPopover).hover(showPopover, hidePopover);
+      });
 
       api
           .column(groupColumn, { page: 'current' })
@@ -667,6 +766,20 @@ document.addEventListener("turbolinks:load", () => {
       var api = this.api();
       var rows = api.rows({ page: 'current' }).nodes();
       var last = null;
+
+      $(function() {
+        $('[title]').attr("data-rel", "tooltip");
+        $("[data-rel='tooltip']").attr("data-placement", "top");
+        var showPopover = function() {
+            $(this).popover('show');
+        };
+        var hidePopover = function() {
+            $(this).popover('hide');
+        };
+        $("[data-rel='tooltip']").popover({
+            trigger: 'manual'
+        }).click(showPopover).hover(showPopover, hidePopover);
+      });
 
       api
           .column(groupColumn, { page: 'current' })

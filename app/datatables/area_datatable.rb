@@ -45,7 +45,7 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    AreaView.order(nombre_empresa: :ASC, codigo_area: :ASC)
+    AreaView.all.order(nombre_empresa: :ASC)
   end
 
   def show_btn_opcion(record)
@@ -65,7 +65,8 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
                                                                                                                                                                                   sweetalert_confirm_title_value: 'Esta seguro de eliminar <strong style="color: #1d71b9; font-weight: bold;"><p>'+"#{record.nombre}?"+'</p></strong>',
                                                                                                                                                                                   sweetalert_confirm_btn_value: '<i class="fas fa-check-circle"></i> <strong>Si, Eliminar</strong>',
                                                                                                                                                                                   sweetalert_cancel_btn_value: '<i class="fas fa-times-circle"></i> <strong>No, Cancelar</strong>',
-                                                                                                                                                                                  sweetalert_cancel_title_value: 'Se ha cancelado la aliminación de <strong>'+"#{record.nombre}"+'</strong>' }) 
+                                                                                                                                                                                  sweetalert_cancel_title_value: 'Se ha cancelado la aliminación de <strong>'+"#{record.nombre}"+'</strong>' },
+                                                                                                    "data-custom-class": "popover-danger", title: "ELIMINAR", "data-content": "#{record.codigo_area} | #{record.nombre.capitalize}") 
         #else
         #  btnOpcion = ""
         #end
@@ -86,7 +87,8 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
                                                                                                                                                                                                                     sweetalert_confirm_title_value: 'Esta seguro de inactivar <strong style="color: #1d71b9; font-weight: bold;"><p>'+"#{record.nombre}?"+'</p></strong>',
                                                                                                                                                                                                                     sweetalert_confirm_btn_value: '<i class="fas fa-check-circle"></i> <strong>Si, Inactivar</strong>',
                                                                                                                                                                                                                     sweetalert_cancel_btn_value: '<i class="fas fa-times-circle"></i> <strong>No, Cancelar</strong>',
-                                                                                                                                                                                                                    sweetalert_cancel_title_value: 'Se ha cancelado la inactivación de <strong>'+"#{record.nombre}"+'</strong>' }) 
+                                                                                                                                                                                                                    sweetalert_cancel_title_value: 'Se ha cancelado la inactivación de <strong>'+"#{record.nombre}"+'</strong>' },
+                                                                                                                                                      'data-custom-class': "popover-danger", title: "INACTIVAR", "data-content": "#{record.codigo_area} | #{record.nombre.capitalize}") 
     else
       btnInactivar = link_to("<i class='fas fa-toggle-on' style='transform: rotate(180deg);'></i>".html_safe, activar_area_path(:id => record.id), class: "btn btn-outline-success btn-sm rounded-circle", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
                                                                                                                                                                                                                   sweetalert_confirm_alert_value: "Activar",
@@ -94,7 +96,8 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
                                                                                                                                                                                                                   sweetalert_confirm_title_value: 'Esta seguro de activar <strong style="color: #1d71b9; font-weight: bold;"><p>'+"#{record.nombre}?"+'</p></strong>',
                                                                                                                                                                                                                   sweetalert_confirm_btn_value: '<i class="fas fa-check-circle"></i> <strong>Si, Activar</strong>',
                                                                                                                                                                                                                   sweetalert_cancel_btn_value: '<i class="fas fa-times-circle"></i> <strong>No, Cancelar</strong>',
-                                                                                                                                                                                                                  sweetalert_cancel_title_value: 'Se ha cancelado la activación de <strong>'+"#{record.nombre}"+'</strong>' }) 
+                                                                                                                                                                                                                  sweetalert_cancel_title_value: 'Se ha cancelado la activación de <strong>'+"#{record.nombre}"+'</strong>' },
+                                                                                                                                                    'data-custom-class': "popover-success", title: "ACTIVAR", "data-content": "#{record.codigo_area} | #{record.nombre.capitalize}") 
     end
     #else
     #  btnInactivar = ""
