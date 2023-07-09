@@ -63,7 +63,7 @@
                     <%= f.label "Archivo Excel terminado" %>
                     <%= f.file_field :archivo_excel, required: true, class: 'form-control' %>
                     <br>
-                    <%= button_tag f.submit, class: "btn btn-danger btn-sm", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
+                    <%= button_tag f.submit, class: "btn btn-danger btn-sm", data: {controller: 'sweetalert', action: 'click->sweetalert#btnProcesar',
                                                                                       sweetalert_confirm_alert_value: "Carga Excel",
                                                                                       sweetalert_cancel_alert_value: "Cancelado",
                                                                                       sweetalert_confirm_title_value: '<strong>NOTA: </strong>'+"Al momento de realizar la carga se importará los datos que no existen en la base de datos."+'<br><br>'+"Está seguro de realizar la carga del "+'<strong>Font Awesome?</strong>',

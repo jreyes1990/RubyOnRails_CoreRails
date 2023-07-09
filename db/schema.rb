@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(version: 2023_06_12_044639) do
     t.string "apellido", limit: 200
     t.string "foto"
     t.integer "telefono"
+    t.integer "chat_id_telegram"
     t.string "direccion"
     t.string "token", limit: 1000
     t.integer "user_created_id"

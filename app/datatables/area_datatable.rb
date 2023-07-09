@@ -21,7 +21,6 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
       codigo_area: { source: "AreaView.codigo_area", cond: :like },
       nombre_area: { source: "AreaView.nombre", cond: :like },
       codigo_hex: { source: "AreaView.codigo_hex", cond: :like },
-      descripcion: { source: "AreaView.descripcion", cond: :like },
       estado: { source: "AreaView.estado", cond: :like },
       opciones: { source: "", searchable: false, orderable: false},
       inactivar: { source: "", searchable: false, orderable: false}
@@ -34,9 +33,8 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
         id: record.id,
         nombre_empresa: estilo_codigo_hex_empresa(record),
         codigo_area: record.codigo_area,
-        nombre_area: record.nombre,
+        nombre_area: nombre_descripcion_area(record),
         codigo_hex: estilo_codigo_hex(record),
-        descripcion: record.descripcion,
         estado: format_estado(record),
         opciones: show_btn_opcion(record),
         inactivar: show_btn_inactivar(record)
@@ -45,7 +43,7 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    AreaView.all.order(nombre_empresa: :ASC)
+    AreaView.all.order(nombre_empresa: :ASC, codigo_area: :ASC)
   end
 
   def show_btn_opcion(record)
@@ -122,6 +120,10 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def estilo_codigo_hex_empresa(record)
-    return "<div class='text-center'><strong style='color: #{record.codigo_hex}'>#{record.nombre_empresa.upcase}</strong></div>".html_safe
+    return "<div class='text-center'><strong style='color: #{record.codigo_hex_empresa}'>#{record.nombre_empresa.upcase}</strong></div>".html_safe
+  end
+
+  def nombre_descripcion_area(record)
+    return "<div data-custom-class='popover-info' title='#{record.nombre.upcase}' data-content='#{record.descripcion}'>#{record.nombre.capitalize}</div>".html_safe
   end
 end

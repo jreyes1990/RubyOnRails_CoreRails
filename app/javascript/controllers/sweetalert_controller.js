@@ -308,6 +308,93 @@ export default class extends ApplicationController {
     })
   }
 
+  btnProcesar(event) {
+    if (this.redirect) return;
+    event.stopImmediatePropagation();
+    event.preventDefault();
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success btn-sm',
+        cancelButton: 'btn btn-danger btn-sm'
+      },
+      buttonsStyling: true
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: this.confirmAlertValue,
+      html: this.confirmTitleValue,
+      icon: 'warning',
+      toast: false,
+      position: 'center',
+      backdrop: false,
+      background: "white",
+      timer: 5000,
+      timerProgressBar: true,
+      showCancelButton: true,
+      confirmButtonColor: "#029b4f",
+      cancelButtonColor: "#be2617",
+      confirmButtonText: this.confirmBtnValue,
+      cancelButtonText: this.cancelBtnValue,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.redirect = true;
+        this.element.click();
+
+        if (result.value) {
+          let timerInterval
+          Swal.fire({
+            title: this.procesoTitleValue,
+            html: "<h4><strong style='color: #1d71b9;'>Espere por favor</strong></h4>",
+            background: '#fff url(/images/loading_v1.gif)',
+            //timer: 5000,
+            //showLoaderOnConfirm: true,
+            //imageUrl: 'assets/images/loading_v1.gif',
+            //imageHeight: 40,
+            timerProgressBar: true,
+            /*
+            didOpen: () => {
+              Swal.showLoading()
+              timerInterval = setInterval(() => {
+                const content = Swal.getHtmlContainer()
+                if (content) {
+                  const b = content.querySelector('b')
+                  if (b) {
+                    b.textContent = Swal.getTimerLeft()
+                  }
+                }
+              }, 50)
+            },*/
+            willClose: () => {
+              clearInterval(timerInterval)
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              //console.log('I was closed by the timer')
+            }
+          })
+        }
+
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire({
+          title: this.cancelAlertValue,
+          html: this.cancelTitleValue,
+          icon: 'error',
+          toast: false,
+          backdrop: false,
+          background: "white",
+          timer: 5000,
+          timerProgressBar: true
+        })
+      }
+    })
+  }
+
   btnInactivarToast(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();

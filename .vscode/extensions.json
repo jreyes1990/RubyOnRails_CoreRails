@@ -1,5 +1,10 @@
 {
     "recommendations": [
-        "abusaidm.html-snippets"
+        "abusaidm.html-snippets",
+        "janne252.fontawesome-autocomplete",
+        "fisheva.eva-theme",
+        "rayhanw.erb-helpers",
+        "thekalinga.bootstrap4-vscode",
+        "tejanium.stimulusjs"
     ]
 }

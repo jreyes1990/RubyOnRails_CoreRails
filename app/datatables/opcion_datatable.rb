@@ -23,7 +23,6 @@ class OpcionDatatable < AjaxDatatablesRails::ActiveRecord
       path_opcion: { source: "OpcionView.path", cond: :like },
       controlador_opcion: { source: "OpcionView.controlador", cond: :like },
       codigo_hex: { source: "OpcionView.codigo_hex", cond: :like },
-      descripcion: { source: "OpcionView.descripcion", cond: :like },
       estado: { source: "OpcionView.estado", cond: :like },
       opciones: { source: "", searchable: false, orderable: false},
       inactivar: { source: "", searchable: false, orderable: false}
@@ -36,11 +35,10 @@ class OpcionDatatable < AjaxDatatablesRails::ActiveRecord
         id: record.id,
         nombre_menu: estilo_codigo_hex_menu(record),
         icono: icono_awesome(record),
-        nombre_opcion: record.nombre,
+        nombre_opcion: nombre_descripcion_opcion(record),
         path_opcion: record.path,
         controlador_opcion: record.controlador,
         codigo_hex: estilo_codigo_hex(record),
-        descripcion: record.descripcion,
         estado: format_estado(record),
         opciones: show_btn_opcion(record),
         inactivar: show_btn_inactivar(record)
@@ -131,5 +129,9 @@ class OpcionDatatable < AjaxDatatablesRails::ActiveRecord
 
   def estilo_codigo_hex(record)
     return "<div class='text-center'><strong><span class='badge badge-pill badge-white' style='background: #{record.codigo_hex}; color: #{record.codigo_hex};'>#{record.codigo_hex}</span></strong></div>".html_safe
+  end
+
+  def nombre_descripcion_opcion(record)
+    return "<div data-custom-class='popover-info' title='#{record.nombre.upcase}' data-content='#{record.descripcion}'>#{record.nombre.capitalize}</div>".html_safe
   end
 end

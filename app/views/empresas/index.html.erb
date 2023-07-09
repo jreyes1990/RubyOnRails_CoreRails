@@ -33,7 +33,6 @@
               <th class="text-center">Código Empresa</th>
               <th>Nombre</th>
               <th class="text-center">HEX</th>
-              <th>Descripcion</th>
               <th class="text-center">Estado</th>
               <!--< if tiene_permiso("BOTON EDITAR REGISTRO", "VER") ||
                   tiene_permiso("BOTON ELIMINAR REGISTRO", "VER") %>-->
@@ -50,9 +49,8 @@
               <tr>
                 <td class="text-center"><%= empresa.id %></td>
                 <td class="text-center"><%= empresa.codigo_empresa %></td>
-                <td><%= empresa.nombre %></td>
+                <td data-custom-class="popover-info" title="<%= empresa.nombre.upcase %>"  data-content="<%=empresa.descripcion%>"><%= empresa.nombre %></td>
                 <td><%= format_estilo_codigo(empresa.codigo_hex) %></td>
-                <td><%= empresa.descripcion %></td>
                 <td class="text-center"><%= format_estado(empresa.estado) %></td>
                 <!--< if tiene_permiso("BOTON EDITAR REGISTRO", "VER") ||
                   tiene_permiso("BOTON ELIMINAR REGISTRO", "VER") %>-->

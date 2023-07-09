@@ -96,6 +96,37 @@ class OpcionesController < ApplicationController
     end
   end
 
+  def modal_nuevo_menu
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def modal_registro_menu 
+    # Consulta para verificar si el nombre del menu a registrar ya existe
+    @parametro_nombre_menu = params[:nuevo_menu_form][:nombre]
+    @consulta_menu = Menu.where("upper(nombre) LIKE upper('%#{@parametro_nombre_menu}%')").first
+
+    @nuevo_menu = Menu.new(nuevo_menu_params)
+    @nuevo_menu.estado = "A"
+    @nuevo_menu.user_created_id = current_user.id
+
+    respond_to do |format|
+      if @consulta_menu.blank?
+        if @nuevo_menu.save
+          format.html { redirect_to new_opcion_path, notice: "La Empressa <strong>#{@nuevo_menu.id}: #{@nuevo_menu.nombre}</strong> se ha creado correctamente.".html_safe }
+          format.json { render :show, status: :created, location: @nuevo_menu }
+        else
+          format.html { render :new, status: :unprocessable_entity, alert: "Ocurrio un error al crear la Empresa, Verifique!!.." }
+          format.json { render json: @nuevo_menu.errors, status: :unprocessable_entity }
+        end
+      else
+        format.html { redirect_to new_opcion_path, alert: "La Empresa <strong>#{@nuevo_menu.id}: #{@nuevo_menu.nombre}</strong> ha registrar ya existe, Verifique!!.".html_safe }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_opcion
@@ -105,5 +136,9 @@ class OpcionesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def opcion_params
       params.require(:opcion).permit(Opcion.attribute_names.map(&:to_sym))
+    end
+
+    def nuevo_menu_params
+      params.require(:nuevo_menu_form).permit(Menu.attribute_names.map(&:to_sym))
     end
 end

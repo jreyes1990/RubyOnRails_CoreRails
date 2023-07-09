@@ -1,7 +1,22 @@
 <!-- Inicio Menú - Opción -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Gestión de Menú-Opción</h6>
+    <div class="row">
+      <div class="col-md-6 text-left">
+        <h6 class="m-0 font-weight-bold text-primary">Gestión de Menú - Opción</h6>
+      </div>
+      <div class="col-md-6 text-right">
+        <!--< if tiene_permiso("BOTON NUEVO REGISTRO", "VER") %>-->
+          <%= link_to modal_nuevo_menu_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-content-nuevo-menu', class: "btn btn-success btn-sm"} do %>
+            <span class="icon text-red-50">
+              <i class="fas fa-plus-circle"></i>
+            </span>
+            <span class="text">NUEVO MENÚ</span>
+          <% end %>
+        <!--< end %>-->
+      </div>
+    </div>
+    
   </div>
   <div class="card-body">
     <div class="container-fluid">
@@ -53,6 +68,22 @@
           <% end %>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Configuracion para activar select2
+  $(".select2").select2({
+    theme: "bootstrap4",
+    language: "es-GT",
+    width: "100%",
+  });
+</script>
+
+<div id="modal-content-nuevo-menu" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
     </div>
   </div>
 </div>

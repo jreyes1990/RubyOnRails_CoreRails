@@ -39,6 +39,9 @@ Rails.application.routes.draw do
     resources :empresas
     get 'empresas/inactivar/:id' => "empresas#inactivar_empresa", as: 'inactivar_empresa'
     get 'empresas/activar/:id' => "empresas#activar_empresa", as: 'activar_empresa'
+    # Ruta para ingresar nuevas empresas dentro del formulario del modelo de Area
+    get 'modal_new_empresa', to: 'areas#modal_nueva_empresa', as: 'modal_nueva_empresa'
+    post 'areas/modal_registro_empresa/', to: 'areas#modal_registro_empresa', as: 'modal_registro_empresa'
 
     resources :areas
     get 'areas/inactivar/:id' => "areas#inactivar_area", as: 'inactivar_area'
@@ -63,6 +66,9 @@ Rails.application.routes.draw do
     resources :opciones
     get 'opciones/inactivar/:id' => "opciones#inactivar_opcion", as: 'inactivar_opcion'
     get 'opciones/activar/:id' => "opciones#activar_opcion", as: 'activar_opcion'
+    # Ruta para ingresar nuevo menu dentro del formulario del modelo de Opciones
+    get 'modal_new_menu', to: 'opciones#modal_nuevo_menu', as: 'modal_nuevo_menu'
+    post 'modal_create_menu', to: 'opciones#modal_registro_menu', as: 'modal_registro_menu'
 
     resources :menu_roles
     get 'menu_roles/inactivar/:id' => "menu_roles#inactivar_menu_rol", as: 'inactivar_menu_rol'
