@@ -1,5 +1,7 @@
 module Utilidades
+  require 'mini_magick'
   public
+
   def format_estado(parametro)
     if parametro == 'A'
       badge_estado = "badge badge-success"
@@ -71,4 +73,17 @@ module Utilidades
     fecha = t.strftime("%Y")
     return fecha
   end 
+
+  # Metodo para dar tamaño a la imagen
+  def resize_image(image, width, height)
+    image = MiniMagick::Image.new(image.tempfile.path)
+    image.resize "#{width}x#{height}"
+    image
+  end
+
+  # Metodo para convertir imagen a Base64
+  def convert_to_clob(image)
+    base64_image = Base64.strict_encode64(image.to_blob)
+    "data:image/png;base64,#{base64_image}"
+  end
 end

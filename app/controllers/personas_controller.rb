@@ -1,5 +1,6 @@
 class PersonasController < ApplicationController
   before_action :set_persona, only: [:show, :edit, :update, :destroy]
+
   def show
     @empresa_area = PersonasAreaView.where(persona_id: @persona.id, empresa_id: current_user_empresa_id).first
   end
@@ -8,15 +9,31 @@ class PersonasController < ApplicationController
   end
 
   def update
-    @persona.user_updated_id = current_user.id
+    image_data = params[:persona][:foto]
 
+    if image_data.present?
+      resized_image = resize_image(image_data, 300, 180)  # Tamaño deseado: 800x600
+      @persona.foto = convert_to_clob(resized_image)
+    end
+    @persona.user_updated_id = current_user.id
+    
     respond_to do |format|
-      if @persona.update(persona_params)
-        format.html { redirect_to @persona, notice: "La Persona <strong>#{@persona.nombre} #{@persona.apellido}</strong> se ha actualizado correctamente.".html_safe }
-        format.json { render :show, status: :ok, location: @persona }
+      if image_data.present?
+        if @persona.save
+          format.html { redirect_to @persona, notice: "La Persona <strong>#{@persona.nombre} #{@persona.apellido}</strong> se ha actualizado correctamente.".html_safe }
+          format.json { render :show, status: :ok, location: @persona }
+        else
+          format.html { render :edit, status: :unprocessable_entity, alert: "Ocurrio un error al actualizar la Persona, Verifique!!.." }
+          format.json { render json: @persona.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :edit, status: :unprocessable_entity, alert: "Ocurrio un error al actualizar la Persona, Verifique!!.." }
-        format.json { render json: @persona.errors, status: :unprocessable_entity }
+        if @persona.update(persona_params)
+          format.html { redirect_to @persona, notice: "La Persona <strong>#{@persona.nombre} #{@persona.apellido}</strong> se ha actualizado correctamente.".html_safe }
+          format.json { render :show, status: :ok, location: @persona }
+        else
+          format.html { render :edit, status: :unprocessable_entity, alert: "Ocurrio un error al actualizar la Persona, Verifique!!.." }
+          format.json { render json: @persona.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

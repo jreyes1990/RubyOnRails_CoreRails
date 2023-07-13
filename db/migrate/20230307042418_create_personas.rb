@@ -3,7 +3,7 @@ class CreatePersonas < ActiveRecord::Migration[6.0]
     create_table :personas do |t|
       t.string :nombre, limit: 200
       t.string :apellido, limit: 200
-      t.string :foto
+      t.text :foto
       t.integer :telefono
       t.integer :chat_id_telegram
       t.string :direccion

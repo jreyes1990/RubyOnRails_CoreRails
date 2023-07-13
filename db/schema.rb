@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_12_044639) do
+ActiveRecord::Schema.define(version: 2023_07_12_032602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,7 +192,7 @@ ActiveRecord::Schema.define(version: 2023_06_12_044639) do
   create_table "personas", force: :cascade do |t|
     t.string "nombre", limit: 200
     t.string "apellido", limit: 200
-    t.string "foto"
+    t.text "foto"
     t.integer "telefono"
     t.integer "chat_id_telegram"
     t.string "direccion"

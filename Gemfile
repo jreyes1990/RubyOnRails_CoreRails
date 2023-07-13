@@ -125,5 +125,8 @@ gem "net-smtp"
 gem "net-imap"
 gem "uri", "0.10.0"
 
+# GEMA PARA IMAGEN
+gem 'mini_magick'
+
 # Configurando idioma devise, Enlace: https://github.com/tigrish/devise-i18n
 #gem 'devise-i18n'

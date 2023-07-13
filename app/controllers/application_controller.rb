@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   layout :layout_by_resource
+  include Permisos  
+  include Utilidades
 
   def current_user_empresa_id
     id_empresa_actual = 0
