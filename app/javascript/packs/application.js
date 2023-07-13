@@ -66,7 +66,7 @@ let pdfFonts = require("pdfmake/build/vfs_fonts");
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import "./datatable_ajax_custom";
-
+import "./search_ajax_custom";
 
 document.addEventListener("turbolinks:load", () => {
   /* *******************************************************

@@ -10,7 +10,7 @@ class PersonasAreasController < ApplicationController
   end
 
   def search_empresa_persona
-    parametro = params[:empresa_usuario_area_params]
+    parametro = params[:empresa_usuario_area_params].upcase
       
     @empresa =  Empresa.where("(upper(id|| ' ' ||nombre) like upper('%#{parametro}%')) and estado = 'A' ").limit(50).distinct
 
@@ -20,7 +20,7 @@ class PersonasAreasController < ApplicationController
   end 
 
   def search_area_persona
-    parametro = params[:empresa_usuario_area_params]
+    parametro = params[:personas_area_params]
       
     @empresa =  Area.joins("inner join empresas on (areas.empresa_id = empresas.id)")
                     .where("areas.empresa_id = #{parametro} and areas.estado = 'A'").limit(50).distinct
