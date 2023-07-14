@@ -13,19 +13,21 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="container-fluid">
-                      <div class="d-flex flex-column align-items-center text-center">
+                      <div class="d-flex flex-column align-items-center">
                         <%  if @persona.foto.present?
                               @foto_persona = @persona.foto
                             else
                               @foto_persona = "https://avatars.githubusercontent.com/u/97012106?v=4"
                             end %>
-
+                        <br>
                         <img src="<%= @foto_persona %>" alt="Admin" class="rounded-circle" width="150" height="150">
+                        <h4><%= @persona.nombre_completo %></h4>
                         <br><br>
                         <div class="forms-group">
-                          <!--<= f.file_field :foto, class: "col-md-12 form-control"%>-->
-                          <%= f.file_field :foto, class: "col-md-12 form-control", accept: 'image/jpeg,image/gif,image/png' %>
-                          
+                          <div class="custom-file">
+                            <%= f.file_field :foto, :class => "custom-file-input", id: "customFile", accept: 'image/jpeg,image/gif,image/png' %>
+                            <label class="custom-file-label" for="customFile">Busca una foto</label>
+                          </div>
                         </div>
                       </div>
                     </div>

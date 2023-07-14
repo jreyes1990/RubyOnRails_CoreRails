@@ -65,8 +65,9 @@ let pdfMake = require("pdfmake/build/pdfmake");
 let pdfFonts = require("pdfmake/build/vfs_fonts");
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-import "./datatable_ajax_custom";
-import "./search_ajax_custom";
+import "./custom_datatable_ajax";
+import "./custom_search_ajax";
+import "./custom_wizard_form";
 
 document.addEventListener("turbolinks:load", () => {
   /* *******************************************************
@@ -95,13 +96,6 @@ document.addEventListener("turbolinks:load", () => {
     },
   };
 
-  var var_dom =
-    "" +
-    "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-    "<'row'<'col-sm-12'tr>>" +
-    "<'row'<'col-md-10'i><'col-md-1 text-center'><'col-md-1'>><br>" +
-    "<'row text-center' <'col-md-3'><'col-md-6'p><'col-md-3'>>";
-
   var var_datatable =
     "" +
     "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
@@ -109,7 +103,7 @@ document.addEventListener("turbolinks:load", () => {
     "<'row'<'col-md-10'i><'col-md-1 text-center'><'col-md-1'>><br>" +
     "<'row text-center' <'col-md-4'><'col-md-5'p><'col-md-3'>>";
 
-  var var_buttons = 
+  var button_datatable = 
   [{
       text: 'CSV <i class="fas fa-file-csv"></i> ',
       extend: "csvHtml5",
@@ -309,7 +303,7 @@ document.addEventListener("turbolinks:load", () => {
       [5, 10, 15, 20, 25, 50, -1],
       [5, 10, 15, 20, 25, 50, 'Todos'],
     ],
-    buttons: var_buttons,
+    buttons: button_datatable,
     pagingType: "full_numbers",
   });
 
@@ -341,6 +335,11 @@ document.addEventListener("turbolinks:load", () => {
     theme: "bootstrap4",
     language: "es-GT",
     width: '100%'
+  });
+
+  $(".custom-file-input").on("change", function () {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
   
 });

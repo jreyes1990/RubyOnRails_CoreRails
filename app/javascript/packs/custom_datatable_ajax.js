@@ -2,7 +2,7 @@ document.addEventListener("turbolinks:load", () => {
   /* *******************************************************
  * Configuracion para dataTables
  * *********************************************************/
-  var espaniol = {
+  var espanol = {
     sEmptyTable: "No has datos disponibles en la tabla.",
     sLengthMenu: "Mostrar _MENU_ Entradas",
     //"iDisplayLength": 5,
@@ -25,7 +25,7 @@ document.addEventListener("turbolinks:load", () => {
     },
   };
 
-  var var_datatable =
+  var var_datatable_ajax =
     "" +
     "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
     "<'row'<'col-sm-12'tr>>" +
@@ -122,8 +122,8 @@ document.addEventListener("turbolinks:load", () => {
     stateSave: true,
     stateDuration: 1200,
     responsive: true,
-    dom: var_datatable,
-    language: espaniol,
+    dom: var_datatable_ajax,
+    language: espanol,
     processing: true,
     serverSide: true,
     lengthMenu: [
@@ -188,8 +188,8 @@ document.addEventListener("turbolinks:load", () => {
     stateSave: true,
     stateDuration: 1200,
     responsive: true,
-    dom: var_datatable,
-    language: espaniol,
+    dom: var_datatable_ajax,
+    language: espanol,
     processing: true,
     serverSide: true,
     lengthMenu: [
@@ -254,8 +254,8 @@ document.addEventListener("turbolinks:load", () => {
     stateSave: true,
     stateDuration: 1200,
     responsive: true,
-    dom: var_datatable,
-    language: espaniol,
+    dom: var_datatable_ajax,
+    language: espanol,
     processing: true,
     serverSide: true,
     lengthMenu: [
@@ -318,8 +318,8 @@ document.addEventListener("turbolinks:load", () => {
     stateSave: true,
     stateDuration: 1200,
     responsive: true,
-    dom: var_datatable,
-    language: espaniol,
+    dom: var_datatable_ajax,
+    language: espanol,
     processing: true,
     serverSide: true,
     lengthMenu: [
@@ -383,8 +383,8 @@ document.addEventListener("turbolinks:load", () => {
     stateSave: true,
     stateDuration: 1200,
     responsive: true,
-    dom: var_datatable,
-    language: espaniol,
+    dom: var_datatable_ajax,
+    language: espanol,
     processing: true,
     serverSide: true,
     lengthMenu: [
@@ -449,8 +449,8 @@ document.addEventListener("turbolinks:load", () => {
     stateSave: true,
     stateDuration: 1200,
     responsive: true,
-    dom: var_datatable,
-    language: espaniol,
+    dom: var_datatable_ajax,
+    language: espanol,
     processing: true,
     serverSide: true,
     lengthMenu: [
@@ -495,8 +495,8 @@ document.addEventListener("turbolinks:load", () => {
     stateSave: true,
     stateDuration: 1200,
     responsive: true,
-    dom: var_datatable,
-    language: espaniol,
+    dom: var_datatable_ajax,
+    language: espanol,
     processing: true,
     serverSide: true,
     lengthMenu: [
@@ -557,8 +557,8 @@ document.addEventListener("turbolinks:load", () => {
     stateSave: true,
     stateDuration: 1200,
     responsive: true,
-    dom: var_datatable,
-    language: espaniol,
+    dom: var_datatable_ajax,
+    language: espanol,
     processing: true,
     serverSide: true,
     lengthMenu: [
