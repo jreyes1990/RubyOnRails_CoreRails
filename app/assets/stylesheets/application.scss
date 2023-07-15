@@ -110,12 +110,12 @@ td.highlight {
 .progress {
   display: -ms-flexbox;
   display: flex;
-  height: 1rem;
+  height: 0.6rem;
   overflow: hidden;
   line-height: 0;
   font-size: 0.75rem;
-  background-color: #e9ecef;
-  border-radius: 0.25rem;
+  background-color: #f5f0f0 !important;
+  border-radius: 0.50rem;
 }
 
 .progress-bar {
@@ -131,4 +131,9 @@ td.highlight {
   white-space: nowrap;
   background-color: #0db02b !important;
   transition: width 0.6s ease;
+}
+
+.progress .progress-bar {
+  height: 0.6rem; /* Ajusta aquí la altura deseada */
+  border-radius: 0.50rem;
 }
