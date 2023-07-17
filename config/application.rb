@@ -23,19 +23,5 @@ module CoreRails
 
     config.session_store :active_record_store,
                          :key => '_redmine_session'
-
-
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.perform_deliveries = true
-    config.action_mailer.default :charset => "utf-8"
-
-    ActionMailer::Base.smtp_settings = {
-      :address => "smtp.gmail.com",
-      :port => 587,
-      :authentication => :plain,
-      :domain => 'madretierra.com.gt',
-      :user_name => 'jreyes@madretierra.com.gt',
-      :password => 'Jarl@1990',
-    }
   end
 end

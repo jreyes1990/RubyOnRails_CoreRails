@@ -42,6 +42,9 @@ class UsuariosController < ApplicationController
     begin
       respond_to do |format|
         if @usuario.save
+          # Envío de correo electrónico
+          UsuarioMailer.registro_exitoso(@usuario.email).deliver_now
+
           @persona = Persona.where("user_id = ?", @usuario.id).first
 
           if @persona.update(persona_params)
