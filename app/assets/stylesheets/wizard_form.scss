@@ -31,8 +31,8 @@
 }
 
 .signup-step-container {
-  padding: 40px 0px;
-  padding-bottom: 60px;
+  padding: 20px 0px;
+  padding-bottom: 20px;
 }
 
 .wizard-inner {
@@ -166,7 +166,8 @@ span.round-tab i {
 
 .wizard .tab-pane {
   position: relative;
-  padding-top: 20px;
+  //padding-top: 20px;
+  padding-top: 0px;
 }
 
 .wizard h3 {
@@ -175,15 +176,50 @@ span.round-tab i {
 
 .prev-step,
 .next-step {
-  font-size: 13px;
+  //font-size: 13px;
   padding: 8px 24px;
   border: none;
   border-radius: 4px;
   margin-top: 30px;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 .next-step {
-  background-color: #0db02b;
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.next-step:hover {
+  color: #fff;
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.next-step:focus, .next-step.focus {
+  color: #fff;
+  background-color: #218838;
+  border-color: #1e7e34;
+  box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
+}
+
+.next-step.disabled, .next-step:disabled {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.next-step:not(:disabled):not(.disabled):active, .next-step:not(:disabled):not(.disabled).active,
+.show > .next-step.dropdown-toggle {
+  color: #fff;
+  background-color: #1e7e34;
+  border-color: #1c7430;
+}
+
+.next-step:not(:disabled):not(.disabled):active:focus, .next-step:not(:disabled):not(.disabled).active:focus,
+.show > .next-step.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
 }
 
 .skip-btn {
@@ -195,6 +231,20 @@ span.round-tab i {
   text-align: center;
   font-weight: 500;
   margin-bottom: 20px;
+}
+
+.btn-lg, .btn-group-lg > .btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
 }
 
 .term-check {

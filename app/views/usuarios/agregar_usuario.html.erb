@@ -1,101 +1,163 @@
 <!-- Formulario Usuarios -->
 <div class="card shadow mb-4">
-  <div class="card-header py-3">
+  <div class="card-header py-3">  
     <h5 class="m-0 font-weight-bold text-primary">Registro Usuarios</h5>
   </div>
   <div class="card-body">
-    <%= simple_form_for :usuario_form, :url=> {:controller => "usuarios", :action => "crear_usuario"} do |f| %>
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <div class="row">
+    <div class="container-fluid">
+      <section class="signup-step-container">
+        <div class="row d-flex justify-content-center">
           <div class="col-md-12">
-            <h5 class="m-0 font-weight-bold text-primary">Datos Personales</h5>
-            <hr>
-            <div class="row">
-              <div class="col-md-6"><%= f.input :nombre, autofocus: true, input_html: {class:"form-control", type: "txt", placeholder: "Ingrese solo letras" , required: true, pattern: "^[A-Za-zñÑáéíóúÁÉÍÓÚ \s]+$" } %></div>
-              <div class="col-md-6"><%= f.input :apellido, input_html: {class:"form-control", type: "txt" , placeholder: "Ingrese solo letras", required: true, pattern: "^[A-Za-zñÑáéíóúÁÉÍÓÚ \s]+$" } %></div>
-            </div>
-            <div class="row">
-              <div class="col-md-6"><%= f.input :telefono, input_html: {class:"form-control", type: "" , maxlength: "8", placeholder: "Ingrese 8 dígitos" , required: true, pattern: "^[0-9]{8}$" } %></div>
-              <div class="col-md-6"><%= f.input :direccion, input_html: {class:"form-control", type: "txt" , placeholder: "" , required: true }%></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <div class="row">
-          <div class="col-md-12">
-            <h5 class="m-0 font-weight-bold text-primary">Datos de Autenticación</h5>
-            <hr>
-            <div class="row">
-              <div class="col-md-6">
-                <%= f.label "Correo Electrónico" %><br/>
-                <%= f.email_field :email, autocomplete: "email" ,class: "form-control form-control-user", placeholder: "ejemplo@gmail.com" , required: true %>
-                <br>
-              </div>
-              <div class="col-md-6">
-                <%= f.label "Clave" %>
-                <div class="input-group">
-                  <%= f.password_field :password, autocomplete: "current-password", minlength: "6", class: "form-control form-control-user", required: true, placeholder: "Minimo 6 caracteres", id: "txtPasswordNew" %>
-                  <div class="input-group-append">
-                    <button id="show_password_new" class="btn btn-success" type="button"> <span id="mostrar" class="fas fa-eye-slash icon"></span> </button>
+            <div class="wizard">
+              <div class="wizard-inner">
+                <div class="connecting-line">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                </div> 
+                </div>
+
+                <ul class="nav nav-tabs nav-justified" role="tablist">
+                  <li role="presentation" class="active" data-step="1">
+                    <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" aria-expanded="true">
+                      <span class="round-tab">
+                        <i class="fas fa-user-alt"></i>
+                      </span>
+                      <br>
+                      <i class="d-none d-sm-inline" style="font-size: .875rem;">Datos Personales</i>
+                    </a>
+                  </li>
+                  <li role="presentation" class="disabled" data-step="2">
+                    <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" aria-expanded="true">
+                      <span class="round-tab">
+                        <i class="fas fa-user-lock"></i>
+                      </span>
+                      <br>
+                      <i class="d-none d-sm-inline" style="font-size: .875rem;">Autenticación</i>
+                    </a>
+                  </li>
+                  <li role="presentation" class="disabled" data-step="3">
+                    <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" aria-expanded="true">
+                      <span class="round-tab">
+                        <i class="fas fa-user-cog"></i>
+                      </span>
+                      <br>
+                      <i class="d-none d-sm-inline" style="font-size: .875rem;">Asignación Área</i>
+                    </a>
+                  </li>
+                </ul>
               </div>
+
+              <%= simple_form_for :usuario_form, :url=> {:controller => "usuarios", :action => "crear_usuario"} do |f| %>
+                <%= f.hidden_field :estado, :value=> "A" %>
+                <%= f.hidden_field :user_created_id, :value=> current_user.id %>
+                <form role="form" action="#" class="login-box">
+                  <div class="tab-content" id="main_form">
+                    <div class="tab-pane active" role="tabpanel" id="step1">
+                      <h4 class="text-center" style="font-size: 2.15rem;">Datos Personales</h4>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-inputs">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <%= f.input :nombre, autofocus: true, input_html: {class:"form-control", type: "txt", placeholder: "Ingrese solo letras" , required: true, pattern: "^[A-Za-zñÑáéíóúÁÉÍÓÚ \s]+$" } %>
+                              </div>
+                              <div class="col-md-6">
+                                <%= f.input :apellido, input_html: {class:"form-control", type: "txt" , placeholder: "Ingrese solo letras", required: true, pattern: "^[A-Za-zñÑáéíóúÁÉÍÓÚ \s]+$" } %>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <%= f.input :telefono, input_html: {class:"form-control", type: "" , maxlength: "8", placeholder: "Ingrese 8 dígitos" , required: true, pattern: "^[0-9]{8}$" } %>
+                              </div>
+                              <div class="col-md-6">
+                                <%= f.input :direccion, input_html: {class:"form-control", type: "txt" , placeholder: "Ingrese solo letras" , required: true }%>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-center">
+                        <%= render partial: "cancelar_registro_usuario" %>
+                        <%= render partial: "continue_wizard" %>
+                      </div>
+                    </div>
+
+                    <div class="tab-pane" role="tabpanel" id="step2">
+                      <h4 class="text-center">Datos de Autenticación</h4>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-inputs">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <%= f.label "Correo Electrónico" %><br/>
+                                <%= f.email_field :email, autocomplete: "email" ,class: "form-control form-control-user", placeholder: "ejemplo@gmail.com" , required: true %>
+                                <br>
+                              </div>
+                              <div class="col-md-6">
+                                <%= f.label "Clave" %>
+                                <div class="input-group">
+                                  <%= f.password_field :password, autocomplete: "current-password", minlength: "6", class: "form-control form-control-user", required: true, placeholder: "Minimo 6 caracteres", id: "txtPasswordNew" %>
+                                  <div class="input-group-append">
+                                    <button id="show_password_new" class="btn btn-success" type="button"> <span id="mostrar" class="fas fa-eye-slash icon"></span> </button>
+                                  </div>
+                                </div> 
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-center">
+                        <%= render partial: "cancelar_registro_usuario" %>
+                        <%= render partial: "back_wizard" %>
+                        <%= render partial: "continue_wizard" %>
+                      </div>
+                    </div>
+
+                    <div class="tab-pane" role="tabpanel" id="step3">
+                      <h4 class="text-center">Asignación de Área</h4>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-inputs">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <%= f.input :empresa_id, collection: Empresa.where(:estado=> 'A').limit(10), label_method: :empresa_con_codigo, value_method: :id, label: "Seleccione una empresa", prompt: "Buscar una empresa", input_html: {class: 'select2', required: true, id: "codigo_empresa_usuario", 'data-endpoint': search_empresa_path } %>
+                              </div>
+                              <div class="col-md-6">
+                                <%= f.input :area_id, collection: Area.where(:estado=> 'A').limit(0), label_method: :nombre, value_method: :id, label: "Seleccione una área", prompt: "Buscar una área", input_html: {class: 'select2', required: true, id: "codigo_area_usuario"} %>
+                              </div>
+                            </div>
+                            <div class="text-center">
+                              <%= render partial: "cancelar_registro_usuario" %>
+                              <!--< if tiene_permiso("BOTON REGISTRAR", "VER") %>-->
+                              <%= button_tag f.submit, class: "btn btn-success btn-sm", data: {controller: 'sweetalert', action: 'click->sweetalert#btnConfirmar',
+                                                                                                sweetalert_confirm_alert_value: "Registrar",
+                                                                                                sweetalert_cancel_alert_value: "Cancelado",
+                                                                                                sweetalert_confirm_title_value: 'Esta seguro de <strong> registrar el usuario?</strong>',
+                                                                                                sweetalert_confirm_btn_value: '<i class="fas fa-check-circle"></i> <strong>Si, Registrar</strong>',
+                                                                                                sweetalert_cancel_btn_value: '<i class="fas fa-times-circle"></i> <strong>No, Cancelar</strong>',
+                                                                                                sweetalert_cancel_title_value: 'Se ha cancelado el evento <strong>registrar usuario</strong>' } do %>
+                                <span class="icon text-50">
+                                  <i class="fas fa-edit"></i>
+                                </span>
+                                <span class="text">REGISTRAR</span>
+                              <% end %>
+                              <!--< end %>-->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              <% end %>
             </div>
           </div>
         </div>
-        <br>
-      </div>
+      </section>
     </div>
-
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <div class="row">
-          <div class="col-md-12">
-            <h5 class="m-0 font-weight-bold text-primary">Asignación de Área</h5>
-            <hr>
-            <div class="row">
-              <%= f.hidden_field :estado, :value=> "A" %>
-              <%= f.hidden_field :user_created_id, :value=> current_user.id %>
-              <div class="col-md-6"><%= f.input :empresa_id, collection: Empresa.where(:estado=> 'A').limit(10), label_method: :empresa_con_codigo, value_method: :id, label: "Seleccione una empresa", prompt: "Buscar una empresa", input_html: {class: 'select2', required: true, id: "codigo_empresa_usuario", 'data-endpoint': search_empresa_path } %></div>
-                <div class="col-md-6"><%= f.input :area_id, collection: Area.where(:estado=> 'A').limit(0), label_method: :nombre, value_method: :id, label: "Seleccione una área", prompt: "Buscar una área", input_html: {class: 'select2', required: true, id: "codigo_area_usuario"} %></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <!--< if tiene_permiso("BOTON REGISTRAR", "VER") %>-->
-          <%= button_tag f.submit, class: "btn btn-success btn-sm", data: {controller: 'sweetalert', action: 'click->sweetalert#btnConfirmar',
-                                                                            sweetalert_confirm_alert_value: "Registrar",
-                                                                            sweetalert_cancel_alert_value: "Cancelado",
-                                                                            sweetalert_confirm_title_value: 'Esta seguro de <strong> registrar el usuario?</strong>',
-                                                                            sweetalert_confirm_btn_value: '<i class="fas fa-check-circle"></i> <strong>Si, Registrar</strong>',
-                                                                            sweetalert_cancel_btn_value: '<i class="fas fa-times-circle"></i> <strong>No, Cancelar</strong>',
-                                                                            sweetalert_cancel_title_value: 'Se ha cancelado el evento <strong>registrar usuario</strong>' } do %>
-            <span class="icon text-50">
-              <i class="fas fa-edit"></i>
-            </span>
-            <span class="text">REGISTRAR</span>
-          <%end%>
-          <!--< end %>-->
-          <%= link_to usuarios_path, class: "btn btn-danger btn-sm" do %>
-            <span class="icon text-red-50">
-              <i class="fas fa-arrow-circle-left"></i>
-            </span>
-            <span class="text">CANCELAR</span>
-          <%end%>
-        </div>
-      </div>
-      <% end %>
   </div>
 </div>
+
 <div class="area_usuario" data-endpoint="<%= search_area_path %>"></div>
 <script>
   $('#codigo_empresa_usuario').on('select2:select', function (e) {
@@ -118,3 +180,6 @@
     });
   });
 </script>
+
+
+

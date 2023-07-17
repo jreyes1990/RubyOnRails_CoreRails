@@ -53,20 +53,20 @@
                       <%= link_to inactivar_persona_path(:id => persona.id), class: "btn btn-outline-danger btn-sm rounded-circle", data: { controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
                                                                                                                     sweetalert_confirm_alert_value: "Inactivar",
                                                                                                                     sweetalert_cancel_alert_value: "Cancelado",
-                                                                                                                    sweetalert_confirm_title_value: 'Esta seguro de inactivar <p><strong style="color: #1d71b9;">' + "#{"#{persona.nombre.upcase} #{persona.apellido.upcase}"}?" + '</strong></p>',
+                                                                                                                    sweetalert_confirm_title_value: 'Esta seguro de inactivar <p><strong style="color: #1d71b9;">' + "#{"#{persona.nombre} #{persona.apellido}"}?" + '</strong></p>',
                                                                                                                     sweetalert_confirm_btn_value: '<i class="fas fa-check-circle"></i><strong> Si, Inactivar</strong>',
                                                                                                                     sweetalert_cancel_btn_value: '<i class="fas fa-times-circle"></i><strong> No, Cancelar</strong>' }, 
-                                                                              "data-custom-class": "popover-danger", title: "INACTIVAR", "data-content": "#{persona.id} | #{persona.nombre.capitalize} #{persona.apellido.capitalize}" do %>
+                                                                              "data-custom-class": "popover-danger", title: "INACTIVAR", "data-content": "#{persona.id} | #{persona.nombre} #{persona.apellido}" do %>
                         <i class="fas fa-toggle-on" style="transform: rotate(180deg)"></i>
                       <% end %>
                     <% else %>
                       <%= link_to activar_persona_path(:id => persona.id), class: "btn btn-outline-success btn-sm rounded-circle", data: { controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
                                                                                                                     sweetalert_confirm_alert_value: "Activar",
                                                                                                                     sweetalert_cancel_alert_value: "Cancelado",
-                                                                                                                    sweetalert_confirm_title_value: 'Esta seguro de activar <p><strong style="color: #1d71b9;">' + "#{"#{persona.nombre.upcase} #{persona.apellido.upcase}"}?" + '</strong></p>',
+                                                                                                                    sweetalert_confirm_title_value: 'Esta seguro de activar <p><strong style="color: #1d71b9;">' + "#{"#{persona.nombre} #{persona.apellido}"}?" + '</strong></p>',
                                                                                                                     sweetalert_confirm_btn_value: '<i class="fas fa-check-circle"></i><strong> Si, Activar</strong>',
                                                                                                                     sweetalert_cancel_btn_value: '<i class="fas fa-times-circle"></i><strong> No, Cancelar</strong>' },
-                                                                            "data-custom-class": "popover-success", title: "ACTIVAR", "data-content": "#{persona.id} | #{persona.nombre.capitalize} #{persona.apellido.capitalize}" do %>
+                                                                            "data-custom-class": "popover-success", title: "ACTIVAR", "data-content": "#{persona.id} | #{persona.nombre} #{persona.apellido}" do %>
                         <i class="fas fa-toggle-on" style="transform: rotate(360deg)"></i>
                       <% end %>
                     <% end %>
