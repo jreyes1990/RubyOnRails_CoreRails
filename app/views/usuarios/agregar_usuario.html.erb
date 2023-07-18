@@ -126,6 +126,7 @@
                                 <%= f.input :area_id, collection: Area.where(:estado=> 'A').limit(0), label_method: :nombre, value_method: :id, label: "Seleccione una área", prompt: "Buscar una área", input_html: {class: 'select2', required: true, id: "codigo_area_usuario"} %>
                               </div>
                             </div>
+                            <br>
                             <div class="text-center">
                               <%= render partial: "cancelar_registro_usuario" %>
                               <!--< if tiene_permiso("BOTON REGISTRAR", "VER") %>-->
