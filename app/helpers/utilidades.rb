@@ -1,5 +1,6 @@
 module Utilidades
   require 'mini_magick'
+  require 'securerandom'
   public
 
   def format_estado(parametro)
@@ -85,5 +86,11 @@ module Utilidades
   def convert_to_clob(image)
     base64_image = Base64.strict_encode64(image.to_blob)
     "data:image/png;base64,#{base64_image}"
+  end
+
+  # Metodo generar una contraseña temporal
+  def generate_secure_password(length = 12)
+    chars = ('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a + ['!', '@', '#', '$', '%', '^', '&', '*']
+    password = (1..length).map { chars.sample }.join
   end
 end

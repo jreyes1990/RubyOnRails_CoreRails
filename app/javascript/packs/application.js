@@ -46,6 +46,8 @@ import "select2/dist/js/i18n/es";
 import "datatables.net-responsive/js/dataTables.responsive";
 import "datatables.net-responsive-bs4/js/responsive.bootstrap4";
 
+import "bootstrap-toggle/js/bootstrap-toggle";
+
 import "moment/dist/moment";
 import "moment/dist/locale/es";
 
@@ -266,6 +268,14 @@ document.addEventListener("turbolinks:load", () => {
     width: "100%",
   });
 
+  // Configuracion para activar select2
+  $("#codigo_empresa_persona, #codigo_empresa_usuario").select2({
+    minimumInputLength: 2,
+    theme: "bootstrap4",
+    language: "es-GT",
+    width: "100%",
+  });
+
   // Configuracion para activar select2 multiple
   $(".select2-multiple").select2({
     language: "es-GT",
@@ -307,39 +317,17 @@ document.addEventListener("turbolinks:load", () => {
     pagingType: "full_numbers",
   });
 
-  //BUSCADOR EMPRESAS
-  $('#codigo_empresa_usuario').select2({
-    ajax: {
-      url: $('#codigo_empresa_usuario').data('endpoint'),
-      dataType: "json",
-      delay: 500,
-      data: function (params) {
-        return {
-          empresa_usuario_params: params.term, // search term
-          page: params.page
-        };
-      },
-      processResults: function (data, page) {
-        return {
-          //results: data
-          results: $.map(data, function (value, index) {
-            return {
-              id: value.valor_id,
-              text: value.valor_text
-            };
-          })
-        };
-      }
-    },
-    minimumInputLength: 2,
-    theme: "bootstrap4",
-    language: "es-GT",
-    width: '100%'
-  });
-
   $(".custom-file-input").on("change", function () {
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
   
+  $(document).ready(function() {
+    // Inicializar el interruptor de cambio
+    $('#my-toggle, #correo_usuario').bootstrapToggle({
+      on: 'Si',
+      off: 'No',
+      style: 'ios'
+    });
+  });
 });

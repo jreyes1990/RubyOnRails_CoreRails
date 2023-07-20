@@ -1,4 +1,73 @@
 <!-- app/views/usuario_mailer/registro_exitoso.html.erb -->
-<h1>Bienvenido a la aplicación</h1>
-<p>Hola ,</p>
-<p>Gracias por registrarte en nuestra aplicación.</p>
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Bienvenido, <%= @usuario %>!</h6>
+  </div>
+
+  <div class="card-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="card">
+            <div class="card-body">
+              <div class="container-fluid">
+                <div class="d-flex flex-column align-items-center text-center">
+                  <img src="cid:logo.png" alt="Admin" class="rounded-circle" width="150" height="150">
+                  <div class="mt-3">
+                    <p class="text-secondary mb-1">Has sido registrado con éxito en nuestra aplicación. Puedes iniciar sesión con los siguientes detalles:</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+
+        <div class="col-md-7">
+          <div class="card">
+            <div class="card-body">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-3">Empresa: </div>
+                      <div class="col-md-9 text-secondary"><%= @empresa_usuario %></div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-3">Area: </div>
+                      <div class="col-md-9 text-secondary"><%= @area_usuario %></div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-3">Email: </div>
+                      <div class="col-md-9 text-secondary"><%= @email_usuario %></div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-3">Contraseña Temporal: </div>
+                      <div class="col-md-9 text-secondary"><%= @password_temp %></div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-3">Enlace de la aplicación</div>
+                      <div class="col-md-9 text-secondary"><%= @enlace_app %></div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-3">NOTA: </div>
+                      <div class="col-md-9 text-secondary">
+                        <p>Por favor, cambia tu contraseña lo antes posible después de iniciar sesión por primera vez.</p>
+                        <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>

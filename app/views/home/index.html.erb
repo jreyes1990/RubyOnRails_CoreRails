@@ -26,3 +26,27 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- Formas para usar un simple_form
+<= f.input :valida_check, as: :boolean, label: "Desea enviar el correo?", checked_value: 'S', unchecked_value: 'N', input_html: {checked: false, value: 'S', type: "checkbox", data: { toggle: "toggle", style: "ios", on: "Si", off: "No" }} %>
+
+<= f.label "Desea enviar correo, prueba2?"%>
+<= f.input_field :valida_check, as: :boolean, type: "checkbox", checked: false, checked_value: 'S', unchecked_value: 'N', data: { toggle: "toggle", style: "ios", on: "Si", off: "No" } %>
+
+<= f.hidden_field :valida_check, value: 'N' %>
+<= f.check_box :valida_check, {data: { toggle: "toggle", style: "ios", on: "Si", off: "No" }}, 'S', 'N' %>
+
+<= f.hidden_field :valida_check, value: 'N' %>
+<= f.check_box :valida_check, { checked: false, data: { toggle: "toggle", style: "ios", on: "Si", off: "No" }, onchange: "this.previousElementSibling.value = this.checked ? 'S' : 'N'" }, 'S', 'N' %>
+
+<= hidden_field_tag 'usuario_form[envia_correo_usuario]', 'N' %>
+<= text_field_tag 'usuario_form[envia_correo_usuario]', 'S', checked: true, id: "correo_usuario", type: "checkbox", data: { toggle: "toggle", style: "ios", on: "Si", off: "No" }, onchange: "this.value = this.checked ? 'S' : 'N'" %>
+
+<= check_box_tag 'usuario_form[valida_check]', '', data: { toggle: "toggle", style: "ios", on: "Si", off: "No" } %>
+-->
+
+<input id="my-toggle" type="checkbox" checked data-toggle="toggle" data-style="ios" data-on="Si" data-off="No">
+
+

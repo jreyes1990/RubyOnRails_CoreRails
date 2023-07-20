@@ -158,6 +158,8 @@
 -- GENERANDO MODEL PARAMETROS
    rails generate model parametro area_id:integer nombre_area:string empresa_id:integer nombre_empresa:string ruta_predeterminada:string view_default:string user:references
 
+-- rails generate scaffold persona_empresa_formulario descripcion:string user_created_id:integer user_updated_id:integer estado:string{10} personas_area:references opcion_ca:references
+
 -- PARA CREAR UN MODAL SE NECESITA LO SIGUIENTE
    1. Crear un metodo con el formato .js
    2. Crear un partial
@@ -243,5 +245,15 @@
             end
          end
 
+-- GENERAR CONTRASEÑA TEMPORAL AUTOMATICAMENTE
+   -- Primero, vamos agregar la siguiente gema
+      # Para generar una contraseña temporal automática
+      gem 'securerandom'
+   -- Segundo, vamos agregar el siguiente codigo en la siguiente ruta /app/helpers/utilidades/
+      require 'securerandom'
 
+      def generate_secure_password(length = 12)
+         chars = ('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a + ['!', '@', '#', '$', '%', '^', '&', '*']
+         password = (1..length).map { chars.sample }.join
+      end
 

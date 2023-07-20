@@ -39,23 +39,38 @@ class UsuariosController < ApplicationController
     @usuario = User.new(usuario_params)    
     @usuario.user_created_id = current_user.id
     @usuario.estado = "A"
+    @usuario.password = generate_secure_password
+    @nombre_completo = params[:usuario_form][:nombre] + " " + params[:usuario_form][:apellido]
+
     begin
       respond_to do |format|
         if @usuario.save
-          # Envío de correo electrónico
-          UsuarioMailer.registro_exitoso(@usuario.email).deliver_now
-
           @persona = Persona.where("user_id = ?", @usuario.id).first
 
           if @persona.update(persona_params)
-            area_id = params[:usuario_form][:area_id]
+            @consulta_area = AreaView.where(id: params[:usuario_form][:area_id]).first
+
             @persona_areas = PersonasArea.new
             @persona_areas.persona_id = @persona.id
-            @persona_areas.area_id = area_id
+            @persona_areas.area_id = @consulta_area.id
             @persona_areas.estado = 'A'
             @persona_areas.user_created_id = current_user.id
 
             if @persona_areas.save
+              # Envío de correo electrónico
+              puts "ENVIANDO CORREO ELECTRONICO"
+              puts "EMPRESA: #{@consulta_area.nombre_empresa}"
+              puts "AREA: #{@consulta_area.nombre}"
+              puts "NOMBRE COMPLETO: #{@nombre_completo}"
+              puts "EMAIL: #{@usuario[:email]}"
+              puts "PASSWORD: #{@usuario[:password]}"
+              puts "ENVIAR CORREO A USUARIO: #{params[:usuario_form][:envia_correo_usuario]}"
+
+              # Envío de correo electrónico
+              if params[:usuario_form][:envia_correo_usuario].upcase == 'S'.upcase
+                UsuarioMailer.registro_exitoso(@consulta_area.nombre_empresa, @consulta_area.nombre, @nombre_completo, @usuario.email, @usuario.password).deliver_now
+              end
+              
               format.html { redirect_to usuarios_path, notice: 'El Usuario se ha creado exitosamente.' } 
             else 
               flash[:alert] = "No se pudo asignar la persona a una área, Verifique !!!"
