@@ -7,7 +7,7 @@
 #  chat_id_telegram :integer
 #  direccion        :string
 #  estado           :string(10)
-#  foto             :string
+#  foto             :text
 #  nombre           :string(200)
 #  telefono         :integer
 #  token            :string(1000)

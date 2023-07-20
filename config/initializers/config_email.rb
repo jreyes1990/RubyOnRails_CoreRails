@@ -6,7 +6,7 @@ Rails.application.configure do
     config.action_mailer.perform_deliveries = true
     config.action_mailer.delivery_method = :smtp       # Establece el método de entrega de correo electrónico, en este caso, SMTP
     config.action_mailer.default :charset => "utf-8"
-    config.action_mailer.default_options = { from: 'Jar <noreply@example.com>' }
+    config.action_mailer.default_options = { from: 'noreply@example.com' }
 
     # Configuración específica para el servidor SMTP de Gmail
     config.action_mailer.smtp_settings = {

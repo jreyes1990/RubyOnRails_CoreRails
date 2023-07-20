@@ -1,6 +1,7 @@
 module Utilidades
   require 'mini_magick'
   require 'securerandom'
+  require 'net/http'
   public
 
   def format_estado(parametro)
@@ -92,5 +93,16 @@ module Utilidades
   def generate_secure_password(length = 12)
     chars = ('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a + ['!', '@', '#', '$', '%', '^', '&', '*']
     password = (1..length).map { chars.sample }.join
+  end
+
+  # Metodo para validar si hay conexion a internet
+  def internet_connection_available?
+    url = URI.parse('https://www.google.com')
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = (url.scheme == 'https')
+    http.open_timeout = 5  # Establece un tiempo de espera para la conexión (en segundos)
+    response = http.start { |http| http.head('/') } rescue nil
+
+    return !response.nil? && response.is_a?(Net::HTTPOK)
   end
 end

@@ -11,7 +11,7 @@ class UsuarioMailer < ApplicationMailer
     attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/Ingenio_Madre_Tierra.png")
 
     #mail(to: @email_usuario, subject: 'Bienvenido a nuestro sistema') # Personaliza el asunto del correo
-    mail(bcc: @email_usuario, subject: 'Bienvenido a nuestro sistema') # Personaliza el asunto del correo
+    mail(to: @email_usuario, subject: 'Bienvenido a nuestro sistema', reply_to: 'jreyes1990.test@example.com') # Personaliza el asunto del correo
   end
 
 end

@@ -68,7 +68,12 @@ class UsuariosController < ApplicationController
 
               # Envío de correo electrónico
               if params[:usuario_form][:envia_correo_usuario].upcase == 'S'.upcase
-                UsuarioMailer.registro_exitoso(@consulta_area.nombre_empresa, @consulta_area.nombre, @nombre_completo, @usuario.email, @usuario.password).deliver_now
+                if internet_connection_available?
+                  UsuarioMailer.registro_exitoso(@consulta_area.nombre_empresa, @consulta_area.nombre, @nombre_completo, @usuario.email, @usuario.password).deliver_now
+                  puts "SI, HAY CONEXION A INTERNET, PUEDE ENVIAR EL CORREO AL USUARIO"
+                else
+                  puts "PERDON, NO SE PUDO ENVIAR EL CORREO ELECTRONICO PORQUE NO HAY CONEXION A INTERNET"
+                end
               end
               
               format.html { redirect_to usuarios_path, notice: 'El Usuario se ha creado exitosamente.' } 
