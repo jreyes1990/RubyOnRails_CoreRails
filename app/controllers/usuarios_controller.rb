@@ -7,26 +7,30 @@ class UsuariosController < ApplicationController
                        .order!("personas.id DESC")
   end
 
-  def search_empresa
-    parametro = params[:empresa_usuario_params].upcase
-      
-    @empresa =  Empresa.where("(upper(id|| ' ' ||nombre) like upper('%#{parametro}%')) and estado = 'A' ").limit(50).distinct
+  def search_area_empresa_usuario
+    if params[:search_empresa_usuario_params].present?
+      parametro = params[:search_empresa_usuario_params].upcase
 
-    respond_to do |format|
-      format.json { render json: @empresa.map { |p| { valor_id: p.id, valor_text: p.informacion_empresa } } }
-    end   
-  end 
+      @empresa =  Empresa.where("(upper(id|| ' ' ||nombre) like upper('%#{parametro}%')) and estado = 'A' ").limit(50).distinct
 
-  def search_area
-    parametro = params[:empresa_usuario_params].upcase
-      
-    @empresa =  Area.joins("inner join empresas on (areas.empresa_id = empresas.id)")
-                    .where("areas.empresa_id = #{parametro} and areas.estado = 'A'").limit(50).distinct
+      respond_to do |format|
+        format.json { render json: @empresa.map { |p| { valor_id: p.id, valor_text: p.informacion_empresa } } }
+      end 
+    elsif params[:empresa_usuario_params].present?
+      empresa_id = params[:empresa_usuario_params]
 
-    respond_to do |format|
-      format.json { render json: @empresa.map { |p| { valor_id: p.id, valor_text: p.area_con_codigo } } }
-    end   
-  end 
+      @area =  Area.joins("inner join empresas on (areas.empresa_id = empresas.id)")
+                      .where("areas.empresa_id = #{empresa_id} and areas.estado = 'A'").limit(50).distinct
+
+      respond_to do |format|
+        format.json { 
+          render json: {
+            area_empresa: @area.map { |p| { valor_id: p.id, valor_text: p.area_con_codigo } }
+          }
+        }
+      end
+    end
+  end
 
   def new      
   end
@@ -80,7 +84,7 @@ class UsuariosController < ApplicationController
               # Envía un mensaje a través de Telegram
               if params[:usuario_form][:envia_telegram_usuario].upcase == 'S'.upcase
                 if internet_connection_available?
-                  message = "Bienvenido a nuestro sistema: \n\nHola <strong>#{@nombre_completo}</strong>!.\nHas sido registrado con éxito en nuestra aplicación.\nEmpresa: <strong>#{@consulta_area.nombre_empresa}</strong>\nÁrea: <strong>#{@consulta_area.nombre}</strong>\nEmail: <strong>#{@usuario.email}</strong>\nContraseña: <strong>#{@usuario.password}</strong>\n\n<strong>NOTA: </strong>\n\nPor favor, cambia tu contraseña lo antes posible después de iniciar sesión por primera vez.\n\nSi tienes alguna pregunta, no dudes en contactarnos.".html_safe
+                  message = "Bienvenido a nuestro sistema: \n\nHola <strong>#{@nombre_completo}</strong>!.\nHas sido registrado con éxito en nuestra aplicación.\n\nEmpresa: <strong>#{@consulta_area.nombre_empresa}</strong>\nÁrea: <strong>#{@consulta_area.nombre}</strong>\nEmail: <strong>#{@usuario.email}</strong>\nContraseña: <strong>#{@usuario.password}</strong>\nEnlace App: http://localhost:3000/\n\n<strong>NOTA: </strong>\nPor favor, cambia tu contraseña lo antes posible después de iniciar sesión por primera vez.\n\nSi tienes alguna pregunta, no dudes en contactarnos.".html_safe
                   $telegram_bot.api.send_message(chat_id: params[:usuario_form][:chat_id_telegram], text: message, parse_mode: 'HTML')
                   puts "SI, HAY CONEXION A INTERNET, PUEDE ENVIAR EL TELEGRAM AL USUARIO"
                 else

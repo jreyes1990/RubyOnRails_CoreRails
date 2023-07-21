@@ -17,8 +17,7 @@ Rails.application.routes.draw do
     get 'usuarios/index' => "usuarios#index", as: 'usuarios'
     post 'usuarios/crear_usuario' => "usuarios#crear_usuario", as: 'crear_usuario'
     get 'usuarios/agregar_usuario' => "usuarios#agregar_usuario", as: 'agregar_usuario'
-    get "search_empresa_usuario" => "usuarios#search_empresa", as: "search_empresa"
-    get "search_area_usuario" => "usuarios#search_area", as: "search_area"
+    get "search_area_empresa_usuario" => "usuarios#search_area_empresa_usuario", as: "search_area_empresa_usuario"
 
     #Manejo controller Personas
     resources :personas
@@ -78,6 +77,12 @@ Rails.application.routes.draw do
     resources :opcion_cas
     get 'opcion_cas/inactivar/:id' => "opcion_cas#inactivar_opcion_ca", as: 'inactivar_opcion_ca'
     get 'opcion_cas/activar/:id' => "opcion_cas#activar_opcion_ca", as: 'activar_opcion_ca'
+
+    resources :persona_empresa_formularios
+    get "permisos/" => "persona_empresa_formularios#index_permisos", :as => "permisos"
+    post "persona_empresa_formularios/consulta_permisos"
+    get "/permisos/show" => "persona_empresa_formularios#mostrar_permisos", as: "mostrar_permisos"
+    get "/permisos/search" => "persona_empresa_formularios#search_usuario", as: "search_usuarios"
   end
 
   scope "/otros" do

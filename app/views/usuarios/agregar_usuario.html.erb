@@ -134,10 +134,10 @@
                           <div class="form-inputs">
                             <div class="row">
                               <div class="col-md-6">
-                                <%= f.input :empresa_id, collection: Empresa.where(:estado=> 'A').limit(10), label_method: :empresa_con_codigo, value_method: :id, label: "Seleccione una empresa", prompt: "Buscar una empresa", input_html: {class: 'select2', required: true, id: "codigo_empresa_usuario", 'data-endpoint': search_empresa_path } %>
+                                <%= f.input :empresa_id, collection: Empresa.where(:estado=> 'A').limit(10), label_method: :empresa_con_codigo, value_method: :id, label: "Seleccione una empresa", prompt: "Buscar una empresa", input_html: {class: 'select2', required: true, id: "empresa_id_usuario", 'data-endpoint': search_area_empresa_usuario_path } %>
                               </div>
                               <div class="col-md-6">
-                                <%= f.input :area_id, collection: Area.where(:estado=> 'A').limit(0), label_method: :nombre, value_method: :id, label: "Seleccione una área", prompt: "Buscar una área", input_html: {class: 'select2', required: true, id: "codigo_area_usuario"} %>
+                                <%= f.input :area_id, collection: Area.where(:estado=> 'A').limit(0), label_method: :nombre, value_method: :id, label: "Seleccione una área", prompt: "Buscar una área", input_html: {class: 'select2', required: true, id: "area_id_usuario"} %>
                               </div>
                             </div>
                             <hr>
@@ -148,7 +148,7 @@
                                 <%= hidden_field_tag 'usuario_form[envia_correo_usuario]', 'N' %>
                                 <%= text_field_tag 'usuario_form[envia_correo_usuario]', 'S', checked: true, id: "correo_usuario", type: "checkbox", data: { toggle: "toggle", style: "ios", on: "Si", off: "No" }, onchange: "this.value = this.checked ? 'S' : 'N'" %>
                               </div>
-                              <div class="col-md-6">
+                              <div class="col-md-6 text-center">
                                 <%= label_tag 'usuario_form[envia_telegram_usuario]', "¿Desea enviar telegram?"%>
                                 <br>
                                 <%= hidden_field_tag 'usuario_form[envia_telegram_usuario]', 'N' %>
@@ -188,29 +188,6 @@
     </div>
   </div>
 </div>
-
-<div class="area_usuario" data-endpoint="<%= search_area_path %>"></div>
-<script>
-  $('#codigo_empresa_usuario').on('select2:select', function (e) {
-    $.ajax({
-      url: $('.area_usuario').data('endpoint'),
-      type: 'GET',
-      dataType: "json",
-      data: {
-        empresa_usuario_params: e.params.data.id
-      },
-      success: function (data) {
-        $("#codigo_area_usuario").empty();
-
-        var json = data;
-        $("#codigo_area_usuario").append("<option value='" + 0 + "'>Seleccione una área</option>");
-        for (var i of json) {
-          $("#codigo_area_usuario").append("<option value='" + i.valor_id + "'>" + i.valor_text + "</option>");
-        }
-      }
-    });
-  });
-</script>
 
 
 

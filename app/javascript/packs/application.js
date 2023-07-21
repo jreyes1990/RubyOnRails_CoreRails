@@ -276,6 +276,18 @@ document.addEventListener("turbolinks:load", () => {
     width: "100%",
   });
 
+  function initializeSelect2(selector, search_param, ajax_param, success_callback, clear_callback, post_select_callback = null) {
+    // Configuración del select2 con AJAX
+    $(selector).select2({
+      minimumInputLength: 2,
+      theme: "bootstrap4",
+      language: "es-GT",
+      width: '100%'
+    })
+  }
+
+  initializeSelect2("#empresa_id_usuario");
+
   // Configuracion para activar select2 multiple
   $(".select2-multiple").select2({
     language: "es-GT",
@@ -324,7 +336,7 @@ document.addEventListener("turbolinks:load", () => {
   
   $(document).ready(function() {
     // Inicializar el interruptor de cambio
-    $('#my-toggle, #correo_usuario').bootstrapToggle({
+    $('#my-toggle, #correo_usuario, #telegram_usuario').bootstrapToggle({
       on: 'Si',
       off: 'No',
       style: 'ios'
