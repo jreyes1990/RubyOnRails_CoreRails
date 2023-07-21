@@ -9,26 +9,30 @@ class PersonasAreasController < ApplicationController
     end
   end
 
-  def search_empresa_persona
-    parametro = params[:empresa_usuario_area_params].upcase
-      
-    @empresa =  Empresa.where("(upper(id|| ' ' ||nombre) like upper('%#{parametro}%')) and estado = 'A' ").limit(50).distinct
+  def search_area_empresa_persona
+    if params[:search_empresa_persona_params].present?
+      parametro = params[:search_empresa_persona_params].upcase
 
-    respond_to do |format|
-      format.json { render json: @empresa.map { |p| { valor_id: p.id, valor_text: p.informacion_empresa } } }
-    end   
-  end 
+      @empresa =  Empresa.where("(upper(id|| ' ' ||nombre) like upper('%#{parametro}%')) and estado = 'A' ").limit(50).distinct
 
-  def search_area_persona
-    parametro = params[:personas_area_params]
-      
-    @empresa =  Area.joins("inner join empresas on (areas.empresa_id = empresas.id)")
-                    .where("areas.empresa_id = #{parametro} and areas.estado = 'A'").limit(50).distinct
+      respond_to do |format|
+        format.json { render json: @empresa.map { |p| { valor_id: p.id, valor_text: p.informacion_empresa } } }
+      end 
+    elsif params[:empresa_persona_params].present?
+      empresa_id = params[:empresa_persona_params]
 
-    respond_to do |format|
-      format.json { render json: @empresa.map { |p| { valor_id: p.id, valor_text: p.area_con_codigo } } }
-    end   
-  end 
+      @area =  Area.joins("inner join empresas on (areas.empresa_id = empresas.id)")
+                      .where("areas.empresa_id = #{empresa_id} and areas.estado = 'A'").limit(50).distinct
+
+      respond_to do |format|
+        format.json { 
+          render json: {
+            persona_area_empresa: @area.map { |p| { valor_id: p.id, valor_text: p.area_con_codigo } }
+          }
+        }
+      end
+    end
+  end
 
   # GET /personas_areas/1 or /personas_areas/1.json
   def show

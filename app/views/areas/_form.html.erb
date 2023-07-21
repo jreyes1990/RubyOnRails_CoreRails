@@ -28,7 +28,7 @@
             <div class="form-inputs">
               <div class="row">
                 <div class="col-md-6">  
-                  <%= f.association :empresa, collection: Empresa.where(estado: 'A').order(id: :DESC), value_method: :id, label_method: :codigo_nombre_empresa,  label: "Empresa", include_blank: "Seleccione una empresa", input_html: { class: "select2", id: 'empresa_id', required: true} %>
+                  <%= f.association :empresa, collection: Empresa.where(estado: 'A').order(id: :DESC), value_method: :id, label_method: :codigo_nombre_empresa,  label: "Empresa", include_blank: "Seleccione una empresa", input_html: { class: "select2", id: 'empresa_id_area', required: true} %>
                 </div>
 
                 <div class="col-md-6">

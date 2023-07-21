@@ -32,8 +32,7 @@ Rails.application.routes.draw do
     resources :personas_areas
     get 'personas_areas/inactivar/:id' => "personas_areas#inactivar_personas_area", as: 'inactivar_personas_area'
     get 'personas_areas/activar/:id' => "personas_areas#activar_personas_area", as: 'activar_personas_area'
-    get "search_empresa_persona" => "personas_areas#search_empresa_persona", as: "search_empresa_persona"
-    get "search_area_persona" => "personas_areas#search_area_persona", as: "search_area_persona"
+    get "search_area_empresa_persona" => "personas_areas#search_area_empresa_persona", as: "search_area_empresa_persona"
 
     resources :empresas
     get 'empresas/inactivar/:id' => "empresas#inactivar_empresa", as: 'inactivar_empresa'

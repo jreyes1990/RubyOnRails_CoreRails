@@ -262,14 +262,7 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   // Configuracion para activar select2
-  $(".select2").select2({
-    theme: "bootstrap4",
-    language: "es-GT",
-    width: "100%",
-  });
-
-  // Configuracion para activar select2
-  $("#codigo_empresa_persona, #codigo_empresa_usuario").select2({
+  $("#codigo_empresa_persona, #codigo_empresa_usuario, #empresa_id_area, #usuario_id_persona").select2({
     minimumInputLength: 2,
     theme: "bootstrap4",
     language: "es-GT",
@@ -287,6 +280,14 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   initializeSelect2("#empresa_id_usuario");
+  initializeSelect2("#empresa_id_persona");
+  
+  // Configuracion para activar select2
+  $(".select2").select2({
+    theme: "bootstrap4",
+    language: "es-GT",
+    width: "100%",
+  });
 
   // Configuracion para activar select2 multiple
   $(".select2-multiple").select2({

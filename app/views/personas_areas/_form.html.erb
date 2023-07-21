@@ -16,19 +16,19 @@
                 <div class="col-md-6">
                   <div class="field">
                     <%= f.label :empresa %>
-                    <%= collection_select(:empresa, :empresa_id, Empresa.where(:estado => 'A').order(:nombre).limit(10), :id, :nombre,  {:prompt => "Seleccione una Empresa"}, {:class => "form-control select2", :required => '', id: "codigo_empresa_persona", 'data-endpoint': search_empresa_persona_path}) %>
+                    <%= collection_select(:empresa, :empresa_id, Empresa.where(:estado => 'A').order(:nombre).limit(10), :id, :nombre,  {:prompt => "Seleccione una Empresa"}, {:class => "form-control select2", :required => '', id: "empresa_id_persona", 'data-endpoint': search_area_empresa_persona_path}) %>
                   </div>
                   <br>
                 </div>
                 <div class="col-md-6">
                   <% if titulo_personas_area.upcase == 'ACTUALIZAR'%>
-                    <%= f.association :area, collection: Area.where(estado: 'A').limit(5), value_method: :id, label_method: :area_con_codigo,  label: "Área", include_blank: "Seleccione un Área", input_html: { class: "select2", id: 'codigo_area_persona', required: true } %>
+                    <%= f.association :area, collection: Area.where(estado: 'A').limit(5), value_method: :id, label_method: :area_con_codigo,  label: "Área", include_blank: "Seleccione un Área", input_html: { class: "select2", id: 'area_id_persona', required: true } %>
                   <% else %>
-                    <%= f.association :area, collection: Area.where(estado: 'A').limit(0), value_method: :id, label_method: :area_con_codigo,  label: "Área", include_blank: "Seleccione un Área", input_html: { class: "select2", id: 'codigo_area_persona', required: true } %>
+                    <%= f.association :area, collection: Area.where(estado: 'A').limit(0), value_method: :id, label_method: :area_con_codigo,  label: "Área", include_blank: "Seleccione un Área", input_html: { class: "select2", id: 'area_id_persona', required: true } %>
                   <% end %>
                 </div>
               </div>
-              <%= f.association :persona, collection: Persona.where(estado: 'A'), value_method: :id, label_method: :nombre_completo_con_email,  label: "Usuario", include_blank: "Seleccione un Usuario", input_html: { class: "select2", id: 'usuario_id', required: true } %>
+              <%= f.association :persona, collection: Persona.where(estado: 'A'), value_method: :id, label_method: :nombre_completo_con_email,  label: "Usuario", include_blank: "Seleccione un Usuario", input_html: { class: "select2", id: 'usuario_id_persona', required: true } %>
               <%= f.input :descripcion, as: :text, input_html: {rows: 3} %>
             </div>
             <br>
@@ -63,5 +63,3 @@
     </div>
   </div>
 </div>
-
-<div class="area_persona" data-endpoint="<%= search_area_persona_path %>"></div>
