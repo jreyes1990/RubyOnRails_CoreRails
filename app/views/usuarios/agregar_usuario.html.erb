@@ -72,10 +72,13 @@
                                 <%= f.input :telefono, input_html: {class:"form-control", type: "" , maxlength: "8", placeholder: "Ingrese 8 dígitos" , required: true, pattern: "^[0-9]{8}$" } %>
                               </div>
                               <div class="col-md-6">
-                                <%= f.input :direccion, input_html: {class:"form-control", type: "txt" , placeholder: "Ingrese solo letras" , required: true }%>
+                                <%= f.input :chat_id_telegram, input_html: {class:"form-control", type: "number" , placeholder: "Ingrese solo numeros" , required: true }%>
                               </div>
                             </div>
                             <div class="row">
+                              <div class="col-md-6">
+                                <%= f.input :direccion, input_html: {class:"form-control", type: "txt" , placeholder: "Ingrese solo letras" , required: true }%>
+                              </div>
                               <div class="col-md-6">
                                 <%= f.label "Correo Electrónico" %><br/>
                                 <%= f.email_field :email, autocomplete: "email" ,class: "form-control form-control-user", placeholder: "ejemplo@gmail.com" , required: true %>
@@ -130,17 +133,26 @@
                         <div class="col-md-12">
                           <div class="form-inputs">
                             <div class="row">
-                              <div class="col-md-5">
+                              <div class="col-md-6">
                                 <%= f.input :empresa_id, collection: Empresa.where(:estado=> 'A').limit(10), label_method: :empresa_con_codigo, value_method: :id, label: "Seleccione una empresa", prompt: "Buscar una empresa", input_html: {class: 'select2', required: true, id: "codigo_empresa_usuario", 'data-endpoint': search_empresa_path } %>
                               </div>
-                              <div class="col-md-5">
+                              <div class="col-md-6">
                                 <%= f.input :area_id, collection: Area.where(:estado=> 'A').limit(0), label_method: :nombre, value_method: :id, label: "Seleccione una área", prompt: "Buscar una área", input_html: {class: 'select2', required: true, id: "codigo_area_usuario"} %>
                               </div>
-                              <div class="col-md-2 text-center">
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-md-6 text-center">
                                 <%= label_tag 'usuario_form[envia_correo_usuario]', "¿Desea enviar correo?"%>
                                 <br>
                                 <%= hidden_field_tag 'usuario_form[envia_correo_usuario]', 'N' %>
                                 <%= text_field_tag 'usuario_form[envia_correo_usuario]', 'S', checked: true, id: "correo_usuario", type: "checkbox", data: { toggle: "toggle", style: "ios", on: "Si", off: "No" }, onchange: "this.value = this.checked ? 'S' : 'N'" %>
+                              </div>
+                              <div class="col-md-6">
+                                <%= label_tag 'usuario_form[envia_telegram_usuario]', "¿Desea enviar telegram?"%>
+                                <br>
+                                <%= hidden_field_tag 'usuario_form[envia_telegram_usuario]', 'N' %>
+                                <%= text_field_tag 'usuario_form[envia_telegram_usuario]', 'N', checked: false, id: "telegram_usuario", type: "checkbox", data: { toggle: "toggle", style: "ios", on: "Si", off: "No" }, onchange: "this.value = this.checked ? 'S' : 'N'" %>
                               </div>
                             </div>
                             <br>

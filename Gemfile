@@ -128,8 +128,12 @@ gem "uri", "0.10.0"
 # GEMA PARA IMAGEN
 gem 'mini_magick'
 
-# Para generar una contraseña temporal automática
+# GENERA CONTRASEÑA TEMPORAL AUTOMATICA
 gem 'securerandom'
+
+# ENVIO MENSAJE A TELEGRAM
+gem 'telegram-bot-ruby'
+
 
 # Configurando idioma devise, Enlace: https://github.com/tigrish/devise-i18n
 #gem 'devise-i18n'

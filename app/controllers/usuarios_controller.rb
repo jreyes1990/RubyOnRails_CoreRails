@@ -65,6 +65,7 @@ class UsuariosController < ApplicationController
               puts "EMAIL: #{@usuario[:email]}"
               puts "PASSWORD: #{@usuario[:password]}"
               puts "ENVIAR CORREO A USUARIO: #{params[:usuario_form][:envia_correo_usuario]}"
+              puts "ENVIAR TELEGRAM A USUARIO: #{params[:usuario_form][:envia_telegram_usuario]}"
 
               # Envío de correo electrónico
               if params[:usuario_form][:envia_correo_usuario].upcase == 'S'.upcase
@@ -75,6 +76,18 @@ class UsuariosController < ApplicationController
                   puts "PERDON, NO SE PUDO ENVIAR EL CORREO ELECTRONICO PORQUE NO HAY CONEXION A INTERNET"
                 end
               end
+
+              # Envía un mensaje a través de Telegram
+              if params[:usuario_form][:envia_telegram_usuario].upcase == 'S'.upcase
+                if internet_connection_available?
+                  message = "Bienvenido a nuestro sistema: \n\nHola <strong>#{@nombre_completo}</strong>!.\nHas sido registrado con éxito en nuestra aplicación.\nEmpresa: <strong>#{@consulta_area.nombre_empresa}</strong>\nÁrea: <strong>#{@consulta_area.nombre}</strong>\nEmail: <strong>#{@usuario.email}</strong>\nContraseña: <strong>#{@usuario.password}</strong>\n\n<strong>NOTA: </strong>\n\nPor favor, cambia tu contraseña lo antes posible después de iniciar sesión por primera vez.\n\nSi tienes alguna pregunta, no dudes en contactarnos.".html_safe
+                  $telegram_bot.api.send_message(chat_id: params[:usuario_form][:chat_id_telegram], text: message, parse_mode: 'HTML')
+                  puts "SI, HAY CONEXION A INTERNET, PUEDE ENVIAR EL TELEGRAM AL USUARIO"
+                else
+                  puts "PERDON, NO SE PUDO ENVIAR EL TELEGRAM PORQUE NO HAY CONEXION A INTERNET"
+                end
+              end
+
               
               format.html { redirect_to usuarios_path, notice: 'El Usuario se ha creado exitosamente.' } 
             else 
@@ -103,6 +116,6 @@ class UsuariosController < ApplicationController
   end
   
   def persona_params
-    params.require(:usuario_form).permit(:nombre, :apellido, :telefono, :direccion, :user_created_id, :estado)
+    params.require(:usuario_form).permit(:nombre, :apellido, :telefono, :chat_id_telegram, :direccion, :user_created_id, :estado)
   end
 end

@@ -245,6 +245,24 @@
             end
          end
 
+-- ENVIO DE MENSAJE POR TELEGRAM AL CREAR UN USUARIO
+   -- 1. Agregar la gema en 'Gemfile'
+      gem 'telegram-bot-ruby'
+
+   -- 2. Crea un archivo telegram_bot.rb en la carpeta config/initializers de tu aplicación Rails y configura el bot de Telegram.
+      require 'telegram/bot'
+
+      Telegram::Bot::Client.run('YOUR_TELEGRAM_BOT_TOKEN') do |bot|
+         $telegram_bot = bot
+      end
+
+   -- 3. En tu controlador de usuarios (app/controllers/users_controller.rb), en el método create, después de guardar el nuevo usuario, puedes enviar un mensaje a través de Telegram
+      # Envía un mensaje a través de Telegram
+      message = "Bienvenido a nuestro sistema: \n\nHola <strong>#{@nombre_completo}</strong>!.\nHas sido registrado con éxito en nuestra aplicación.\nEmpresa: <strong>#{@consulta_area.nombre_empresa}</strong>\nÁrea: <strong>#{@consulta_area.nombre}</strong>\nEmail: <strong>#{@usuario.email}</strong>\nContraseña: <strong>#{@usuario.password}</strong>\n\n<strong>NOTA: </strong>\n\nPor favor, cambia tu contraseña lo antes posible después de iniciar sesión por primera vez.\n\nSi tienes alguna pregunta, no dudes en contactarnos.".html_safe
+      $telegram_bot.api.send_message(chat_id: params[:usuario_form][:chat_id_telegram], text: message, parse_mode: 'HTML')
+
+
+
 -- GENERAR CONTRASEÑA TEMPORAL AUTOMATICAMENTE
    -- Primero, vamos agregar la siguiente gema
       # Para generar una contraseña temporal automática
@@ -256,4 +274,26 @@
          chars = ('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a + ['!', '@', '#', '$', '%', '^', '&', '*']
          password = (1..length).map { chars.sample }.join
       end
+
+-- VALIDAR SI LA CONEXION A INTERNET ESTA ACTIVA.
+   -- Para verificar si tienes conexión a Internet antes de enviar el correo, puedes hacer una solicitud a un servidor en línea y verificar si recibes una respuesta exitosa.
+   require 'net/http'
+
+   def internet_connection_available?
+      url = URI.parse('https://www.google.com')
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = (url.scheme == 'https')
+      http.open_timeout = 5  --Establece un tiempo de espera para la conexión (en segundos)
+      response = http.start { |http| http.head('/') } rescue nil
+
+      return !response.nil? && response.is_a?(Net::HTTPOK)
+   end
+
+   -- Puedes utilizar esta función antes de enviar el correo para asegurarte de que haya conexión.
+   if internet_connection_available?
+      -- Código para enviar el correo
+   else
+      -- Código para manejar el caso de falta de conexión
+   end
+
 
