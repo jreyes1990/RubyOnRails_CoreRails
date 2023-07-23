@@ -82,6 +82,31 @@ document.addEventListener("turbolinks:load", () => {
       },
     }];
 
+  // Definir la función para inicializar los popovers
+  function initializePopovers() {
+    $('[title]').attr("data-rel", "tooltip").attr("data-placement", "top");
+    var showPopover = function() {
+      $(this).popover('show');
+    };
+    var hidePopover = function() {
+      $(this).popover('hide');
+    };
+    $("[data-rel='tooltip']").popover({
+      trigger: 'manual'
+    }).click(showPopover).hover(showPopover, hidePopover);
+  }
+
+  // Definir la función para agrupar las columnas
+  function groupColumns(api, groupColumn, rows) {
+    var last = null;
+    api.column(groupColumn, { page: 'current' }).data().each(function(group, i) {
+      if (last !== group) {
+        $(rows).eq(i).before('<tr class="group text-left" style="background: #ffe5a4 !important;"><td colspan="8"><strong>' + group + '</strong></td></tr>');
+        last = group;
+      }
+    });
+  }
+  
   /* DATATABLE AJAX PARA EL MODULO DE FONT_AWESOM */
   var groupColumnAwesome = 4;
   $("#font-awesome-datatable").DataTable({

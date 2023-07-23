@@ -67,99 +67,13 @@ let pdfMake = require("pdfmake/build/pdfmake");
 let pdfFonts = require("pdfmake/build/vfs_fonts");
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
+import "./custom_show_hidden_password";
+import "./custom_datatable";
 import "./custom_datatable_ajax";
 import "./custom_search_ajax";
 import "./custom_wizard_form";
 
 document.addEventListener("turbolinks:load", () => {
-  /* *******************************************************
- * Configuracion para dataTables
- * *********************************************************/
-  var espaniol = {
-    sEmptyTable: "No has datos disponibles en la tabla.",
-    sLengthMenu: "Mostrar _MENU_ Entradas",
-    //"iDisplayLength": 5,
-    sZeroRecords: "No se encontraron resultados",
-    info: "Mostrando _END_ registros, de _TOTAL_ registros ",
-    sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
-    sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
-    sInfoPostFix: "(Actualizados)",
-    sProcessing: "Procesando...",
-    sSearch: "",
-    oPaginate: {
-      sFirst: "Primero",
-      sLast: "Último",
-      sNext: "Siguiente",
-      sPrevious: "Anterior",
-    },
-    aria: {
-      sSortAscending: "Ordenación Ascendente",
-      sSortDescending: "Ordenación Descendente",
-    },
-  };
-
-  var var_datatable =
-    "" +
-    "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-    "<'row'<'col-sm-12'tr>>" +
-    "<'row'<'col-md-10'i><'col-md-1 text-center'><'col-md-1'>><br>" +
-    "<'row text-center' <'col-md-4'><'col-md-5'p><'col-md-3'>>";
-
-  var button_datatable = 
-  [{
-      text: 'CSV <i class="fas fa-file-csv"></i> ',
-      extend: "csvHtml5",
-      fieldSeparator: "\t",
-      extension: ".csv",
-      dataContentAttr: "Si desea exportar el archivo, Dar click en CSV",
-      titleAttr: 'Si desea exportar el archivo, Dar click en CSV',
-      customClassName: "popover-success",
-      className: "btn btn-warning",
-    },
-    {
-      text: 'EXCEL <i class="fas fa-file-excel"></i> ',
-      extend: "csvHtml5",
-      fieldSeparator: "\t",
-      extension: ".xlsx",
-      titleAttr: "Si desea exportar el archivo, Dar click en EXCEL",
-      className: "btn btn-success",
-      messageTop: "La exportación excel, se ha realizado correctamente",
-    },
-    {
-      text: 'PDF <i class="fas fa-file-pdf"></i> ',
-      extend: "pdfHtml5",
-      titleAttr: "Si desea exportar el archivo, Dar click en PDF",
-      className: "btn btn-danger",
-      messageTop: "PDF created by PDFMake with Buttons for DataTables.",
-    },
-    {
-      text: 'PRINT <i class="fas fa-print"></i> ',
-      extend: "print",
-      titleAttr: "Si desea imprimr, Dar click en PRINT",
-      className: "btn btn-info",
-      exportOptions: {
-        columns: ":visible",
-      },
-    },
-    {
-      text: "JSON",
-      titleAttr: "Si desea exportar el archivo, Dar click en JSON",
-      className: "btn btn-primary",
-      action: function (e, dt, button, config) {
-        var data = dt.buttons.exportData();
-
-        $.fn.dataTable.fileSave(
-          new Blob([JSON.stringify(data)]),
-          "Export.json"
-        );
-      },
-  }];
-
-  $(document).ajaxSend(function (e, xhr, options) {
-    var token = $("meta[name='csrf-token']").attr("content");
-    xhr.setRequestHeader("X-CSRF-Token", token);
-  });
-
   /* *******************************************************
    * Para controlar el sidebar en posición cerrado o abierto
    * ******************************************************** */
@@ -190,69 +104,6 @@ document.addEventListener("turbolinks:load", () => {
       800
     );
   });
-  /* *******************************************************
-   * Fin para controlar el sidebar en posición cerrado o abierto
-   * ******************************************************** */
-
-  //control de los tiempos de los flash
-  $(".alert")
-    .fadeTo(4000, 500)
-    .slideUp(500, function () {
-      $(".alert").slideUp(4000);
-    });
-
-  //MOSTRAR U OCULTAR CONTRASEÑA INICIO DE SESIÓN
-  $('#show_password').on('click', function (e) {
-    var cambio = document.getElementById("txtPassword");
-    if(cambio.type == "password"){
-        cambio.type = "text";
-        $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-    }else{
-        cambio.type = "password";
-        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-    }
-    $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
-  });
-
-  //MOSTRAR U OCULTAR CONTRASEÑA NUEVO REGISTRO USUARIO
-  $('#nuevo_password').on('click', function (e) {
-    var cambio = document.getElementById("txtNuevoPassword");
-    if(cambio.type == "password"){
-        cambio.type = "text";
-        $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-    }else{
-        cambio.type = "password";
-        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-    }
-    $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
-  });
-
-  //MOSTRAR U OCULTAR CONFIRMACION CONTRASEÑA NUEVO REGISTRO USUARIO
-  $('#confirma_nuevo_password').on('click', function (e) {
-    var cambio = document.getElementById("txtConfirmaPassword");
-    if(cambio.type == "password"){
-        cambio.type = "text";
-        $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-    }else{
-        cambio.type = "password";
-        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-    }
-    $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
-  });
-
-  $(document).ready(function () {
-    $('#show_password_new').click(function () {
-      var tipo = document.getElementById("txtPasswordNew");
-
-      if(tipo.type == "password"){
-        $('#txtPasswordNew').attr('type', 'text');
-        $('#mostrar').addClass('fa fa-eye').removeClass('fa fa-eye-slash');
-      }else{
-        $('#txtPasswordNew').attr('type', 'password');
-        $('#mostrar').addClass('fa fa-eye-slash').removeClass('fa fa-eye');
-      }
-    });
-  });
 
   const originalWebSocketClose = WebSocket.prototype.close
   WebSocket.prototype.close = function () {
@@ -260,43 +111,19 @@ document.addEventListener("turbolinks:load", () => {
       originalWebSocketClose.apply(this, arguments)
     }
   }
+  /* *******************************************************
+   * Fin para controlar el sidebar en posición cerrado o abierto
+   * ******************************************************** */
 
-  // Configuracion para activar select2
-  $("#codigo_empresa_persona, #codigo_empresa_usuario, #empresa_id_area, #usuario_id_persona").select2({
-    minimumInputLength: 2,
-    theme: "bootstrap4",
-    language: "es-GT",
-    width: "100%",
+  // control de los tiempos de los flash
+  $(".alert")
+    .fadeTo(4000, 500)
+    .slideUp(500, function () {
+      $(".alert").slideUp(4000);
   });
+  // Fin del control de los tiempos de los flash
 
-  function initializeSelect2(selector, search_param, ajax_param, success_callback, clear_callback, post_select_callback = null) {
-    // Configuración del select2 con AJAX
-    $(selector).select2({
-      minimumInputLength: 2,
-      theme: "bootstrap4",
-      language: "es-GT",
-      width: '100%'
-    })
-  }
-
-  initializeSelect2("#empresa_id_usuario");
-  initializeSelect2("#empresa_id_persona");
-  
-  // Configuracion para activar select2
-  $(".select2").select2({
-    theme: "bootstrap4",
-    language: "es-GT",
-    width: "100%",
-  });
-
-  // Configuracion para activar select2 multiple
-  $(".select2-multiple").select2({
-    language: "es-GT",
-    width: "100%",
-  });
-
-  //
-  //funcion para los mensajes de los toggle en las tablas
+  // funcion para los mensajes de los toggle en las tablas
   $(function() {
     $('[title]').attr("data-rel", "tooltip");
     $("[data-rel='tooltip']")
@@ -312,35 +139,143 @@ document.addEventListener("turbolinks:load", () => {
         trigger: 'manual'
     }).click(showPopover).hover(showPopover, hidePopover);
   });
+  // Fin de la funcion para los mensajes de los toggle en las tablas
 
-  $("#datatable").DataTable({
-    fixedHeader: true,
-    stateSave: true,
-    stateDuration: 1200,
-    responsive: true,
-    dom: var_datatable,
-    language: espaniol,
-    lengthChange: true,
-    select: true,
-    lengthMenu: [
-      [5, 10, 15, 20, 25, 50, -1],
-      [5, 10, 15, 20, 25, 50, 'Todos'],
-    ],
-    buttons: button_datatable,
-    pagingType: "full_numbers",
-  });
-
+  // Uso para la visualizacion del archivo que se esta cargando de file_input
   $(".custom-file-input").on("change", function () {
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
+  // Fin del Uso para la visualizacion del archivo que se esta cargando de file_input
   
+  // Inicializar el interruptor de cambio
   $(document).ready(function() {
-    // Inicializar el interruptor de cambio
     $('#my-toggle, #correo_usuario, #telegram_usuario').bootstrapToggle({
       on: 'Si',
       off: 'No',
       style: 'ios'
     });
   });
+  // Fin de Inicializar el interruptor de cambio
+
+  // Configuracion para activar select2
+  $("#codigo_empresa_persona, #codigo_empresa_usuario, #empresa_id_area, #usuario_id_persona").select2({
+    minimumInputLength: 2,
+    theme: "bootstrap4",
+    language: "es-GT",
+    width: "100%",
+  });
+
+  // Configuracion para activar select2
+  $(".select2-search").select2({
+    minimumInputLength: 2,
+    theme: "bootstrap4",
+    language: "es-GT",
+    width: "100%",
+  });
+
+  // Configuracion para activar select2
+  $(".select2").select2({
+    theme: "bootstrap4",
+    language: "es-GT",
+    width: "100%",
+  });
+
+  // Configuracion para activar select2 multiple
+  $(".select2-multiple").select2({
+    language: "es-GT",
+    width: "100%",
+  });
+
+  /**
+   * Función para inicializar los select2 con ajax
+   * @param {string} selector - Selector del elemento select2, ejemplo: "#empresa_id_estado_x_proceso"
+   * @param {string} search_param - Nombre del parámetro de búsqueda para el endpoint
+   * @param {string} ajax_param - Nombre del parámetro de búsqueda para el endpoint de la segunda llamada
+   * @param {function} success_callback - Función que se ejecuta cuando la segunda llamada es exitosa
+   * @param {function} clear_callback - Función que se ejecuta cuando la segunda llamada no es exitosa
+   * @param {function} post_select_callback - Función que se ejecuta después de seleccionar un elemento del select2, puede ir null (opcional)
+   */
+  function initializeSelect2(selector, search_param, ajax_param, success_callback, clear_callback, post_select_callback = null) {
+    // Configuración del select2 con AJAX
+    $(selector).select2({
+      ajax: {
+        url: $(selector).data('endpoint'), // URL del endpoint para la búsqueda AJAX
+        dataType: "json",
+        delay: 500,
+        data: function (params) {
+          let search_obj = {};
+          search_obj[search_param] = params.term; // Parámetro de búsqueda con el término ingresado en el select2
+          return search_obj;
+        },
+        processResults: function (data, page) {
+          return {
+            results: $.map(data, function (value, index) {
+              return {
+                id: value.valor_id,
+                text: value.valor_text
+              };
+            })
+          };
+        }
+      },
+      minimumInputLength: 2,
+      theme: "bootstrap4",
+      language: "es-GT",
+      width: '100%'
+    }).on('select2:select', function (e) {
+      var selectedOption = e.params.data.id;
+      if (selectedOption !== '') {
+        if (post_select_callback) {
+          post_select_callback(selectedOption);
+        }
+        let ajax_data = {};
+        ajax_data[ajax_param] = selectedOption; // Parámetro de búsqueda para la segunda llamada AJAX
+        $.ajax({
+          url: $(this).data('endpoint'), // URL del endpoint para la segunda llamada AJAX
+          dataType: "json",
+          data: ajax_data,
+          success: success_callback // Función a ejecutar cuando la segunda llamada es exitosa
+        });
+      } else {
+        clear_callback(); // Función a ejecutar cuando no hay una opción seleccionada
+      }
+    });
+  }
+
+  /* BUSCADOR AREA - EMPRESA, EN EL MODULO USUARIO */
+  initializeSelect2(
+      "#empresa_id_usuario",
+      "search_empresa_usuario_params",
+      "empresa_usuario_params",
+    function (data) {
+      $("#area_id_usuario").empty();
+      $("#area_id_usuario").append("<option value='" + 0 + "'>Seleccione una área</option>");
+      for (var i of data.area_empresa) {
+          $("#area_id_usuario").append("<option value='" + i.valor_id + "'>" + i.valor_text + "</option>");
+      }
+    },
+    function () {
+      $("#area_id_usuario").empty().trigger('change');
+    }
+  )
+
+  /* BUSCADOR AREA - EMPRESA, EN EL MODULO PERSONAS AREA */
+  initializeSelect2(
+      "#empresa_id_persona",
+      "search_empresa_persona_params",
+      "empresa_persona_params",
+    function (data) {
+      $("#area_id_persona").empty();
+      $("#area_id_persona").append("<option value='" + 0 + "'>Seleccione una área</option>");
+      for (var i of data.persona_area_empresa) {
+          $("#area_id_persona").append("<option value='" + i.valor_id + "'>" + i.valor_text + "</option>");
+      }
+    },
+    function () {
+      $("#area_id_persona").empty().trigger('change');
+    }
+  )
+
+
 });
