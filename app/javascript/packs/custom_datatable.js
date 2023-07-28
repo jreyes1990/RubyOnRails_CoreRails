@@ -42,40 +42,82 @@ document.addEventListener("turbolinks:load", () => {
       extend: "csvHtml5",
       fieldSeparator: "\t",
       extension: ".csv",
-      dataContentAttr: "Si desea exportar el archivo, Dar click en CSV",
-      titleAttr: 'Si desea exportar el archivo, Dar click en CSV',
-      customClassName: "popover-success",
       className: "btn btn-warning",
+      exportOptions: {
+        columns: ":visible:not(:first-child):not(:nth-last-child(-n+2))" // Excluir el primer campo y los últimos 2 campos
+        //columns: ":visible:not(:first-child):not(:nth-child(4)):not(:nth-last-child(-n+3))" // Excluir primer, cuarto y últimos 3 campos
+      },
+      init: function(api, node, config) {
+        $(node).attr("data-custom-class", "popover-warning");
+        $(node).attr("title", "CSV");
+        $(node).attr("data-content", "Si desea exportar el archivo, Dar click en CSV");
+        // $(node).popover({
+        //   html: true // Permite utilizar contenido HTML en el popover
+        // });
+      }
     },
     {
       text: 'EXCEL <i class="fas fa-file-excel"></i> ',
       extend: "csvHtml5",
       fieldSeparator: "\t",
       extension: ".xlsx",
-      titleAttr: "Si desea exportar el archivo, Dar click en EXCEL",
       className: "btn btn-success",
       messageTop: "La exportación excel, se ha realizado correctamente",
+      exportOptions: {
+        columns: ":visible:not(:first-child):not(:nth-last-child(-n+2))" // Excluir el primer campo y los últimos 2 campos
+        //columns: ":visible:not(:first-child):not(:nth-child(4)):not(:nth-last-child(-n+3))" // Excluir primer, cuarto y últimos 3 campos
+      },
+      init: function(api, node, config) {
+        $(node).attr("data-custom-class", "popover-success");
+        $(node).attr("title", "EXCEL");
+        $(node).attr("data-content", "Si desea exportar el archivo, Dar click en EXCEL");
+        // $(node).popover({
+        //   html: true // Permite utilizar contenido HTML en el popover
+        // });
+      }
     },
     {
       text: 'PDF <i class="fas fa-file-pdf"></i> ',
       extend: "pdfHtml5",
-      titleAttr: "Si desea exportar el archivo, Dar click en PDF",
       className: "btn btn-danger",
       messageTop: "PDF created by PDFMake with Buttons for DataTables.",
+      exportOptions: {
+        columns: ":visible:not(:first-child):not(:nth-last-child(-n+2))" // Excluir el primer campo y los últimos 2 campos
+        //columns: ":visible:not(:first-child):not(:nth-child(4)):not(:nth-last-child(-n+3))" // Excluir primer, cuarto y últimos 3 campos
+      },
+      init: function(api, node, config) {
+        $(node).attr("data-custom-class", "popover-danger");
+        $(node).attr("title", "PDF");
+        $(node).attr("data-content", "Si desea exportar el archivo, Dar click en PDF");
+        // $(node).popover({
+        //   html: true // Permite utilizar contenido HTML en el popover
+        // });
+      }
     },
     {
       text: 'PRINT <i class="fas fa-print"></i> ',
       extend: "print",
-      titleAttr: "Si desea imprimr, Dar click en PRINT",
       className: "btn btn-info",
       exportOptions: {
-        columns: ":visible",
+        columns: ":visible:not(:first-child):not(:nth-last-child(-n+2))" // Excluir el primer campo y los últimos 2 campos
+        //columns: ":visible:not(:first-child):not(:nth-child(4)):not(:nth-last-child(-n+3))" // Excluir primer, cuarto y últimos 3 campos
       },
+      init: function(api, node, config) {
+        $(node).attr("data-custom-class", "popover-info");
+        $(node).attr("title", "PRINT");
+        $(node).attr("data-content", "Si desea imprimr, Dar click en PRINT");
+        // $(node).popover({
+        //   html: true // Permite utilizar contenido HTML en el popover
+        // });
+      }
     },
     {
       text: "JSON",
-      titleAttr: "Si desea exportar el archivo, Dar click en JSON",
-      className: "btn btn-primary",
+      className: "btn btn-secondary",
+      exportOptions: {
+        columns: ":visible:not(:first-child):not(:nth-last-child(-n+2))" // Excluir el primer campo y los últimos 2 campos
+        //columns: ":visible:not(:first-child):not(:nth-child(4)):not(:nth-last-child(-n+3))" // Excluir primer, cuarto y últimos 3 campos
+      },
       action: function (e, dt, button, config) {
         var data = dt.buttons.exportData();
 
@@ -84,6 +126,14 @@ document.addEventListener("turbolinks:load", () => {
           "Export.json"
         );
       },
+      init: function(api, node, config) {
+        $(node).attr("data-custom-class", "popover-secondary");
+        $(node).attr("title", "JSON");
+        $(node).attr("data-content", "Si desea exportar el archivo, Dar click en JSON");
+        // $(node).popover({
+        //   html: true // Permite utilizar contenido HTML en el popover
+        // });
+      }
   }];
 
   $(document).ajaxSend(function (e, xhr, options) {

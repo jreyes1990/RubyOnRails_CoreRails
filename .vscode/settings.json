@@ -43,5 +43,8 @@
     },
     "[html]": {
         "editor.defaultFormatter": null
+    },
+    "[erb]": {
+        "editor.defaultFormatter": null
     }
 }

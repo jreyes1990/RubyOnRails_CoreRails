@@ -61,13 +61,17 @@
                 <div class="container-fluid">
                   <%= simple_form_for :carga_font_awesome, :url => {:controller => "font_awesomes", :action => "carga_excel"} do |f| %>
                     <%= f.label "Archivo Excel terminado" %>
-                    <%= f.file_field :archivo_excel, required: true, class: 'form-control' %>
-                    <br>
+                    <div class="custom-file">
+                      <%= f.file_field :archivo_excel, required: true,  :class => "custom-file-input", id: "archivo_excel_input" %>
+                      <label class="custom-file-label" for="archivo_excel_input">Seleccione el archivo</label>
+                    </div>
+                    <br><br>
                     <%= button_tag f.submit, class: "btn btn-danger btn-sm", data: {controller: 'sweetalert', action: 'click->sweetalert#btnProcesar',
                                                                                       sweetalert_confirm_alert_value: "Carga Excel",
                                                                                       sweetalert_cancel_alert_value: "Cancelado",
                                                                                       sweetalert_confirm_title_value: '<strong>NOTA: </strong>'+"Al momento de realizar la carga se importará los datos que no existen en la base de datos."+'<br><br>'+"Está seguro de realizar la carga del "+'<strong>Font Awesome?</strong>',
                                                                                       sweetalert_confirm_btn_value: "Si, Procesar",
+                                                                                      sweetalert_confirm_proccess_value: "Procesando.....",
                                                                                       sweetalert_cancel_btn_value: "No, Cancelar" }   do %>
                       <span class="icon text-50">
                         <i class="fa fa-upload"></i>

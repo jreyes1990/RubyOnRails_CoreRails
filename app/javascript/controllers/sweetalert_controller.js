@@ -7,13 +7,15 @@ import ApplicationController from './application_controller'
 export default class extends ApplicationController {
   static values = {
     confirmAlert: String,
-    cancelAlert: String,
     confirmTitle: String,
-    cancelTitle: String,
+    confirmProccess: String,
     confirmBtn: String,
-    cancelBtn: String
+    cancelAlert: String,
+    cancelTitle: String,
+    cancelBtn: String,
+    cancelProccess: String
   }
-
+  
   /*
    * Regular Stimulus lifecycle methods
    * Learn more at: https://stimulusjs.org/reference/lifecycle-callbacks
@@ -308,91 +310,103 @@ export default class extends ApplicationController {
     })
   }
 
+  
   btnProcesar(event) {
     if (this.redirect) return;
     event.stopImmediatePropagation();
     event.preventDefault();
 
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success btn-sm',
-        cancelButton: 'btn btn-danger btn-sm'
-      },
-      buttonsStyling: true
-    })
+    // Obtener el elemento del archivo (input)
+    const archivoExcelInput = document.getElementById("archivo_excel_input");
 
-    swalWithBootstrapButtons.fire({
-      title: this.confirmAlertValue,
-      html: this.confirmTitleValue,
-      icon: 'warning',
-      toast: false,
-      position: 'center',
-      backdrop: false,
-      background: "white",
-      timer: 5000,
-      timerProgressBar: true,
-      showCancelButton: true,
-      confirmButtonColor: "#029b4f",
-      cancelButtonColor: "#be2617",
-      confirmButtonText: this.confirmBtnValue,
-      cancelButtonText: this.cancelBtnValue,
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.redirect = true;
-        this.element.click();
+    // Verificar si se ha seleccionado un archivo
+    if (archivoExcelInput && archivoExcelInput.files.length === 0) {
+      // Mostrar SweetAlert2 de error si no se ha seleccionado ningún archivo
+      Swal.fire({
+        title: "Error",
+        text: "No se ha cargado ningún archivo",
+        icon: "error",
+        confirmButtonColor: "#d33",
+      });
+      return; // Detener la ejecución de la función si no se ha seleccionado un archivo
+    }else {
 
-        if (result.value) {
-          let timerInterval
-          Swal.fire({
-            title: this.procesoTitleValue,
-            html: "<h4><strong style='color: #1d71b9;'>Espere por favor</strong></h4>",
-            background: '#fff url(/images/loading_v1.gif)',
-            //timer: 5000,
-            //showLoaderOnConfirm: true,
-            //imageUrl: 'assets/images/loading_v1.gif',
-            //imageHeight: 40,
-            timerProgressBar: true,
-            /*
-            didOpen: () => {
-              Swal.showLoading()
-              timerInterval = setInterval(() => {
-                const content = Swal.getHtmlContainer()
-                if (content) {
-                  const b = content.querySelector('b')
-                  if (b) {
-                    b.textContent = Swal.getTimerLeft()
-                  }
-                }
-              }, 50)
-            },*/
-            willClose: () => {
-              clearInterval(timerInterval)
-            }
-          }).then((result) => {
-            /* Read more about handling dismissals below */
-            if (result.dismiss === Swal.DismissReason.timer) {
-              //console.log('I was closed by the timer')
-            }
-          })
+      // Obtener la URL absoluta de la imagen usando asset_path
+      const imageUrl = "/assets/loading_v10.gif";
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success btn-sm',
+          cancelButton: 'btn btn-danger btn-sm'
+        },
+        buttonsStyling: true
+      });
+
+      // Mostrar el primer SweetAlert2 con el botón de confirmación
+      swalWithBootstrapButtons.fire({
+        title: this.confirmAlertValue,
+        html: this.confirmTitleValue,
+        icon: 'warning',
+        toast: false,
+        position: 'center',
+        backdrop: false,
+        background: "white",
+        showCancelButton: true,
+        confirmButtonColor: "#029b4f",
+        cancelButtonColor: "#be2617",
+        confirmButtonText: this.confirmBtnValue,
+        cancelButtonText: this.cancelBtnValue,
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.redirect = true;
+          this.element.click();
+
+          // Mostrar el SweetAlert2 "Checking..."
+          const checkingAlert = Swal.fire({
+            title: this.confirmProccessValue,
+            text: "Espere por favor.",
+            imageUrl: imageUrl,
+            imageWidth: 300, // Tamaño de ancho en píxeles
+            imageHeight: 200, // Tamaño de alto en píxeles
+            showConfirmButton: false,
+            allowOutsideClick: false
+          });
+
+          // Aquí comienza el proceso de datos (sustituye este bloque por tu lógica de procesamiento real)
+          // Por ejemplo, un proceso ficticio que tarda 5 segundos:
+          setTimeout(() => {
+            // Fin del proceso de datos, cerrar el SweetAlert2 "Checking..."
+            checkingAlert.close();
+
+            // Mostrar el SweetAlert2 con el resultado del proceso
+            swalWithBootstrapButtons.fire({
+              title: this.confirmAlertValue, // Puedes ajustar esto al mensaje de éxito
+              html: this.confirmTitleValue, // Puedes ajustar esto al contenido de éxito
+              icon: 'success', // Puedes ajustar esto al ícono de éxito
+              toast: false,
+              position: 'center',
+              backdrop: false,
+              background: "white",
+              timer: 5000,
+              timerProgressBar: true
+            });
+          }, 5000); // Tiempo de inicio ficticio del proceso (5000 ms)
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // Mostrar el SweetAlert2 con el mensaje de cancelación si se hace clic en Cancelar
+          swalWithBootstrapButtons.fire({
+            title: this.cancelAlertValue,
+            html: this.cancelTitleValue,
+            icon: 'error',
+            toast: false,
+            backdrop: false,
+            background: "white",
+            timer: 5000,
+            timerProgressBar: true
+          });
         }
-
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire({
-          title: this.cancelAlertValue,
-          html: this.cancelTitleValue,
-          icon: 'error',
-          toast: false,
-          backdrop: false,
-          background: "white",
-          timer: 5000,
-          timerProgressBar: true
-        })
-      }
-    })
+      });
+    }
   }
 
   btnInactivarToast(event) {

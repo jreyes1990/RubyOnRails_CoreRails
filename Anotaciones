@@ -296,4 +296,23 @@
       -- Código para manejar el caso de falta de conexión
    end
 
+-- Precompilación de assets => asegúrate de que los assets (incluyendo las imágenes) se hayan precompilado correctamente antes de desplegar la aplicación.
+   1. Limpia la caché de bundler => Ejecuta el siguiente comando para limpiar la caché de bundler
+      bundle clean --force
+
+   2. Actualiza bundler => Actualiza la gema de bundler a la versión más reciente con el siguiente comando.
+      gem update bundler
+
+   3. Reinstala las gemas => Después de actualizar bundler, reinstala todas las gemas especificadas en tu Gemfile.
+      bundle install
+
+   4. Ejecuta el comando con bundle exec => Después de reinstalar las gemas, intenta nuevamente ejecutar el comando con bundle exec para asegurarte de que estás utilizando las versiones correctas de las gemas según lo especificado en tu Gemfile.
+      bundle exec rake assets:clobber
+
+   5. Verifica la integración con Rails => Asegúrate de que tu aplicación Rails esté correctamente configurada para servir los assets estáticos. Verifica que la configuración de config/environments/development.rb incluya la siguiente línea.
+      config.serve_static_assets = true
+
+   6. Verifica la precompilación de assets => En un entorno de desarrollo, los assets deben precompilarse antes de que se sirvan. Asegúrate de que la precompilación de assets se haya realizado correctamente ejecutando el siguiente comando.
+      RAILS_ENV=development bundle exec rake assets:precompile
+
 
