@@ -1,4 +1,5 @@
 module Utilidades
+  include ActionView::Helpers::NumberHelper # Importa el helper number_with_delimiter para poder usarlo en tu clase
   require 'mini_magick'
   require 'securerandom'
   require 'net/http'
@@ -76,6 +77,19 @@ module Utilidades
     return fecha
   end 
 
+  # Metodo para contar los registros por modulo, dependiente del estado
+  def conteo(modelo, estado, decimales)
+    if estado == "0"
+      @cantidad = modelo.all.distinct.count
+    elsif estado == "A"  
+      @cantidad = modelo.where(estado: 'A').distinct.count
+    else
+      @cantidad = modelo.where(estado: 'I').distinct.count
+    end
+    # Dar formato de miles al resultado
+    @cantidad_formateada = number_with_precision(@cantidad, precision: decimales, delimiter: ',')
+  end
+
   # Metodo para dar tamaño a la imagen
   def resize_image(image, width, height)
     image = MiniMagick::Image.new(image.tempfile.path)
@@ -91,7 +105,7 @@ module Utilidades
 
   # Metodo generar una contraseña temporal
   def generate_secure_password(length = 12)
-    chars = ('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a + ['!', '@', '#', '$', '%', '^', '&', '*']
+    chars = ('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a + ['!', '@', '#', '$', '%', '^', '&', '*', '/', '-', '_', '+', '<', '>']
     password = (1..length).map { chars.sample }.join
   end
 
