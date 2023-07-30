@@ -1,0 +1,27 @@
+/* Estilos para las alertas personalizadas */
+.alert {
+  overflow: hidden; /* Para ocultar la barra de progreso si es necesario */
+}
+
+.progress-bar-alert {
+  height: 5px;
+  width: 100%; /* Iniciar con 100% de ancho */;
+  background-color: #b5b3b3; /* Color de la barra de progreso */
+  position: absolute;
+  bottom: 0;
+  left: 0; /* Iniciar la barra de progreso desde la izquierda */
+  z-index: 1;
+
+  /* Animación de la barra de progreso */
+  animation: progressAnimation 4050ms linear;
+}
+
+/* Animación de la barra de progreso */
+@keyframes progressAnimation {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}

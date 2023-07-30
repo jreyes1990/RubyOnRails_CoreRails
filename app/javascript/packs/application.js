@@ -72,6 +72,7 @@ import "./custom_datatable";
 import "./custom_datatable_ajax";
 import "./custom_search_ajax";
 import "./custom_wizard_form";
+import "./custom_alerts";
 
 document.addEventListener("turbolinks:load", () => {
   /* *******************************************************
@@ -114,14 +115,6 @@ document.addEventListener("turbolinks:load", () => {
   /* *******************************************************
    * Fin para controlar el sidebar en posición cerrado o abierto
    * ******************************************************** */
-
-  // control de los tiempos de los flash
-  $(".alert")
-    .fadeTo(4000, 500)
-    .slideUp(500, function () {
-      $(".alert").slideUp(4000);
-  });
-  // Fin del control de los tiempos de los flash
 
   // funcion para los mensajes de los toggle en las tablas
   $(function() {
@@ -243,6 +236,22 @@ document.addEventListener("turbolinks:load", () => {
     });
   }
 
+  /* BUSCADOR AREA - USUARIO, EN EL MODULO PERSONA EMPRESA FORMULARIO */
+  initializeSelect2(
+      "#usuario_id_selected",
+      "search_usuario_selected_params",
+      "usuario_selected_params",
+    function (data) {
+      $("#area_usuario_id_selected").empty();
+      for (var i of data.area_usuario) {
+          $("#area_usuario_id_selected").append("<option value='" + i.valor_id + "'>" + i.valor_text + "</option>");
+      }
+    },
+    function () {
+      $("#area_usuario_id_selected").empty().trigger('change');
+    }
+  )
+
   /* BUSCADOR AREA - EMPRESA, EN EL MODULO USUARIO */
   initializeSelect2(
       "#empresa_id_usuario",
@@ -276,6 +285,5 @@ document.addEventListener("turbolinks:load", () => {
       $("#area_id_persona").empty().trigger('change');
     }
   )
-
 
 });

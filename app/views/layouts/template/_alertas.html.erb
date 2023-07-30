@@ -2,21 +2,25 @@
   <% if type=='alert' %>
     <div class="alert alert-warning">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <div class="progress-bar-alert"></div>
       <%= msg %>
     </div>
   <% elsif type=='notice' %>
     <div class="alert alert-info">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <div class="progress-bar-alert"></div>
       <%= msg %>
     </div>
   <% elsif type=='success' %>
     <div class="alert alert-success">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <div class="progress-bar-alert"></div>
       <%= msg %>
     </div>
   <% elsif type=='error' %>
     <div class="alert alert-danger">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <div class="progress-bar-alert"></div>
       <%= msg %>
     </div>
   <% end %>
