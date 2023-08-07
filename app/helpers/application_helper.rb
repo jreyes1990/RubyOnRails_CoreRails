@@ -105,7 +105,7 @@ module ApplicationHelper
 
   # METODOS DE ACTIVACION EN SIDEBAR - CONFIGURACIÓN SISTEMA
   def is_active_controller_sistema_titulo
-    @controladores = ["usuarios","empresas","areas","personas_areas","roles","menus","opciones","menu_roles","atributos","componentes","opcion_cas"]
+    @controladores = ["usuarios","empresas","areas","personas_areas","roles","menus","opciones","menu_roles","atributos","componentes","opcion_cas","persona_empresa_formularios"]
     if @controladores.include? params[:controller]
       "nav-item active"
     else
@@ -114,7 +114,7 @@ module ApplicationHelper
   end
 
   def is_active_controller_sistema
-    @controladores = ["usuarios","empresas","areas","personas_areas","roles","menus","opciones","menu_roles","atributos","componentes","opcion_cas"]
+    @controladores = ["usuarios","empresas","areas","personas_areas","roles","menus","opciones","menu_roles","atributos","componentes","opcion_cas","persona_empresa_formularios"]
     if @controladores.include? params[:controller]
       "nav-link"
     else
@@ -123,21 +123,11 @@ module ApplicationHelper
   end
 
   def is_active_option_controller_sistema
-    @controladores = ["usuarios","empresas","areas","personas_areas","roles","menus","opciones","menu_roles","atributos","componentes","opcion_cas"]
+    @controladores = ["usuarios","empresas","areas","personas_areas","roles","menus","opciones","menu_roles","atributos","componentes","opcion_cas","persona_empresa_formularios"]
     if @controladores.include? params[:controller]
       "collapse show"
     else
       "collapse"
-    end
-  end
-
-  def conteo(modelo, estado)
-    if estado == "0"
-      @cantidad = modelo.all.distinct.count
-    elsif estado == "A"  
-      @cantidad = modelo.where(estado: 'A').distinct.count
-    else
-      @cantidad = modelo.where(estado: 'I').distinct.count
     end
   end
 end

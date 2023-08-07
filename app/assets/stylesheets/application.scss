@@ -50,6 +50,7 @@
 @import "./custom_wizard_form.scss";
 @import "./custom_alerts.scss";
 @import "./custom_progress.scss";
+@import "./custom_checkbox.scss";
 
 /*estilos para la tabla*/
 table th {
@@ -93,4 +94,12 @@ td.highlight {
   border-radius: 20px; 
   border-color: rgb(255, 255, 255); 
   background-color: rgb(255, 255, 255);
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 0.75rem 0.60rem;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }

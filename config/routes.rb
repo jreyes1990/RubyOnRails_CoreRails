@@ -79,9 +79,15 @@ Rails.application.routes.draw do
 
     resources :persona_empresa_formularios
     get "permisos/" => "persona_empresa_formularios#index_permisos", :as => "permisos"
+    get "/permisos/search" => "persona_empresa_formularios#search_usuario", as: "search_usuarios"
     post "persona_empresa_formularios/consulta_permisos"
     get "/permisos/show" => "persona_empresa_formularios#mostrar_permisos", as: "mostrar_permisos"
-    get "/permisos/search" => "persona_empresa_formularios#search_usuario", as: "search_usuarios"
+    get "/permisos/add" => "persona_empresa_formularios#agregar_permiso", as: "agregar_permisos"
+    get "/permisos/showadd" => "persona_empresa_formularios#mostrar_agregar_permisos", as: "mostrar_agregar_permisos"
+    get "/permisos/opc_perfil" => "persona_empresa_formularios#obtener_opciones_por_perfil", as: "obtener_opciones_por_perfil"
+    get "/permisos/opc_individual" => "persona_empresa_formularios#obtener_opciones_por_individual", as: "obtener_opciones_por_individual"
+    post "persona_empresa_formularios/guardar_permisos"
+    delete "/permisos/remove/:id" => "persona_empresa_formularios#eliminar_permiso", as: "eliminar_permiso"
   end
 
   scope "/otros" do

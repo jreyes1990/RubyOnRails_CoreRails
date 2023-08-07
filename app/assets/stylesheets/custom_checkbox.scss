@@ -1,0 +1,56 @@
+/* Estilos para el icono de verificación */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Estilos para el cuadro del checkbox */
+.checkbox-label input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Estilos para el cuadro del checkbox personalizado */
+.checkmark {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #459fff !important;
+  border-radius: 3px;
+  margin-right: 0px;
+  background-color: #459fff;
+}
+
+/* Estilos para la marca de verificación dentro del cuadro */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Mostrar la marca de verificación cuando el checkbox está marcado */
+.checkbox-label input[type="checkbox"]:checked + .checkmark:after {
+  display: block;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+
+/* Estilo para el fondo blanco cuando el checkbox NO está marcado */
+.checkbox-label input[type="checkbox"]:not(:checked) + .checkmark {
+  background-color: #ffffff;
+}
+
+/* Estilo para el borde del ícono cuando el checkbox NO está marcado */
+.checkbox-label input[type="checkbox"]:not(:checked) + .checkmark:after {
+  display: none; /* Oculta el ícono de check */
+}

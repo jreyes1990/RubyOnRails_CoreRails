@@ -68,6 +68,7 @@ let pdfFonts = require("pdfmake/build/vfs_fonts");
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import "./custom_show_hidden_password";
+import "./custom_permisos_usuario";
 import "./custom_datatable";
 import "./custom_datatable_ajax";
 import "./custom_search_ajax";
@@ -286,4 +287,42 @@ document.addEventListener("turbolinks:load", () => {
     }
   )
 
+  // Manejar el cambio de estado del checkbox maestro
+  $(document).on('change', '.combo-master', function() {
+    // Obtener el estado del checkbox maestro
+    var isChecked = this.checked;
+
+    // Establecer el estado de todos los checkboxes del combo según el checkbox maestro
+    $('.combo-checkbox').prop('checked', isChecked);
+  });
+  
+  
+  // // Función para seleccionar o deseleccionar checkboxes de atributos
+  // function setAllCheckboxes(checked) {
+  //   const checkboxes = document.querySelectorAll('input[name="permisoids[]"]');
+  //   checkboxes.forEach(checkbox => checkbox.checked = checked);
+  // }
+
+  // // Función para cambiar el estado del checkbox adicional
+  // function toggleSelectDeselectAllCheckbox() {
+  //   const selectDeselectAllCheckbox = document.getElementById('select-deselect-all-checkbox');
+  //   setAllCheckboxes(selectDeselectAllCheckbox.checked);
+  // }
+
+  // // Ejecutar la función inicialmente para asegurarnos de que los checkboxes se actualicen al cargar la página.
+  // toggleSelectDeselectAllCheckbox();
+
+  // // Escucha el evento 'change' en el checkbox adicional 'Select/Deselect All'
+  // document.getElementById('select-deselect-all-checkbox').addEventListener('change', toggleSelectDeselectAllCheckbox);
+
+  // // Escucha el evento 'change' en los checkboxes de atributos individuales para actualizar el estado del checkbox grupal
+  // const attributeCheckboxes = document.querySelectorAll('input[name="permisoids[]"]');
+  // attributeCheckboxes.forEach(checkbox => {
+  //   checkbox.addEventListener('change', () => {
+  //     const selectDeselectAllCheckbox = document.getElementById('select-deselect-all-checkbox');
+  //     const allChecked = Array.from(attributeCheckboxes).every(checkbox => checkbox.checked);
+  //     selectDeselectAllCheckbox.checked = allChecked;
+  //   });
+  // });
+  
 });

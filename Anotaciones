@@ -158,7 +158,11 @@
 -- GENERANDO MODEL PARAMETROS
    rails generate model parametro area_id:integer nombre_area:string empresa_id:integer nombre_empresa:string ruta_predeterminada:string view_default:string user:references
 
--- rails generate scaffold persona_empresa_formulario descripcion:string user_created_id:integer user_updated_id:integer estado:string{10} personas_area:references opcion_ca:references
+-- GENERANDO SCAFFOLD PERSONA_EMPRESA_FORMULARIO
+   rails generate scaffold persona_empresa_formulario descripcion:string user_created_id:integer user_updated_id:integer estado:string{10} personas_area:references opcion_ca:references
+
+-- GENERANDO VISTA PERSONA_EMPRESA_FORMULARIO CON SCENIC 
+   rails generate scenic:view persona_empresa_formularios_views
 
 -- PARA CREAR UN MODAL SE NECESITA LO SIGUIENTE
    1. Crear un metodo con el formato .js

@@ -370,4 +370,28 @@ SimpleForm.setup do |config|
     time:          :vertical_multi_select,
     select:        :vertical_select
   }
+
+
+  1.upto(12) do |col|
+    config.wrappers "inline_field#{col}".to_sym, tag: 'div', class: "col-sm-#{col}", error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |ic|
+      ic.use :html5
+      ic.use :placeholder
+      ic.use :label, class: 'form-control-label'
+      ic.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'is-valid'
+      ic.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+      ic.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    end
+
+    config.wrappers "inline_bool#{col}".to_sym, tag: 'div', class: "col-sm-#{col}", error_class: 'has-error' do |ib|
+      ib.use :html5
+      ib.optional :readonly
+
+      ib.wrapper tag: 'div', class: 'checkbox' do |ba|
+        ba.use :input
+        ba.use :label
+      end
+      ib.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+      ib.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    end
+  end
 end

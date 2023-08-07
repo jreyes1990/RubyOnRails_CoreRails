@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_12_032602) do
+ActiveRecord::Schema.define(version: 2023_07_30_091402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,6 +189,19 @@ ActiveRecord::Schema.define(version: 2023_07_12_032602) do
     t.index ["user_id"], name: "index_parametros_on_user_id"
   end
 
+  create_table "persona_empresa_formularios", force: :cascade do |t|
+    t.string "descripcion"
+    t.integer "user_created_id"
+    t.integer "user_updated_id"
+    t.string "estado", limit: 10
+    t.bigint "personas_area_id", null: false
+    t.bigint "opcion_ca_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["opcion_ca_id"], name: "index_persona_empresa_formularios_on_opcion_ca_id"
+    t.index ["personas_area_id"], name: "index_persona_empresa_formularios_on_personas_area_id"
+  end
+
   create_table "personas", force: :cascade do |t|
     t.string "nombre", limit: 200
     t.string "apellido", limit: 200
@@ -264,6 +277,8 @@ ActiveRecord::Schema.define(version: 2023_07_12_032602) do
   add_foreign_key "opcion_cas", "opciones"
   add_foreign_key "opciones", "menus"
   add_foreign_key "parametros", "users"
+  add_foreign_key "persona_empresa_formularios", "opcion_cas"
+  add_foreign_key "persona_empresa_formularios", "personas_areas"
   add_foreign_key "personas", "users"
   add_foreign_key "personas_areas", "areas"
   add_foreign_key "personas_areas", "personas"
@@ -389,5 +404,38 @@ ActiveRecord::Schema.define(version: 2023_07_12_032602) do
        JOIN areas ON ((personas_areas.area_id = areas.id)))
        JOIN empresas ON ((areas.empresa_id = empresas.id)))
        LEFT JOIN roles ON ((personas_areas.rol_id = roles.id)));
+  SQL
+  create_view "persona_empresa_formularios_views", sql_definition: <<-SQL
+      SELECT persona_empresa_formularios.id,
+      persona_empresa_formularios.personas_area_id,
+      persona_empresa_formularios.opcion_ca_id,
+      persona_empresa_formularios.estado,
+      personas_areas_views.empresa_id,
+      personas_areas_views.codigo_empresa,
+      personas_areas_views.nombre_empresa,
+      personas_areas_views.area_id,
+      personas_areas_views.codigo_area,
+      personas_areas_views.codigo_hex_area,
+      personas_areas_views.nombre_area,
+      personas_areas_views.user_id,
+      personas_areas_views.persona_id,
+      personas_areas_views.nombre_usuario,
+      personas_areas_views.email_usuario,
+      personas_areas_views.rol_id,
+      personas_areas_views.nombre_rol,
+      personas_areas_views.codigo_hex_rol,
+      opcion_cas_views.menu_id,
+      opcion_cas_views.nombre_menu,
+      opcion_cas_views.codigo_hex_menu,
+      opcion_cas_views.opcion_id,
+      opcion_cas_views.nombre_opcion,
+      opcion_cas_views.codigo_hex_opcion,
+      opcion_cas_views.componente_id,
+      opcion_cas_views.nombre_componente,
+      opcion_cas_views.atributo_id,
+      opcion_cas_views.nombre_atributo
+     FROM ((persona_empresa_formularios
+       JOIN personas_areas_views ON ((persona_empresa_formularios.personas_area_id = personas_areas_views.id)))
+       JOIN opcion_cas_views ON ((persona_empresa_formularios.opcion_ca_id = opcion_cas_views.id)));
   SQL
 end
