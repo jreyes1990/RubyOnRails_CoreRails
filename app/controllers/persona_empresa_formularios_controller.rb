@@ -213,6 +213,19 @@ end
     end
   end
 
+  def eliminar_seleccionados
+    ids_seleccionados = params[:componentes_seleccionados]
+
+    if ids_seleccionados.present?
+      PersonaEmpresaFormulario.where(id: ids_seleccionados).destroy_all
+      flash[:success] = 'Componentes seleccionados eliminados exitosamente.'
+    else
+      flash[:error] = 'Por favor, selecciona al menos un componente para eliminar.'
+    end
+
+    redirect_to mostrar_permisos_path
+  end
+
   def eliminar_permiso
     @id_permiso = params[:id]
     @permiso = PersonaEmpresaFormulario.find(@id_permiso)

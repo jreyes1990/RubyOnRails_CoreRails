@@ -297,32 +297,6 @@ document.addEventListener("turbolinks:load", () => {
   });
   
   
-  // // Función para seleccionar o deseleccionar checkboxes de atributos
-  // function setAllCheckboxes(checked) {
-  //   const checkboxes = document.querySelectorAll('input[name="permisoids[]"]');
-  //   checkboxes.forEach(checkbox => checkbox.checked = checked);
-  // }
-
-  // // Función para cambiar el estado del checkbox adicional
-  // function toggleSelectDeselectAllCheckbox() {
-  //   const selectDeselectAllCheckbox = document.getElementById('select-deselect-all-checkbox');
-  //   setAllCheckboxes(selectDeselectAllCheckbox.checked);
-  // }
-
-  // // Ejecutar la función inicialmente para asegurarnos de que los checkboxes se actualicen al cargar la página.
-  // toggleSelectDeselectAllCheckbox();
-
-  // // Escucha el evento 'change' en el checkbox adicional 'Select/Deselect All'
-  // document.getElementById('select-deselect-all-checkbox').addEventListener('change', toggleSelectDeselectAllCheckbox);
-
-  // // Escucha el evento 'change' en los checkboxes de atributos individuales para actualizar el estado del checkbox grupal
-  // const attributeCheckboxes = document.querySelectorAll('input[name="permisoids[]"]');
-  // attributeCheckboxes.forEach(checkbox => {
-  //   checkbox.addEventListener('change', () => {
-  //     const selectDeselectAllCheckbox = document.getElementById('select-deselect-all-checkbox');
-  //     const allChecked = Array.from(attributeCheckboxes).every(checkbox => checkbox.checked);
-  //     selectDeselectAllCheckbox.checked = allChecked;
-  //   });
-  // });
+  
   
 });
