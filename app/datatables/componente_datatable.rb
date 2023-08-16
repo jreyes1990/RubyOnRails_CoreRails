@@ -1,5 +1,6 @@
 class ComponenteDatatable < AjaxDatatablesRails::ActiveRecord
   extend Forwardable
+  include Utilidades
 
   #Definición de los Helpers de la vista
   def_delegator :@view, :link_to
@@ -31,7 +32,7 @@ class ComponenteDatatable < AjaxDatatablesRails::ActiveRecord
         id: record.id,
         nombre_componente: record.nombre,
         descripcion: record.descripcion,
-        estado: format_estado(record),
+        estado: format_estado(record.estado),
         opciones: show_btn_opcion(record),
         inactivar: show_btn_inactivar(record)
       }
@@ -97,17 +98,5 @@ class ComponenteDatatable < AjaxDatatablesRails::ActiveRecord
     #  btnInactivar = ""
     #end
     return btnInactivar
-  end
-
-  def format_estado(record)
-    if record.estado == 'A'
-      badge_estado = "badge badge-success"
-      nombre_estado = "Activo"
-    else
-      badge_estado = "badge badge-danger"
-      nombre_estado = "Inactivo"
-    end
-
-    return "<div class='text-center'><span class='#{badge_estado}'>#{nombre_estado}</span></div>".html_safe
   end
 end

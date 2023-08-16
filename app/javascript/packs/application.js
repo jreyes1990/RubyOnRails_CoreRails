@@ -27,8 +27,10 @@ import "startbootstrap-sb-admin-2/vendor/fontawesome-free/js/all";
 import "datatables.net/js/jquery.dataTables";
 
 import "datatables.net-bs/js/dataTables.bootstrap";
+//import "datatables.net-bs4/js/dataTables.bootstrap4";
 
 import "datatables.net-buttons-bs4/js/buttons.bootstrap4";
+//import "datatables.net-buttons-bs/js/buttons.bootstrap";
 
 import "datatables.net-buttons/js/dataTables.buttons";
 import "datatables.net-buttons/js/buttons.flash";
@@ -43,10 +45,13 @@ import "jszip/dist/jszip";
 import "select2/dist/js/select2";
 import "select2/dist/js/i18n/es";
 
+import "bootstrap-toggle/js/bootstrap-toggle";
+
 import "datatables.net-responsive/js/dataTables.responsive";
 import "datatables.net-responsive-bs4/js/responsive.bootstrap4";
 
-import "bootstrap-toggle/js/bootstrap-toggle";
+import "datatables.net-rowgroup/js/dataTables.rowGroup";
+import "datatables.net-rowgroup-bs4/js/rowGroup.bootstrap4";
 
 import "moment/dist/moment";
 import "moment/dist/locale/es";

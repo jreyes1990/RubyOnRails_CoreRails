@@ -1,5 +1,6 @@
 class OpcionCaDatatable < AjaxDatatablesRails::ActiveRecord
   extend Forwardable
+  include Utilidades
 
   #Definición de los Helpers de la vista
   def_delegator :@view, :link_to
@@ -29,11 +30,11 @@ class OpcionCaDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def data
-    records.map do |record|
+    records.sort_by { |oc| "#{oc.menu_id} #{oc.opcion_id} #{oc.atributo_id}" }.reverse.map do |record|
       {
         id: record.id,
-        nombre_menu: estilo_codigo_hex_menu_opcion(record),
-        nombre_opcion: record.nombre_opcion,
+        nombre_menu: columna_centrada(record.nombre_menu.upcase),
+        nombre_opcion: columna_centrada(record.nombre_opcion.upcase),
         nombre_componente: record.nombre_componente,
         nombre_atributo: record.nombre_atributo,
         descripcion: record.descripcion,

@@ -21,6 +21,7 @@
 @import "@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4";
 
 @import "datatables.net-bs/css/dataTables.bootstrap";
+//@import "datatables.net-bs4/css/dataTables.bootstrap4";
 
 @import "datatables.net-buttons-bs4/css/buttons.bootstrap4";
 
@@ -34,6 +35,8 @@
 @import "bootstrap-tooltip-custom-class/bootstrap-v4/tooltip/dist/css/bootstrap-tooltip-custom-class";
 
 @import "bootstrap-toggle/css/bootstrap-toggle";
+
+@import "datatables.net-rowgroup-bs4/css/rowGroup.bootstrap4";
 
 //@import "chart.js/dist/Chart";
 
@@ -102,4 +105,27 @@ td.highlight {
   padding: 0.75rem 0.60rem;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.group-start-level-0 {
+    background-color: #08A243 !important;
+    text-transform: uppercase !important;
+    font-weight: bold !important;
+    color: white !important;
+}
+
+.group-start-level-1 td {
+    background-color: #008080 !important;
+    //padding-left: 30px !important;
+    text-transform: uppercase !important;
+    font-weight: bold !important;
+    color: white !important;
+}
+
+.group-start-level-2 td {
+    background-color: #FFA500 !important;
+    //padding-left: 60px !important;
+    text-transform: uppercase !important;
+    font-weight: bold !important;
+    color: white !important;
 }

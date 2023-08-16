@@ -1,5 +1,6 @@
 class OpcionDatatable < AjaxDatatablesRails::ActiveRecord
   extend Forwardable
+  include Utilidades
 
   #Definición de los Helpers de la vista
   def_delegator :@view, :link_to
@@ -23,6 +24,7 @@ class OpcionDatatable < AjaxDatatablesRails::ActiveRecord
       path_opcion: { source: "OpcionView.path", cond: :like },
       controlador_opcion: { source: "OpcionView.controlador", cond: :like },
       codigo_hex: { source: "OpcionView.codigo_hex", cond: :like },
+      descripcion_opcion: { source: "OpcionView.descripcion", cond: :like },
       estado: { source: "OpcionView.estado", cond: :like },
       opciones: { source: "", searchable: false, orderable: false},
       inactivar: { source: "", searchable: false, orderable: false}
@@ -30,16 +32,17 @@ class OpcionDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def data
-    records.map do |record|
+    records.sort_by { |oc| "#{oc.menu_id}" }.reverse.map do |record|
       {
         id: record.id,
-        nombre_menu: estilo_codigo_hex_menu(record),
-        icono: icono_awesome(record),
-        nombre_opcion: nombre_descripcion_opcion(record),
+        nombre_menu: columna_centrada(record.nombre_menu.upcase),
+        icono: icono_awesome(record.icono),
+        nombre_opcion: record.nombre,
         path_opcion: record.path,
         controlador_opcion: record.controlador,
-        codigo_hex: estilo_codigo_hex(record),
-        estado: format_estado(record),
+        codigo_hex: format_estilo_codigo(record.codigo_hex),
+        descripcion_opcion: record.descripcion,
+        estado: format_estado(record.estado),
         opciones: show_btn_opcion(record),
         inactivar: show_btn_inactivar(record)
       }
@@ -47,7 +50,7 @@ class OpcionDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    OpcionView.order(nombre_menu: :ASC, id: :DESC)
+    OpcionView.all.order(id: :ASC)
   end
 
   def show_btn_opcion(record)
@@ -105,33 +108,5 @@ class OpcionDatatable < AjaxDatatablesRails::ActiveRecord
     #  btnInactivar = ""
     #end
     return btnInactivar
-  end
-
-  def icono_awesome(record)
-    return "<div class='text-center'><i class='#{record.icono}' aria-hidden='true'></i></div>".html_safe
-  end
-
-  def format_estado(record)
-    if record.estado == 'A'
-      badge_estado = "badge badge-success"
-      nombre_estado = "Activo"
-    else
-      badge_estado = "badge badge-danger"
-      nombre_estado = "Inactivo"
-    end
-
-    return "<div class='text-center'><span class='#{badge_estado}'>#{nombre_estado}</span></div>".html_safe
-  end
-
-  def estilo_codigo_hex_menu(record)
-    return "<div class='text-center'><strong style='color: #{record.codigo_hex_menu};'>#{record.nombre_menu.upcase}</strong></div>".html_safe
-  end
-
-  def estilo_codigo_hex(record)
-    return "<div class='text-center'><strong><span class='badge badge-pill badge-white' style='background: #{record.codigo_hex}; color: #{record.codigo_hex};'>#{record.codigo_hex}</span></strong></div>".html_safe
-  end
-
-  def nombre_descripcion_opcion(record)
-    return "<div data-custom-class='popover-info' title='#{record.nombre.upcase}' data-content='#{record.descripcion}'>#{record.nombre.capitalize}</div>".html_safe
   end
 end

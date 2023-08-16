@@ -5,38 +5,6 @@ module Utilidades
   require 'net/http'
   public
 
-  def format_estado(parametro)
-    if parametro == 'A'
-      badge_estado = "badge badge-success"
-      nombre_estado = "Activo"
-    else
-      badge_estado = "badge badge-danger"
-      nombre_estado = "Inactivo"
-    end
-
-    return "<div class='text-center'><span class='#{badge_estado}'>#{nombre_estado}</span></div>".html_safe
-  end
-
-  def format_estilo_codigo(parametro)
-    return "<div class='text-center'><strong><span class='badge badge-pill badge-white' style='background: #{parametro}; color: #{parametro};'>#{parametro}</span></strong></div>".html_safe
-  end
-
-  def icono_awesome(parametro)
-    return "<div class='text-center'><i class='#{parametro}' aria-hidden='true'></i></div>".html_safe
-  end
-
-  def concatena_datos(valor1, valor2)
-    return "#{valor1} - #{valor2}"
-  end
-
-  def format_digitos(correlativo, valor_digito)
-    if !correlativo.nil?
-      respuesta = correlativo.to_s.rjust(valor_digito,"0")
-    end
-
-    return respuesta
-  end
-
   def custom_query(sql)
     results = ActiveRecord::Base.connection.exec_query(sql)
   
@@ -76,6 +44,62 @@ module Utilidades
     fecha = t.strftime("%Y")
     return fecha
   end 
+
+  def format_estado(status)
+    if status == 'A'
+      badge_estado = "badge badge-success"
+      nombre_estado = "Activo"
+    else
+      badge_estado = "badge badge-danger"
+      nombre_estado = "Inactivo"
+    end
+
+    return "<div class='text-center'><span class='#{badge_estado}'>#{nombre_estado}</span></div>".html_safe
+  end
+
+  def format_color_nombre(nombre, codigo_color)
+    if !codigo_color.blank? || !codigo_color.present? || !codigo_color.nil?
+      color_hex = codigo_color
+    else
+      color_hex = "#f000"
+    end
+
+    return "<div style='color: #{color_hex};'>#{nombre.upcase}</div>".html_safe
+  end
+
+  def format_estilo_codigo(codigo_color)
+    return "<div class='text-center'><strong><span class='badge badge-pill badge-white' style='background: #{codigo_color}; color: #{codigo_color};'>#{codigo_color}</span></strong></div>".html_safe
+  end
+
+  def icono_awesome(font_awesome)
+    return "<div class='text-center'><i class='#{font_awesome}' aria-hidden='true'></i></div>".html_safe
+  end
+
+  def mensaje_popover(nombre, mensaje)
+    return "<div data-custom-class='popover-info' title='#{nombre.upcase}' data-content='#{mensaje}'>#{nombre.capitalize}</div>".html_safe
+  end
+
+  def concatena_datos(valor1, valor2)
+    return "#{valor1} - #{valor2}"
+  end
+
+  def format_digitos(correlativo, valor_digito)
+    if !correlativo.nil?
+      respuesta = correlativo.to_s.rjust(valor_digito,"0")
+    end
+
+    return respuesta
+  end
+
+  # Metodo para centrar los datos de la columna
+  def columna_centrada(campo)
+    return "<div class='text-center'><span>#{campo}</span></div>".html_safe
+  end
+
+  # Metodo para contar los registros por modulo, dependiente del estado
+  def format_numero(numero, decimales)
+    return number_with_precision(numero, precision: decimales, delimiter: ',')
+  end
 
   # Metodo para contar los registros por modulo, dependiente del estado
   def conteo(modelo, estado, decimales)

@@ -1,5 +1,6 @@
 class CodigoColorDatatable < AjaxDatatablesRails::ActiveRecord
   extend Forwardable
+  include Utilidades
 
   #Definición de los Helpers de la vista
   def_delegator :@view, :link_to
@@ -33,13 +34,13 @@ class CodigoColorDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         id: record.id,
-        disenio: record.disenio.upcase,
-        nombre_color: record.nombre_color,
-        colores: estilo_codigo_hex(record),
+        disenio: columna_centrada(record.disenio.upcase),
+        nombre_color: columna_centrada(record.nombre_color),
+        colores: format_estilo_codigo(record.colores),
         codigo_hex: record.codigo_hex,
         codigo_rgb: record.codigo_rgb,
         codigo_hls: record.codigo_hls,
-        estado: format_estado(record),
+        estado: format_estado(record.estado),
         opciones: show_btn_opcion(record),
         inactivar: show_btn_inactivar(record)
       }
@@ -105,21 +106,5 @@ class CodigoColorDatatable < AjaxDatatablesRails::ActiveRecord
     #  btnInactivar = ""
     #end
     return btnInactivar
-  end
-
-  def format_estado(record)
-    if record.estado == 'A'
-      badge_estado = "badge badge-success"
-      nombre_estado = "Activo"
-    else
-      badge_estado = "badge badge-danger"
-      nombre_estado = "Inactivo"
-    end
-
-    return "<div class='text-center'><span class='#{badge_estado}'>#{nombre_estado}</span></div>".html_safe
-  end
-
-  def estilo_codigo_hex(record)
-    return "<strong><span class='badge badge-pill badge-white' style='background: #{record.codigo_hex}; color: #{record.codigo_hex};'>#{record.codigo_hex}</span></strong>".html_safe
   end
 end

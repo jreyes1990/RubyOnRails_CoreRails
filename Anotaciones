@@ -27,6 +27,17 @@
    --              Enlace: https://codigonautas.com/creacion-de-bonitos-mensajes-emergentes-con-sweetalert2/
        yarn add sweetalert2
 
+   -- ROW-GROUPING, Enlace: https://yarnpkg.com/package/datatables.net-rowgroup-bs4
+      https://cdn.datatables.net/
+      yarn add datatables.net-rowgroup-bs4@1.2.0
+
+   -- DATATABLE-RESPONSIVE: Enlace, https://www.youtube.com/watch?v=HIDn_HpEuEQ
+      Se instalo datatables.net-responsive-bs4 para tener una tabla responsiva
+      yarn add datatables.net-responsive-bs4
+
+   -- BOOTSTRAP-POPOVER-TOOLTIP: Enlace, https://github.com/andreivictor/bootstrap-tooltip-custom-class
+      yarn add bootstrap-tooltip-custom-class
+
    -- GENERAR ACTION_TEXT, Enlace: https://bswan0002.medium.com/how-to-set-up-action-text-rich-text-editor-in-rails-6-ab91be81e647
       rails action_text:install
 
@@ -169,13 +180,6 @@
    2. Crear un partial
    3. Crear la llamada del partial con formato .js
    4. Crear la ruta del partial
-
--- DATATABLE-RESPONSIVE, Enlace, https://www.youtube.com/watch?v=HIDn_HpEuEQ
-   Se instalo datatables.net-responsive-bs4 para tener una tabla responsiva
-   yarn add datatables.net-responsive-bs4
-
--- CLASE PERSONALIZADA DE BOOTSTRAP POPOVER Y TOOLTIP, Enlace, https://github.com/andreivictor/bootstrap-tooltip-custom-class
-   yarn add bootstrap-tooltip-custom-class
 
 -- ENVIO DE CORREO AL CREAR UN USUARIO
    -- Primero, configurar el entorno de email

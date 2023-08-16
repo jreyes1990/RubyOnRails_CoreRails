@@ -1,5 +1,6 @@
 class MenuRolDatatable < AjaxDatatablesRails::ActiveRecord
   extend Forwardable
+  include Utilidades
 
   #Definición de los Helpers de la vista
   def_delegator :@view, :link_to
@@ -17,23 +18,23 @@ class MenuRolDatatable < AjaxDatatablesRails::ActiveRecord
   def view_columns
     @view_columns ||= {
       id: { source: "MenuRolView.id", cond: :eq },
-      nombre_rol: { source: "OpcionView.nombre_rol", cond: :like },
-      nombre_menu: { source: "OpcionView.nombre_menu", cond: :like },
-      nombre_opcion: { source: "OpcionView.nombre_opcion", cond: :like },
-      estado: { source: "OpcionView.estado", cond: :like },
+      nombre_rol: { source: "MenuRolView.nombre_rol", cond: :like },
+      nombre_menu: { source: "MenuRolView.nombre_menu", cond: :like },
+      nombre_opcion: { source: "MenuRolView.nombre_opcion", cond: :like },
+      estado: { source: "MenuRolView.estado", cond: :like },
       opciones: { source: "", searchable: false, orderable: false},
       inactivar: { source: "", searchable: false, orderable: false}
     }
   end
 
   def data
-    records.map do |record|
+    records.sort_by { |oc| "#{oc.rol_id} #{oc.nombre_menu}" }.reverse.map do |record|
       {
         id: record.id,
-        nombre_rol: estilo_codigo_hex_menu_rol(record),
-        nombre_menu: record.nombre_menu,
+        nombre_rol: columna_centrada(record.nombre_rol),
+        nombre_menu: columna_centrada(record.nombre_menu),
         nombre_opcion: record.nombre_opcion,
-        estado: format_estado(record),
+        estado: format_estado(record.estado),
         opciones: show_btn_opcion(record),
         inactivar: show_btn_inactivar(record)
       }
@@ -41,7 +42,7 @@ class MenuRolDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    MenuRolView.order(id: :DESC)
+    MenuRolView.all.order(id: :ASC)
   end
 
   def show_btn_opcion(record)
@@ -99,21 +100,5 @@ class MenuRolDatatable < AjaxDatatablesRails::ActiveRecord
     #  btnInactivar = ""
     #end
     return btnInactivar
-  end
-
-  def format_estado(record)
-    if record.estado == 'A'
-      badge_estado = "badge badge-success"
-      nombre_estado = "Activo"
-    else
-      badge_estado = "badge badge-danger"
-      nombre_estado = "Inactivo"
-    end
-
-    return "<div class='text-center'><span class='#{badge_estado}'>#{nombre_estado}</span></div>".html_safe
-  end
-
-  def estilo_codigo_hex_menu_rol(record)
-    return "<div class='text-center'><strong style='color: #{record.codigo_hex_rol};'>#{record.nombre_rol.upcase}</strong></div>".html_safe
   end
 end

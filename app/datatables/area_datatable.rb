@@ -1,5 +1,6 @@
 class AreaDatatable < AjaxDatatablesRails::ActiveRecord
   extend Forwardable
+  include Utilidades
 
   #Definición de los Helpers de la vista
   def_delegator :@view, :link_to
@@ -21,6 +22,7 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
       codigo_area: { source: "AreaView.codigo_area", cond: :like },
       nombre_area: { source: "AreaView.nombre", cond: :like },
       codigo_hex: { source: "AreaView.codigo_hex", cond: :like },
+      descripcion_area: { source: "AreaView.descripcion", cond: :like },
       estado: { source: "AreaView.estado", cond: :like },
       opciones: { source: "", searchable: false, orderable: false},
       inactivar: { source: "", searchable: false, orderable: false}
@@ -28,14 +30,15 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def data
-    records.map do |record|
+    records.sort_by { |oc| "#{oc.nombre_empresa} #{oc.id}" }.reverse.map do |record|
       {
         id: record.id,
-        nombre_empresa: estilo_codigo_hex_empresa(record),
+        nombre_empresa: columna_centrada(record.nombre_empresa.upcase),
         codigo_area: record.codigo_area,
-        nombre_area: nombre_descripcion_area(record),
-        codigo_hex: estilo_codigo_hex(record),
-        estado: format_estado(record),
+        nombre_area: record.nombre,
+        codigo_hex: format_estilo_codigo(record.codigo_hex),
+        descripcion_area: record.descripcion,
+        estado: format_estado(record.estado),
         opciones: show_btn_opcion(record),
         inactivar: show_btn_inactivar(record)
       }
@@ -43,7 +46,7 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    AreaView.all.order(nombre_empresa: :ASC, codigo_area: :ASC)
+    AreaView.all
   end
 
   def show_btn_opcion(record)
@@ -101,29 +104,5 @@ class AreaDatatable < AjaxDatatablesRails::ActiveRecord
     #  btnInactivar = ""
     #end
     return btnInactivar
-  end
-
-  def format_estado(record)
-    if record.estado == 'A'
-      badge_estado = "badge badge-success"
-      nombre_estado = "Activo"
-    else
-      badge_estado = "badge badge-danger"
-      nombre_estado = "Inactivo"
-    end
-
-    return "<div class='text-center'><span class='#{badge_estado}'>#{nombre_estado}</span></div>".html_safe
-  end
-
-  def estilo_codigo_hex(record)
-    return "<strong><span class='badge badge-pill badge-white' style='background: #{record.codigo_hex}; color: #{record.codigo_hex};'>#{record.codigo_hex}</span></strong>".html_safe
-  end
-
-  def estilo_codigo_hex_empresa(record)
-    return "<div class='text-center'><strong style='color: #{record.codigo_hex_empresa}'>#{record.nombre_empresa.upcase}</strong></div>".html_safe
-  end
-
-  def nombre_descripcion_area(record)
-    return "<div data-custom-class='popover-info' title='#{record.nombre.upcase}' data-content='#{record.descripcion}'>#{record.nombre.capitalize}</div>".html_safe
   end
 end

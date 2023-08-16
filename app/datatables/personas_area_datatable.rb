@@ -1,5 +1,6 @@
 class PersonasAreaDatatable < AjaxDatatablesRails::ActiveRecord
   extend Forwardable
+  include Utilidades
 
   #Definición de los Helpers de la vista
   def_delegator :@view, :link_to
@@ -29,15 +30,15 @@ class PersonasAreaDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def data
-    records.map do |record|
+    records.sort_by { |oc| "#{oc.nombre_area} #{oc.nombre_area} #{oc.nombre_rol}" }.reverse.map do |record|
       {
         id: record.id,
-        nombre_empresa: estilo_codigo_hex_empresa_area(record),
-        nombre_area: record.nombre_area,
+        nombre_empresa: columna_centrada(record.nombre_empresa.upcase),
+        nombre_area: columna_centrada(record.nombre_area.upcase),
         nombre_usuario: record.nombre_usuario,
         email_usuario: record.email_usuario,
-        nombre_rol: estilo_codigo_hex_rol(record),
-        estado: format_estado(record),
+        nombre_rol: record.nombre_rol.upcase,
+        estado: format_estado(record.estado),
         opciones: show_btn_opcion(record),
         inactivar: show_btn_inactivar(record)
       }
@@ -45,7 +46,7 @@ class PersonasAreaDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    PersonasAreaView.order(nombre_empresa: :DESC, nombre_area: :DESC, nombre_rol: :ASC, id: :DESC)
+    PersonasAreaView.order(id: :DESC)
   end
 
   def show_btn_opcion(record)
@@ -103,37 +104,5 @@ class PersonasAreaDatatable < AjaxDatatablesRails::ActiveRecord
     #  btnInactivar = ""
     #end
     return btnInactivar
-  end
-
-  def format_estado(record)
-    if record.estado == 'A'
-      badge_estado = "badge badge-success"
-      nombre_estado = "Activo"
-    else
-      badge_estado = "badge badge-danger"
-      nombre_estado = "Inactivo"
-    end
-
-    return "<div class='text-center'><span class='#{badge_estado}'>#{nombre_estado}</span></div>".html_safe
-  end
-
-  def estilo_codigo_hex_empresa_area(record)
-    @color_empresa = Empresa.where(id: record.empresa_id).first
-
-    if !@color_empresa.blank?
-      color_hex = @color_empresa.codigo_hex
-    else
-      color_hex = "#F000"
-    end
-
-    return "<div class='text-center'><strong style='color: #{color_hex};'>#{record.nombre_empresa.upcase}</strong> - <strong style='color: #{record.codigo_hex_area};'>#{record.nombre_area.upcase}</strong></div>".html_safe
-  end
-
-  def estilo_codigo_hex_rol(record)
-    @color_rol = Rol.where(id: record.rol_id).first
-
-    if !@color_rol.blank?
-      return "<div style='color: #{@color_rol.codigo_hex};'>#{record.nombre_rol.upcase}</div>".html_safe
-    end
   end
 end

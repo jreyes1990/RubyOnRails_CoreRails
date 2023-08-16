@@ -1,5 +1,6 @@
 class FontAwesomDatatable < AjaxDatatablesRails::ActiveRecord
   extend Forwardable
+  include Utilidades
 
   #Definición de los Helpers de la vista
   def_delegator :@view, :link_to
@@ -31,13 +32,13 @@ class FontAwesomDatatable < AjaxDatatablesRails::ActiveRecord
   def data
     records.map do |record|
       {
-        id: record.id,
-        icono: icono_awesome(record),
+        id: format_numero(record.id, 0),
+        icono: icono_awesome(record.icono),
         prefijo_nombre: record.prefijo_nombre,
-        codigo_css: codigo_css_awesome(record),
-        tipo_icono: record.tipo_icono.upcase,
+        codigo_css: format_estilo_codigo(record.codigo_css),
+        tipo_icono: columna_centrada(record.tipo_icono.upcase),
         termino: record.termino,
-        estado: format_estado(record),
+        estado: format_estado(record.estado),
         opciones: show_btn_opcion(record),
         inactivar: show_btn_inactivar(record)
       }
@@ -45,7 +46,7 @@ class FontAwesomDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    FontAwesom.order(tipo_icono: :ASC, id: :DESC)
+    FontAwesom.order(tipo_icono: :ASC, prefijo_nombre: :DESC)
   end
 
   def show_btn_opcion(record)
@@ -103,27 +104,5 @@ class FontAwesomDatatable < AjaxDatatablesRails::ActiveRecord
     #  btnInactivar = ""
     #end
     return btnInactivar
-  end
-
-  def icono_awesome(record)
-    iconoFontAwesome = "<i class='#{record.icono}' aria-hidden='true'></i>".html_safe
-
-    return iconoFontAwesome
-  end
-
-  def format_estado(record)
-    if record.estado == 'A'
-      badge_estado = "badge badge-success"
-      nombre_estado = "Activo"
-    else
-      badge_estado = "badge badge-danger"
-      nombre_estado = "Inactivo"
-    end
-
-    return "<div class='text-center'><span class='#{badge_estado}'>#{nombre_estado}</span></div>".html_safe
-  end
-
-  def codigo_css_awesome(record)
-    return "<div class='text-center'><span style='content: #{record.codigo_css}'>#{record.codigo_css}</span></div>".html_safe
   end
 end

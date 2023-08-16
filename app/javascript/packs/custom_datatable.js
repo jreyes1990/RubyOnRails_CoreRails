@@ -30,11 +30,51 @@ document.addEventListener("turbolinks:load", () => {
   };
 
   var var_datatable = 
-    "" +
-    "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-    "<'row'<'col-sm-12'tr>>" +
-    "<'row'<'col-md-10'i><'col-md-1 text-center'><'col-md-1'>><br>" +
-    "<'row text-center' <'col-md-4'><'col-md-5'p><'col-md-3'>>";
+    `<'row'<'col-md-3'l><'col-md-6 text-center'B><'col-md-3'f>>
+     <'row'<'col-sm-12'tr>>
+     <'row'<'col-sm-12'i>>
+     <'row'<'col-sm-4'><'col-sm-4 text-center'p><'col-sm-4'>>`;
+
+  var btnDescarga = [
+    {
+      text: 'EXCEL <i class="fas fa-file-excel"></i> ',
+      extend: "csvHtml5",
+      fieldSeparator: "\t",
+      extension: ".xlsx",
+      className: "btn btn-success",
+      messageTop: "La exportación excel, se ha realizado correctamente",
+      exportOptions: {
+        columns: ":visible:not(:first-child):not(:nth-last-child(-n+2))" // Excluir el primer campo y los últimos 2 campos
+        //columns: ":visible:not(:first-child):not(:nth-child(4)):not(:nth-last-child(-n+3))" // Excluir primer, cuarto y últimos 3 campos
+      },
+      init: function(api, node, config) {
+        $(node).attr("data-custom-class", "popover-success");
+        $(node).attr("title", "EXCEL");
+        $(node).attr("data-content", "Si desea exportar el archivo, Dar click en EXCEL");
+        // $(node).popover({
+        //   html: true // Permite utilizar contenido HTML en el popover
+        // });
+      }
+    },
+    {
+      text: 'PDF <i class="fas fa-file-pdf"></i> ',
+      extend: "pdfHtml5",
+      className: "btn btn-danger",
+      messageTop: "PDF created by PDFMake with Buttons for DataTables.",
+      exportOptions: {
+        columns: ":visible:not(:first-child):not(:nth-last-child(-n+2))" // Excluir el primer campo y los últimos 2 campos
+        //columns: ":visible:not(:first-child):not(:nth-child(4)):not(:nth-last-child(-n+3))" // Excluir primer, cuarto y últimos 3 campos
+      },
+      init: function(api, node, config) {
+        $(node).attr("data-custom-class", "popover-danger");
+        $(node).attr("title", "PDF");
+        $(node).attr("data-content", "Si desea exportar el archivo, Dar click en PDF");
+        // $(node).popover({
+        //   html: true // Permite utilizar contenido HTML en el popover
+        // });
+      }
+    }
+  ];
 
   var button_datatable = 
   [{
@@ -291,7 +331,7 @@ document.addEventListener("turbolinks:load", () => {
     [
       { responsivePriority: 1, targets: [1, -1, -2] },
       { responsivePriority: 2, targets: [2, -3] },
-      { responsivePriority: 3, targets: [0, -4] }
+      { responsivePriority: 3, targets: [0, 3, 4] }
     ],
     opciones,
     [1, 2],
@@ -304,7 +344,7 @@ document.addEventListener("turbolinks:load", () => {
     [
       { responsivePriority: 1, targets: [1, -1, -2] },
       { responsivePriority: 2, targets: [0, -3] },
-      { responsivePriority: 3, targets: [2] }
+      { responsivePriority: 3, targets: [2, 3] }
     ],
     opciones,
     [1],
@@ -317,7 +357,7 @@ document.addEventListener("turbolinks:load", () => {
     [
       { responsivePriority: 1, targets: [2, -1, -2] },
       { responsivePriority: 2, targets: [1, -3] },
-      { responsivePriority: 3, targets: [0, 3] }
+      { responsivePriority: 3, targets: [0, 3, 4] }
     ],
     opciones,
     [2],
