@@ -316,6 +316,34 @@ export default class extends ApplicationController {
     event.stopImmediatePropagation();
     event.preventDefault();
 
+    // Obtener todos los elementos requeridos (input, textarea, select)
+    const elementosRequeridos = document.querySelectorAll('input[required], textarea[required], select[required]');
+
+    // Enlistar los campos requeridos vacíos
+    const camposVacios = [];
+    elementosRequeridos.forEach(elemento => {
+      if (!elemento.value.trim()) {
+        camposVacios.push(elemento.id);
+      }
+    });
+
+    if (camposVacios.length > 0) {
+      // Construir el mensaje de error con los campos requeridos vacíos
+      const mensajeError = `Los siguientes campos requeridos están vacíos: ${camposVacios.join(', ')}`;
+
+      // Mostrar SweetAlert2 de error con el mensaje detallado
+      Swal.fire({
+        title: "Error",
+        text: mensajeError,
+        icon: "error",
+        confirmButtonColor: "#d33",
+      });
+      return; // Detener la ejecución de la función si hay campos requeridos vacíos
+    } else {
+      // Si todos los campos requeridos están llenos, procede con el proceso
+      // Resto del código...
+    }
+
     // Obtener el elemento del archivo (input)
     const archivoExcelInput = document.getElementById("archivo_excel_input");
 
