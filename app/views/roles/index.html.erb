@@ -80,7 +80,7 @@
                   < if tiene_permiso("BOTON ACTIVAR/INACTIVAR REGISTRO", "VER") %>-->
                   <td class="text-center">
                     <% if rol.estado == 'A' %>
-                      <%= link_to  inactivar_rol_path(:id => rol.id), class: "btn btn-outline-danger btn-sm rounded-circle", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
+                      <%= link_to  inactivar_rol_path(:id => rol.id), method: :get, data: { turbolinks: false }, class: "btn btn-outline-danger btn-sm rounded-circle", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
                                                                                                                                             sweetalert_confirm_alert_value: "Inactivar",
                                                                                                                                             sweetalert_cancel_alert_value: "Cancelado",
                                                                                                                                             sweetalert_confirm_title_value: 'Esta seguro de inactivar <strong style="color: #1d71b9; font-weight: bold;"><p>'+"#{rol.nombre}?"+'</p></strong>',
@@ -91,7 +91,7 @@
                         <i class="fas fa-toggle-on" style="transform: rotate(180deg)"></i>
                       <%end%>
                     <% else %>
-                      <%= link_to  activar_rol_path(:id => rol.id), class: "btn btn-outline-success btn-sm rounded-circle", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
+                      <%= link_to  activar_rol_path(:id => rol.id), method: :get, data: { turbolinks: false }, class: "btn btn-outline-success btn-sm rounded-circle", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
                                                                                                                                             sweetalert_confirm_alert_value: "Activar",
                                                                                                                                             sweetalert_cancel_alert_value: "Cancelado",
                                                                                                                                             sweetalert_confirm_title_value: 'Esta seguro de activar <strong style="color: #1d71b9; font-weight: bold;"><p>'+"#{rol.nombre}?"+'</p></strong>',

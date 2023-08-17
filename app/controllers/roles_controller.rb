@@ -66,10 +66,17 @@ class RolesController < ApplicationController
     @rol.user_updated_id = current_user.id
     @rol.estado = "I"
 
+    @validad_estado = Rol.where(nombre: @rol.nombre, estado: 'I').first
+
     respond_to do |format|
-      if @rol.save
-        format.html { redirect_to roles_url, notice: "El Rol <strong style='color: #{@rol.codigo_hex}'>#{@rol.nombre}</strong> ha sido Inactivado.".html_safe }
-        format.json { render :show, status: :created, location: @rol }
+      if !@validad_estado.present?
+        if @rol.save
+          format.html { redirect_to roles_url, notice: "El Rol <strong style='color: #{@rol.codigo_hex}'>#{@rol.nombre}</strong> ha sido Inactivado.".html_safe }
+          format.json { render :show, status: :created, location: @rol }
+        else
+          format.html { redirect_to roles_url, alert: "Ocurrio un error al inactivar el rol, Verifique!!.." }
+          format.json { render json: @rol.errors, status: :unprocessable_entity }
+        end
       else
         format.html { redirect_to roles_url, alert: "Ocurrio un error al inactivar el rol, Verifique!!.." }
         format.json { render json: @rol.errors, status: :unprocessable_entity }

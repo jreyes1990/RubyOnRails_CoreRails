@@ -1,49 +1,120 @@
-<% flash.each do | type, msg, icono | %>
+<!-- <% flash.each do | type, msg, icono | %>
   <% if type=='alert'%>
     <div class="alert alert-warning">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       <div class="progress-bar-alert"></div>
       <%= msg %>
-      <%= icono="warning" %>
+      
     </div>
   <% elsif type=='notice'%>
     <div class="alert alert-info">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       <div class="progress-bar-alert"></div>
       <%= msg %>
-      <%= icono="info" %>
     </div>
   <% elsif type=='success'%>
     <div class="alert alert-success">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       <div class="progress-bar-alert"></div>
       <%= msg %>
-      <%= icono="success" %>
     </div>
   <% elsif type=='error'%>
     <div class="alert alert-danger">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       <div class="progress-bar-alert"></div>
       <%= msg %>
-      <%= icono="danger" %>
     </div>
   <% end %>
+<% end %> -->
 
+<% if flash[:notice] 
+   icono="success" %>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const checkingAlert = Swal.fire({
-        title: "<%= type.capitalize %>",
-        text: "<%= msg %>",
+      Swal.fire({
+        title: "Éxito",
+        toast: false,
+        //position: 'bottom-end',
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+        html: "<%= flash[:notice] %>",
         icon: "<%= icono %>",
-        timer: 4000, // Tiempo en milisegundos para autocerrar la alerta (opcional)
+        timer: 4000,
+        timerProgressBar: true,
         showConfirmButton: false,
         showCancelButton: false,
       });
+    });
+  </script>
+<% end %>
 
-      setTimeout(() => {
-        // Fin del proceso de datos, cerrar el SweetAlert2 "Checking..."
-        checkingAlert.close();
-      }, 4000); 
+<% if flash[:success] 
+   icono="success" %>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      Swal.fire({
+        title: "Éxito",
+        toast: false,
+        //position: 'bottom-end',
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+        html: "<%= flash[:success] %>",
+        icon: "<%= icono %>",
+        timer: 4000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        showCancelButton: false,
+      });
+    });
+  </script>
+<% end %>
+
+<% if flash[:alert] 
+   icono="warning" %>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      Swal.fire({
+        title: "Alerta",
+        toast: false,
+        //position: 'bottom-end',
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+        html: "<%= flash[:alert] %>",
+        icon: "<%= icono %>",
+        timer: 4000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        showCancelButton: false,
+      });
+    });
+  </script>
+<% end %>
+
+<% if flash[:error] 
+   icono="danger" %>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      Swal.fire({
+        title: "Error",
+        toast: false,
+        //position: 'bottom-end',
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        },
+        html: "<%= flash[:error] %>",
+        icon: "<%= icono %>",
+        timer: 4000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        showCancelButton: false,
+      });
     });
   </script>
 <% end %>
