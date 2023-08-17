@@ -37,13 +37,13 @@ Rails.application.routes.draw do
     resources :empresas
     get 'empresas/inactivar/:id' => "empresas#inactivar_empresa", as: 'inactivar_empresa'
     get 'empresas/activar/:id' => "empresas#activar_empresa", as: 'activar_empresa'
-    # Ruta para ingresar nuevas empresas dentro del formulario del modelo de Area
-    get 'modal_new_empresa', to: 'areas#modal_nueva_empresa', as: 'modal_nueva_empresa'
-    post 'areas/modal_registro_empresa/', to: 'areas#modal_registro_empresa', as: 'modal_registro_empresa'
 
     resources :areas
     get 'areas/inactivar/:id' => "areas#inactivar_area", as: 'inactivar_area'
     get 'areas/activar/:id' => "areas#activar_area", as: 'activar_area'
+    # Ruta para ingresar nuevas empresas dentro del formulario del modelo de Area
+    get 'modal_new_empresa', to: 'areas#modal_nueva_empresa', as: 'modal_nueva_empresa'
+    post 'areas/modal_registro_empresa/', to: 'areas#modal_registro_empresa', as: 'modal_registro_empresa'
 
     resources :atributos
     get 'atributos/inactivar/:id' => "atributos#inactivar_atributo", as: 'inactivar_atributo'

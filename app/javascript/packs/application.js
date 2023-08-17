@@ -53,6 +53,8 @@ import "datatables.net-responsive-bs4/js/responsive.bootstrap4";
 import "datatables.net-rowgroup/js/dataTables.rowGroup";
 import "datatables.net-rowgroup-bs4/js/rowGroup.bootstrap4";
 
+import Swal from "sweetalert2/dist/sweetalert2";
+
 import "moment/dist/moment";
 import "moment/dist/locale/es";
 
@@ -67,6 +69,7 @@ var jQuery = require("jquery");
 global.$ = global.jQuery = jQuery;
 window.$ = window.jQuery = jQuery;
 
+window.Swal = Swal;
 
 let pdfMake = require("pdfmake/build/pdfmake");
 let pdfFonts = require("pdfmake/build/vfs_fonts");
