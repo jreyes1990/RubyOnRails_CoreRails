@@ -1,6 +1,7 @@
 module ApplicationHelper
   include Utilidades
   include Permisos
+  include Bitacoras
 
   def current_user_name
     persona = Persona.where(user_id: current_user.id).first

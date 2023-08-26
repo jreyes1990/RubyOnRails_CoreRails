@@ -107,6 +107,8 @@ class PersonasController < ApplicationController
         contrasena_nueva_encriptada = BCrypt::Password.create(contrasena_nueva)
         @user.encrypted_password = contrasena_nueva_encriptada
 
+        @actualiza_credencial = CredencialesUsuario.where(user_id: @user.id).update(actualizo_password: "SI")
+
         if @user.save
           format.html { redirect_to persona_path(current_user.persona), notice: "La Contraseña se ha actualizado correctamente." }
           format.json { render :show, status: :created, location: @user }

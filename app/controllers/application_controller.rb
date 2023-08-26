@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
   include Permisos  
   include Utilidades
+  include Bitacoras
 
   def current_user_empresa_id
     id_empresa_actual = 0

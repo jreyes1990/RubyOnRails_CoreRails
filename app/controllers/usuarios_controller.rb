@@ -76,9 +76,13 @@ class UsuariosController < ApplicationController
                 if internet_connection_available?
                   UsuarioMailer.registro_exitoso(@consulta_area.nombre_empresa, @consulta_area.nombre, @nombre_completo, @usuario.email, @usuario.password).deliver_now
                   puts "SI, HAY CONEXION A INTERNET, PUEDE ENVIAR EL CORREO AL USUARIO"
+                  @estado_correo = "ENVIADO"
                 else
                   puts "PERDON, NO SE PUDO ENVIAR EL CORREO ELECTRONICO PORQUE NO HAY CONEXION A INTERNET"
+                  @estado_correo = "PENDIENTE"
                 end
+              else
+                @estado_correo = "NO ENVIAR"
               end
 
               # Envía un mensaje a través de Telegram
@@ -87,11 +91,34 @@ class UsuariosController < ApplicationController
                   message = "Bienvenido a nuestro sistema: \n\nHola <strong>#{@nombre_completo}</strong>!.\nHas sido registrado con éxito en nuestra aplicación.\n\nEmpresa: <strong>#{@consulta_area.nombre_empresa}</strong>\nÁrea: <strong>#{@consulta_area.nombre}</strong>\nEmail: <strong>#{@usuario.email}</strong>\nContraseña: <strong>#{@usuario.password}</strong>\nEnlace App: http://localhost:3000/\n\n<strong>NOTA: </strong>\nPor favor, cambia tu contraseña lo antes posible después de iniciar sesión por primera vez.\n\nSi tienes alguna pregunta, no dudes en contactarnos.".html_safe
                   $telegram_bot.api.send_message(chat_id: params[:usuario_form][:chat_id_telegram], text: message, parse_mode: 'HTML')
                   puts "SI, HAY CONEXION A INTERNET, PUEDE ENVIAR EL TELEGRAM AL USUARIO"
+                  @estado_telegram = "ENVIADO"
                 else
                   puts "PERDON, NO SE PUDO ENVIAR EL TELEGRAM PORQUE NO HAY CONEXION A INTERNET"
+                  @estado_telegram = "PENDIENTE"
                 end
+              else
+                @estado_telegram = "NO ENVIAR"
               end
 
+              genera_credenciales(
+                "CREACIÓN USUARIO",
+                @consulta_area.empresa_id,
+                @consulta_area.nombre_empresa,
+                @consulta_area.id,
+                @consulta_area.nombre,
+                @persona.id,
+                @nombre_completo,
+                @persona.user_id,
+                @usuario[:email],
+                @usuario.password,
+                params[:usuario_form][:envia_correo_usuario],
+                params[:usuario_form][:envia_telegram_usuario],
+                @estado_correo,
+                @estado_telegram,
+                current_user.id,
+                nil,
+                "A"
+              )
               
               format.html { redirect_to usuarios_path, notice: 'El Usuario se ha creado exitosamente.' } 
             else 
