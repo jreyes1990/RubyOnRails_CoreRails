@@ -12,14 +12,14 @@ Rails.application.configure do
     config.action_mailer.smtp_settings = {
       address: "smtp.gmail.com",                # Reemplaza con la dirección del servidor SMTP que utilizarás
       port: 587,                                # Reemplaza con el puerto adecuado
-      domain: "madretierra.com.gt",             # Reemplaza con tu propio dominio
-      user_name: "jreyes@madretierra.com.gt",   # Reemplaza con tu propio correo electrónico de Gmail
-      password: "Jarl@1990",                    # Reemplaza con tu propia contraseña de Gmail
+      domain: "gmail.com",                      # Reemplaza con tu propio dominio
+      user_name: "jreyes1990.test@gmail.com",   # Reemplaza con tu propio correo electrónico de Gmail
+      password: "csxkofjlwacdtgmw",             # Reemplaza con tu propia contraseña de Gmail
       authentication: "plain",
       enable_starttls_auto: true,
       openssl_verify_mode: "none"
     }
 
     # Configura las opciones de URL predeterminadas para generar URLs en los correos electrónicos
-    config.action_mailer.default_url_options = { :host => "localhost:3000" }
+    # config.action_mailer.default_url_options = { :host => "localhost:3000" }
   end

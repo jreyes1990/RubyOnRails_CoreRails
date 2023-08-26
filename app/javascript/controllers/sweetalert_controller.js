@@ -401,6 +401,7 @@ export default class extends ApplicationController {
             allowOutsideClick: false
           });
 
+          
           // Aquí comienza el proceso de datos (sustituye este bloque por tu lógica de procesamiento real)
           // Por ejemplo, un proceso ficticio que tarda 5 segundos:
           setTimeout(() => {
@@ -416,10 +417,10 @@ export default class extends ApplicationController {
               position: 'center',
               backdrop: false,
               background: "white",
-              timer: 5000,
+              timer: 15000,
               timerProgressBar: true
             });
-          }, 5000); // Tiempo de inicio ficticio del proceso (5000 ms)
+          }, 15000); // Tiempo de inicio ficticio del proceso (5000 ms)
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           // Mostrar el SweetAlert2 con el mensaje de cancelación si se hace clic en Cancelar
           swalWithBootstrapButtons.fire({

@@ -37,7 +37,7 @@ class PersonasAreaDatatable < AjaxDatatablesRails::ActiveRecord
         nombre_area: columna_centrada(record.nombre_area.upcase),
         nombre_usuario: record.nombre_usuario,
         email_usuario: record.email_usuario,
-        nombre_rol: record.nombre_rol.upcase,
+        nombre_rol: record.nombre_rol,
         estado: format_estado(record.estado),
         opciones: show_btn_opcion(record),
         inactivar: show_btn_inactivar(record)

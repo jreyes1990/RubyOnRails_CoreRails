@@ -72,7 +72,7 @@
                                 <%= f.input :telefono, input_html: {class:"form-control", type: "" , maxlength: "8", placeholder: "Ingrese 8 dígitos" , required: true, pattern: "^[0-9]{8}$" } %>
                               </div>
                               <div class="col-md-6">
-                                <%= f.input :chat_id_telegram, input_html: {class:"form-control", type: "number" , placeholder: "Ingrese solo numeros" , required: true }%>
+                                <%= f.input :chat_id_telegram, input_html: {class:"form-control", type: "number" , placeholder: "Ingrese solo numeros" }, required: false %>
                               </div>
                             </div>
                             <div class="row">

@@ -1,11 +1,10 @@
 <div class="card shadow mb-4">
   <div class="card-header py-3">
+    <h5 class="m-0 font-weight-bold text-primary">Codigo de Colores</h5>
+  </div>
+  <div class="card-body">
     <div class="row">
-      <div class="col-md-6 text-left">
-        <h5 class="m-0 font-weight-bold text-primary">Codigo de Colores</h5>
-      </div>
-      <br/>
-      <div class="col-md-6 text-right">
+      <div class="col-md-12 table-responsive-sm text-right">
         <%= link_to codigo_colores_path, class: "btn btn-primary btn-sm" do %>
           <span class="icon text-red-50">
             <i class="fa fa-arrow-circle-left"></i>
@@ -21,69 +20,65 @@
         <% end %>
       </div>
     </div>
-  </div>
-  <div class="card-body">
-    <div class="container-fluid">
-      <div class="row">
+    <br>
 
-        <div class="col-md-6 text-center">
-          <div class="card">
-            <div class="card-header py-3">
-              <h5 class="m-0 font-weight-bold text-primary">FORMATO</h5>
+    <div class="row">
+      <div class="col-md-6 text-center">
+        <div class="card">
+          <div class="card-header py-3">
+            <h5 class="m-0 font-weight-bold text-primary">FORMATO</h5>
+          </div>
+          <div class="card-body" style="background-color: #FDFBF0;">
+            <div class="container-fluid">
+              <%= simple_form_for :descarga_colores, :url => {:controller => "codigo_colores", :action => "descarga_formato_excel"} do |f| %>
+                <%= button_tag f.submit, class: "btn btn-success btn-sm", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
+                                                                                  sweetalert_confirm_alert_value: "Descarga Formato",                                                                                                                        
+                                                                                  sweetalert_confirm_title_value: "Está seguro de realizar la descargar del formato del "+'<strong>Codigo Colores</strong>',
+                                                                                  sweetalert_confirm_btn_value: "Si, Descargar",
+                                                                                  sweetalert_cancel_btn_value: "No, Cancelar"},
+                                          "data-custom-class": "popover-success", title: "DESCARGA FORMATO", "data-content": "Si desea procesar una carga, por favor dar click para descargar el formato oficial"  do %>
+                  <span class="icon text-50">
+                    <i class="fa fa-download"></i>
+                  </span>
+                  <span class="text">DESCARGAR FORMATO EXCEL</span>
+                <% end %>
+              <% end %>
             </div>
+          </div>
+        </div>
+        <br>
+      </div>
+
+      <div class="col-md-6 text-center">
+        <div class="card">
+          <div class="card-header py-3">
+            <h5 class="m-0 font-weight-bold text-primary">PROCESAMIENTO</h5>
+          </div>
             <div class="card-body" style="background-color: #FDFBF0;">
               <div class="container-fluid">
-                <%= simple_form_for :descarga_colores, :url => {:controller => "codigo_colores", :action => "descarga_formato_excel"} do |f| %>
-                  <%= button_tag f.submit, class: "btn btn-success btn-sm", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
-                                                                                    sweetalert_confirm_alert_value: "Descarga Formato",                                                                                                                        
-                                                                                    sweetalert_confirm_title_value: "Está seguro de realizar la descargar del formato del "+'<strong>Codigo Colores</strong>',
-                                                                                    sweetalert_confirm_btn_value: "Si, Descargar",
-                                                                                    sweetalert_cancel_btn_value: "No, Cancelar"},
-                                            "data-custom-class": "popover-success", title: "DESCARGA FORMATO", "data-content": "Si desea procesar una carga, por favor dar click para descargar el formato oficial"  do %>
+                <%= simple_form_for :carga_codigo_colores, :url => {:controller => "codigo_colores", :action => "carga_excel"} do |f| %>
+                <%= f.label "Archivo Excel terminado" %>
+                  <div class="custom-file">
+                    <%= f.file_field :archivo_excel, required: true, :class => "custom-file-input", id: "archivo_excel_input" %>
+                    <label class="custom-file-label" for="archivo_excel_input">Seleccione el archivo</label>
+                  </div>
+                  <br><br>
+                  <%= button_tag f.submit, class: "btn btn-danger btn-sm", data: {controller: 'sweetalert', action: 'click->sweetalert#btnProcesar',
+                                                                                    sweetalert_confirm_alert_value: "Carga Excel",
+                                                                                    sweetalert_cancel_alert_value: "Cancelado",
+                                                                                    sweetalert_confirm_title_value: '<strong>NOTA: </strong>'+"Al momento de realizar la carga se importará los datos que no existen en la base de datos."+'<br><br>'+"Está seguro de realizar la carga del "+'<strong>Codigo Colores?</strong>',
+                                                                                    sweetalert_confirm_btn_value: "Si, Procesar",
+                                                                                    sweetalert_confirm_proccess_value: "Procesando.....",
+                                                                                    sweetalert_cancel_btn_value: "No, Cancelar" }   do %>
                     <span class="icon text-50">
-                      <i class="fa fa-download"></i>
+                      <i class="fa fa-upload"></i>
                     </span>
-                    <span class="text">DESCARGAR FORMATO EXCEL</span>
+                    <span class="text">CARGAR EXCEL COLORES</span>
                   <% end %>
                 <% end %>
               </div>
             </div>
-          </div>
-          <br>
         </div>
-
-        <div class="col-md-6 text-center">
-          <div class="card">
-            <div class="card-header py-3">
-              <h5 class="m-0 font-weight-bold text-primary">PROCESAMIENTO</h5>
-            </div>
-              <div class="card-body" style="background-color: #FDFBF0;">
-                <div class="container-fluid">
-                  <%= simple_form_for :carga_codigo_colores, :url => {:controller => "codigo_colores", :action => "carga_excel"} do |f| %>
-                  <%= f.label "Archivo Excel terminado" %>
-                    <div class="custom-file">
-                      <%= f.file_field :archivo_excel, required: true, :class => "custom-file-input", id: "archivo_excel_input" %>
-                      <label class="custom-file-label" for="archivo_excel_input">Seleccione el archivo</label>
-                    </div>
-                    <br><br>
-                    <%= button_tag f.submit, class: "btn btn-danger btn-sm", data: {controller: 'sweetalert', action: 'click->sweetalert#btnProcesar',
-                                                                                      sweetalert_confirm_alert_value: "Carga Excel",
-                                                                                      sweetalert_cancel_alert_value: "Cancelado",
-                                                                                      sweetalert_confirm_title_value: '<strong>NOTA: </strong>'+"Al momento de realizar la carga se importará los datos que no existen en la base de datos."+'<br><br>'+"Está seguro de realizar la carga del "+'<strong>Codigo Colores?</strong>',
-                                                                                      sweetalert_confirm_btn_value: "Si, Procesar",
-                                                                                      sweetalert_confirm_proccess_value: "Procesando.....",
-                                                                                      sweetalert_cancel_btn_value: "No, Cancelar" }   do %>
-                      <span class="icon text-50">
-                        <i class="fa fa-upload"></i>
-                      </span>
-                      <span class="text">CARGAR EXCEL COLORES</span>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>

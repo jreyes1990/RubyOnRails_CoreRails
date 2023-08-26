@@ -30,10 +30,9 @@ document.addEventListener("turbolinks:load", () => {
   };
 
   var var_datatable_ajax =
-    `<'row'<'col-md-3'l><'col-md-6 text-center'B><'col-md-3'f>>
-     <'row'<'col-sm-12'tr>>
-     <'row'<'col-sm-12'i>>
-     <'row'<'col-sm-4'><'col-sm-4 text-center'p><'col-sm-4'>>`;
+    `<'row'<'col-lg-3 custom-center'l><'col-lg-6 d-flex justify-content-center'B><'col-lg-3 custom-center'f>>
+     <'row'<'col-12'tr>>
+     <'row'<'col-12 d-flex justify-content-center'i><'col-12 d-flex justify-content-center'p>>`;
 
   var var_buttons = 
   [{

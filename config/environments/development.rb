@@ -64,4 +64,7 @@ Rails.application.configure do
   config.session_store :cache_store, key: "_sessions_development", compress: true, pool_size: 5, expire_after: 1.year
 
   config.serve_static_assets = true
+
+  # Configura las opciones de URL predeterminadas para generar URLs en los correos electrónicos
+  config.action_mailer.default_url_options = { :host => "localhost:3000" }
 end
