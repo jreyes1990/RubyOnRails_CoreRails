@@ -1,5 +1,6 @@
 class EmpresasController < ApplicationController
   before_action :set_empresa, only: %i[ show edit update destroy ]
+  before_action :comprobar_permiso
 
   # GET /empresas or /empresas.json
   def index
@@ -27,7 +28,7 @@ class EmpresasController < ApplicationController
 
     respond_to do |format|
       if @empresa.save
-        format.html { redirect_to empresas_url, notice: "La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha creado correctamente.".html_safe }
+        format.html { redirect_to empresas_url, notice: "<strong>EXCELENTE!!<strong><br>La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha creado correctamente.".html_safe }
         format.json { render :show, status: :created, location: @empresa }
       else
         format.html { render :new, status: :unprocessable_entity, alert: "Ocurrio un error al crear el Color, Verifique!!.." }
@@ -42,7 +43,7 @@ class EmpresasController < ApplicationController
 
     respond_to do |format|
       if @empresa.update(empresa_params)
-        format.html { redirect_to empresas_url, notice: "La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha actualizado correctamente.".html_safe }
+        format.html { redirect_to empresas_url, notice: "<strong>ÉXITO!!</strong> La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha actualizado correctamente.".html_safe }
         format.json { render :show, status: :ok, location: @empresa }
       else
         format.html { render :edit, status: :unprocessable_entity, alert: "Ocurrio un error al actualizar el Color, Verifique!!.." }

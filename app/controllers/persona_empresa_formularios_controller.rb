@@ -1,5 +1,6 @@
 class PersonaEmpresaFormulariosController < ApplicationController
   before_action :set_persona_empresa_formulario, only: %i[ show edit update destroy ]
+  before_action :comprobar_permiso
 
   def index_permisos
     @usuarios = Persona.where(estado: 'A')
@@ -73,27 +74,31 @@ class PersonaEmpresaFormulariosController < ApplicationController
     if @menu_x_role.exists?
       html_generado = ""
 
-      # Checkbox para seleccionar o deseleccionar todos los campos de atributos
-      select_deselect_all_checkbox = 
-      "<li class='list-group-item d-flex justify-content-between align-items-center flex-wrap'>
-        <h6>Select/Deselect All</h6>
-        <span class='text-secondary'>
-          <label class='checkbox-label'>
-            <strong style='padding-right: 5px;'>Select All</strong>
-            <input type='checkbox' name='permisoids[]' id='select-deselect-all-checkbox' checked=true/>
-            <span class='checkmark'></span>
-          </label>
-        </span>
-      </li>"
-
       @menu_x_role.each do |mxr|
+        # Checkbox para seleccionar o deseleccionar todos los campos de atributos
+        select_deselect_all_checkbox = 
+        "<li class='list-group-item d-flex justify-content-between align-items-center flex-wrap'>
+          <label for='select-all-#{mxr.opcion.nombre.upcase.gsub ' ', '_'}'>
+            <h6>SELECCIONAR</h6>
+          </label>
+          <span class='text-secondary'>
+            <label class='checkbox-label'>
+              <strong style='padding-right: 5px;'>TODOS</strong>
+                <input type='checkbox' id='select-all-#{mxr.opcion.nombre.upcase.gsub ' ', '_'}' checked=true>
+              <span class='checkmark'></span>
+            </label>
+          </span>
+        </li>"
+
         atributos_componentes = mxr.opcion.opcion_cas.sort_by { |oc| "#{oc.opcion.id} #{oc.atributo.id} #{oc.componente.id}"}.reverse.map do |oc|
           "<li class='list-group-item d-flex justify-content-between align-items-center flex-wrap'>
-            <h6>#{oc.componente.nombre}</h6>
+            <label for='#{oc.id}'>
+              <h6>#{oc.componente.nombre}</h6>
+            </label>
             <span class='text-secondary'>  
               <label class='checkbox-label'>
                 <strong style='padding-right: 5px;'>#{oc.atributo.nombre}</strong>
-                <input type='checkbox' name='permisoids[]' value='#{oc.id}' checked=true/>
+                  <input type='checkbox' name='permisoids[]' value='#{oc.id}' class='#{mxr.opcion.nombre.upcase.gsub " ", "_"}' id='#{oc.id}' checked=true/>
                 <span class='checkmark's></span>
               </label>
             </span>
@@ -101,24 +106,46 @@ class PersonaEmpresaFormulariosController < ApplicationController
         end.join
 
         # Concatenamos el checkbox adicional al inicio de la lista
-        atributos_componentes = select_deselect_all_checkbox + atributos_componentes
+        atributos_componentes = select_deselect_all_checkbox+atributos_componentes
 
         tarjeta = 
           "<div class='col-xs-12 col-sm-6 col-lg-4'>
             <div class='card border-bottom-primary'>
               <div class='card-header text-primary'>
-                #{mxr.opcion.menu.nombre}: <strong>#{mxr.opcion.nombre.upcase}</strong>
+                <div class='row'>
+                  <div class='col-10 text-left'>
+                    <h6 style='font-size: 20px;'>#{mxr.opcion.menu.nombre}: </h6>
+                    <h6 style='color: #f18313;'><strong>#{mxr.opcion.nombre.upcase}</strong></h6>
+                  </div>
+                  <div class='col-2 text-right' style='margin-top: 15px;'>
+                    <a href='#' data-toggle='collapse' data-target='#collapse#{mxr.opcion.nombre.upcase.gsub ' ', '_'}' aria-expanded='true' class=''>
+                      <i class='icon-action fa fa-chevron-down' style='color:#6c6868'></i>                  
+                    </a>
+                  </div>
+                </div>
               </div>
-              <div class='card-body'>
-                <div class='card mt-3'>
-                  <ul class='list-group list-group-flush'>
-                    #{atributos_componentes}
-                  </ul>
+              <div class='collapse' id='collapse#{mxr.opcion.nombre.upcase.gsub ' ', '_'}' style=''>
+                <div class='card' style='padding: 10px;'>
+                  <div class='card mt-3'>
+                    <ul class='list-group list-group-flush'>
+                      #{atributos_componentes}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
             <br>
-          </div>"
+          </div>
+          
+          <script>
+            document.getElementById('select-all-#{mxr.opcion.nombre.upcase.gsub ' ', '_'}').onclick = function() {
+              var checkboxes = document.querySelectorAll('input[class=#{mxr.opcion.nombre.upcase.gsub ' ', '_'}]');
+              for (var checkbox of checkboxes) {                                                      
+                checkbox.checked = this.checked;
+                console.log(checkboxes)
+              }
+            }
+          </script>"
 
         html_generado << tarjeta
       end

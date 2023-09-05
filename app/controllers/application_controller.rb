@@ -17,6 +17,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def comprobar_permiso
+    cargar_permisos_usuario(current_user_empresa_id, current_user.id)
+    if !tiene_permiso("OPCION", "ACCESAR")
+    flash[:error] = "No tienes autorización para ver esta sección"
+    redirect_to home_path
+    end
+  end
+
   private
     def layout_by_resource
       if devise_controller?

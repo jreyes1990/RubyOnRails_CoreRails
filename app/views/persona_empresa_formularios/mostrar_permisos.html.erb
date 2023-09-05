@@ -44,11 +44,13 @@
                           </span>
                           <span class="text">REGRESAR</span>
                         <% end %>
-                        <%= button_tag "", type: "submit", class: "btn btn-danger btn-sm", id: "eliminar-seleccionados-btn", data: { confirm: '¿Estás seguro de eliminar los componentes seleccionados?' } do %>
-                          <span class="text">ELIMINAR</span>
-                          <span class="icon text-red-50">
-                            <i class="fas fa-trash-alt"></i>
-                          </span>
+                        <% if tiene_permiso("BOTON ELIMINAR REGISTRO", "VER") %>
+                          <%= button_tag "", type: "submit", class: "btn btn-danger btn-sm", id: "eliminar-seleccionados-btn", data: { confirm: '¿Estás seguro de eliminar los componentes seleccionados?' } do %>
+                            <span class="text">ELIMINAR</span>
+                            <span class="icon text-red-50">
+                              <i class="fas fa-trash-alt"></i>
+                            </span>
+                          <% end %>
                         <% end %>
                         <!--< if tiene_permiso("BOTON NUEVO REGISTRO", "VER") %>-->
                         <%= link_to agregar_permisos_path(:id => @persona.id, area_id: @area.id), :class => "btn btn-success btn-sm" do %>
@@ -118,63 +120,69 @@
         <hr>
         <div class="row">
           <% menu_agregado = [] %>
-          <% @opciones_configuradas.sort_by { |oc| "#{oc.opcion_id} #{oc.atributo_id} #{oc.componente_id}"}.map do |oc| 
+          <% @opciones_configuradas.sort_by { |oc| "#{oc.menu_id}"}.map do |oc| 
             if !menu_agregado.include?("#{oc.nombre_menu}-#{oc.nombre_opcion}")
                 menu_agregado.push("#{oc.nombre_menu}-#{oc.nombre_opcion}") %>
               <div class="col-xs-12 col-sm-6 col-lg-4">
                 <div class="card border-bottom-primary">
                   <div class="card-header text-primary">
-                    <%= "#{oc.nombre_menu.upcase}: <strong>#{oc.nombre_opcion.upcase}</strong>".html_safe %>
-                    <label class="checkbox-label">
-                      <input type="checkbox" class="menu-checkbox" data-menu-id="<%= oc.menu_id %>">
-                      <span class="checkmark"></span>
-                    </label>
+                    <div class="row">
+                      <div class="col-10 text-left">
+                        <h6 style="font-size: 20px;"><%= "#{oc.nombre_menu}:" %></h6>
+                        <h6 style="color: #f18313;"><%= "<strong>#{oc.nombre_opcion.upcase}</strong>".html_safe %></h6>
+                      </div>
+                      <div class="col-2 text-right" style="margin-top: 15px;">
+                        <a href="#" data-toggle="collapse" data-target="#collapse<%= oc.nombre_opcion.upcase.gsub " ", "_"%>" aria-expanded="true" class="">
+                          <i class="icon-action fa fa-chevron-down" style="color:#6c6868"></i>                  
+                        </a>
+                      </div>
+                    </div> 
                   </div>
-                  <div class="card-body">
-                    <div class="card mt-3" style="background-color: whitesmoke;">
-                      <div class="col-md-12 table-responsive-sm">
-                        <table style="font-size: 13px; width: 100%; padding: 15px;">
-                          <thead>
-                            <tr class="text-center">
-                              <th></th>
-                              <th></th>
-                              <th></th>
-                            </tr>
-                          </thead>
 
-                          <tbody>
-                            <% @permisos_configurados.sort_by { |oc| "#{oc.opcion_id} #{oc.atributo_id} #{oc.componente_id}"}.reverse.map do |pc| %>
-                              <% if pc.opcion_id == oc.opcion_id  %>
-                                <tr style="border-bottom: 1px solid silver;">
-                                  <th>
-                                    <%= "<strong style='color: black;'>COMPONENTE: #{pc.nombre_componente}</strong>".html_safe %>
-                                    <p class="text-secondary">
-                                        ATRIBUTO: <font class="text-permisos"><%= "#{pc.nombre_atributo.upcase}" %></font>
-                                      <br>
-                                        ASIGNADO POR: <font class="text-permisos"><%= "#{pc.descripcion.upcase}" %></font>
-                                      <br>
-                                        AREA: <font class="text-permisos"><%= "#{pc.nombre_area.upcase}" %></font>
-                                    </p>
-                                  </th>
-                                  <th></th>
-                                  <th>
-                                    <label class="checkbox-label">
-                                      <%= check_box_tag "componentes_seleccionados[]", pc.id, false, class: "componente-checkbox" %>
-                                      <span class="checkmark"></span>
-                                    </label>
+                  <div class="collapse" id="collapse<%= oc.nombre_opcion.upcase.gsub " ", "_"%>" style="">
+                    <div class="card-body">
+                      <div class="card mt-3" style="background-color: whitesmoke;">
+                        <div class="col-md-12 table-responsive-sm">
+                          <table style="font-size: 13px; width: 100%; padding: 15px;">
+                            <thead>
+                              <tr class="text-center">
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                              </tr>
+                            </thead>
 
-                                    
-                                    <!--< if tiene_permiso("BOTON ELIMINAR REGISTRO", "VER") %>-->
-                                    <!-- <= link_to eliminar_permiso_path(:id => pc.id, :id_persona => @persona.id),  method: :delete, data: {confirm: 'Estas seguro?'} do %>
-                                      <i class="fas fa-trash fa-lg" style="color: #f56363;"></i>
-                                    < end %>   -->
-                                    <!--< end %>-->
-                                  </th>
-                                </tr>
+                            <tbody>
+                              <% @permisos_configurados.sort_by { |oc| "#{oc.opcion_id} #{oc.atributo_id} #{oc.componente_id}"}.reverse.map do |pc| %>
+                                <% if pc.opcion_id == oc.opcion_id  %>
+                                  <tr style="border-bottom: 1px solid silver;">
+                                    <th>
+                                      <label for="<%=pc.id%>">
+                                        <%= "<strong style='color: black;'>COMPONENTE: #{pc.nombre_componente}</strong>".html_safe %>
+                                        <p class="text-secondary">
+                                            ATRIBUTO: <font class="text-permisos"><%= "#{pc.nombre_atributo.upcase}" %></font>
+                                          <br>
+                                            ASIGNADO POR: <font class="text-permisos"><%= "#{pc.try(:descripcion)}" %></font>
+                                          <br>
+                                            AREA: <font class="text-permisos"><%= "#{pc.nombre_area.upcase}" %></font>
+                                        </p>
+                                      </label>
+                                    </th>
+                                    <th></th>
+                                    <th>
+                                      <% if tiene_permiso("BOTON ELIMINAR REGISTRO", "VER") %>
+                                        <label class="checkbox-label">
+                                          <%= check_box_tag "componentes_seleccionados[]", pc.id, false, class: "componente-checkbox", id: "#{pc.id}" %>
+                                          <span class="checkmark"></span>
+                                        </label>
+                                      <% end %>
+                                    </th>
+                                  </tr>
+                                <% end %>
                               <% end %>
-                            <% end %>
-                          </tbody>
-                        </table>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   </div>

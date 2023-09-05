@@ -1,19 +1,21 @@
 <!-- Inicio Empresas -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Gestión de Empresas</h6>
-  </div>
-  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12 table-responsive-sm text-left">
+        <h4 class="m-0 font-weight-bold text-primary">Gestión de Empresas</h4>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-12 table-responsive-sm text-right">
-        <!--< if tiene_permiso("BOTON NUEVO REGISTRO", "VER") %>-->
+        <% if tiene_permiso("BOTON NUEVO REGISTRO", "VER") %>
           <%= link_to new_empresa_path, class: "btn btn-success btn-sm" do %>
             <span class="icon text-green-50">
                 <i class="fas fa-plus-circle"></i>
             </span>
             <span class="text">AGREGAR</span>
           <% end %>
-        <!--< end %>-->
+        <% end %>
         <%= link_to root_path, class: "btn btn-danger btn-sm" do %>
           <span class="icon text-red-50">
               <i class="fas fa-home"></i>
@@ -22,8 +24,8 @@
         <% end %>
       </div>
     </div>
-    <br>
-
+  </div>
+  <div class="card-body">
     <div class="row">
       <div class="col-md-12 table-responsive-sm">
         <table id="datatable_empresa" class="table table-striped table-hover table-sm table-bordered display" cellspacing="0" style="width:100%">
@@ -82,7 +84,7 @@
                   < if tiene_permiso("BOTON ACTIVAR/INACTIVAR REGISTRO", "VER") %>-->
                   <td class="text-center">
                     <% if empresa.estado == 'A' %>
-                      <%= link_to  inactivar_empresa_path(:id => empresa.id), method: :get, data: { turbolinks: false }, class: "btn btn-outline-danger btn-sm rounded-circle", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
+                      <%= link_to  inactivar_empresa_path(:id => empresa.id), method: :get, class: "btn btn-outline-danger btn-sm rounded-circle", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
                                                                                                                                             sweetalert_confirm_alert_value: "Inactivar",
                                                                                                                                             sweetalert_cancel_alert_value: "Cancelado",
                                                                                                                                             sweetalert_confirm_title_value: 'Esta seguro de inactivar <strong style="color: #1d71b9; font-weight: bold;"><p>'+"#{empresa.nombre}?"+'</p></strong>',
@@ -91,9 +93,9 @@
                                                                                                                                             sweetalert_cancel_title_value: 'Se ha cancelado la inactivación de <strong>'+"#{empresa.nombre}"+'</strong>' },
                                                                               "data-custom-class": "popover-danger", title: "INACTIVAR", "data-content": "#{empresa.codigo_empresa} | #{empresa.nombre.capitalize}" do %>
                         <i class="fas fa-toggle-on" style="transform: rotate(180deg)"></i>
-                      <%end%>
+                      <% end %>
                     <% else %>
-                      <%= link_to  activar_empresa_path(:id => empresa.id), method: :get, data: { turbolinks: false }, class: "btn btn-outline-success btn-sm rounded-circle", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
+                      <%= link_to  activar_empresa_path(:id => empresa.id), method: :get, class: "btn btn-outline-success btn-sm rounded-circle", data: {controller: 'sweetalert', action: 'click->sweetalert#btnInactivar',
                                                                                                                                             sweetalert_confirm_alert_value: "Activar",
                                                                                                                                             sweetalert_cancel_alert_value: "Cancelado",
                                                                                                                                             sweetalert_confirm_title_value: 'Esta seguro de activar <strong style="color: #1d71b9; font-weight: bold;"><p>'+"#{empresa.nombre}?"+'</p></strong>',

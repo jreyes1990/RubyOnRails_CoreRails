@@ -134,6 +134,8 @@ gem 'securerandom'
 # ENVIO MENSAJE A TELEGRAM
 gem 'telegram-bot-ruby'
 
+gem "friendly_id"
+
 
 # Configurando idioma devise, Enlace: https://github.com/tigrish/devise-i18n
 #gem 'devise-i18n'

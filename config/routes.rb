@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   }
   
   root to: 'home#index'
+  get 'home/index' => "home#index", as: 'home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  scope "/sistemas" do
+  scope "/sistemas", :path_names => {new: 'N', edit: 'E'} do
     get 'home/mostrar/:id' => "home#mostrar_parametro", as: 'mostrar_parametro'
     post 'home/registrar_parametro'
     post "home/registrar_area_temporal"
@@ -38,28 +39,53 @@ Rails.application.routes.draw do
     get 'empresas/inactivar/:id' => "empresas#inactivar_empresa", as: 'inactivar_empresa'
     get 'empresas/activar/:id' => "empresas#activar_empresa", as: 'activar_empresa'
 
-    resources :areas
-    get 'areas/inactivar/:id' => "areas#inactivar_area", as: 'inactivar_area'
-    get 'areas/activar/:id' => "areas#activar_area", as: 'activar_area'
+    resources :areas, :path => 'AR' do
+      member do
+       get 'I' => "areas#inactivar_area", as: 'inactivar'
+       get 'A' => "areas#activar_area", as: 'activar' 
+      end
+    end
     # Ruta para ingresar nuevas empresas dentro del formulario del modelo de Area
     get 'modal_new_empresa', to: 'areas#modal_nueva_empresa', as: 'modal_nueva_empresa'
     post 'areas/modal_registro_empresa/', to: 'areas#modal_registro_empresa', as: 'modal_registro_empresa'
 
-    resources :atributos
-    get 'atributos/inactivar/:id' => "atributos#inactivar_atributo", as: 'inactivar_atributo'
-    get 'atributos/activar/:id' => "atributos#activar_atributo", as: 'activar_atributo'
+    resources :atributos, :path => 'A' do
+      member do
+        get 'I' => "atributos#inactivar_atributo", as: 'inactivar'
+        get 'A' => "atributos#activar_atributo", as: 'activar'
+      end
+    end
 
-    resources :componentes
-    get 'componentes/inactivar/:id' => "componentes#inactivar_componente", as: 'inactivar_componente'
-    get 'componentes/activar/:id' => "componentes#activar_componente", as: 'activar_componente'
+    #Esto es para crear rutas personalizadas que pertenecen a un resource en especifico
+    resources :componentes, :path => 'C' do
+      #el collection sirve para crear una ruta que no depende de un id
 
-    resources :menus
-    get 'menus/inactivar/:id' => "menus#inactivar_menu", as: 'inactivar_menu'
-    get 'menus/activar/:id' => "menus#activar_menu", as: 'activar_menu'
+      #el member sirve para crear una ruta que depende de un id
+      member do
+        get 'I' => "componentes#inactivar_componente", as: 'inactivar'
+        get 'A' => "componentes#activar_componente", as: 'activar'
+      end
+    end
 
-    resources :roles
-    get 'roles/inactivar/:id' => "roles#inactivar_rol", as: 'inactivar_rol'
-    get 'roles/activar/:id' => "roles#activar_rol", as: 'activar_rol'
+    resources :menus, :path => 'M' do
+      #el collection sirve para crear una ruta que no depende de un id
+
+      #el member sirve para crear una ruta que depende de un id
+      member do
+        get 'I' => "menus#inactivar_menu", as: 'inactivar'
+        get 'A' => "menus#activar_menu", as: 'activar'
+      end
+    end
+
+    resources :roles, :path => 'R' do
+      #el collection sirve para crear una ruta que no depende de un id
+
+      #el member sirve para crear una ruta que depende de un id
+      member do
+        get 'I' => "roles#inactivar_rol", as: 'inactivar'
+        get 'A' => "roles#activar_rol", as: 'activar'
+      end
+    end
 
     resources :opciones
     get 'opciones/inactivar/:id' => "opciones#inactivar_opcion", as: 'inactivar_opcion'

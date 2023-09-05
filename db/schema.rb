@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_30_091402) do
+ActiveRecord::Schema.define(version: 2023_08_30_051241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,28 @@ ActiveRecord::Schema.define(version: 2023_07_30_091402) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "credenciales_usuarios", force: :cascade do |t|
+    t.integer "empresa_id"
+    t.string "nombre_empresa"
+    t.integer "area_id"
+    t.string "nombre_area"
+    t.integer "persona_id"
+    t.string "nombre_usuario"
+    t.integer "user_id"
+    t.string "correo_electronico"
+    t.string "password_temporal"
+    t.string "actualizo_password"
+    t.string "enviar_correo"
+    t.string "enviar_telegram"
+    t.string "estado_envio_correo"
+    t.string "estado_envio_telegram"
+    t.integer "user_created_id"
+    t.integer "user_updated_id"
+    t.string "estado", limit: 10
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "empresas", force: :cascade do |t|
     t.integer "codigo_empresa"
     t.string "nombre", limit: 200
@@ -117,6 +139,17 @@ ActiveRecord::Schema.define(version: 2023_07_30_091402) do
     t.string "estado", limit: 10
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "menu_roles", force: :cascade do |t|
@@ -170,7 +203,9 @@ ActiveRecord::Schema.define(version: 2023_07_30_091402) do
     t.integer "user_created_id"
     t.integer "user_updated_id"
     t.string "estado", limit: 10
+    t.string "aplica_carga_masiva", limit: 10
     t.bigint "menu_id", null: false
+    t.integer "posicion"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["menu_id"], name: "index_opciones_on_menu_id"
@@ -240,8 +275,10 @@ ActiveRecord::Schema.define(version: 2023_07_30_091402) do
     t.integer "user_created_id"
     t.integer "user_updated_id"
     t.string "estado", limit: 10
+    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["slug"], name: "index_roles_on_slug"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -313,7 +350,9 @@ ActiveRecord::Schema.define(version: 2023_07_30_091402) do
       opciones.user_created_id,
       opciones.user_updated_id,
       opciones.estado,
+      opciones.aplica_carga_masiva,
       opciones.menu_id,
+      opciones.posicion,
       opciones.created_at,
       opciones.updated_at,
       menus.nombre AS nombre_menu,
@@ -367,6 +406,8 @@ ActiveRecord::Schema.define(version: 2023_07_30_091402) do
       opciones.nombre AS nombre_opcion,
       opciones.icono AS icono_opcion,
       opciones.codigo_hex AS codigo_hex_opcion,
+      opciones.path AS path_opcion,
+      opciones.controlador AS controlador_opcion,
       componentes.nombre AS nombre_componente,
       atributos.nombre AS nombre_atributo
      FROM ((((opcion_cas
@@ -409,6 +450,7 @@ ActiveRecord::Schema.define(version: 2023_07_30_091402) do
       SELECT persona_empresa_formularios.id,
       persona_empresa_formularios.personas_area_id,
       persona_empresa_formularios.opcion_ca_id,
+      persona_empresa_formularios.descripcion,
       persona_empresa_formularios.estado,
       personas_areas_views.empresa_id,
       personas_areas_views.codigo_empresa,
@@ -427,6 +469,8 @@ ActiveRecord::Schema.define(version: 2023_07_30_091402) do
       opcion_cas_views.menu_id,
       opcion_cas_views.nombre_menu,
       opcion_cas_views.codigo_hex_menu,
+      opcion_cas_views.path_opcion,
+      opcion_cas_views.controlador_opcion,
       opcion_cas_views.opcion_id,
       opcion_cas_views.nombre_opcion,
       opcion_cas_views.codigo_hex_opcion,

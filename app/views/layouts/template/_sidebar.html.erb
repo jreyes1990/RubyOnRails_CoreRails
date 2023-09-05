@@ -1,3 +1,7 @@
+<% if session[:permisosSidebar].nil?
+  carga_permisos_menu_sidebar(helper_current_user_empresa_id, current_user.id) 
+end %>
+
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 

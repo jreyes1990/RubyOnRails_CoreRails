@@ -1,4 +1,4 @@
-<!-- <% flash.each do | type, msg, icono | %>
+<% flash.each do | type, msg, icono | %>
   <% if type=='alert'%>
     <div class="alert alert-warning">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -7,9 +7,11 @@
       
     </div>
   <% elsif type=='notice'%>
-    <div class="alert alert-info">
+    <div class="alert alert-info alert-dismissible align-items-center fade show">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       <div class="progress-bar-alert"></div>
+      <!-- <i class="fas fa-check-circle fa-lg"></i> -->
+      <img class="img-profile rounded-circle" src="/assets/icono_success.png" style="border: 2px solid white;" width="40" height="40">
       <%= msg %>
     </div>
   <% elsif type=='success'%>
@@ -25,9 +27,9 @@
       <%= msg %>
     </div>
   <% end %>
-<% end %> -->
+<% end %>
 
-<% if flash[:notice] 
+<!-- <% if flash[:notice] 
    icono="success" %>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -117,4 +119,4 @@
       });
     });
   </script>
-<% end %>
+<% end %> -->

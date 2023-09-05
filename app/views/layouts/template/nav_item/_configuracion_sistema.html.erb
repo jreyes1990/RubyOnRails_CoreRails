@@ -1,107 +1,161 @@
-<!-- Divider -->
-<hr class="sidebar-divider">
+<%
+menu_sistema_elements = [
+  { 
+    name: 'MENU USUARIOS', 
+    link: usuarios_path, 
+    class: 'fas fa-users', 
+    action: 'usuarios',
+    text: 'Usuarios', 
+    class_badge: "badge badge-success",
+    registros: conteo(User, 'A', 0)
+  },
+  { 
+    name: 'MENU EMPRESAS', 
+    link: empresas_path, 
+    class: 'fas fa-building', 
+    action: 'empresas',
+    text: 'Empresas', 
+    class_badge: "badge badge-success",
+    registros: conteo(Empresa, 'A', 0)
+  },
+  { 
+    name: 'MENU AREAS EMPRESA', 
+    link: areas_path, 
+    class: 'fas fa-building', 
+    action: 'areas',
+    text: 'Áreas - Empresa', 
+    class_badge: "badge badge-success",
+    registros: conteo(Area, 'A', 0)
+  },
+  { 
+    name: 'MENU USUARIO AREA', 
+    link: personas_areas_path, 
+    class: 'fas fa-users', 
+    action: 'personas_areas',
+    text: 'Usuario - Área', 
+    class_badge: "badge badge-success",
+    registros: conteo(PersonasArea, 'A', 0)
+  },
+  { 
+    name: 'MENU ROL', 
+    link: roles_path, 
+    class: 'fas fa-user-tag', 
+    action: 'roles',
+    text: 'Roles', 
+    class_badge: "badge badge-success",
+    registros: conteo(Rol, 'A', 0)
+  },
+  { 
+    name: 'MENU MENU', 
+    link: menus_path, 
+    class: 'fab fa-elementor', 
+    action: 'menus',
+    text: 'Menús', 
+    class_badge: "badge badge-success",
+    registros: conteo(Menu, 'A', 0)
+  },
+  { 
+    name: 'MENU OPCION MENU', 
+    link: opciones_path, 
+    class: 'fas fa-minus-square', 
+    action: 'opciones',
+    text: 'Menú - Opciones', 
+    class_badge: "badge badge-success",
+    registros: conteo(Opcion, 'A', 0)
+  },
+  { 
+    name: 'MENU MENU ROL', 
+    link: menu_roles_path, 
+    class: 'fas fa-user-cog', 
+    action: 'menu_roles',
+    text: 'Menú - Roles', 
+    class_badge: "badge badge-success",
+    registros: conteo(MenuRol, 'A', 0)
+  },
+  { 
+    name: 'MENU ATRIBUTO', 
+    link: atributos_path, 
+    class: 'fas fa-atom', 
+    action: 'atributos',
+    text: 'Atributos', 
+    class_badge: "badge badge-success",
+    registros: conteo(Atributo, 'A', 0)
+  },
+  { 
+    name: 'MENU COMPONENTE', 
+    link: componentes_path, 
+    class: 'fab fa-codepen', 
+    action: 'componentes',
+    text: 'Componentes', 
+    class_badge: "badge badge-success",
+    registros: conteo(Componente, 'A', 0)
+  }
+].freeze
+%>
 
-<!-- Heading -->
-<div class="sidebar-heading">
-  Configuración
-</div>
+<%
+menu_sistema_permisos_elements = [
+  { 
+    name: 'MENU PERMISOS FORMULARIO', 
+    link: opcion_cas_path, 
+    class: 'fas fa-clipboard-list', 
+    action: 'opcion_cas',
+    text: 'Permisos Formulario', 
+    class_badge: "badge badge-success",
+    registros: conteo(OpcionCa, 'A', 0)
+  }
+].freeze
+%>
 
-<!-- Nav Item - Pages Collapse Menu -->
-<li class="<%= is_active_controller_sistema_titulo %>">
-  <a class="menu_sb <%= is_active_controller_sistema %>" href="#" data-toggle="collapse" data-target="#collapseSistema" aria-expanded="true" aria-controls="collapseSistema">
-    <i class="fas fa-fw fa-cog"></i>
-    <span>SISTEMAS</span>
-  </a>
-  <div id="collapseSistema" class="opcion_sb <%= is_active_option_controller_sistema %>" aria-labelledby="headingSistema" data-parent="#accordionSidebar">
-    <div class="bg-white py-2 collapse-inner rounded">
-      <h6 class="collapse-header">Opciones:</h6>
-      <!--INICIA VALIDACION DE OPCIONES MOSTRAR EN EL SIDEBAR -->
+<% if menu_sistema_elements.any? { |element| tiene_permiso_sidebar(element[:name], "VER OPCION") } %>
+  <!-- Divider -->
+  <hr class="sidebar-divider">
 
-      <!--< if tiene_permiso_sidebar("MENU USUARIOS", "VER OPCION") %>-->
-      <%= link_to usuarios_path, class: is_active_action("usuarios") do %>
-        <i class="fas fa-users"></i>
-        <span>Usuarios  <span class="badge badge-success"><%= conteo(User, 'A', 0) %></span></span>
-      <% end %>
-      <!--< end %>-->
-
-      <!--< if tiene_permiso_sidebar("MENU EMPRESAS", "VER OPCION") %>-->
-      <%= link_to empresas_path, class: is_active_action("empresas") do %>
-        <i class="fas fa-building"></i>
-        <span>Empresas  <span class="badge badge-success"><%= conteo(Empresa, 'A', 0) %></span></span>
-      <% end %>
-      <!--< end %>-->
-
-      <!--< if tiene_permiso_sidebar("MENU AREAS EMPRESA", "VER OPCION") %>-->
-      <%= link_to areas_path, class: is_active_action("areas") do %>
-        <i class="fas fa-sitemap"></i>
-        <span>Areas - Empresa  <span class="badge badge-success"><%= conteo(Area, 'A', 0) %></span></span>
-      <% end %>
-      <!--< end %>-->
-
-      <!--< if tiene_permiso_sidebar("MENU USUARIO AREA", "VER OPCION") %>-->
-      <%= link_to personas_areas_path, class: is_active_action("personas_areas")  do %>
-        <i class="fas fa-users"></i>
-        <span>Usuario - Area  <span class="badge badge-success"><%= conteo(PersonasArea, 'A', 0) %></span></span>
-      <% end %>
-      <!--< end %>-->
-
-      <!--< if tiene_permiso_sidebar("MENU ROL", "VER OPCION") %>-->
-      <%= link_to roles_path, class: is_active_action("roles")  do %>
-        <i class="fas fa-user-tag"></i>
-        <span>Roles  <span class="badge badge-success"><%= conteo(Rol, 'A', 0) %></span></span>
-      <% end %>
-      <!--< end %>-->
-
-      <!--< if tiene_permiso_sidebar("MENU MENU", "VER OPCION") %>-->
-      <%= link_to menus_path, class: is_active_action("menus")  do %>
-        <i class="fab fa-elementor"></i>
-        <span>Menús  <span class="badge badge-success"><%= conteo(Menu, 'A', 0) %></span></span>
-      <% end %>
-      <!--< end %>-->
-      
-      <!--< if tiene_permiso_sidebar("MENU OPCION MENU", "VER OPCION") %>-->
-      <%= link_to opciones_path, class: is_active_action("opciones")  do %>
-        <i class="fas fa-minus-square"></i>
-        <span>Menú - Opciones  <span class="badge badge-success"><%= conteo(Opcion, 'A', 0) %></span></span>
-      <% end %>
-      <!--< end %>-->
-
-      <!--< if tiene_permiso_sidebar("MENU MENU ROL", "VER OPCION") %>-->
-      <%= link_to menu_roles_path, class: is_active_action("menu_roles")  do %>
-        <i class="fas fa-user-cog"></i>
-        <span>Menú - Roles  <span class="badge badge-success"><%= conteo(MenuRol, 'A', 0) %></span></span>
-      <% end %>
-      <!--< end %>-->
-
-      <!--< if tiene_permiso_sidebar("MENU ATRIBUTO", "VER OPCION") %>-->
-      <%= link_to atributos_path, class: is_active_action("atributos")  do %>
-        <i class="fas fa-atom"></i>
-        <span>Atributos  <span class="badge badge-success"><%= conteo(Atributo, 'A', 0) %></span></span>
-      <% end %>
-      <!--< end %>-->
-
-      <!--< if tiene_permiso_sidebar("MENU COMPONENTE", "VER OPCION") %>-->
-      <%= link_to componentes_path, class: is_active_action("componentes")  do %>
-        <i class="fab fa-codepen"></i>
-        <span>Componentes  <span class="badge badge-success"><%= conteo(Componente, 'A', 0) %></span></span>
-      <% end %>
-      <!--< end %>-->
-
-      <!--< if tiene_permiso_sidebar("MENU PERMISOS FORMULARIO", "VER OPCION") %>-->
-      <%= link_to opcion_cas_path, class: is_active_action("opcion_cas")  do %>
-        <i class="fas fa-clipboard-list"></i>
-        <span>Permisos Formulario  <span class="badge badge-success"><%= conteo(OpcionCa, 'A', 0) %></span></span>
-      <% end %>
-      <!--< end %>-->
-
-      <!--< if tiene_permiso_sidebar("MENU PERMISOS USUARIO", "VER OPCION") %>-->
-      <%= link_to permisos_path, class: is_active_action("persona_empresa_formularios")  do %>
-        <i class="fas fa-key"></i>
-        <span>Permisos Usuario  <span class="badge badge-success"><%= conteo(PersonaEmpresaFormulario, 'A', 0) %></span></span>
-      <% end %>
-      <!--< end %>-->
-
-      <!--FINALIZA VALIDACION DEL OPCIONES PARA MOSTRAR EN EL SIDEBAR -->
-    </div>
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Configuración
   </div>
-</li>
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="<%= is_active_controller_sistema_titulo %>">
+    <a class="menu_sb <%= is_active_controller_sistema %>" href="#" data-toggle="collapse" data-target="#collapseSistema" aria-expanded="true" aria-controls="collapseSistema">
+      <i class="fas fa-fw fa-cog"></i>
+      <span>SISTEMAS</span>
+    </a>
+    <div id="collapseSistema" class="opcion_sb <%= is_active_option_controller_sistema %>" aria-labelledby="headingSistema" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Opciones:</h6>
+        <!--INICIA VALIDACION DE OPCIONES MOSTRAR EN EL SIDEBAR -->
+        <% menu_sistema_elements.each do |element| %>
+          <% if tiene_permiso_sidebar(element[:name], "VER OPCION") %>
+            <%= link_to element[:link], class: is_active_action(element[:action]) do %>
+              <i class="<%= element[:class] %>"></i>
+              <span><%= element[:text] %> <span class="<%= element[:class_badge] %>"><%= element[:registros] %></span></span>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% if menu_sistema_permisos_elements.any? { |element_permisos| tiene_permiso_sidebar(element_permisos[:name], "VER OPCION") } %>
+          <h6 class="collapse-header">Permiso Documentos:</h6>
+          <% menu_sistema_permisos_elements.each do |element_permisos| %>
+            <% if tiene_permiso_sidebar(element_permisos[:name], "VER OPCION") %>
+              <%= link_to element_permisos[:link], class: is_active_action(element_permisos[:action]) do %>
+                <i class="<%= element_permisos[:class] %>"></i>
+                <span><%= element_permisos[:text] %> <span class="<%= element_permisos[:class_badge] %>"><%= element_permisos[:registros] %></span></span>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <!--FINALIZA VALIDACION DEL OPCIONES PARA MOSTRAR EN EL SIDEBAR -->
+    
+        
+        
+        <%= link_to permisos_path, class: is_active_action("persona_empresa_formularios")  do %>
+          <i class="fas fa-key"></i>
+          <span>Permisos Usuario  <span class="badge badge-success"><%= conteo(PersonaEmpresaFormulario, 'A', 0) %></span></span>
+        <% end %>   
+
+      </div>
+    </div>
+  </li>
+<% end %>   

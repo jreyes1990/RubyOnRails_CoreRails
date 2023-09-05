@@ -3,6 +3,18 @@ module ApplicationHelper
   include Permisos
   include Bitacoras
 
+  def helper_current_user_empresa_id
+    id_empresa_actual = 0
+    parametros = Parametro.where(:user_id => current_user.id).first
+
+    if (parametros != nil) then
+      id_empresa_actual = parametros.empresa_id        
+      return id_empresa_actual
+    else
+      return id_empresa_actual = ''
+    end       
+  end
+  
   def current_user_name
     persona = Persona.where(user_id: current_user.id).first
 

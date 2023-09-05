@@ -6,6 +6,8 @@ menus.codigo_hex as codigo_hex_menu,
 opciones.nombre as nombre_opcion, 
 opciones.icono as icono_opcion, 
 opciones.codigo_hex as codigo_hex_opcion,
+opciones.path AS path_opcion,
+opciones.controlador AS controlador_opcion,
 componentes.nombre as nombre_componente,
 atributos.nombre as nombre_atributo
 from opcion_cas 

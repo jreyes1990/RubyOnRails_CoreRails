@@ -10,7 +10,9 @@ class CreateOpciones < ActiveRecord::Migration[6.0]
       t.integer :user_created_id
       t.integer :user_updated_id
       t.string :estado, limit: 10
+      t.string :aplica_carga_masiva, limit: 10
       t.references :menu, null: false, foreign_key: true
+      t.integer :posicion
 
       t.timestamps
     end

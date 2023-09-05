@@ -1,82 +1,37 @@
 module Permisos 
   public
   
-=begin
-  def cargar_permisos_de_usuario(persona_id, empresa_id)
-    controlador = params[:controller]
+  def cargar_permisos_usuario(empresa_id, usuario_id)
+    controlador = params[:controller].upcase
     
-    @permisosConfigurados =  custom_query("SELECT
-                                                com.NOMBRE AS COMPONENTE,
-                                                atr.NOMBRE AS ATRIBUTO
-                                            FROM
-                                                PERSONA_EMPRESA_FORMULARIOS a
-                                            INNER JOIN personas_areas b ON
-                                                a.personas_area_id = b.id
-                                            INNER JOIN areas c ON
-                                                b.area_id = c.id
-                                            INNER JOIN empresas d ON
-                                                d.id = c.empresa_id
-                                            INNER JOIN personas e ON
-                                                b.persona_id = e.id
-                                            INNER JOIN opcion_cas oc ON
-                                                oc.id = a.opcion_ca_id
-                                            INNER JOIN opciones o ON
-                                                o.id = oc.opcion_id
-                                            INNER JOIN atributos atr ON
-                                                atr.id = oc.atributo_id
-                                            INNER JOIN COMPONENTES com ON
-                                                com.id = oc.COMPONENTE_ID 
-                                            WHERE
-                                                e.id = #{persona_id}
-                                                AND c.empresa_id = #{empresa_id.to_i}
-                                                AND upper(o.controlador) = upper('#{controlador}')")
-            
+    @permisos_configurados = PersonaEmpresaFormularioView
+                              .select(:nombre_componente, :nombre_atributo)
+                              .where("user_id=? and empresa_id=? and upper(controlador_opcion)=?", usuario_id, empresa_id, controlador)
+                              .distinct
+        
     @permisos = []
-    @permisosConfigurados.each do |h|
-        componente = h['componente']
-        atributo = h['atributo']
+    @permisos_configurados.each do |h|
+        componente = h.nombre_componente
+        atributo = h.nombre_atributo
         permiso = Permiso.new(componente, atributo)
         @permisos.push(permiso)
     end
     return @permisos
   end
 
-  def cargar_permisos_de_menus_sidebar(persona_id, empresa_id)
+  def carga_permisos_menu_sidebar(empresa_id, usuario_id)
     if !empresa_id.blank?  
-        #query para cargar los menus del sidebar
-      @permisosConfiguradosSidebar = custom_query("SELECT
-                                                  com.NOMBRE AS COMPONENTE,
-                                                  atr.NOMBRE AS ATRIBUTO
-                                              FROM
-                                                  PERSONA_EMPRESA_FORMULARIOS a
-                                              INNER JOIN personas_areas b ON
-                                                  a.personas_area_id = b.id
-                                              INNER JOIN areas c ON
-                                                  b.area_id = c.id
-                                              INNER JOIN empresas d ON
-                                                  d.id = c.empresa_id
-                                              INNER JOIN personas e ON
-                                                  b.persona_id = e.id
-                                              INNER JOIN opcion_cas oc ON
-                                                  oc.id = a.opcion_ca_id
-                                              INNER JOIN opciones o ON
-                                                  o.id = oc.opcion_id
-                                              INNER JOIN atributos atr ON
-                                                  atr.id = oc.atributo_id
-                                              INNER JOIN COMPONENTES com ON
-                                                  com.id = oc.COMPONENTE_ID 
-                                              WHERE
-                                                  e.user_id = #{persona_id}
-                                                  AND c.empresa_id = #{empresa_id.to_i}
-                                                  AND atr.nombre = 'VER OPCION'")
-                                                                                                  
+      @permisos_configurados_sidebar = PersonaEmpresaFormularioView
+                                        .select(:nombre_componente, :nombre_atributo)
+                                        .where(user_id: usuario_id, empresa_id: empresa_id, nombre_atributo: 'VER OPCION')
+                                        .distinct
       
       session[:permisosSidebar] = []
       i = 0
-      if !@permisosConfiguradosSidebar.nil?
-        @permisosConfiguradosSidebar.each do |h|
-          componente = h['componente']
-          atributo = h['atributo']
+      if !@permisos_configurados_sidebar.nil?
+        @permisos_configurados_sidebar.each do |h|
+          componente = h.nombre_componente
+          atributo = h.nombre_atributo
           permiso = Permiso.new(componente, atributo)
           session[:permisosSidebar].push(permiso)
         end
@@ -87,7 +42,7 @@ module Permisos
       return session[:permisosSidebar] = []
     end  
   end
-=end
+
   def tiene_permiso(componente, atributo)
     atributo_encontrado = false
     

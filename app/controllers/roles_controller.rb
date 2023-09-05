@@ -1,5 +1,5 @@
 class RolesController < ApplicationController
-  before_action :set_rol, only: %i[ show edit update destroy ]
+  before_action :set_rol, only: %i[ show edit update destroy inactivar_rol activar_rol]
 
   # GET /roles or /roles.json
   def index
@@ -62,7 +62,7 @@ class RolesController < ApplicationController
   end
 
   def inactivar_rol
-    @rol = Rol.find(params[:id])
+    #@rol = Rol.find(params[:id])
     @rol.user_updated_id = current_user.id
     @rol.estado = "I"
 
@@ -85,7 +85,7 @@ class RolesController < ApplicationController
   end
 
   def activar_rol
-    @rol = Rol.find(params[:id])
+    #@rol = Rol.find(params[:id])
     @rol.user_updated_id = current_user.id
     @rol.estado = "A"
 
@@ -104,6 +104,7 @@ class RolesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_rol
       @rol = Rol.find(params[:id])
+      #@rol = Rol.friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

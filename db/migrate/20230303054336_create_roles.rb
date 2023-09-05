@@ -7,6 +7,8 @@ class CreateRoles < ActiveRecord::Migration[6.0]
       t.integer :user_created_id
       t.integer :user_updated_id
       t.string :estado, limit: 10
+      t.string :slug
+      t.index :slug
 
       t.timestamps
     end
