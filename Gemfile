@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'redis', '~> 4.0'
 
 # Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
@@ -78,10 +78,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'net-ssh', '>= 6.0.2'
-
-# https://guias.makeitreal.camp/ruby-on-rails-i/devise
-# https://github.com/heartcombo/devise
-gem 'devise'
 
 # Uso para manejo de fotografias,  Enlace:  https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave'
@@ -135,6 +131,16 @@ gem 'securerandom'
 gem 'telegram-bot-ruby'
 
 gem "friendly_id"
+
+# https://guias.makeitreal.camp/ruby-on-rails-i/devise
+# https://github.com/heartcombo/devise
+gem 'devise'
+# 
+gem 'devise-security'
+# Soporte para la autenticación de dos factores
+gem 'devise-two-factor'
+# Genera código QR para el usuario pueda escanear con Google Authenticator
+gem 'rqrcode'
 
 
 # Configurando idioma devise, Enlace: https://github.com/tigrish/devise-i18n

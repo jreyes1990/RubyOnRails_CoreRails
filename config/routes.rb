@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   
   root to: 'home#index'
   get 'home/index' => "home#index", as: 'home'
+  post 'home/cambio_password_user' => "home#cambio_password_user", as: 'cambio_password_user'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   scope "/sistemas", :path_names => {new: 'N', edit: 'E'} do

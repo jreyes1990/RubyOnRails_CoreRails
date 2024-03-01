@@ -19,9 +19,13 @@
 
     <div class="row">
       <div class="col-md-12 text-center">
+        
+        <% if @valida_password_user.password_changed === 'f' || @valida_password_user.password_changed === false %>
+          <%= render "modal_cambio_password_user" %>
+        <% end %>
         <% if @valida_parametro.blank? %>
           <%= render "modal_registrar_area" %>
-            <% end %>
+        <% end %>
       </div>
     </div>
   </div>

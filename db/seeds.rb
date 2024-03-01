@@ -2,11 +2,11 @@ u = User.new({email: "jreyes1990.test@gmail.com", encrypted_password: "$2a$12$XM
 u.save!(validate: false)
 
 persona = Persona.find(1)
-persona.nombre = "Super"
-persona.apellido = "Administrador"
-persona.direccion = "Guatemala"
+persona.nombre = "Jolberth Alberto"
+persona.apellido = "Reyes Lopez"
+persona.direccion = "Santa Lucia Cotzumalguapa"
 persona.estado = "A"
-persona.telefono = "66854900"
+persona.telefono = "54685874"
 persona.save
 
 Empresa.create!([

@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   def index
     @consulta_area = PersonasAreaView.where(user_id: current_user.id, estado: 'A')  
     @valida_parametro = Parametro.where(user_id: current_user.id).first
-
+    @valida_password_user = User.select(:id, :password_changed ).where(:id => current_user.id).first
     session[:permisosSidebar] = nil
   end
 
@@ -65,6 +65,50 @@ class HomeController < ApplicationController
     end
   end
 
+  def cambio_password_user
+    puts set_password_change
+    @user = current_user
+    @passwords_params = set_password_change
+    respond_to do |format|
+      if @user.valid_password?(@passwords_params[:password_actual])
+        if @passwords_params[:password_nueva] == @passwords_params[:password_confirmada]
+          if @passwords_params[:password_nueva] != @passwords_params[:password_actual]
+            #validar que la contraseña nueva sea segura, 8 digitos minimos, una letra mayuscula, una minuscula, un numero y un caracter especial
+            if @passwords_params[:password_nueva].length >= 8 && @passwords_params[:password_nueva].match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/).present?
+              @user.password = @passwords_params[:password_nueva]
+              @user.password_changed = true
+              if @user.save
+                  session[:password_change_success] = "Nueva contraseña registrada exitosamente."
+                  format.html { redirect_to home_path, notice: "Nueva contraseña registrada exitosamente." }
+              else
+                  @valida_password_user = User.select(:id, :password_changed ).where(:id => current_user.id).first
+                  format.js { flash.now[:error] = "Error al cambiar la contraseña" }
+              end
+            else 
+              @valida_password_user = User.select(:id, :password_changed ).where(:id => current_user.id).first
+              format.js { flash.now[:error] = "La nueva contraseña no es segura" }
+            end
+          else 
+            @valida_password_user = User.select(:id, :password_changed ).where(:id => current_user.id).first
+            format.js { flash.now[:error] = "La nueva contraseña no puede ser la actual" }
+          end
+        else
+          @valida_password_user = User.select(:id, :password_changed ).where(:id => current_user.id).first
+          format.js { flash.now[:error] = "La contraseña nueva no coinciden" }
+        end
+      else 
+        @valida_password_user = User.select(:id, :password_changed ).where(:id => current_user.id).first
+        format.js { flash.now[:error] = "Contaseña actual incorrecta" }
+      end
+    end
+  end
+
   def welcome
+  end
+
+  private
+
+  def set_password_change
+    params.require(:set_password_change).permit(:password_actual, :password_nueva, :password_confirmada)
   end
 end
