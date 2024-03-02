@@ -22,13 +22,18 @@ class EmpresasController < ApplicationController
 
   # POST /empresas or /empresas.json
   def create
+    @parametro_bandera = params[:empresa][:bandera].to_i
     @empresa = Empresa.new(empresa_params)
     @empresa.estado = "A"
     @empresa.user_created_id = current_user.id
 
     respond_to do |format|
       if @empresa.save
-        format.html { redirect_to empresas_url, notice: "<strong>EXCELENTE!!<strong><br>La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha creado correctamente.".html_safe }
+        if @parametro_bandera == 1
+          format.html { redirect_to empresas_url, notice: "<strong>EXCELENTE!!<strong><br>La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha creado correctamente.".html_safe }
+        elsif @parametro_bandera == 2
+          format.html { redirect_to new_area_path, notice: "<strong>EXCELENTE!!<strong><br>La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha creado correctamente.".html_safe }
+        end
         format.json { render :show, status: :created, location: @empresa }
       else
         format.html { render :new, status: :unprocessable_entity, alert: "Ocurrio un error al crear el Color, Verifique!!.." }
