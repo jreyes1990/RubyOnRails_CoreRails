@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_30_051241) do
+ActiveRecord::Schema.define(version: 2024_03_01_155739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,6 +178,14 @@ ActiveRecord::Schema.define(version: 2023_08_30_051241) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "old_passwords", force: :cascade do |t|
+    t.string "encrypted_password", null: false
+    t.string "password_archivable_type"
+    t.bigint "password_archivable_id"
+    t.datetime "created_at"
+    t.index ["password_archivable_type", "password_archivable_id"], name: "idx_old_passwords"
+  end
+
   create_table "opcion_cas", force: :cascade do |t|
     t.string "descripcion"
     t.integer "user_created_id"
@@ -301,6 +309,18 @@ ActiveRecord::Schema.define(version: 2023_08_30_051241) do
     t.string "estado"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.boolean "password_changed", default: false
+    t.datetime "password_changed_at"
+    t.string "encrypted_otp_secret"
+    t.string "encrypted_otp_secret_iv"
+    t.string "encrypted_otp_secret_salt"
+    t.integer "consumed_timestep"
+    t.boolean "otp_required_for_login"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

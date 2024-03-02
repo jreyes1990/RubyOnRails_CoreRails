@@ -7,10 +7,15 @@
 #  descripcion     :string
 #  estado          :string(10)
 #  nombre          :string(200)
+#  slug            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  user_created_id :integer
 #  user_updated_id :integer
+#
+# Indexes
+#
+#  index_roles_on_slug  (slug)
 #
 require 'rails_helper'
 
