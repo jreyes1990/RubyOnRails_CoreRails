@@ -119,10 +119,4 @@ class HomeController < ApplicationController
   def set_password_change
     params.require(:set_password_change).permit(:password_actual, :password_nueva, :password_confirmada)
   end
-  # En el controlador o helper donde manejas la configuración de 2FA
-  def generate_qr_code(user)
-    otp_uri = user.otp_provisioning_uri(user.email, issuer: 'Sistema de Core Rails')
-    qrcode = RQRCode::QRCode.new(otp_uri).as_svg(module_size: 3).html_safe
-    qrcode
-  end
 end

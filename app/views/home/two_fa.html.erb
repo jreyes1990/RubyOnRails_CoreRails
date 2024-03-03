@@ -3,6 +3,9 @@
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), method: :post) do |f| %>
   <div class="form-inputs">
+    <div>
+      <%= raw @qr_code_svg %>
+    </div>
     <br><br>
     <div class="form-group">
       <%= f.input :otp_attempt, label: "Codigo de Seguridad", required: false, autofocus: true, autocomplete: "email", class: "form-control form-control-user", placeholder: "Ingrese su codigo de seguridad..." %>
