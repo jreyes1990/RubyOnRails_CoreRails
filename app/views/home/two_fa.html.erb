@@ -1,0 +1,21 @@
+<h2>BIENVENIDO</h1>
+<br>
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), method: :post) do |f| %>
+  <div class="form-inputs">
+    <br><br>
+    <div class="form-group">
+      <%= f.input :otp_attempt, label: "Codigo de Seguridad", required: false, autofocus: true, autocomplete: "email", class: "form-control form-control-user", placeholder: "Ingrese su codigo de seguridad..." %>
+    </div>
+    <br><br>
+    
+  </div>
+  <br>
+  <div class="form-actions">
+    <%= f.button :submit, "Enviar", class: "btn btn-success btn-user btn-block" %>
+  </div>
+<% end %>
+<hr>
+<div class="text-center">
+  <%= render "devise/shared/links" %>
+</div>

@@ -323,4 +323,44 @@
    6. Verifica la precompilación de assets => En un entorno de desarrollo, los assets deben precompilarse antes de que se sirvan. Asegúrate de que la precompilación de assets se haya realizado correctamente ejecutando el siguiente comando.
       RAILS_ENV=development bundle exec rake assets:precompile
 
+#  Cómo implementar autenticación a dos pasos con Rails y Devise (2FA)
+   0. Documentacion => Devise-Two-Factor Authentication
+      ENLACE => https://github.com/devise-two-factor/devise-two-factor
+      VIDEO  => https://www.youtube.com/watch?v=yUjU0okqQfQ
+
+
+   1. Agregue Devise-Two-Factor a su Gemfile
+      gem 'devise-two-factor'
+
+      1.0. Eliminamos la migration
+           rake db:migrate:down VERSION=20231012215531
+
+      1.0. Destruimos la migration generado
+           rails d migration AddTwoFactorFieldsToUsers
+           
+      1.1. Excluidos de la migration anterior
+           add_column :users, :encrypted_otp_secret, :string
+           add_index :users, :encrypted_otp_secret, unique: true # Asegura la unicidad
+           add_column :users, :encrypted_otp_secret_iv, :string
+           add_column :users, :encrypted_otp_secret_salt, :string
+   
+   2. Agregar el generador de devise two factor, junto con la variable de entorno
+      rails generate devise_two_factor User OTP_SECRET_ENCRYPTION_KEY
+
+   3. Ejecutar el proceso de configuracion
+      rails db:migrate
+
+   4. Ejecutar la OTP_SECRET_ENCRYPTION_KEY
+      OTP_SECRET_ENCRYPTION_KEY=12345dfdf545fgfgggh54g21h54g5hhjjh54 rails server
+
+#  Como leer los correos electronicos sin tener que enviarlos
+   0. Documentacion => letter_opener
+      ENLACE => https://github.com/ryanb/letter_opener
+      VIDEO  => https://webcrunch.com/posts/using-the-letter_opener-gem-with-ruby-on-rails
+      
+   1. Agregue letter_opener a su Gemfile
+      gem "letter_opener", group: :development
+
+   2. Generar un Mailer enviar el codigo de Authentication
+      rails generate mailer UsuarioCode send_code
 

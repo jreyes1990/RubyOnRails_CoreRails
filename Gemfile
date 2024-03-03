@@ -142,6 +142,9 @@ gem 'devise-two-factor'
 # Genera código QR para el usuario pueda escanear con Google Authenticator
 gem 'rqrcode'
 
+# Leer correos electronicos sin tener que enviarlos
+gem "letter_opener", group: :development
+
 
 # Configurando idioma devise, Enlace: https://github.com/tigrish/devise-i18n
 #gem 'devise-i18n'

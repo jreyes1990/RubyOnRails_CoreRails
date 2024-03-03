@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  require 'rqrcode'
 
   def index
     @consulta_area = PersonasAreaView.where(user_id: current_user.id, estado: 'A')  
@@ -106,9 +107,22 @@ class HomeController < ApplicationController
   def welcome
   end
 
-  private
+  def enable
+    current_user.otp_secret = User.generate_otp_secret
+    current_user.otp_required_for_login = true
+    current_user.save!
 
+    redirect_back(fallback_location:root_path)
+  end
+
+  private
   def set_password_change
     params.require(:set_password_change).permit(:password_actual, :password_nueva, :password_confirmada)
+  end
+  # En el controlador o helper donde manejas la configuración de 2FA
+  def generate_qr_code(user)
+    otp_uri = user.otp_provisioning_uri(user.email, issuer: 'Sistema de Core Rails')
+    qrcode = RQRCode::QRCode.new(otp_uri).as_svg(module_size: 3).html_safe
+    qrcode
   end
 end

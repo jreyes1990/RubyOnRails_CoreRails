@@ -60,11 +60,14 @@ Rails.application.configure do
   # CHANGE the following line; it's :memory_store by default
   config.cache_store = :redis_cache_store, {url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" }}
 
-  # ADD the following line; it probably doesn't exist
+  # ADD the following line; it probably doesn't perform_deliveries
   config.session_store :cache_store, key: "_sessions_development", compress: true, pool_size: 5, expire_after: 1.year
 
   config.serve_static_assets = true
 
   # Configura las opciones de URL predeterminadas para generar URLs en los correos electrónicos
-  config.action_mailer.default_url_options = { :host => "localhost:3000" }
+  # config.action_mailer.default_url_options = { :host => "localhost:3000" }
+
+  # Configura la opcion para abrir el correo electronico a otra pestania
+  # config.action_mailer.delivery_method = :letter_opener
 end

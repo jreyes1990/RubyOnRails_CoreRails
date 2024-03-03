@@ -15,7 +15,8 @@ Rails.application.configure do
     config.assets.raise_runtime_errors = true
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.perform_deliveries = true
-    config.action_mailer.delivery_method = :smtp       # Establece el método de entrega de correo electrónico, en este caso, SMTP
+    config.action_mailer.delivery_method = :letter_opener # Configura la opcion para abrir el correo electronico a otra pestania
+    # config.action_mailer.delivery_method = :smtp       # Establece el método de entrega de correo electrónico, en este caso, SMTP
     config.action_mailer.default :charset => "utf-8"
     config.action_mailer.default_options = { from: 'noreply@example.com' }
 

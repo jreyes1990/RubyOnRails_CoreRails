@@ -26,6 +26,10 @@
         <% if @valida_parametro.blank? %>
           <%= render "modal_registrar_area" %>
         <% end %>
+
+        <% if !current_user.otp_required_for_login %>
+          <%= link_to "Habilitar 2FA", home_enable_path, method: :patch %>
+        <% end %>
       </div>
     </div>
   </div>
