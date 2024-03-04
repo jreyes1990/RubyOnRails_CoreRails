@@ -145,6 +145,9 @@ gem 'rqrcode'
 # Leer correos electronicos sin tener que enviarlos
 gem "letter_opener", group: :development
 
+# Gestionar variables de entorno a nivel de proyecto
+gem 'dotenv-rails', group: :development
+
 
 # Configurando idioma devise, Enlace: https://github.com/tigrish/devise-i18n
 #gem 'devise-i18n'

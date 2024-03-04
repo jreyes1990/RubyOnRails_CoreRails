@@ -364,3 +364,18 @@
    2. Generar un Mailer enviar el codigo de Authentication
       rails generate mailer UsuarioCode send_code
 
+#  Como gestionar variables de entorno a nivel de proyecto
+   0. Documentacion => dotenv-rails
+      ENLACE => https://github.com/bkeepers/dotenv
+                https://github.com/ruby/securerandom
+
+      VIDEO  => https://www.youtube.com/watch?v=z65NtpNb4aI
+
+   1. Agregue dotenv-rails a su Gemfile
+      gem 'dotenv-rails', group: :development
+
+   2. Crear un archivo .env en la raiz del proyecto
+      2.1. Dentro del archivo .env agreguar las variables de entorno a utilizar
+      2.2. Si desea generar una key encriptada, puede abrir la consola de rails 'rails c'
+      2.3. Dentro de la consola de rails agregar lo siguiente 'puts SecureRandom.hex(64)'
+           con la siguiente linea en el comando se generara una llave y la podra utilizar.
