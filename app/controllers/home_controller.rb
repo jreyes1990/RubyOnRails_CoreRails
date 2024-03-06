@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-  require 'rqrcode'
 
   def index
     @consulta_area = PersonasAreaView.where(user_id: current_user.id, estado: 'A')  

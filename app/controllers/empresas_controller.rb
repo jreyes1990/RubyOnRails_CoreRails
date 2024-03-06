@@ -22,17 +22,17 @@ class EmpresasController < ApplicationController
 
   # POST /empresas or /empresas.json
   def create
-    @parametro_bandera = params[:empresa][:bandera].to_i
+    @flag_new_empresa = params[:empresa][:flag_new_empresa].to_i
     @empresa = Empresa.new(empresa_params)
     @empresa.estado = "A"
     @empresa.user_created_id = current_user.id
 
     respond_to do |format|
       if @empresa.save
-        if @parametro_bandera == 1
-          format.html { redirect_to empresas_url, notice: "<strong>EXCELENTE!!<strong><br>La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha creado correctamente.".html_safe }
-        elsif @parametro_bandera == 2
-          format.html { redirect_to new_area_path, notice: "<strong>EXCELENTE!!<strong><br>La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha creado correctamente.".html_safe }
+        if @flag_new_empresa == 1
+          format.html { redirect_to empresas_url, notice: "La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha creado correctamente.".html_safe }
+        elsif @flag_new_empresa == 2
+          format.html { redirect_to new_area_path, notice: "La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha creado correctamente.".html_safe }
         end
         format.json { render :show, status: :created, location: @empresa }
       else
@@ -48,7 +48,7 @@ class EmpresasController < ApplicationController
 
     respond_to do |format|
       if @empresa.update(empresa_params)
-        format.html { redirect_to empresas_url, notice: "<strong>ÉXITO!!</strong> La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha actualizado correctamente.".html_safe }
+        format.html { redirect_to empresas_url, notice: "La Empresa <strong>#{@empresa.codigo_empresa}: #{@empresa.nombre}</strong> se ha actualizado correctamente.".html_safe }
         format.json { render :show, status: :ok, location: @empresa }
       else
         format.html { render :edit, status: :unprocessable_entity, alert: "Ocurrio un error al actualizar el Color, Verifique!!.." }

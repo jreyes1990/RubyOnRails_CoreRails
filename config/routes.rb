@@ -11,6 +11,22 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   scope "/sistemas", :path_names => {new: 'N', edit: 'E'} do
+    resources :empresas, :path => 'E' do
+      member do
+        get 'I' => "empresas#inactivar_empresa", as: 'inactivar'
+        get 'A' => "empresas#activar_empresa", as: 'activar'
+      end
+    end
+
+    resources :areas, :path => 'AR' do
+      member do
+       get 'I' => "areas#inactivar_area", as: 'inactivar'
+       get 'A' => "areas#activar_area", as: 'activar' 
+      end
+    end
+    # Ruta para ingresar nuevas empresas dentro del formulario del modelo de Area
+    get 'modal_new_empresa', to: 'areas#modal_nueva_empresa', as: 'modal_nueva_empresa'
+
     get 'home/mostrar/:id' => "home#mostrar_parametro", as: 'mostrar_parametro'
     post 'home/registrar_parametro'
     post "home/registrar_area_temporal"
@@ -36,20 +52,6 @@ Rails.application.routes.draw do
     get 'personas_areas/inactivar/:id' => "personas_areas#inactivar_personas_area", as: 'inactivar_personas_area'
     get 'personas_areas/activar/:id' => "personas_areas#activar_personas_area", as: 'activar_personas_area'
     get "search_area_empresa_persona" => "personas_areas#search_area_empresa_persona", as: "search_area_empresa_persona"
-
-    resources :empresas
-    get 'empresas/inactivar/:id' => "empresas#inactivar_empresa", as: 'inactivar_empresa'
-    get 'empresas/activar/:id' => "empresas#activar_empresa", as: 'activar_empresa'
-
-    resources :areas, :path => 'AR' do
-      member do
-       get 'I' => "areas#inactivar_area", as: 'inactivar'
-       get 'A' => "areas#activar_area", as: 'activar' 
-      end
-    end
-    # Ruta para ingresar nuevas empresas dentro del formulario del modelo de Area
-    get 'modal_new_empresa', to: 'areas#modal_nueva_empresa', as: 'modal_nueva_empresa'
-    post 'areas/modal_registro_empresa/', to: 'areas#modal_registro_empresa', as: 'modal_registro_empresa'
 
     resources :atributos, :path => 'A' do
       member do

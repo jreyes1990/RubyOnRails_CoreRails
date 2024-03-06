@@ -1,1 +1,9 @@
-$('#modal-content-nueva-empresa').find('.modal-content').html("<%= escape_javascript(render(partial: 'modal_nueva_empresa')) %>");
+$('#modal-content-nueva-empresa').html("<%= escape_javascript(render(:partial => 'modal_nueva_empresa')) %>");
+$('#modal-content-nueva-empresa').modal('show');
+
+$('#modal-content-nueva-empresa').on('shown.bs.modal', function () {
+  var modalContent = $(this).find('.modal-content');
+  var desiredHeight = modalContent.find('.form').outerHeight(); // Asumiendo que tu formulario tiene una clase 'form'
+  modalContent.css('height', desiredHeight);
+});
+

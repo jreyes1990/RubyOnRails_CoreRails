@@ -1,11 +1,11 @@
 <!-- Inicio Áreas - Empresas -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Gestión de Áreas - Empresas</h6>
-  </div>
-  <div class="card-body">
     <div class="row">
-      <div class="col-md-12 table-responsive-sm text-right">
+      <div class="col-md-6 table-responsive-sm text-left mt-2">
+        <h5 class="m-0 font-weight-bold text-primary">Gestión de Áreas - Empresas</h5>
+      </div>
+      <div class="col-md-6 table-responsive-sm text-right mt-2">
         <!--< if tiene_permiso("BOTON NUEVO REGISTRO", "VER") %>-->
           <%= link_to new_area_path, class: "btn btn-success btn-sm" do %>
             <span class="icon text-green-50">
@@ -22,8 +22,9 @@
         <% end %>
       </div>
     </div>
-    <br>
+  </div>
 
+  <div class="card-body">
     <div class="row">
       <div class="col-md-12 table-responsive-sm">
         <table id="datatable_area_ajax" class="table table-striped table-hover table-sm table-bordered display" cellspacing="0" style="width:100%" data-source="<%= areas_path(format: :json) %>">

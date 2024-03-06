@@ -1,1 +1,6 @@
-<%= render 'empresas/form', empresa: @empresa, titulo_empresa: 'Registrar', bandera_empresa: 2 %>
+<div class="modal-dialog modal-xl modal-custom-xl modal-dialog-centered d-flex align-items-center justify-content-center" role="document">
+  <!-- Agregué la clase 'modal-xl' para hacer el modal más grande -->
+  <div class="modal-content">
+    <%= render 'empresas/form', empresa: @empresa, titulo_empresa: 'Registrar', flag_new_empresa: 2 %>
+  </div>
+</div>

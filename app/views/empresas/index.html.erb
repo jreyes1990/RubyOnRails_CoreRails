@@ -2,12 +2,10 @@
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <div class="row">
-      <div class="col-md-12 table-responsive-sm text-left">
-        <h4 class="m-0 font-weight-bold text-primary">Gestión de Empresas</h4>
+      <div class="col-md-6 table-responsive-sm text-left mt-2">
+        <h5 class="m-0 font-weight-bold text-primary">Gestión de Empresas</h5>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 table-responsive-sm text-right">
+      <div class="col-md-6 table-responsive-sm text-right mt-2">
         <% if tiene_permiso("BOTON NUEVO REGISTRO", "VER") %>
           <%= link_to new_empresa_path, class: "btn btn-success btn-sm" do %>
             <span class="icon text-green-50">
